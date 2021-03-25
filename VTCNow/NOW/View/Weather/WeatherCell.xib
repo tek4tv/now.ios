@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="WeatherCell" customModule="NOW" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfU-WZ-dQ5">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-sun-96" translatesAutoresizingMaskIntoConstraints="NO" id="1YW-wK-pPy">
+                                <rect key="frame" x="20" y="5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="a5U-Op-OdG">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="40" id="hwz-Vx-qLl">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="width" secondItem="1YW-wK-pPy" secondAttribute="height" id="o73-XI-EQm">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="34°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yl-at-YXV">
+                                <rect key="frame" x="70" y="28" width="32" height="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TP Hồ Chí Minh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPU-6y-v1p">
+                                <rect key="frame" x="70" y="10" width="77.5" height="13"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OPU-6y-v1p" firstAttribute="leading" secondItem="1YW-wK-pPy" secondAttribute="trailing" constant="10" id="7G7-71-jsY"/>
+                            <constraint firstItem="1YW-wK-pPy" firstAttribute="centerY" secondItem="LfU-WZ-dQ5" secondAttribute="centerY" id="Gqo-bI-NMJ"/>
+                            <constraint firstAttribute="bottom" secondItem="0yl-at-YXV" secondAttribute="bottom" constant="5" id="K0c-xI-k1f"/>
+                            <constraint firstItem="0yl-at-YXV" firstAttribute="leading" secondItem="1YW-wK-pPy" secondAttribute="trailing" constant="10" id="Ndl-Y0-4o3"/>
+                            <constraint firstItem="OPU-6y-v1p" firstAttribute="top" secondItem="LfU-WZ-dQ5" secondAttribute="top" constant="10" id="Tut-7C-oAz"/>
+                            <constraint firstItem="1YW-wK-pPy" firstAttribute="leading" secondItem="LfU-WZ-dQ5" secondAttribute="leading" constant="20" id="uLx-Up-u5A"/>
+                            <constraint firstAttribute="width" constant="160" id="v2j-cE-aUc"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VlM-Ng-SMV">
+                        <rect key="frame" x="350.5" y="12.5" width="33.5" height="25"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="4BR-83-bfp">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="width" secondItem="VlM-Ng-SMV" secondAttribute="height" multiplier="4/3" id="H40-4T-AGM">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                        </constraints>
+                        <state key="normal" image="cast"/>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgm-Iz-MFN">
+                        <rect key="frame" x="285.5" y="0.0" width="65" height="50"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-search-50" translatesAutoresizingMaskIntoConstraints="NO" id="kHW-91-CwT">
+                                <rect key="frame" x="20" y="12.5" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="3yq-Sq-G3d"/>
+                                    <constraint firstAttribute="width" secondItem="kHW-91-CwT" secondAttribute="height" id="8aB-mH-igl"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="65" id="0qu-P5-djR"/>
+                            <constraint firstItem="kHW-91-CwT" firstAttribute="centerX" secondItem="fgm-Iz-MFN" secondAttribute="centerX" id="Pmg-vv-BqU"/>
+                            <constraint firstItem="kHW-91-CwT" firstAttribute="centerY" secondItem="fgm-Iz-MFN" secondAttribute="centerY" id="guB-Rb-7zb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="fgm-Iz-MFN" secondAttribute="bottom" id="2Js-Fs-gQu"/>
+                <constraint firstItem="LfU-WZ-dQ5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4Ly-ut-EIa"/>
+                <constraint firstAttribute="bottom" secondItem="LfU-WZ-dQ5" secondAttribute="bottom" id="DVd-5Y-kQ7"/>
+                <constraint firstItem="VlM-Ng-SMV" firstAttribute="leading" secondItem="fgm-Iz-MFN" secondAttribute="trailing" id="Nvd-ca-nL2"/>
+                <constraint firstItem="VlM-Ng-SMV" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="X6O-Uj-HhF">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="LfU-WZ-dQ5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="aIj-L4-I9Y"/>
+                <constraint firstAttribute="trailing" secondItem="VlM-Ng-SMV" secondAttribute="trailing" constant="30" id="s9W-b3-rI0">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="fgm-Iz-MFN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="t6l-Jz-gE9"/>
+            </constraints>
+            <connections>
+                <outlet property="viewSearch" destination="fgm-Iz-MFN" id="nKl-KL-wfZ"/>
+                <outlet property="viewWeather" destination="LfU-WZ-dQ5" id="cPQ-zf-4We"/>
+            </connections>
+            <point key="canvasLocation" x="140.57971014492756" y="118.52678571428571"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="cast" width="539" height="441"/>
+        <image name="icons8-search-50" width="50" height="50"/>
+        <image name="icons8-sun-96" width="96" height="96"/>
+    </resources>
+</document>

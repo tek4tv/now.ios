@@ -1,0 +1,17 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'NOW' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for NOW
+	pod 'Alamofire'
+  pod 'XLPagerTabStrip'
+  pod 'Kingfisher', '~> 6.0'
+  pod 'MarqueeLabel'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Database'
+  pod 'Google-Mobile-Ads-SDK', '~> 7.69'
+  pod 'GoogleAds-IMA-iOS-SDK', '~> 3.11.4'
+end

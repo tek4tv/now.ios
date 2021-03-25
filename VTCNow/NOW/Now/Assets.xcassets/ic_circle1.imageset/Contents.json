@@ -1,0 +1,36 @@
+{
+  "images" : [
+    {
+      "filename" : "icons8-filled-circle-10.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "graphics-feature-set" : "apple5",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "graphics-feature-set" : "apple5",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "graphics-feature-set" : "apple5",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
