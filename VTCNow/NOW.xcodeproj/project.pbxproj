@@ -69,6 +69,10 @@
 		F65EC45E26145CBA0088DBC7 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F65EC45D26145CBA0088DBC7 /* Roboto-Bold.ttf */; };
 		F65EC47A2614669F0088DBC7 /* ViewMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65EC4782614669F0088DBC7 /* ViewMoreCell.swift */; };
 		F65EC47B2614669F0088DBC7 /* ViewMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F65EC4792614669F0088DBC7 /* ViewMoreCell.xib */; };
+		F65EC49A261476EC0088DBC7 /* HashTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65EC498261476EC0088DBC7 /* HashTagCell.swift */; };
+		F65EC49B261476EC0088DBC7 /* HashTagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F65EC499261476EC0088DBC7 /* HashTagCell.xib */; };
+		F65EC49F261478320088DBC7 /* HashTagItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65EC49D261478320088DBC7 /* HashTagItemCell.swift */; };
+		F65EC4A0261478320088DBC7 /* HashTagItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F65EC49E261478320088DBC7 /* HashTagItemCell.xib */; };
 		F65FD97425C672F0007F8D0F /* LazyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FD96E25C672F0007F8D0F /* LazyImageView.swift */; };
 		F65FD97525C672F0007F8D0F /* Type1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FD97025C672F0007F8D0F /* Type1Cell.swift */; };
 		F65FD97625C672F0007F8D0F /* Type1ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FD97125C672F0007F8D0F /* Type1ItemCell.swift */; };
@@ -204,6 +208,10 @@
 		F65EC45D26145CBA0088DBC7 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		F65EC4782614669F0088DBC7 /* ViewMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMoreCell.swift; sourceTree = "<group>"; };
 		F65EC4792614669F0088DBC7 /* ViewMoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewMoreCell.xib; sourceTree = "<group>"; };
+		F65EC498261476EC0088DBC7 /* HashTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashTagCell.swift; sourceTree = "<group>"; };
+		F65EC499261476EC0088DBC7 /* HashTagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HashTagCell.xib; sourceTree = "<group>"; };
+		F65EC49D261478320088DBC7 /* HashTagItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashTagItemCell.swift; sourceTree = "<group>"; };
+		F65EC49E261478320088DBC7 /* HashTagItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HashTagItemCell.xib; sourceTree = "<group>"; };
 		F65FD96E25C672F0007F8D0F /* LazyImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImageView.swift; sourceTree = "<group>"; };
 		F65FD97025C672F0007F8D0F /* Type1Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type1Cell.swift; sourceTree = "<group>"; };
 		F65FD97125C672F0007F8D0F /* Type1ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type1ItemCell.swift; sourceTree = "<group>"; };
@@ -476,6 +484,7 @@
 		F6507CD225C3EF98002E77EC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F65EC497261476B90088DBC7 /* Hashtag */,
 				F698933425F5FD3B00EA960A /* Watch */,
 				F649761325F2142100EAC71D /* Music */,
 				F64C116325EF9417001C3A7C /* Movie */,
@@ -561,6 +570,17 @@
 				F65EC45D26145CBA0088DBC7 /* Roboto-Bold.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		F65EC497261476B90088DBC7 /* Hashtag */ = {
+			isa = PBXGroup;
+			children = (
+				F65EC498261476EC0088DBC7 /* HashTagCell.swift */,
+				F65EC499261476EC0088DBC7 /* HashTagCell.xib */,
+				F65EC49D261478320088DBC7 /* HashTagItemCell.swift */,
+				F65EC49E261478320088DBC7 /* HashTagItemCell.xib */,
+			);
+			path = Hashtag;
 			sourceTree = "<group>";
 		};
 		F65FD96D25C672F0007F8D0F /* LazyLoading */ = {
@@ -810,6 +830,7 @@
 				F65FD99225C68BEC007F8D0F /* Type2Cell.xib in Resources */,
 				F6F7C4E725E8B3C9008F7A45 /* BookItemCell.xib in Resources */,
 				F65EC45E26145CBA0088DBC7 /* Roboto-Bold.ttf in Resources */,
+				F65EC4A0261478320088DBC7 /* HashTagItemCell.xib in Resources */,
 				F649B51F26087FA900FF3B04 /* nativeAdmobCLVCell.xib in Resources */,
 				F6507CBF25C3EEFF002E77EC /* Main.storyboard in Resources */,
 				F64DAC5026083A5900A2C688 /* LaunchScreen.storyboard in Resources */,
@@ -826,6 +847,7 @@
 				F6D5068D25C6A84B002BEA99 /* Type6ItemCell.xib in Resources */,
 				F65FD98725C6794F007F8D0F /* CategoryCell.xib in Resources */,
 				F66506B72601BF41009E5B78 /* DotCell.xib in Resources */,
+				F65EC49B261476EC0088DBC7 /* HashTagCell.xib in Resources */,
 				F65EC45B26145CAF0088DBC7 /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -881,6 +903,7 @@
 			files = (
 				F6F387602602F07F004E916A /* PlayerView2Controller.swift in Sources */,
 				F6D5068F25C6A84B002BEA99 /* Type6Cell.swift in Sources */,
+				F65EC49A261476EC0088DBC7 /* HashTagCell.swift in Sources */,
 				F65FD97625C672F0007F8D0F /* Type1ItemCell.swift in Sources */,
 				F65FD97425C672F0007F8D0F /* LazyImageView.swift in Sources */,
 				F68D46D625CA43460097B9F4 /* PlayerView.swift in Sources */,
@@ -920,6 +943,7 @@
 				F666BEE125E3569B0000990E /* PopUp2Controller.swift in Sources */,
 				F6F7C4E425E8B3C9008F7A45 /* BookItemCell.swift in Sources */,
 				F6507CF225C41053002E77EC /* HighLightController.swift in Sources */,
+				F65EC49F261478320088DBC7 /* HashTagItemCell.swift in Sources */,
 				F6624CFB25EE2D4E00622AA1 /* ReadACell.swift in Sources */,
 				F6507CEE25C3F76D002E77EC /* CategoryModel.swift in Sources */,
 				F6507CDC25C3F045002E77EC /* StringDateExtension.swift in Sources */,

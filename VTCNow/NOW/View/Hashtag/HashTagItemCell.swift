@@ -1,5 +1,5 @@
 //
-//  ViewMoreCell.swift
+//  HashTagItemCell.swift
 //  NOW
 //
 //  Created by dovietduy on 3/31/21.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ViewMoreCell: UICollectionViewCell {
+class HashTagItemCell: UICollectionViewCell {
 
-    @IBOutlet weak var imgThumb: LazyImageView!
+    @IBOutlet weak var lblTitle: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

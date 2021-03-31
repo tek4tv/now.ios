@@ -34,9 +34,10 @@ class Type2Cell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: "Type2ItemCell", bundle: nil), forCellWithReuseIdentifier: "Type2ItemCell")
+        collView.register(UINib(nibName: Type2ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type2ItemCell.className)
+        collView.register(UINib(nibName: ViewMoreCell.className, bundle: nil), forCellWithReuseIdentifier: ViewMoreCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 160 * scaleW, height: 180 * scaleW)
+        //layout.itemSize = CGSize(width: 160 * scaleW, height: 180 * scaleW)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10 * scaleW
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 0)
@@ -48,40 +49,58 @@ class Type2Cell: UICollectionViewCell {
     }
     
 }
-extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource{
+extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if data.media.count >= 6{
-            return 6
+        if data.media.count >= 7{
+            return 7
         }
         return data.media.count
     }
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.row {
+        case 0...5:
+            return CGSize(width: 160 * scaleW, height: 180 * scaleW)
+        default:
+            return CGSize(width: 168 * scaleW, height: 180 * scaleW)
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type2ItemCell.className, for: indexPath) as! Type2ItemCell
         let item = data.media[indexPath.row]
-        cell.lblTitle.text = item.name
-        cell.item = item
-        if item.timePass == "Đang phát"{
-            cell.lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
-            cell.lblTime.text = "Đang phát"
-        } else{
-            if let futureDate = item.schedule.toDate(){
-                let interval = futureDate - Date()
-                if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
-                    let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
-                    item.timePass = "\(timeStr)"
-                    if hour <= 0 && minute <= 0 && second <= 0{
-                        item.timePass = "Đang phát"
+        switch indexPath.row {
+        case 0...5:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type2ItemCell.className, for: indexPath) as! Type2ItemCell
+            cell.lblTitle.text = item.name
+            cell.item = item
+            if item.timePass == "Đang phát"{
+                cell.lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
+                cell.lblTime.text = "Đang phát"
+            } else{
+                if let futureDate = item.schedule.toDate(){
+                    let interval = futureDate - Date()
+                    if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
+                        let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
+                        item.timePass = "\(timeStr)"
+                        if hour <= 0 && minute <= 0 && second <= 0{
+                            item.timePass = "Đang phát"
+                        }
                     }
+                    cell.lblTime.text = item.timePass
+                    
                 }
-                cell.lblTime.text = item.timePass
-                
             }
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.thumbImage.loadImage(fromURL: url)
+            }
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMoreCell.className, for: indexPath) as! ViewMoreCell
+            
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.imgThumb.loadImage(fromURL: url)
+            }
+            return cell
         }
-        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-            cell.thumbImage.loadImage(fromURL: url)
-        }
-        return cell
+        
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         sharedItem = data.media[indexPath.row]
