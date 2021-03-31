@@ -36,7 +36,7 @@ class Type2Cell: UICollectionViewCell {
         collView.dataSource = self
         collView.register(UINib(nibName: "Type2ItemCell", bundle: nil), forCellWithReuseIdentifier: "Type2ItemCell")
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 160 * scaleW, height: collView.bounds.height * scaleW)
+        layout.itemSize = CGSize(width: 160 * scaleW, height: 180 * scaleW)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10 * scaleW
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 0)
