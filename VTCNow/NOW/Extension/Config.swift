@@ -15,7 +15,7 @@ var idBookPlaying = 0
 var idVideoPlaying = 0
 var reads : [ReadModel] = []
 var tabBarIndex = 0
-
+var isMessaging = false
 
 let admobBanner = "ca-app-pub-3940256099942544/2934735716"
 let admobFull = "ca-app-pub-5372862349743986/9369434422"

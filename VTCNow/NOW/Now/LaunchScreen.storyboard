@@ -7,6 +7,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -16,8 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by Tek4TV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lww-Xt-62N">
-                                <rect key="frame" x="154" y="828" width="106.5" height="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by Tek4TV JSC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lww-Xt-62N">
+                                <rect key="frame" x="141" y="828" width="132.5" height="14"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -29,11 +34,19 @@
                                     <constraint firstAttribute="width" secondItem="Dca-dH-PDi" secondAttribute="height" id="laA-4m-FqW"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ĐÀI TRUYỀN HÌNH KỸ THUẬT SỐ VTC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gE1-RR-jKo">
+                                <rect key="frame" x="82" y="802" width="250.5" height="18"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="lww-Xt-62N" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="4Id-K5-d04"/>
+                            <constraint firstItem="lww-Xt-62N" firstAttribute="top" secondItem="gE1-RR-jKo" secondAttribute="bottom" constant="8" symbolic="YES" id="92o-bv-SOY"/>
+                            <constraint firstItem="gE1-RR-jKo" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="OCq-GJ-Sfn"/>
                             <constraint firstItem="Dca-dH-PDi" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="ayI-eE-bE9"/>
                             <constraint firstItem="Dca-dH-PDi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="k01-Ki-rHx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lww-Xt-62N" secondAttribute="bottom" constant="20" id="qEi-eF-324"/>

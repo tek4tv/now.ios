@@ -12,12 +12,10 @@ class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDe
     func adsManagerDidRequestContentPause(_ adsManager: IMAAdsManager!) {
         // Pause the content for the SDK to play ads.
         viewPlayer.player?.pause()
-//        hideContentPlayer()
     }
     
     func adsManagerDidRequestContentResume(_ adsManager: IMAAdsManager!) {
         // Resume the content since the SDK is done playing ads (at least for now).
-//        showContentPlayer()
         viewPlayer.player?.play()
     }
     
@@ -30,8 +28,7 @@ class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDe
     func adsManager(_ adsManager: IMAAdsManager!, didReceive error: IMAAdError!) {
         // Fall back to playing content
         print("AdsManager error: " + error.message)
-//        showContentPlayer()
-        viewPlayer.player?.play()
+        //viewPlayer.player?.play()
     }
     
     func adsLoader(_ loader: IMAAdsLoader!, adsLoadedWith adsLoadedData: IMAAdsLoadedData!) {
@@ -43,8 +40,7 @@ class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDe
     
     func adsLoader(_ loader: IMAAdsLoader!, failedWith adErrorData: IMAAdLoadingErrorData!) {
         print("Error loading ads: " + adErrorData.adError.message)
-        //showContentPlayer()
-        viewPlayer.player?.play()
+        //viewPlayer.player?.play()
     }
     var player: AVPlayer!
     var playerLayer: AVPlayerLayer!
@@ -69,7 +65,7 @@ class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDe
     
     
     
-    static let AdTagURLString = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator="
+    static let AdTagURLString = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator="
     
     var adsLoader: IMAAdsLoader!
     var adsManager: IMAAdsManager!
@@ -262,8 +258,8 @@ class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDe
             viewPlayer.player  = player
             contentPlayhead = IMAAVPlayerContentPlayhead(avPlayer: viewPlayer.player)
             
-            requestAds()
-            //viewPlayer.player?.play()
+            //requestAds()
+            viewPlayer.player?.play()
             viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
             viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
             
@@ -291,7 +287,7 @@ class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDe
             }
             else if (viewPlayer.player?.timeControlStatus == .paused) {
                 if tabBarIndex == 1 {
-                    didOpenVideo()
+                    //didOpenVideo()
                 }
                 //player is pause
             }

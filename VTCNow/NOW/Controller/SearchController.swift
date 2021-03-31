@@ -15,8 +15,9 @@ class SearchController: UIViewController {
     @IBOutlet weak var tblView: UITableView!
     @IBOutlet weak var lblNotFound: UILabel!
     @IBOutlet weak var viewSpeech: UIView!
+    @IBOutlet weak var collWordView: UICollectionView!
     var indicator =  UIActivityIndicatorView()
-    
+    var listWord = ["Sơn Tùng MTP", "Covid 19", "Cuộc sống 24h", "Hà nội", "Phải chăng em đã yêu?", "Yêu"]
     var listData : [MediaModel] = []
     var listString: [String] = []
     var filterListString: [String] = []
@@ -28,6 +29,7 @@ class SearchController: UIViewController {
                           for: .editingChanged)
         txfView.addTarget(self, action: #selector(textFieldDidTouch(_:)),
                           for: .touchDown)
+        collView.tag = 0
         collView.delegate = self
         collView.dataSource = self
         collView.register(UINib(nibName: "VideoCell", bundle: nil), forCellWithReuseIdentifier: "VideoCell")
@@ -39,7 +41,15 @@ class SearchController: UIViewController {
         collView.collectionViewLayout = layout
         txfView.delegate = self
         // Do any additional setup after loading the view.
-        
+        collWordView.tag = 1
+        collWordView.delegate = self
+        collWordView.dataSource = self
+        collWordView.register(UINib(nibName: WordCell.className, bundle: nil), forCellWithReuseIdentifier: WordCell.className)
+        let layout2 = LeftAlignedCellsCustomFlowLayout()
+        layout2.estimatedItemSize = CGSize(width: 1, height: 40 * scaleH)
+        layout2.minimumLineSpacing = 5
+        layout2.minimumInteritemSpacing = 5
+        collWordView.collectionViewLayout = layout2
         //
         tblView.delegate = self
         tblView.dataSource = self
@@ -52,6 +62,7 @@ class SearchController: UIViewController {
             self.tblView.reloadData()
         }
         lblNotFound.isHidden = true
+        self.collView.isHidden = true
     }
     @objc func didSelectViewSpeech(_ sender: Any){
         let vc = storyboard?.instantiateViewController(withIdentifier: SpeechToTextController.className) as! SpeechToTextController
@@ -114,24 +125,63 @@ class SearchController: UIViewController {
 }
 extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        listData.count
+        switch collectionView.tag {
+        case 0:
+            return listData.count
+        default:
+            return listWord.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.className, for: indexPath) as! VideoCell
-        cell.delegate = self
-        
-        let item = listData[indexPath.row]
-        cell.item = item
-        cell.indexPath = indexPath
-        cell.lblTitle.text = item.name
-        cell.lblTime.text = item.timePass
-        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-            cell.thumbImage.loadImage(fromURL: url)
+        switch collectionView.tag{
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.className, for: indexPath) as! VideoCell
+            cell.delegate = self
+            
+            let item = listData[indexPath.row]
+            cell.item = item
+            cell.indexPath = indexPath
+            cell.lblTitle.text = item.name
+            cell.lblTime.text = item.timePass
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.thumbImage.loadImage(fromURL: url)
+            }
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.className, for: indexPath) as! WordCell
+            cell.lblTitle.text = "#" + listWord[indexPath.row]
+            return cell
         }
-        return cell
+        
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView.tag {
+        case 0:
+            break
+        default:
+            //txfView.endEditing(true)
+            txfView.text = listWord[indexPath.row]
+            collView.isHidden = false
+            indicator.hidesWhenStopped = true
+            indicator.center = view.center
+            view.addSubview(indicator)
+            indicator.startAnimating()
+            self.lblNotFound.isHidden = true
+            APIService.shared.searchAll(keySearch: listWord[indexPath.row]) { (data, error) in
+                if let data = data as? [MediaModel]{
+                    self.listData = data
+                    self.collView.reloadData()
+                    self.indicator.stopAnimating()
+                    if self.listData.isEmpty {
+                        self.lblNotFound.isHidden = false
+                        self.collView.isHidden = true
+                    }
+                }
+            }
+        }
+    }
     
 }
 extension SearchController: UITextFieldDelegate {
@@ -140,12 +190,14 @@ extension SearchController: UITextFieldDelegate {
         tblView.isHidden = true
         indicator.startAnimating()
         lblNotFound.isHidden = true
+        collView.isHidden = false
         APIService.shared.searchAll(keySearch: textField.text!) { (data, error) in
             if let data = data as? [MediaModel]{
                 self.listData = data
                 self.collView.reloadData()
                 if self.listData.isEmpty {
                     self.lblNotFound.isHidden = false
+                    self.collView.isHidden = true
                 }
                 self.indicator.stopAnimating()
             }
@@ -185,6 +237,7 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource{
         txfView.endEditing(true)
         txfView.text = filterListString[indexPath.row]
         tblView.isHidden = true
+        collView.isHidden = false
         indicator.hidesWhenStopped = true
         indicator.center = view.center
         view.addSubview(indicator)
@@ -197,6 +250,7 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource{
                 self.indicator.stopAnimating()
                 if self.listData.isEmpty {
                     self.lblNotFound.isHidden = false
+                    self.collView.isHidden = true
                 }
             }
         }

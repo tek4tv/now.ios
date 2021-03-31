@@ -14,7 +14,7 @@ class Type2Cell: UICollectionViewCell {
     var timer = Timer()
     var data = CategoryModel(){
         didSet{
-            lblTitle.text = data.name + " >"
+            lblTitle.text = data.name
             if data.name != oldValue.name{
                 collView.reloadData()
             }
@@ -36,10 +36,10 @@ class Type2Cell: UICollectionViewCell {
         collView.dataSource = self
         collView.register(UINib(nibName: "Type2ItemCell", bundle: nil), forCellWithReuseIdentifier: "Type2ItemCell")
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 180 * scaleW, height: collView.bounds.height * scaleW)
+        layout.itemSize = CGSize(width: 160 * scaleW, height: collView.bounds.height * scaleW)
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 5 * scaleW, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 10 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 0)
         collView.collectionViewLayout = layout
         
     }
@@ -50,9 +50,9 @@ class Type2Cell: UICollectionViewCell {
 }
 extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if data.media.count >= 10{
-//            return 10
-//        }
+        if data.media.count >= 6{
+            return 6
+        }
         return data.media.count
     }
     
@@ -61,18 +61,17 @@ extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         let item = data.media[indexPath.row]
         cell.lblTitle.text = item.name
         cell.item = item
-        if item.timePass == "Trực tiếp"{
-            cell.viewDot.backgroundColor = .red
-            cell.lblTime.textColor = .red
-            cell.lblTime.text = "Trực tiếp"
+        if item.timePass == "Đang phát"{
+            cell.lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
+            cell.lblTime.text = "Đang phát"
         } else{
             if let futureDate = item.schedule.toDate(){
                 let interval = futureDate - Date()
                 if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
                     let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
-                    item.timePass = "Còn \(timeStr)"
+                    item.timePass = "\(timeStr)"
                     if hour <= 0 && minute <= 0 && second <= 0{
-                        item.timePass = "Trực tiếp"
+                        item.timePass = "Đang phát"
                     }
                 }
                 cell.lblTime.text = item.timePass

@@ -10,7 +10,6 @@ class Type2ItemCell: UICollectionViewCell{
     @IBOutlet weak var thumbImage: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
-    @IBOutlet weak var viewDot: UIView!
     var item = MediaModel()
     
     override func awakeFromNib() {
@@ -27,22 +26,20 @@ class Type2ItemCell: UICollectionViewCell{
             let interval = futureDate - Date()
             if let day = interval.day, let hour = interval.hour, let minute = interval.minute, let second = interval.second{
                 let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
-                item.timePass = "Còn \(timeStr)"
+                item.timePass = "\(timeStr)"
                 if day < 0{
                     item.timePass = "\(-day) ngày trước"
                 }else
                 if hour <= 0 && minute <= 0 && second <= 0{
-                    item.timePass = "Trực tiếp"
-                    viewDot.backgroundColor = .red
-                    lblTime.textColor = .red
+                    item.timePass = "Đang phát"
+                    lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
                 }
             }
             lblTime.text = item.timePass
         }
     }
     override func prepareForReuse() {
-        viewDot.backgroundColor = .darkGray
-        lblTime.textColor = .darkGray
+        lblTime.textColor = .white
         thumbImage.image = #imageLiteral(resourceName: "placeHolderImage")
     }
 }

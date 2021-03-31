@@ -12,13 +12,11 @@ import GoogleInteractiveMediaAds
 class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoaderDelegate , IMAAdsManagerDelegate {
     func adsManagerDidRequestContentPause(_ adsManager: IMAAdsManager!) {
         // Pause the content for the SDK to play ads.
-//        playerViewController.player?.pause()
-//        hideContentPlayer()
+        viewPlayer.player?.pause()
     }
     
     func adsManagerDidRequestContentResume(_ adsManager: IMAAdsManager!) {
         // Resume the content since the SDK is done playing ads (at least for now).
-//        showContentPlayer()
         viewPlayer.player?.play()
     }
     
@@ -31,8 +29,7 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
     func adsManager(_ adsManager: IMAAdsManager!, didReceive error: IMAAdError!) {
         // Fall back to playing content
         print("AdsManager error: " + error.message)
-//        showContentPlayer()
-//        playerViewController.player?.play()
+        //viewPlayer.player?.play()
     }
     
     func adsLoader(_ loader: IMAAdsLoader!, adsLoadedWith adsLoadedData: IMAAdsLoadedData!) {
@@ -43,10 +40,9 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
     
     func adsLoader(_ loader: IMAAdsLoader!, failedWith adErrorData: IMAAdLoadingErrorData!) {
         print("Error loading ads: " + adErrorData.adError.message)
-        //showContentPlayer()
-        //playerViewController.player?.play()
+        //viewPlayer.player?.play()
     }
-    static let AdTagURLString = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dredirectlinear&correlator="
+    static let AdTagURLString = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dskippablelinear&correlator="
     
     var adsLoader: IMAAdsLoader!
     var adsManager: IMAAdsManager!
@@ -142,6 +138,7 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
         NotificationCenter.default.addObserver(self, selector: #selector(didOpenVideo(_:)), name: NSNotification.Name("openVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didStopVideo(_:)), name: NSNotification.Name("StopPlayVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didStopMP3(_:)), name: NSNotification.Name("StopMP3Video"), object: nil)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(rotated(_:)), name: UIDevice.orientationDidChangeNotification, object: nil)
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeDown(_:)))
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeUp(_:)))
@@ -171,6 +168,10 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
         viewPlayer.addSubview(activityIndicatorView)
         activityIndicatorView.centerXAnchor.constraint(equalTo: viewPlayer.centerXAnchor).isActive = true
         activityIndicatorView.centerYAnchor.constraint(equalTo: viewPlayer.centerYAnchor).isActive = true
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.post(name: NSNotification.Name("openMessage"), object: nil)
     }
     @objc func rotated(_ sender: Any) {
         if self.viewContainer.alpha == 1{
@@ -302,7 +303,7 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
     }
 
     @objc func didOpenVideo(_ notification: Notification){
-        requestAds()
+        //requestAds()
         activityIndicatorView.startAnimating()
         if let window = UIApplication.shared.keyWindow {
             window.addSubview(self.viewContainer)
@@ -346,15 +347,16 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
             player = AVPlayer(url: url)
             viewPlayer.player  = player
             contentPlayhead = IMAAVPlayerContentPlayhead(avPlayer: player)
-            viewPlayer.player?.play()
+            //viewPlayer.player?.play()
             viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
             viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
+            isMessaging = false
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(HomeController.contentDidFinishPlaying(_:)),
                 name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
                 object: player.currentItem);
-            //NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+            NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             isPlaying = true
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
             
@@ -424,6 +426,13 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
                 }
             }
         }
+        
+        if let temp = UserDefaults.standard.value(forKey: sharedItem.privateID) as? Double, temp > 0.0{
+            let time: CMTime = CMTimeMake(value: Int64(temp * 1000), timescale: 1000)
+            viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: .zero)
+        }
+        
+        
         collView.reloadData()
     }
     var imageView: UIImageView = {
@@ -650,6 +659,8 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
 //                NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
 //            }
 //        }
+        UserDefaults.standard.removeObject(forKey: sharedItem.privateID)
+        UserDefaults.standard.synchronize()
     }
     
     func getTimeString(from time: CMTime) -> String{
@@ -675,6 +686,7 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
             self?.slider.value = Float(currentItem.currentTime().seconds)
             self?.lblCurrentTime.text = self?.getTimeString(from: currentItem.currentTime())
             self?.activityIndicatorView.stopAnimating()
+            UserDefaults.standard.setValue(currentItem.currentTime().seconds, forKey: sharedItem.privateID)
         })
     }
     @objc func didSelectViewBack(_ sender: Any){

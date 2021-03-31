@@ -15,6 +15,8 @@
 		F611070F25EF317900B049C3 /* ReadDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611070E25EF317900B049C3 /* ReadDetailController.swift */; };
 		F6332F7625CCFD5600305C2E /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6332F7525CCFD5600305C2E /* PlayerViewController.swift */; };
 		F645AC5725E8E113005F3C57 /* BookCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F645AC5625E8E113005F3C57 /* BookCategoryController.swift */; };
+		F647365C2612E555008BF14E /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F647365A2612E554008BF14E /* WordCell.swift */; };
+		F647365D2612E555008BF14E /* WordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F647365B2612E554008BF14E /* WordCell.xib */; };
 		F648029925DFA03700D6485B /* SubTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648029725DFA03700D6485B /* SubTypeCell.swift */; };
 		F648029A25DFA03700D6485B /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F648029825DFA03700D6485B /* SubTypeCell.xib */; };
 		F64836A925F0D12000A9E878 /* MovieController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64836A825F0D12000A9E878 /* MovieController.swift */; };
@@ -62,7 +64,9 @@
 		F655707B25F8868E00E3A062 /* PopUp7Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F655707A25F8868E00E3A062 /* PopUp7Controller.swift */; };
 		F65597D525E3B88F008C1050 /* PopUp4Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65597D425E3B88F008C1050 /* PopUp4Controller.swift */; };
 		F6560B5625EB824E009996D1 /* BookPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6560B5525EB824E009996D1 /* BookPlayerController.swift */; };
-		F6566BC625FA03070052D994 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F6566BC525FA03070052D994 /* GoogleService-Info.plist */; };
+		F65EC45826145CA60088DBC7 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F65EC45726145CA50088DBC7 /* Roboto-Regular.ttf */; };
+		F65EC45B26145CAF0088DBC7 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F65EC45A26145CAF0088DBC7 /* Roboto-Medium.ttf */; };
+		F65EC45E26145CBA0088DBC7 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F65EC45D26145CBA0088DBC7 /* Roboto-Bold.ttf */; };
 		F65FD97425C672F0007F8D0F /* LazyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FD96E25C672F0007F8D0F /* LazyImageView.swift */; };
 		F65FD97525C672F0007F8D0F /* Type1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FD97025C672F0007F8D0F /* Type1Cell.swift */; };
 		F65FD97625C672F0007F8D0F /* Type1ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FD97125C672F0007F8D0F /* Type1ItemCell.swift */; };
@@ -123,6 +127,7 @@
 		F6D5068F25C6A84B002BEA99 /* Type6Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D5068B25C6A84B002BEA99 /* Type6Cell.swift */; };
 		F6E8CC6E25E78D6300CD0939 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E8CC6C25E78D6300CD0939 /* SearchCell.swift */; };
 		F6E8CC6F25E78D6300CD0939 /* SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6E8CC6D25E78D6300CD0939 /* SearchCell.xib */; };
+		F6F2BD8F260DBD81001056C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F6F2BD8E260DBD80001056C7 /* GoogleService-Info.plist */; };
 		F6F387602602F07F004E916A /* PlayerView2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F3875F2602F07F004E916A /* PlayerView2Controller.swift */; };
 		F6F7C4DE25E8B2AC008F7A45 /* BookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7C4DD25E8B2AC008F7A45 /* BookController.swift */; };
 		F6F7C4E425E8B3C9008F7A45 /* BookItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F7C4E025E8B3C9008F7A45 /* BookItemCell.swift */; };
@@ -141,6 +146,8 @@
 		F611070E25EF317900B049C3 /* ReadDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDetailController.swift; sourceTree = "<group>"; };
 		F6332F7525CCFD5600305C2E /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		F645AC5625E8E113005F3C57 /* BookCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCategoryController.swift; sourceTree = "<group>"; };
+		F647365A2612E554008BF14E /* WordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
+		F647365B2612E554008BF14E /* WordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordCell.xib; sourceTree = "<group>"; };
 		F648029725DFA03700D6485B /* SubTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubTypeCell.swift; sourceTree = "<group>"; };
 		F648029825DFA03700D6485B /* SubTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTypeCell.xib; sourceTree = "<group>"; };
 		F64836A825F0D12000A9E878 /* MovieController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieController.swift; sourceTree = "<group>"; };
@@ -190,7 +197,9 @@
 		F655707A25F8868E00E3A062 /* PopUp7Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp7Controller.swift; sourceTree = "<group>"; };
 		F65597D425E3B88F008C1050 /* PopUp4Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp4Controller.swift; sourceTree = "<group>"; };
 		F6560B5525EB824E009996D1 /* BookPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPlayerController.swift; sourceTree = "<group>"; };
-		F6566BC525FA03070052D994 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F65EC45726145CA50088DBC7 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		F65EC45A26145CAF0088DBC7 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		F65EC45D26145CBA0088DBC7 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		F65FD96E25C672F0007F8D0F /* LazyImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImageView.swift; sourceTree = "<group>"; };
 		F65FD97025C672F0007F8D0F /* Type1Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type1Cell.swift; sourceTree = "<group>"; };
 		F65FD97125C672F0007F8D0F /* Type1ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type1ItemCell.swift; sourceTree = "<group>"; };
@@ -251,6 +260,7 @@
 		F6D5068B25C6A84B002BEA99 /* Type6Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type6Cell.swift; sourceTree = "<group>"; };
 		F6E8CC6C25E78D6300CD0939 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		F6E8CC6D25E78D6300CD0939 /* SearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCell.xib; sourceTree = "<group>"; };
+		F6F2BD8E260DBD80001056C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F6F3875F2602F07F004E916A /* PlayerView2Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView2Controller.swift; sourceTree = "<group>"; };
 		F6F7C4DD25E8B2AC008F7A45 /* BookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookController.swift; sourceTree = "<group>"; };
 		F6F7C4E025E8B3C9008F7A45 /* BookItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookItemCell.swift; sourceTree = "<group>"; };
@@ -395,6 +405,7 @@
 		F6507CB625C3EEFF002E77EC /* NOW */ = {
 			isa = PBXGroup;
 			children = (
+				F65EC45626145C860088DBC7 /* Font */,
 				F649B51826087FA900FF3B04 /* Admod */,
 				F6507CDE25C3F2CB002E77EC /* Service */,
 				F6507CD725C3F034002E77EC /* Extension */,
@@ -412,8 +423,8 @@
 				F6507CB725C3EEFF002E77EC /* AppDelegate.swift */,
 				F6507CB925C3EEFF002E77EC /* SceneDelegate.swift */,
 				F64DAC4F26083A5900A2C688 /* LaunchScreen.storyboard */,
+				F6F2BD8E260DBD80001056C7 /* GoogleService-Info.plist */,
 				F6507CBD25C3EEFF002E77EC /* Main.storyboard */,
-				F6566BC525FA03070052D994 /* GoogleService-Info.plist */,
 				F6507CC525C3EF01002E77EC /* Info.plist */,
 				F6507CC025C3EF01002E77EC /* Assets.xcassets */,
 			);
@@ -482,6 +493,8 @@
 				F68D46D525CA43460097B9F4 /* PlayerView.swift */,
 				F6E8CC6C25E78D6300CD0939 /* SearchCell.swift */,
 				F6E8CC6D25E78D6300CD0939 /* SearchCell.xib */,
+				F647365A2612E554008BF14E /* WordCell.swift */,
+				F647365B2612E554008BF14E /* WordCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -532,6 +545,16 @@
 				F66B04D325EE3FF90034013F /* ReadBCell.swift */,
 			);
 			path = Read;
+			sourceTree = "<group>";
+		};
+		F65EC45626145C860088DBC7 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				F65EC45726145CA50088DBC7 /* Roboto-Regular.ttf */,
+				F65EC45A26145CAF0088DBC7 /* Roboto-Medium.ttf */,
+				F65EC45D26145CBA0088DBC7 /* Roboto-Bold.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		F65FD96D25C672F0007F8D0F /* LazyLoading */ = {
@@ -759,7 +782,6 @@
 				F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */,
 				F65FD9AB25C694E2007F8D0F /* VideoCell.xib in Resources */,
 				F6CA872F25F5C07E004DF132 /* Music3Cell.xib in Resources */,
-				F6566BC625FA03070052D994 /* GoogleService-Info.plist in Resources */,
 				F6F7C4E625E8B3C9008F7A45 /* BookCell.xib in Resources */,
 				F65FD9AA25C694E2007F8D0F /* Type3Cell.xib in Resources */,
 				F65FD97725C672F0007F8D0F /* Type1ItemCell.xib in Resources */,
@@ -771,13 +793,16 @@
 				F65FD9BA25C69775007F8D0F /* Type4Cell.xib in Resources */,
 				F66B04D625EE3FF90034013F /* ReadBCell.xib in Resources */,
 				F698933825F5FD6D00EA960A /* WatchCell.xib in Resources */,
+				F6F2BD8F260DBD81001056C7 /* GoogleService-Info.plist in Resources */,
 				F65FD98625C6794F007F8D0F /* CategoryItemCell.xib in Resources */,
 				F65FD97E25C674CA007F8D0F /* WeatherCell.xib in Resources */,
 				F6507CC125C3EF01002E77EC /* Assets.xcassets in Resources */,
+				F647365D2612E555008BF14E /* WordCell.xib in Resources */,
 				F649761925F2149800EAC71D /* MusicItemCell.xib in Resources */,
 				F6624CFC25EE2D4E00622AA1 /* ReadACell.xib in Resources */,
 				F65FD99225C68BEC007F8D0F /* Type2Cell.xib in Resources */,
 				F6F7C4E725E8B3C9008F7A45 /* BookItemCell.xib in Resources */,
+				F65EC45E26145CBA0088DBC7 /* Roboto-Bold.ttf in Resources */,
 				F649B51F26087FA900FF3B04 /* nativeAdmobCLVCell.xib in Resources */,
 				F6507CBF25C3EEFF002E77EC /* Main.storyboard in Resources */,
 				F64DAC5026083A5900A2C688 /* LaunchScreen.storyboard in Resources */,
@@ -788,11 +813,13 @@
 				F6B82C7625F2315D009FF801 /* Music2Cell.xib in Resources */,
 				F64B02E725ECF18900AAE865 /* ChanelCell.xib in Resources */,
 				F64836B325F0D5BC00A9E878 /* MovieCell.xib in Resources */,
+				F65EC45826145CA60088DBC7 /* Roboto-Regular.ttf in Resources */,
 				F6E8CC6F25E78D6300CD0939 /* SearchCell.xib in Resources */,
 				F64836BB25F0D64400A9E878 /* MovieItemCell.xib in Resources */,
 				F6D5068D25C6A84B002BEA99 /* Type6ItemCell.xib in Resources */,
 				F65FD98725C6794F007F8D0F /* CategoryCell.xib in Resources */,
 				F66506B72601BF41009E5B78 /* DotCell.xib in Resources */,
+				F65EC45B26145CAF0088DBC7 /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -900,6 +927,7 @@
 				F65FD9A825C694E2007F8D0F /* Type3ItemCell.swift in Sources */,
 				F66B04D525EE3FF90034013F /* ReadBCell.swift in Sources */,
 				F64B02EB25ECF30400AAE865 /* ChannelModel.swift in Sources */,
+				F647365C2612E555008BF14E /* WordCell.swift in Sources */,
 				F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */,
 				F666BEEA25E35C950000990E /* PopUpItemCell.swift in Sources */,
 				F6E8CC6E25E78D6300CD0939 /* SearchCell.swift in Sources */,

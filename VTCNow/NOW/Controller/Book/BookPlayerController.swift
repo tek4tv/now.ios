@@ -274,7 +274,7 @@ class BookPlayerController: UIViewController {
         default:
             break
         }
-        
+        idShuffle = idBookPlaying
         
     }
     func getTimeString(from time: CMTime) -> String{
