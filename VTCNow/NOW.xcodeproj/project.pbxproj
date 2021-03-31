@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */; };
 		6451F7C9DFB325D976A77358 /* Pods_NOW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD9211FC4BEF65B0CC5B1DBD /* Pods_NOW.framework */; };
 		F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2F8425EC8E170002E99C /* CommentCell.swift */; };
 		F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60E2F8525EC8E170002E99C /* CommentCell.xib */; };
@@ -140,6 +141,7 @@
 
 /* Begin PBXFileReference section */
 		11A21EDD954A85CAA9EA38BA /* Pods-NOW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOW.debug.xcconfig"; path = "Target Support Files/Pods-NOW/Pods-NOW.debug.xcconfig"; sourceTree = "<group>"; };
+		4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDetailWebviewController.swift; sourceTree = "<group>"; };
 		E2A11019719C8E8CDE921ED9 /* Pods-NOW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOW.release.xcconfig"; path = "Target Support Files/Pods-NOW/Pods-NOW.release.xcconfig"; sourceTree = "<group>"; };
 		F60E2F8425EC8E170002E99C /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		F60E2F8525EC8E170002E99C /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
@@ -673,6 +675,7 @@
 			children = (
 				F611070E25EF317900B049C3 /* ReadDetailController.swift */,
 				F6624CFF25EE329C00622AA1 /* ReadController.swift */,
+				4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */,
 			);
 			path = Read;
 			sourceTree = "<group>";
@@ -903,6 +906,7 @@
 				F64C601F25F22753008D44A0 /* MusicCategoryController.swift in Sources */,
 				F6CB90BE25F720A70071D0BB /* UserController.swift in Sources */,
 				F6507CE025C3F2CB002E77EC /* APIService.swift in Sources */,
+				4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */,
 				F65FD97525C672F0007F8D0F /* Type1Cell.swift in Sources */,
 				F611070F25EF317900B049C3 /* ReadDetailController.swift in Sources */,
 				F648029925DFA03700D6485B /* SubTypeCell.swift in Sources */,
