@@ -8,7 +8,7 @@
 import UIKit
 
 class ReadDetailWebviewController: UIViewController {
-
+    var hhshs = 0
     override func viewDidLoad() {
         super.viewDidLoad()
 
