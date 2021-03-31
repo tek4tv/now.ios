@@ -23,7 +23,7 @@ class CategoryCell: UICollectionViewCell {
         layout.itemSize = CGSize(width: 90 * scaleW, height: collView.bounds.height * scaleH)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collView.collectionViewLayout = layout
     }
 

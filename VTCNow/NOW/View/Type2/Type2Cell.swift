@@ -37,12 +37,11 @@ class Type2Cell: UICollectionViewCell {
         collView.register(UINib(nibName: Type2ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type2ItemCell.className)
         collView.register(UINib(nibName: ViewMoreCell.className, bundle: nil), forCellWithReuseIdentifier: ViewMoreCell.className)
         let layout = UICollectionViewFlowLayout()
-        //layout.itemSize = CGSize(width: 160 * scaleW, height: 180 * scaleW)
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10 * scaleW)
         collView.collectionViewLayout = layout
-        
     }
     func stopTimer(){
         timer.invalidate()

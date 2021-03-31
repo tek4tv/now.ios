@@ -18,6 +18,7 @@ class HighLightController: UIViewController {
         collView.delegate = self
         collView.dataSource = self
         collView.register(UINib(nibName: WeatherCell.className, bundle: nil), forCellWithReuseIdentifier: WeatherCell.className)
+        collView.register(UINib(nibName: HashTagCell.className, bundle: nil), forCellWithReuseIdentifier: HashTagCell.className)
         collView.register(UINib(nibName: CategoryCell.className, bundle: nil), forCellWithReuseIdentifier: CategoryCell.className)
         collView.register(UINib(nibName: Type1Cell.className, bundle: nil), forCellWithReuseIdentifier: Type1Cell.className)
         collView.register(UINib(nibName: Type2Cell.className, bundle: nil), forCellWithReuseIdentifier: Type2Cell.className)
@@ -91,7 +92,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
         return 1
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return categorys.count + 2
+        return categorys.count + 3
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collView.bounds.width
@@ -99,11 +100,13 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
         if section == 0{
             return CGSize(width: width, height: 50 * scaleW)
         } else if section == 1{
-            return CGSize(width: width, height: 232 * scaleW)
+            return CGSize(width: width, height: 40 * scaleW)
         } else if section == 2{
+            return CGSize(width: width, height: 232 * scaleW)
+        } else if section == 3{
             return CGSize(width: width, height: 85 * scaleW)
         } else {
-            switch categorys[section - 2].layout.type {
+            switch categorys[section - 3].layout.type {
             case "1":
                 return CGSize(width: width, height: 260 * scaleW)
             case "2":
@@ -131,19 +134,21 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             cell.viewWeather.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewWeather(_:))))
             return cell
         } else if section == 1{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashTagCell.className, for: indexPath) as! HashTagCell
+            return cell
+        } else if section == 2{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
             if categorys.count > 0{
                 cell.data = categorys[0].media
                 cell.collView.reloadData()
             }
-            
             return cell
-        } else if section == 2{
+        }else if section == 3{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.className, for: indexPath) as! CategoryCell
             cell.delegate = self
             return cell
-        } else {
-            let item = categorys[section - 2]
+        }else {
+            let item = categorys[section - 3]
             switch item.layout.type {
             case "1":
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
@@ -189,8 +194,10 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             
         } else if section == 2{
             
+        } else if section == 3{
+            
         } else {
-            let cate = categorys[section - 2]
+            let cate = categorys[section - 3]
             
             switch cate.layout.subType {
             case "1", "2", "5", "12", "13", "14":
