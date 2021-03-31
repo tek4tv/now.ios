@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */; };
 		6451F7C9DFB325D976A77358 /* Pods_NOW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD9211FC4BEF65B0CC5B1DBD /* Pods_NOW.framework */; };
 		F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2F8425EC8E170002E99C /* CommentCell.swift */; };
 		F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60E2F8525EC8E170002E99C /* CommentCell.xib */; };
@@ -67,6 +68,8 @@
 		F65EC45826145CA60088DBC7 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F65EC45726145CA50088DBC7 /* Roboto-Regular.ttf */; };
 		F65EC45B26145CAF0088DBC7 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F65EC45A26145CAF0088DBC7 /* Roboto-Medium.ttf */; };
 		F65EC45E26145CBA0088DBC7 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F65EC45D26145CBA0088DBC7 /* Roboto-Bold.ttf */; };
+		F65EC47A2614669F0088DBC7 /* ViewMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65EC4782614669F0088DBC7 /* ViewMoreCell.swift */; };
+		F65EC47B2614669F0088DBC7 /* ViewMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F65EC4792614669F0088DBC7 /* ViewMoreCell.xib */; };
 		F65FD97425C672F0007F8D0F /* LazyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FD96E25C672F0007F8D0F /* LazyImageView.swift */; };
 		F65FD97525C672F0007F8D0F /* Type1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FD97025C672F0007F8D0F /* Type1Cell.swift */; };
 		F65FD97625C672F0007F8D0F /* Type1ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65FD97125C672F0007F8D0F /* Type1ItemCell.swift */; };
@@ -138,6 +141,7 @@
 
 /* Begin PBXFileReference section */
 		11A21EDD954A85CAA9EA38BA /* Pods-NOW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOW.debug.xcconfig"; path = "Target Support Files/Pods-NOW/Pods-NOW.debug.xcconfig"; sourceTree = "<group>"; };
+		4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDetailWebviewController.swift; sourceTree = "<group>"; };
 		E2A11019719C8E8CDE921ED9 /* Pods-NOW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOW.release.xcconfig"; path = "Target Support Files/Pods-NOW/Pods-NOW.release.xcconfig"; sourceTree = "<group>"; };
 		F60E2F8425EC8E170002E99C /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		F60E2F8525EC8E170002E99C /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 		F65EC45726145CA50088DBC7 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		F65EC45A26145CAF0088DBC7 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		F65EC45D26145CBA0088DBC7 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		F65EC4782614669F0088DBC7 /* ViewMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMoreCell.swift; sourceTree = "<group>"; };
+		F65EC4792614669F0088DBC7 /* ViewMoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewMoreCell.xib; sourceTree = "<group>"; };
 		F65FD96E25C672F0007F8D0F /* LazyImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImageView.swift; sourceTree = "<group>"; };
 		F65FD97025C672F0007F8D0F /* Type1Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type1Cell.swift; sourceTree = "<group>"; };
 		F65FD97125C672F0007F8D0F /* Type1ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type1ItemCell.swift; sourceTree = "<group>"; };
@@ -495,6 +501,8 @@
 				F6E8CC6D25E78D6300CD0939 /* SearchCell.xib */,
 				F647365A2612E554008BF14E /* WordCell.swift */,
 				F647365B2612E554008BF14E /* WordCell.xib */,
+				F65EC4782614669F0088DBC7 /* ViewMoreCell.swift */,
+				F65EC4792614669F0088DBC7 /* ViewMoreCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -667,6 +675,7 @@
 			children = (
 				F611070E25EF317900B049C3 /* ReadDetailController.swift */,
 				F6624CFF25EE329C00622AA1 /* ReadController.swift */,
+				4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */,
 			);
 			path = Read;
 			sourceTree = "<group>";
@@ -781,6 +790,7 @@
 				F65FD9A725C694E2007F8D0F /* Type3ItemCell.xib in Resources */,
 				F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */,
 				F65FD9AB25C694E2007F8D0F /* VideoCell.xib in Resources */,
+				F65EC47B2614669F0088DBC7 /* ViewMoreCell.xib in Resources */,
 				F6CA872F25F5C07E004DF132 /* Music3Cell.xib in Resources */,
 				F6F7C4E625E8B3C9008F7A45 /* BookCell.xib in Resources */,
 				F65FD9AA25C694E2007F8D0F /* Type3Cell.xib in Resources */,
@@ -896,6 +906,7 @@
 				F64C601F25F22753008D44A0 /* MusicCategoryController.swift in Sources */,
 				F6CB90BE25F720A70071D0BB /* UserController.swift in Sources */,
 				F6507CE025C3F2CB002E77EC /* APIService.swift in Sources */,
+				4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */,
 				F65FD97525C672F0007F8D0F /* Type1Cell.swift in Sources */,
 				F611070F25EF317900B049C3 /* ReadDetailController.swift in Sources */,
 				F648029925DFA03700D6485B /* SubTypeCell.swift in Sources */,
@@ -953,6 +964,7 @@
 				F6507CD425C3EFC1002E77EC /* RootModel.swift in Sources */,
 				F649761A25F2149800EAC71D /* MusicItemCell.swift in Sources */,
 				F60E2F8A25EC96F70002E99C /* PopUp5Controller.swift in Sources */,
+				F65EC47A2614669F0088DBC7 /* ViewMoreCell.swift in Sources */,
 				F6332F7625CCFD5600305C2E /* PlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
