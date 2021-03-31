@@ -20,7 +20,7 @@ class ReadModel{
         if let temp = json["Title"] as? String { title = temp}
         if let temp = json["Description"] as? String { description = temp}
         if let temp = json["PublishedDate"] as? String { publishedDate = temp}
-        if let temp = json["DetailURL"] as? String {detailUrl = "https://vtc.vn" + temp}
+        if let temp = json["DetailURL"] as? String {detailUrl = temp}
         if let temp = json["image16_9"] as? String { image16_9 = temp}
         if let temp = json["IsVideoArticle"] as? Int { isVideoArticle = temp}
         if let previousDate = publishedDate.toDate(){
