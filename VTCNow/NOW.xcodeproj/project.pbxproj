@@ -121,6 +121,12 @@
 		F6AA30E625EDDBD6007E3477 /* ReadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA30E525EDDBD6007E3477 /* ReadModel.swift */; };
 		F6B82C7525F2315D009FF801 /* Music2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B82C7325F2315D009FF801 /* Music2Cell.swift */; };
 		F6B82C7625F2315D009FF801 /* Music2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6B82C7425F2315D009FF801 /* Music2Cell.xib */; };
+		F6BC461426158C4200DDD828 /* ViewFullCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BC461226158C4200DDD828 /* ViewFullCell.swift */; };
+		F6BC461526158C4200DDD828 /* ViewFullCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6BC461326158C4200DDD828 /* ViewFullCell.xib */; };
+		F6BC46192615A5D600DDD828 /* LongDotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BC46172615A5D600DDD828 /* LongDotCell.swift */; };
+		F6BC461A2615A5D600DDD828 /* LongDotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6BC46182615A5D600DDD828 /* LongDotCell.xib */; };
+		F6BC461E2615A8FD00DDD828 /* ViewFullItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BC461C2615A8FD00DDD828 /* ViewFullItemCell.swift */; };
+		F6BC461F2615A8FD00DDD828 /* ViewFullItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6BC461D2615A8FD00DDD828 /* ViewFullItemCell.xib */; };
 		F6CA872E25F5C07E004DF132 /* Music3Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CA872C25F5C07E004DF132 /* Music3Cell.swift */; };
 		F6CA872F25F5C07E004DF132 /* Music3Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6CA872D25F5C07E004DF132 /* Music3Cell.xib */; };
 		F6CB90BE25F720A70071D0BB /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CB90BD25F720A70071D0BB /* UserController.swift */; };
@@ -261,6 +267,12 @@
 		F6AA30E525EDDBD6007E3477 /* ReadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadModel.swift; sourceTree = "<group>"; };
 		F6B82C7325F2315D009FF801 /* Music2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music2Cell.swift; sourceTree = "<group>"; };
 		F6B82C7425F2315D009FF801 /* Music2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Music2Cell.xib; sourceTree = "<group>"; };
+		F6BC461226158C4200DDD828 /* ViewFullCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFullCell.swift; sourceTree = "<group>"; };
+		F6BC461326158C4200DDD828 /* ViewFullCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewFullCell.xib; sourceTree = "<group>"; };
+		F6BC46172615A5D600DDD828 /* LongDotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongDotCell.swift; sourceTree = "<group>"; };
+		F6BC46182615A5D600DDD828 /* LongDotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LongDotCell.xib; sourceTree = "<group>"; };
+		F6BC461C2615A8FD00DDD828 /* ViewFullItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFullItemCell.swift; sourceTree = "<group>"; };
+		F6BC461D2615A8FD00DDD828 /* ViewFullItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewFullItemCell.xib; sourceTree = "<group>"; };
 		F6CA872C25F5C07E004DF132 /* Music3Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music3Cell.swift; sourceTree = "<group>"; };
 		F6CA872D25F5C07E004DF132 /* Music3Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Music3Cell.xib; sourceTree = "<group>"; };
 		F6CB90BD25F720A70071D0BB /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
@@ -512,6 +524,8 @@
 				F647365B2612E554008BF14E /* WordCell.xib */,
 				F65EC4782614669F0088DBC7 /* ViewMoreCell.swift */,
 				F65EC4792614669F0088DBC7 /* ViewMoreCell.xib */,
+				F6BC46172615A5D600DDD828 /* LongDotCell.swift */,
+				F6BC46182615A5D600DDD828 /* LongDotCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -648,6 +662,10 @@
 				F65FD9A125C694E2007F8D0F /* Type3ItemCell.xib */,
 				F65FD9A325C694E2007F8D0F /* VideoCell.swift */,
 				F65FD9A525C694E2007F8D0F /* VideoCell.xib */,
+				F6BC461226158C4200DDD828 /* ViewFullCell.swift */,
+				F6BC461326158C4200DDD828 /* ViewFullCell.xib */,
+				F6BC461C2615A8FD00DDD828 /* ViewFullItemCell.swift */,
+				F6BC461D2615A8FD00DDD828 /* ViewFullItemCell.xib */,
 			);
 			path = Type3;
 			sourceTree = "<group>";
@@ -805,6 +823,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6BC461F2615A8FD00DDD828 /* ViewFullItemCell.xib in Resources */,
 				F65FD99025C68BEC007F8D0F /* Type2ItemCell.xib in Resources */,
 				F666BEEB25E35C950000990E /* PopUpItemCell.xib in Resources */,
 				F65FD9A725C694E2007F8D0F /* Type3ItemCell.xib in Resources */,
@@ -833,9 +852,11 @@
 				F65FD99225C68BEC007F8D0F /* Type2Cell.xib in Resources */,
 				F6F7C4E725E8B3C9008F7A45 /* BookItemCell.xib in Resources */,
 				F65EC45E26145CBA0088DBC7 /* Roboto-Bold.ttf in Resources */,
+				F6BC461A2615A5D600DDD828 /* LongDotCell.xib in Resources */,
 				F65EC4A0261478320088DBC7 /* HashTagItemCell.xib in Resources */,
 				F649B51F26087FA900FF3B04 /* nativeAdmobCLVCell.xib in Resources */,
 				F6507CBF25C3EEFF002E77EC /* Main.storyboard in Resources */,
+				F6BC461526158C4200DDD828 /* ViewFullCell.xib in Resources */,
 				F64DAC5026083A5900A2C688 /* LaunchScreen.storyboard in Resources */,
 				F65FD97825C672F0007F8D0F /* Type1Cell.xib in Resources */,
 				F648029A25DFA03700D6485B /* SubTypeCell.xib in Resources */,
@@ -934,10 +955,12 @@
 				F611070F25EF317900B049C3 /* ReadDetailController.swift in Sources */,
 				F648029925DFA03700D6485B /* SubTypeCell.swift in Sources */,
 				F65FD99125C68BEC007F8D0F /* Type2Cell.swift in Sources */,
+				F6BC461426158C4200DDD828 /* ViewFullCell.swift in Sources */,
 				F6560B5625EB824E009996D1 /* BookPlayerController.swift in Sources */,
 				F678289525E4AFAE00D96790 /* StreamHelper.swift in Sources */,
 				F6AA30E625EDDBD6007E3477 /* ReadModel.swift in Sources */,
 				F65FD9A925C694E2007F8D0F /* VideoCell.swift in Sources */,
+				F6BC46192615A5D600DDD828 /* LongDotCell.swift in Sources */,
 				F6CA872E25F5C07E004DF132 /* Music3Cell.swift in Sources */,
 				F65FD9B925C69775007F8D0F /* Type4ItemCell.swift in Sources */,
 				F65FD98825C6794F007F8D0F /* CategoryItemCell.swift in Sources */,
@@ -969,6 +992,7 @@
 				F66506B62601BF41009E5B78 /* DotCell.swift in Sources */,
 				F64E6ADA26049C22000F2A22 /* ReportModel.swift in Sources */,
 				F649B52026087FA900FF3B04 /* AdmobManager.swift in Sources */,
+				F6BC461E2615A8FD00DDD828 /* ViewFullItemCell.swift in Sources */,
 				F64A41E025ECC42D0011F8B1 /* Config.swift in Sources */,
 				F65FD99325C68BEC007F8D0F /* Type2ItemCell.swift in Sources */,
 				F698933225F5FC9E00EA960A /* WatchController.swift in Sources */,

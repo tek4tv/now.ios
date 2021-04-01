@@ -347,7 +347,7 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
             player = AVPlayer(url: url)
             viewPlayer.player  = player
             contentPlayhead = IMAAVPlayerContentPlayhead(avPlayer: player)
-            //viewPlayer.player?.play()
+            viewPlayer.player?.play()
             viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
             viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
             isMessaging = false
@@ -362,7 +362,7 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
             
             addTimeObserver()
             setHeightCollView()
-            requestAds()
+            //requestAds()
         }
         //
         if sharedItem.country != ""{

@@ -16,7 +16,7 @@ class Type5Cell: UICollectionViewCell {
     var admobNativeAds: GADUnifiedNativeAd?
     var data = CategoryModel(){
         didSet{
-            lblTitle.text = data.name + " >"
+            lblTitle.text = data.name
             if data.name != oldValue.name{
                 collView.reloadData()
             }
@@ -28,54 +28,30 @@ class Type5Cell: UICollectionViewCell {
         collView.delegate = self
         collView.dataSource = self
         collView.register(UINib(nibName: Type3ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.className)
-        collView.register(UINib(nibName: nativeAdmobCLVCell.className, bundle: nil), forCellWithReuseIdentifier: nativeAdmobCLVCell.className)
+        collView.register(UINib(nibName: ViewMoreCell.className, bundle: nil), forCellWithReuseIdentifier: ViewMoreCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 10 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 20 * scaleW, right: 10 * scaleW)
         collView.collectionViewLayout = layout
-        
-        AdmobManager.shared.loadAllNativeAds()
     }
 
 }
 extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
-            if data.media.count >= 6 {
-                return 6
-            }
-            return data.media.count
-        default:
-            return 1
+        if data.media.count >= 7 {
+            return 7
         }
-        
+        return data.media.count
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section {
-        case 0:
+        let item = data.media[indexPath.row]
+        switch indexPath.row {
+        case 0...5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
-            var item = MediaModel()
-            item = data.media[0]
-            cell.lblTitle.text = item.name
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-                cell.thumbImage.loadImage(fromURL: url)
-            }
-            if item.cast != ""{
-                cell.lblTime.text = item.cast
-            }else{
-                cell.lblTime.text = item.timePass
-            }
-            return cell
-        case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
-            var item = MediaModel()
-            item = data.media[indexPath.row + 1]
             cell.lblTitle.text = item.name
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
@@ -87,12 +63,10 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             }
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nativeAdmobCLVCell.className, for: indexPath) as! nativeAdmobCLVCell
-            if let native = AdmobManager.shared.getAdmobNativeAds(){
-                admobNativeAds = native
-            }
-            if let native = self.admobNativeAds {
-                cell.setupHeader(nativeAd: native)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMoreCell.className, for: indexPath) as! ViewMoreCell
+            
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.imgThumb.loadImage(fromURL: url)
             }
             return cell
         }
@@ -106,18 +80,7 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
 //        }
 //        sharedList = data.media
 //        delegate?.didSelectItemAt()
-        switch indexPath.section {
-        case 0:
-            idVideoPlaying = 0
-            APIService.shared.getDetailVideo(privateKey: data.media[0].privateID) { (data, error) in
-                if let data = data as? MediaModel{
-                    sharedItem = data
-                    sharedList = self.data.media
-                    self.delegate?.didSelectItemAt()
-                }
-            }
-        case 1:
-            idVideoPlaying = indexPath.row + 1
+            idVideoPlaying = indexPath.row
             APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row + 1].privateID) { (data, error) in
                 if let data = data as? MediaModel{
                     sharedItem = data
@@ -125,18 +88,13 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
                     self.delegate?.didSelectItemAt()
                 }
             }
-        default:
-            break
-        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.section {
-        case 0:
-            return CGSize(width: collectionView.bounds.width, height: 300 * scaleW)
-        case 1:
-            return CGSize(width: 190 * scaleW, height: 200 * scaleW)
+        switch indexPath.row {
+        case 0...5:
+            return CGSize(width: 160 * scaleW, height: 180 * scaleW)
         default:
-            return CGSize(width: 380 * scaleW, height: 250 * scaleW)
+            return CGSize(width: 168 * scaleW, height: 180 * scaleW)
         }
     }
 }

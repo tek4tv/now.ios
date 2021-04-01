@@ -112,13 +112,12 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             case "2":
                 return CGSize(width: width, height: 230 * scaleW)
             case "3":
-                let height: CGFloat = CGFloat(3 * 200 + 50 + 550)
+                let height: CGFloat = CGFloat(3 * 200 + 50 + 20)
                 return CGSize(width: width, height: height * scaleW)
             case "4", "14":
                 return CGSize(width: width, height: 275 * scaleW)
             case "5", "8":
-                let height: CGFloat = CGFloat(3 * 200 + 50 + 550)
-                return CGSize(width: width, height: height * scaleW)
+                return CGSize(width: width, height: 250 * scaleW)
             case "6", "7" :
                 return CGSize(width: width, height: 310 * scaleW)
             default:
