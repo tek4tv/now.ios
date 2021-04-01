@@ -6,24 +6,23 @@
 //
 
 import UIKit
+import WebKit
 
 class ReadDetailWebviewController: UIViewController {
-
+    var url = ""
+    @IBOutlet weak var webview: WKWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(url)
+        webview.load(NSURLRequest(url: NSURL(string: url)! as URL) as URLRequest)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
 
-        // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+extension ReadDetailWebviewController:UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
-    */
-
 }

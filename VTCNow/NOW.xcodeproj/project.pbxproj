@@ -13,7 +13,6 @@
 		F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60E2F8525EC8E170002E99C /* CommentCell.xib */; };
 		F60E2F8A25EC96F70002E99C /* PopUp5Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */; };
 		F611070B25EE963100B049C3 /* PopUp6Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611070A25EE963100B049C3 /* PopUp6Controller.swift */; };
-		F611070F25EF317900B049C3 /* ReadDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611070E25EF317900B049C3 /* ReadDetailController.swift */; };
 		F6332F7625CCFD5600305C2E /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6332F7525CCFD5600305C2E /* PlayerViewController.swift */; };
 		F645AC5725E8E113005F3C57 /* BookCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F645AC5625E8E113005F3C57 /* BookCategoryController.swift */; };
 		F647365C2612E555008BF14E /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F647365A2612E554008BF14E /* WordCell.swift */; };
@@ -157,7 +156,6 @@
 		F60E2F8525EC8E170002E99C /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp5Controller.swift; sourceTree = "<group>"; };
 		F611070A25EE963100B049C3 /* PopUp6Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp6Controller.swift; sourceTree = "<group>"; };
-		F611070E25EF317900B049C3 /* ReadDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDetailController.swift; sourceTree = "<group>"; };
 		F6332F7525CCFD5600305C2E /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		F645AC5625E8E113005F3C57 /* BookCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCategoryController.swift; sourceTree = "<group>"; };
 		F647365A2612E554008BF14E /* WordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
@@ -711,7 +709,6 @@
 		F6AA30E025EDDB3D007E3477 /* Read */ = {
 			isa = PBXGroup;
 			children = (
-				F611070E25EF317900B049C3 /* ReadDetailController.swift */,
 				F6624CFF25EE329C00622AA1 /* ReadController.swift */,
 				4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */,
 			);
@@ -952,7 +949,6 @@
 				F6507CE025C3F2CB002E77EC /* APIService.swift in Sources */,
 				4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */,
 				F65FD97525C672F0007F8D0F /* Type1Cell.swift in Sources */,
-				F611070F25EF317900B049C3 /* ReadDetailController.swift in Sources */,
 				F648029925DFA03700D6485B /* SubTypeCell.swift in Sources */,
 				F65FD99125C68BEC007F8D0F /* Type2Cell.swift in Sources */,
 				F6BC461426158C4200DDD828 /* ViewFullCell.swift in Sources */,

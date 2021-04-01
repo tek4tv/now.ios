@@ -123,45 +123,13 @@ extension ReadController: UICollectionViewDelegateFlowLayout{
         case 0:
             break
         case 1:
-            if reads[0].isVideoArticle == 1 {
-                APIService.shared.getReadVideo(id: reads[0].id) {[self] (data, error) in
-                    if let data = data as? NewsVideoModel{
-                        let vc = storyboard?.instantiateViewController(withIdentifier: ReadDetailController.className) as! ReadDetailController
-                        vc.video = data
-                        vc.data2 = reads[0]
-                        navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-            }else{
-                APIService.shared.getReadDetail(id: reads[0].id.description) {[self] (data, error) in
-                    if let data = data as? ReadDetailModel{
-                        let vc = storyboard?.instantiateViewController(withIdentifier: ReadDetailController.className) as! ReadDetailController
-                        vc.data = data
-                        vc.data2 = reads[0]
-                        navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-            }
+            let vc = storyboard?.instantiateViewController(withIdentifier: ReadDetailWebviewController.className) as! ReadDetailWebviewController
+            vc.url = reads[indexPath.row].detailUrl
+            navigationController?.pushViewController(vc, animated: true)
         case 2:
-            if reads[indexPath.row + 1].isVideoArticle == 1 {
-                APIService.shared.getReadVideo(id: reads[indexPath.row + 1].id) {[self] (data, error) in
-                    if let data = data as? NewsVideoModel{
-                        let vc = storyboard?.instantiateViewController(withIdentifier: ReadDetailController.className) as! ReadDetailController
-                        vc.video = data
-                        vc.data2 = reads[indexPath.row + 1]
-                        navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-            }else{
-                APIService.shared.getReadDetail(id: reads[indexPath.row + 1].id.description) {[self] (data, error) in
-                    if let data = data as? ReadDetailModel{
-                        let vc = storyboard?.instantiateViewController(withIdentifier: ReadDetailController.className) as! ReadDetailController
-                        vc.data = data
-                        vc.data2 = reads[indexPath.row + 1]
-                        navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-            }
+            let vc = storyboard?.instantiateViewController(withIdentifier: ReadDetailWebviewController.className) as! ReadDetailWebviewController
+            vc.url = reads[indexPath.row + 1].detailUrl
+            navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
