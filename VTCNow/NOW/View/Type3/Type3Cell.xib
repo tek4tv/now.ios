@@ -44,7 +44,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="VGv-j8-jDc">
-                        <rect key="frame" x="10" y="51.5" width="394" height="153.5"/>
+                        <rect key="frame" x="0.0" y="51.5" width="414" height="153.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BfS-tT-MgN">
                             <size key="itemSize" width="128" height="128"/>
@@ -91,7 +91,7 @@
                     </userDefinedRuntimeAttributes>
                 </constraint>
                 <constraint firstItem="PLs-rz-PbK" firstAttribute="centerY" secondItem="O2X-Xa-bP8" secondAttribute="centerY" id="icb-Eh-fTB"/>
-                <constraint firstAttribute="trailing" secondItem="VGv-j8-jDc" secondAttribute="trailing" constant="10" id="mmd-Nn-v59">
+                <constraint firstAttribute="trailing" secondItem="VGv-j8-jDc" secondAttribute="trailing" id="mmd-Nn-v59">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -101,7 +101,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="VGv-j8-jDc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="sSg-aY-NAm">
+                <constraint firstItem="VGv-j8-jDc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="sSg-aY-NAm">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>

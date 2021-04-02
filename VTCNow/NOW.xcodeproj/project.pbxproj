@@ -111,6 +111,14 @@
 		F666BEEB25E35C950000990E /* PopUpItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F666BEE925E35C950000990E /* PopUpItemCell.xib */; };
 		F66B04D525EE3FF90034013F /* ReadBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B04D325EE3FF90034013F /* ReadBCell.swift */; };
 		F66B04D625EE3FF90034013F /* ReadBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F66B04D425EE3FF90034013F /* ReadBCell.xib */; };
+		F67464892616C118003A5593 /* ViewMore2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67464872616C118003A5593 /* ViewMore2Cell.swift */; };
+		F674648A2616C118003A5593 /* ViewMore2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F67464882616C118003A5593 /* ViewMore2Cell.xib */; };
+		F674648F2616CA44003A5593 /* Type7Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F674648D2616CA44003A5593 /* Type7Cell.swift */; };
+		F67464902616CA44003A5593 /* Type7Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F674648E2616CA44003A5593 /* Type7Cell.xib */; };
+		F67464952616CA59003A5593 /* Type7ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67464932616CA59003A5593 /* Type7ItemCell.swift */; };
+		F67464962616CA59003A5593 /* Type7ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F67464942616CA59003A5593 /* Type7ItemCell.xib */; };
+		F674649A2616D1F4003A5593 /* ViewMore3Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67464982616D1F4003A5593 /* ViewMore3Cell.swift */; };
+		F674649B2616D1F4003A5593 /* ViewMore3Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F67464992616D1F4003A5593 /* ViewMore3Cell.xib */; };
 		F677795525DD0CB50000FBB2 /* HighLight2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F677795425DD0CB50000FBB2 /* HighLight2Controller.swift */; };
 		F678289525E4AFAE00D96790 /* StreamHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F678289425E4AFAE00D96790 /* StreamHelper.swift */; };
 		F68D46D625CA43460097B9F4 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D46D525CA43460097B9F4 /* PlayerView.swift */; };
@@ -256,6 +264,14 @@
 		F666BEE925E35C950000990E /* PopUpItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpItemCell.xib; sourceTree = "<group>"; };
 		F66B04D325EE3FF90034013F /* ReadBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadBCell.swift; sourceTree = "<group>"; };
 		F66B04D425EE3FF90034013F /* ReadBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadBCell.xib; sourceTree = "<group>"; };
+		F67464872616C118003A5593 /* ViewMore2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMore2Cell.swift; sourceTree = "<group>"; };
+		F67464882616C118003A5593 /* ViewMore2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewMore2Cell.xib; sourceTree = "<group>"; };
+		F674648D2616CA44003A5593 /* Type7Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type7Cell.swift; sourceTree = "<group>"; };
+		F674648E2616CA44003A5593 /* Type7Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Type7Cell.xib; sourceTree = "<group>"; };
+		F67464932616CA59003A5593 /* Type7ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type7ItemCell.swift; sourceTree = "<group>"; };
+		F67464942616CA59003A5593 /* Type7ItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Type7ItemCell.xib; sourceTree = "<group>"; };
+		F67464982616D1F4003A5593 /* ViewMore3Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMore3Cell.swift; sourceTree = "<group>"; };
+		F67464992616D1F4003A5593 /* ViewMore3Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewMore3Cell.xib; sourceTree = "<group>"; };
 		F677795425DD0CB50000FBB2 /* HighLight2Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighLight2Controller.swift; sourceTree = "<group>"; };
 		F678289425E4AFAE00D96790 /* StreamHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamHelper.swift; sourceTree = "<group>"; };
 		F68D46D525CA43460097B9F4 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
@@ -512,6 +528,7 @@
 				F65FD9B225C69775007F8D0F /* Type4 */,
 				F65FD9C525C6A114007F8D0F /* Type5 */,
 				F6D5068725C6A84B002BEA99 /* Type6 */,
+				F674648C2616C9B0003A5593 /* Type7 */,
 				F65FD98025C6794F007F8D0F /* Category */,
 				F65FD97A25C674CA007F8D0F /* Weather */,
 				F65FD96D25C672F0007F8D0F /* LazyLoading */,
@@ -524,6 +541,10 @@
 				F65EC4792614669F0088DBC7 /* ViewMoreCell.xib */,
 				F6BC46172615A5D600DDD828 /* LongDotCell.swift */,
 				F6BC46182615A5D600DDD828 /* LongDotCell.xib */,
+				F67464872616C118003A5593 /* ViewMore2Cell.swift */,
+				F67464882616C118003A5593 /* ViewMore2Cell.xib */,
+				F67464982616D1F4003A5593 /* ViewMore3Cell.swift */,
+				F67464992616D1F4003A5593 /* ViewMore3Cell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -697,6 +718,17 @@
 			path = PopUpItem;
 			sourceTree = "<group>";
 		};
+		F674648C2616C9B0003A5593 /* Type7 */ = {
+			isa = PBXGroup;
+			children = (
+				F674648D2616CA44003A5593 /* Type7Cell.swift */,
+				F674648E2616CA44003A5593 /* Type7Cell.xib */,
+				F67464932616CA59003A5593 /* Type7ItemCell.swift */,
+				F67464942616CA59003A5593 /* Type7ItemCell.xib */,
+			);
+			path = Type7;
+			sourceTree = "<group>";
+		};
 		F698933425F5FD3B00EA960A /* Watch */ = {
 			isa = PBXGroup;
 			children = (
@@ -839,11 +871,13 @@
 				F65FD9BA25C69775007F8D0F /* Type4Cell.xib in Resources */,
 				F66B04D625EE3FF90034013F /* ReadBCell.xib in Resources */,
 				F698933825F5FD6D00EA960A /* WatchCell.xib in Resources */,
+				F67464902616CA44003A5593 /* Type7Cell.xib in Resources */,
 				F6F2BD8F260DBD81001056C7 /* GoogleService-Info.plist in Resources */,
 				F65FD98625C6794F007F8D0F /* CategoryItemCell.xib in Resources */,
 				F65FD97E25C674CA007F8D0F /* WeatherCell.xib in Resources */,
 				F6507CC125C3EF01002E77EC /* Assets.xcassets in Resources */,
 				F647365D2612E555008BF14E /* WordCell.xib in Resources */,
+				F674648A2616C118003A5593 /* ViewMore2Cell.xib in Resources */,
 				F649761925F2149800EAC71D /* MusicItemCell.xib in Resources */,
 				F6624CFC25EE2D4E00622AA1 /* ReadACell.xib in Resources */,
 				F65FD99225C68BEC007F8D0F /* Type2Cell.xib in Resources */,
@@ -853,7 +887,9 @@
 				F65EC4A0261478320088DBC7 /* HashTagItemCell.xib in Resources */,
 				F649B51F26087FA900FF3B04 /* nativeAdmobCLVCell.xib in Resources */,
 				F6507CBF25C3EEFF002E77EC /* Main.storyboard in Resources */,
+				F67464962616CA59003A5593 /* Type7ItemCell.xib in Resources */,
 				F6BC461526158C4200DDD828 /* ViewFullCell.xib in Resources */,
+				F674649B2616D1F4003A5593 /* ViewMore3Cell.xib in Resources */,
 				F64DAC5026083A5900A2C688 /* LaunchScreen.storyboard in Resources */,
 				F65FD97825C672F0007F8D0F /* Type1Cell.xib in Resources */,
 				F648029A25DFA03700D6485B /* SubTypeCell.xib in Resources */,
@@ -925,6 +961,7 @@
 				F6F387602602F07F004E916A /* PlayerView2Controller.swift in Sources */,
 				F6D5068F25C6A84B002BEA99 /* Type6Cell.swift in Sources */,
 				F65EC49A261476EC0088DBC7 /* HashTagCell.swift in Sources */,
+				F67464892616C118003A5593 /* ViewMore2Cell.swift in Sources */,
 				F65FD97625C672F0007F8D0F /* Type1ItemCell.swift in Sources */,
 				F65FD97425C672F0007F8D0F /* LazyImageView.swift in Sources */,
 				F68D46D625CA43460097B9F4 /* PlayerView.swift in Sources */,
@@ -980,12 +1017,14 @@
 				F65FD9C925C6A114007F8D0F /* Type5Cell.swift in Sources */,
 				F65FD9A825C694E2007F8D0F /* Type3ItemCell.swift in Sources */,
 				F66B04D525EE3FF90034013F /* ReadBCell.swift in Sources */,
+				F674648F2616CA44003A5593 /* Type7Cell.swift in Sources */,
 				F64B02EB25ECF30400AAE865 /* ChannelModel.swift in Sources */,
 				F647365C2612E555008BF14E /* WordCell.swift in Sources */,
 				F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */,
 				F666BEEA25E35C950000990E /* PopUpItemCell.swift in Sources */,
 				F6E8CC6E25E78D6300CD0939 /* SearchCell.swift in Sources */,
 				F66506B62601BF41009E5B78 /* DotCell.swift in Sources */,
+				F67464952616CA59003A5593 /* Type7ItemCell.swift in Sources */,
 				F64E6ADA26049C22000F2A22 /* ReportModel.swift in Sources */,
 				F649B52026087FA900FF3B04 /* AdmobManager.swift in Sources */,
 				F6BC461E2615A8FD00DDD828 /* ViewFullItemCell.swift in Sources */,
@@ -994,6 +1033,7 @@
 				F698933225F5FC9E00EA960A /* WatchController.swift in Sources */,
 				F6F7C4E525E8B3C9008F7A45 /* BookCell.swift in Sources */,
 				F6D5068E25C6A84B002BEA99 /* Type6ItemCell.swift in Sources */,
+				F674649A2616D1F4003A5593 /* ViewMore3Cell.swift in Sources */,
 				F6B82C7525F2315D009FF801 /* Music2Cell.swift in Sources */,
 				F64836B125F0D5BC00A9E878 /* MovieCell.swift in Sources */,
 				F666BEE425E35A1D0000990E /* PopUp3Controller.swift in Sources */,

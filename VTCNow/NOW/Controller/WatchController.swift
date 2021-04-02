@@ -8,40 +8,40 @@
 import UIKit
 import AVFoundation
 import GoogleInteractiveMediaAds
-class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDelegate{
-    func adsManagerDidRequestContentPause(_ adsManager: IMAAdsManager!) {
-        // Pause the content for the SDK to play ads.
-        viewPlayer.player?.pause()
-    }
-    
-    func adsManagerDidRequestContentResume(_ adsManager: IMAAdsManager!) {
-        // Resume the content since the SDK is done playing ads (at least for now).
-        viewPlayer.player?.play()
-    }
-    
-    func adsManager(_ adsManager: IMAAdsManager!, didReceive event: IMAAdEvent!) {
-        if event.type == IMAAdEventType.LOADED {
-            adsManager.start()
-        }
-    }
-    
-    func adsManager(_ adsManager: IMAAdsManager!, didReceive error: IMAAdError!) {
-        // Fall back to playing content
-        print("AdsManager error: " + error.message)
-        //viewPlayer.player?.play()
-    }
-    
-    func adsLoader(_ loader: IMAAdsLoader!, adsLoadedWith adsLoadedData: IMAAdsLoadedData!) {
-        adsManager = adsLoadedData.adsManager
-        adsManager.delegate = self
-        // Initialize the ads manager.
-        adsManager.initialize(with: nil)
-    }
-    
-    func adsLoader(_ loader: IMAAdsLoader!, failedWith adErrorData: IMAAdLoadingErrorData!) {
-        print("Error loading ads: " + adErrorData.adError.message)
-        //viewPlayer.player?.play()
-    }
+class WatchController: UIViewController {//}, IMAAdsLoaderDelegate , IMAAdsManagerDelegate{
+//    func adsManagerDidRequestContentPause(_ adsManager: IMAAdsManager!) {
+//        // Pause the content for the SDK to play ads.
+//        viewPlayer.player?.pause()
+//    }
+//
+//    func adsManagerDidRequestContentResume(_ adsManager: IMAAdsManager!) {
+//        // Resume the content since the SDK is done playing ads (at least for now).
+//        viewPlayer.player?.play()
+//    }
+//
+//    func adsManager(_ adsManager: IMAAdsManager!, didReceive event: IMAAdEvent!) {
+//        if event.type == IMAAdEventType.LOADED {
+//            adsManager.start()
+//        }
+//    }
+//
+//    func adsManager(_ adsManager: IMAAdsManager!, didReceive error: IMAAdError!) {
+//        // Fall back to playing content
+//        print("AdsManager error: " + error.message)
+//        //viewPlayer.player?.play()
+//    }
+//
+//    func adsLoader(_ loader: IMAAdsLoader!, adsLoadedWith adsLoadedData: IMAAdsLoadedData!) {
+//        adsManager = adsLoadedData.adsManager
+//        adsManager.delegate = self
+//        // Initialize the ads manager.
+//        adsManager.initialize(with: nil)
+//    }
+//
+//    func adsLoader(_ loader: IMAAdsLoader!, failedWith adErrorData: IMAAdLoadingErrorData!) {
+//        print("Error loading ads: " + adErrorData.adError.message)
+//        //viewPlayer.player?.play()
+//    }
     var player: AVPlayer!
     var playerLayer: AVPlayerLayer!
     var isPlaying = false
@@ -77,10 +77,10 @@ class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDe
         super.viewDidAppear(animated);
         
     }
-    func setUpAdsLoader() {
-        adsLoader = IMAAdsLoader(settings: nil)
-        adsLoader.delegate = self
-    }
+//    func setUpAdsLoader() {
+//        adsLoader = IMAAdsLoader(settings: nil)
+//        adsLoader.delegate = self
+//    }
     
     func requestAds() {
         // Create ad display container for ad rendering.
@@ -112,8 +112,8 @@ class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDe
     }
 
     override func viewDidLoad() {
-        setUpContentPlayer()
-        setUpAdsLoader()
+//        setUpContentPlayer()
+//        setUpAdsLoader()
         
         super.viewDidLoad()
         collView.delegate = self
@@ -229,7 +229,7 @@ class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDe
     func didOpenVideo(){
         //requestAds()
         
-        activityIndicatorView.startAnimating()
+        //activityIndicatorView.startAnimating()
         UIView.animate(withDuration: 0.5) {
             self.hidePlayerController()
             self.view.layoutIfNeeded()
@@ -269,11 +269,11 @@ class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDe
             //playerViewController = AVPlayerViewController()
             //playerViewController.player = player
             
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(WatchController.contentDidFinishPlaying(_:)),
-                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-                object: viewPlayer.player?.currentItem);
+//            NotificationCenter.default.addObserver(
+//                self,
+//                selector: #selector(WatchController.contentDidFinishPlaying(_:)),
+//                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+//                object: viewPlayer.player?.currentItem);
             
         }
     }
@@ -287,14 +287,14 @@ class WatchController: UIViewController , IMAAdsLoaderDelegate , IMAAdsManagerDe
             }
             else if (viewPlayer.player?.timeControlStatus == .paused) {
                 if tabBarIndex == 1 {
-                    //didOpenVideo()
+                    didOpenVideo()
                 }
                 //player is pause
             }
             else if (viewPlayer.player?.timeControlStatus == .waitingToPlayAtSpecifiedRate) {
                 //player is waiting to play
                 activityIndicatorView.startAnimating()
-                
+
             }
         }
     }

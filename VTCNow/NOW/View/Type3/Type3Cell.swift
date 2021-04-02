@@ -26,10 +26,11 @@ class Type3Cell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: "Type3ItemCell", bundle: nil), forCellWithReuseIdentifier: "Type3ItemCell")
-        collView.register(UINib(nibName: nativeAdmobCLVCell.className, bundle: nil), forCellWithReuseIdentifier: nativeAdmobCLVCell.className)
+        collView.register(UINib(nibName: Type3ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.className)
+        collView.register(UINib(nibName: ViewFullCell.className, bundle: nil), forCellWithReuseIdentifier: ViewFullCell.className)
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 20 * scaleW, right: 10 * scaleW)
         collView.collectionViewLayout = layout
     }
     func refresh(){
@@ -38,26 +39,66 @@ class Type3Cell: UICollectionViewCell {
 }
 extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if data.media.count >= 6 {
+        // 6 1 6 1 6 1 6
+        switch section {
+        case 0, 2, 4, 6:
             return 6
+        default:
+            return 1
         }
-        return data.media.count
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 7
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
-        let item = data.media[indexPath.row]
-        cell.lblTitle.text = item.name
-        cell.lblTime.text = item.getTimePass()
-        
-        
-        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-            cell.thumbImage.loadImage(fromURL: url)
-            cell.thumbImage.contentMode = .scaleAspectFill
+        switch indexPath.section {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+            let item = data.media[indexPath.row]
+            cell.lblTitle.text = item.name
+            cell.lblTime.text = item.getTimePass()
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.thumbImage.loadImage(fromURL: url)
+                cell.thumbImage.contentMode = .scaleAspectFill
+            }
+            return cell
+        case 2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+            let item = data.media[indexPath.row + 6]
+            cell.lblTitle.text = item.name
+            cell.lblTime.text = item.getTimePass()
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.thumbImage.loadImage(fromURL: url)
+                cell.thumbImage.contentMode = .scaleAspectFill
+            }
+            return cell
+        case 4:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+            let item = data.media[indexPath.row + 12]
+            cell.lblTitle.text = item.name
+            cell.lblTime.text = item.getTimePass()
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.thumbImage.loadImage(fromURL: url)
+                cell.thumbImage.contentMode = .scaleAspectFill
+            }
+            return cell
+        case 6:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+            let item = data.media[indexPath.row + 18]
+            cell.lblTitle.text = item.name
+            cell.lblTime.text = item.getTimePass()
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.thumbImage.loadImage(fromURL: url)
+                cell.thumbImage.contentMode = .scaleAspectFill
+            }
+            return cell
+        case 1, 3, 5:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewFullCell.className, for: indexPath) as! ViewFullCell
+            cell.listData = Array(data.media.prefix(6))
+            return cell
+        default:
+            return UICollectionViewCell()
         }
-        return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        switch indexPath.section {
@@ -80,6 +121,12 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 190 * scaleW, height: 200 * scaleW)
+        switch indexPath.section {
+        case 0, 2, 4, 6:
+            return CGSize(width: 190 * scaleW, height: 200 * scaleW)
+        default:
+            return CGSize(width: 414 * scaleW, height: 260 * scaleW)
+        }
+        
     }
 }

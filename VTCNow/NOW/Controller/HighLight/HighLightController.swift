@@ -26,6 +26,7 @@ class HighLightController: UIViewController {
         collView.register(UINib(nibName: Type4Cell.className, bundle: nil), forCellWithReuseIdentifier: Type4Cell.className)
         collView.register(UINib(nibName: Type5Cell.className, bundle: nil), forCellWithReuseIdentifier: Type5Cell.className)
         collView.register(UINib(nibName: Type6Cell.className, bundle: nil), forCellWithReuseIdentifier: Type6Cell.className)
+        collView.register(UINib(nibName: Type7Cell.className, bundle: nil), forCellWithReuseIdentifier: Type7Cell.className)
         collView.refreshControl = UIRefreshControl()
         collView.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(didSelectBookItem(_:)), name: NSNotification.Name("openBookPlayer"), object: nil)
@@ -106,20 +107,28 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
         } else if section == 3{
             return CGSize(width: width, height: 85 * scaleW)
         } else {
-            switch categorys[section - 3].layout.type {
+            let item = categorys[section - 3]
+            switch item.layout.type {
             case "1":
                 return CGSize(width: width, height: 260 * scaleW)
             case "2":
                 return CGSize(width: width, height: 230 * scaleW)
             case "3":
-                let height: CGFloat = CGFloat(3 * 200 + 50 + 20)
+                let temp = 12 * 200 + 50 + 260 * 3 + 10 * 11 + 20 * 6
+                let height: CGFloat = CGFloat(temp)
                 return CGSize(width: width, height: height * scaleW)
             case "4", "14":
-                return CGSize(width: width, height: 275 * scaleW)
+                return CGSize(width: width, height: 420 * scaleW)
             case "5", "8":
+                if item.name == "Âm nhạc"{
+                    return CGSize(width: width, height: 420 * scaleW)
+                }
                 return CGSize(width: width, height: 250 * scaleW)
             case "6", "7" :
-                return CGSize(width: width, height: 310 * scaleW)
+                if item.name == "Sách hay"{
+                    return CGSize(width: width, height: 250 * scaleW)
+                }
+                return CGSize(width: width, height: 320 * scaleW )
             default:
                 return CGSize(width: 0, height: 200)
             }
@@ -168,11 +177,21 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                 cell.data = item
                 return cell
             case "5", "8":
+                if item.name == "Âm nhạc"{
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4Cell.className, for: indexPath) as! Type4Cell
+                    cell.data = item
+                    return cell
+                }
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type5Cell.className, for: indexPath) as! Type5Cell
                 cell.delegate = self
                 cell.data = item
                 return cell
             case "6", "7":
+                if item.name == "Sách hay"{
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7Cell.className, for: indexPath) as! Type7Cell
+                    cell.data = item
+                    return cell
+                }
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type6Cell.className, for: indexPath) as! Type6Cell
                 cell.data = item
                 return cell

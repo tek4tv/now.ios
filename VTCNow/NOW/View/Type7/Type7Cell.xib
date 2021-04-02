@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="Type7Cell" customModule="NOW" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sách hay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSg-8L-nwj">
+                        <rect key="frame" x="10" y="20" width="73" height="21.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="TTL-p2-bsc">
+                        <rect key="frame" x="0.0" y="51.5" width="414" height="147.5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QkL-Wd-hyv">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cii-ZY-12L">
+                        <rect key="frame" x="10" y="199" width="394" height="1"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Mor-V9-y0K">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-next-page-52" translatesAutoresizingMaskIntoConstraints="NO" id="ded-zT-1p0">
+                        <rect key="frame" x="384" y="21" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="3ev-6G-TBJ"/>
+                            <constraint firstAttribute="width" secondItem="ded-zT-1p0" secondAttribute="height" id="Luv-q3-C8R"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Cii-ZY-12L" firstAttribute="top" secondItem="TTL-p2-bsc" secondAttribute="bottom" id="4lt-4w-UU2"/>
+                <constraint firstAttribute="bottom" secondItem="Cii-ZY-12L" secondAttribute="bottom" id="6mS-L7-JDb"/>
+                <constraint firstItem="aSg-8L-nwj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="CEM-aK-o7X"/>
+                <constraint firstItem="TTL-p2-bsc" firstAttribute="top" secondItem="aSg-8L-nwj" secondAttribute="bottom" constant="10" id="CHf-f9-ys4"/>
+                <constraint firstItem="aSg-8L-nwj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="He7-Jk-nf5"/>
+                <constraint firstItem="ded-zT-1p0" firstAttribute="centerY" secondItem="aSg-8L-nwj" secondAttribute="centerY" id="XC8-zJ-Bv0"/>
+                <constraint firstItem="TTL-p2-bsc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="b2Y-Kd-SXx"/>
+                <constraint firstItem="Cii-ZY-12L" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="jC7-WK-Sfk"/>
+                <constraint firstAttribute="trailing" secondItem="TTL-p2-bsc" secondAttribute="trailing" id="kE9-mi-UhH"/>
+                <constraint firstAttribute="trailing" secondItem="Cii-ZY-12L" secondAttribute="trailing" constant="10" id="nXw-YL-G0y"/>
+                <constraint firstAttribute="trailing" secondItem="ded-zT-1p0" secondAttribute="trailing" constant="10" id="y46-ec-o3c"/>
+            </constraints>
+            <connections>
+                <outlet property="collView" destination="TTL-p2-bsc" id="gwC-f1-BI1"/>
+                <outlet property="lblTitle" destination="aSg-8L-nwj" id="a1b-Ps-c8P"/>
+            </connections>
+            <point key="canvasLocation" x="28.985507246376812" y="131.91964285714286"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="icons8-next-page-52" width="52" height="52"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

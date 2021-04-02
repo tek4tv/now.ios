@@ -13,7 +13,7 @@ class Type4Cell: UICollectionViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     var data = CategoryModel(){
         didSet{
-            lblTitle.text = data.name + " >"
+            lblTitle.text = data.name
             if data.name != oldValue.name{
                 collView.reloadData()
             }
@@ -26,27 +26,29 @@ class Type4Cell: UICollectionViewCell {
         collView.dataSource = self
         collView.register(UINib(nibName: "Type4ItemCell", bundle: nil), forCellWithReuseIdentifier: "Type4ItemCell")
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 150 * scaleW, height: 220 * scaleW)
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 0)
+        layout.itemSize = CGSize(width: 190 * scaleW, height: 170 * scaleW)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
         collView.collectionViewLayout = layout
     }
 
 }
 extension Type4Cell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.media.count
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4ItemCell.className, for: indexPath) as! Type4ItemCell
         let item = data.media[indexPath.row]
-        if let url = URL(string: root.cdn.imageDomain + item.square.replacingOccurrences(of: "\\", with: "/" )){
+        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
             cell.thumbImage.loadImage(fromURL: url)
         }
         cell.lblTitle.text = item.name + item.episode
-        cell.lblTime.text = item.timePass
+        if item.path.contains(".mp3"){
+            cell.imgOverlay.isHidden = true
+        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

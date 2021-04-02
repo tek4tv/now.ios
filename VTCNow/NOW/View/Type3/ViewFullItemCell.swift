@@ -15,6 +15,15 @@ class ViewFullItemCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        animate()
     }
+    func animate(){
+        UIView.animate(withDuration: 6.0, delay: 0.0, options: .curveEaseIn) {
+            self.imgThumb.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        } completion: { (Bool) in
+            self.imgThumb.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            self.animate()
+        }
 
+    }
 }

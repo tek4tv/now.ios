@@ -1,12 +1,13 @@
 //
-//  PhimCell.swift
-//  VTCNow
+//  Type7Cell.swift
+//  NOW
 //
-//  Created by dovietduy on 1/27/21.
+//  Created by dovietduy on 4/2/21.
 //
 
 import UIKit
-class Type6Cell: UICollectionViewCell {
+
+class Type7Cell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -24,17 +25,16 @@ class Type6Cell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type6ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type6ItemCell.className)
-        collView.register(UINib(nibName: ViewMore2Cell.className, bundle: nil), forCellWithReuseIdentifier: ViewMore2Cell.className)
+        collView.register(UINib(nibName: Type7ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type7ItemCell.className)
+        collView.register(UINib(nibName: ViewMore3Cell.className, bundle: nil), forCellWithReuseIdentifier: ViewMore3Cell.className)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 10 * scaleW, right: 10 * scaleW)
+        layout.minimumLineSpacing = 10 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
         collView.collectionViewLayout = layout
     }
 }
-extension Type6Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if data.media.count >= 9{
             return 9
@@ -44,28 +44,28 @@ extension Type6Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.row {
         case 0...7:
-            return CGSize(width: 130 * scaleW, height: 260 * scaleW)
+            return CGSize(width: 110 * scaleW, height: 190 * scaleW)
         default:
-            return CGSize(width: 138 * scaleW, height: 260 * scaleW)
+            return CGSize(width: 118 * scaleW, height: 190 * scaleW)
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = data.media[indexPath.row]
         switch indexPath.row {
         case 0...7:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type6ItemCell.className, for: indexPath) as! Type6ItemCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7ItemCell.className, for: indexPath) as! Type7ItemCell
             
-            if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
-                cell.thumbImage.loadImage(fromURL: url)
+            if let url = URL(string: root.cdn.imageDomain + item.square.replacingOccurrences(of: "\\", with: "/" )){
+                cell.imgThumb.loadImage(fromURL: url)
             }
             cell.lblTitle.text = item.name
             
-            cell.lblCountry.text = item.country
+            cell.lblAuthor.text = item.author
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMore2Cell.className, for: indexPath) as! ViewMore2Cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMore3Cell.className, for: indexPath) as! ViewMore3Cell
             
-            if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.square.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
             }
             return cell
@@ -83,10 +83,6 @@ extension Type6Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
                     NotificationCenter.default.post(name: NSNotification.Name("openBookPlayer"), object: nil)
                 }
             }
-//            sharedItem = data.media[indexPath.row]
-//            sharedList = data.media
-//            idBookPlaying = indexPath.row
-//            NotificationCenter.default.post(name: NSNotification.Name("openBookPlayer"), object: nil)
         }else{
             APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
                 if let data = data as? MediaModel{
@@ -95,9 +91,6 @@ extension Type6Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
                     NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
                 }
             }
-//            sharedItem = data.media[indexPath.row]
-//            sharedList = data.media
-//            NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
         }
         
     }
