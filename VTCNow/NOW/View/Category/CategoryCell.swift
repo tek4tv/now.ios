@@ -13,6 +13,18 @@ class CategoryCell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
     var delegate: CategoryCellDelegate!
+    var images: [String: UIImage] = [
+        "Nổi bật": #imageLiteral(resourceName: "noibat"),
+        "Đừng bỏ lỡ": #imageLiteral(resourceName: "tvshow"),
+        "Tin mới": #imageLiteral(resourceName: "tinmoi"),
+        "Tài liệu": #imageLiteral(resourceName: "tailieu"),
+        "Ẩm thực": #imageLiteral(resourceName: "noibat"),
+        "Sức khoẻ": #imageLiteral(resourceName: "noibat"),
+        "TV Show": #imageLiteral(resourceName: "noibat"),
+        "Âm nhạc": #imageLiteral(resourceName: "noibat"),
+        "Phim": #imageLiteral(resourceName: "noibat"),
+        "Sách hay": #imageLiteral(resourceName: "noibat"),
+    ]
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,7 +48,7 @@ extension CategoryCell: UICollectionViewDelegate, UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCell.className, for: indexPath) as! CategoryItemCell
         let item = categorys[indexPath.row]
         cell.lblTitle.text = item.name
-        cell.thumbImage.image = #imageLiteral(resourceName: "tinmoi")
+        cell.thumbImage.image = images[item.name]
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

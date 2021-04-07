@@ -14,12 +14,12 @@ class Type1Cell: UICollectionViewCell {
     
     var timer = Timer()
     var indexPath = IndexPath(row: 0, section: 0)
-    var data: [MediaModel] = []{
+    var data = CategoryModel(){
         didSet{
-            if data.count >= 6 {
+            if data.media.count >= 6 {
                 widthCollDot.constant = 100 * scaleW
             }else{
-                widthCollDot.constant = CGFloat(data.count * 10) * scaleW
+                widthCollDot.constant = CGFloat(data.media.count * 10) * scaleW
             }
         }
     }
@@ -49,7 +49,7 @@ class Type1Cell: UICollectionViewCell {
         collViewDot.collectionViewLayout = layout2
         
         timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: {[self] (timer) in
-            if indexPath.row < data.count{
+            if indexPath.row < data.media.count{
                 indexPath.row += 1
             } else{
                 indexPath.row = 0
@@ -65,15 +65,15 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
         case 0:
-            if data.count >= 6 {
+            if data.media.count >= 6 {
                 return 6
             }
-            return data.count
+            return data.media.count
         default:
-            if data.count >= 6 {
+            if data.media.count >= 6 {
                 return 6
             }
-            return data.count
+            return data.media.count
         }
         
     }
@@ -82,7 +82,7 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         switch collectionView.tag {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1ItemCell.className, for: indexPath) as! Type1ItemCell
-            let item = data[indexPath.row]
+            let item = data.media[indexPath.row]
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
             }
@@ -106,6 +106,15 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         case 0:
             self.indexPath = indexPath
             collViewDot.reloadData()
+            if data.media.count < 9{
+                APIService.shared.getMoreVideoPlaylist(privateKey: data.privateKey, page: "0") { (data, error) in
+                    if let data = data as? [MediaModel]{
+                        self.data.media += data
+                        self.widthCollDot.constant = 100 * scaleW
+                        self.collView.reloadData()
+                    }
+                }
+            }
         default:
             break
         }
@@ -114,16 +123,13 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView.tag {
         case 0:
-            APIService.shared.getDetailVideo(privateKey: data[indexPath.row].privateID) { (data, error) in
+            APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
                 if let data = data as? MediaModel{
                     sharedItem = data
-                    sharedList = self.data
+                    sharedList = self.data.media
                     NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
                 }
             }
-//            sharedItem = data[indexPath.row]
-//            sharedList = self.data
-//            NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
         default:
             break
         }

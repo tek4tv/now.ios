@@ -53,7 +53,7 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
         adsLoader.delegate = self
     }
     @objc func contentDidFinishPlaying(_ notification: Notification) {
-        adsLoader.contentComplete()
+        //adsLoader.contentComplete()
     }
     func requestAds() {
         // Create ad display container for ad rendering.
@@ -127,7 +127,7 @@ class HomeController: UITabBarController, UITabBarControllerDelegate, IMAAdsLoad
     var speed: Double = 1.0
     
     override func viewDidLoad() {
-        setUpAdsLoader()
+        //setUpAdsLoader()
         super.viewDidLoad()
         txfView.delegate = self
         viewPlayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewPlayer(_:))))

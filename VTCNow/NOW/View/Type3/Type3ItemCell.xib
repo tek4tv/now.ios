@@ -250,6 +250,9 @@
                 <outlet property="lblTime" destination="Tfa-4i-PgU" id="LgQ-38-96g"/>
                 <outlet property="lblTitle" destination="ETX-5u-vt3" id="EdM-n2-LDf"/>
                 <outlet property="thumbImage" destination="UDj-LX-c8z" id="MaA-4x-O9l"/>
+                <outlet property="viewBookmark" destination="cgx-wu-9xF" id="3iN-Vw-4Pq"/>
+                <outlet property="viewImage" destination="UDj-LX-c8z" id="2Vr-vb-Do3"/>
+                <outlet property="viewShare" destination="UG0-vf-8r0" id="Cus-xW-J38"/>
             </connections>
             <point key="canvasLocation" x="189.85507246376812" y="117.85714285714285"/>
         </collectionViewCell>

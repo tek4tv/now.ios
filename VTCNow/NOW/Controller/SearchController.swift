@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import AVFoundation
 class SearchController: UIViewController {
 
     @IBOutlet weak var collView: UICollectionView!
@@ -138,16 +138,16 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
         switch collectionView.tag{
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.className, for: indexPath) as! VideoCell
-            cell.delegate = self
+            //cell.delegate = self
             
             let item = listData[indexPath.row]
             cell.item = item
             cell.indexPath = indexPath
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.timePass
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-                cell.thumbImage.loadImage(fromURL: url)
-            }
+//            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+//                cell.thumbImage.loadImage(fromURL: url)
+//            }
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.className, for: indexPath) as! WordCell
@@ -206,17 +206,33 @@ extension SearchController: UITextFieldDelegate {
     }
 }
 extension SearchController: VideoCellDelegate{
-    func didSelect3Dot(_ cell: VideoCell) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "PopUpController") as! PopUpController
-        vc.data = cell.item
-        vc.modalPresentationStyle = .overFullScreen
-        present(vc, animated: true, completion: nil)
+    func didSelectBookMark(_ cell: VideoCell) {
+        
     }
     
-    func didSelectVideo(_ cell: VideoCell) {
-        sharedItem = cell.item
-        NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
+    func didSelectViewSetting(_ cell: VideoCell) {
+        
     }
+    
+    func didSelectViewFullScreen(_ cell: VideoCell, _ newPlayer: AVPlayer) {
+        
+    }
+    
+    func didSelectViewCast() {
+        
+    }
+    
+//    func didSelect3Dot(_ cell: VideoCell) {
+//        let vc = storyboard?.instantiateViewController(withIdentifier: "PopUpController") as! PopUpController
+//        vc.data = cell.item
+//        vc.modalPresentationStyle = .overFullScreen
+//        present(vc, animated: true, completion: nil)
+//    }
+//
+//    func didSelectVideo(_ cell: VideoCell) {
+//        sharedItem = cell.item
+//        NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
+//    }
 }
 
 extension SearchController: UITableViewDelegate, UITableViewDataSource{

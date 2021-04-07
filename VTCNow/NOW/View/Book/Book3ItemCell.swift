@@ -1,16 +1,15 @@
 //
-//  Music3Cell.swift
+//  Book3ItemCell.swift
 //  NOW
 //
-//  Created by dovietduy on 3/8/21.
+//  Created by dovietduy on 4/5/21.
 //
 
 import UIKit
 
-class Music3Cell: UICollectionViewCell {
+class Book3ItemCell: UICollectionViewCell {
+
     @IBOutlet weak var imgThumb: LazyImageView!
-    @IBOutlet weak var lblTitle: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

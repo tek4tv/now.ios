@@ -46,13 +46,13 @@ extension MovieController: UICollectionViewDelegate, UICollectionViewDataSource,
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
-            cell.data = news.media
+            cell.data = news
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.className, for: indexPath) as! MovieCell
             cell.delegate = self
             let item = news.components[indexPath.section - 1]
-            cell.lblTitle.text = item.name + " >"
+            cell.lblTitle.text = item.name
             cell.data = item.category
             return cell
         }

@@ -147,7 +147,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
         } else if section == 2{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
             if categorys.count > 0{
-                cell.data = categorys[0].media
+                cell.data = categorys[0]
                 cell.collView.reloadData()
             }
             return cell
@@ -160,7 +160,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             switch item.layout.type {
             case "1":
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
-                cell.data = item.media
+                cell.data = item
                 return cell
             case "2":
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type2Cell.className, for: indexPath) as! Type2Cell
@@ -168,7 +168,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                 return cell
             case "3":
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3Cell.className, for: indexPath) as! Type3Cell
-//                cell.delegate = self
+                cell.delegate = self
                 cell.data = item
                 cell.refresh()
                 return cell
@@ -179,6 +179,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             case "5", "8":
                 if item.name == "Âm nhạc"{
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4Cell.className, for: indexPath) as! Type4Cell
+                    cell.delegate = self
                     cell.data = item
                     return cell
                 }
@@ -189,6 +190,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             case "6", "7":
                 if item.name == "Sách hay"{
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7Cell.className, for: indexPath) as! Type7Cell
+                    cell.delegate = self
                     cell.data = item
                     return cell
                 }
@@ -412,6 +414,25 @@ extension HighLightController: CategoryCellDelegate {
         }
     }
 }
+extension HighLightController: Type3CellDelegate{
+    func didSelectViewShare(_ cell: Type3ItemCell) {
+        guard let url = URL(string: cell.data.path) else {
+            return
+        }
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
+    }
+}
+extension HighLightController: Type4CellDelegate{
+    func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel]) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: MusicPlayerController.className) as! MusicPlayerController
+        vc.item = data
+        vc.listData = listData
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
 extension HighLightController: Type5Delegate{
     func didSelectItemAt() {
         if sharedItem.path.contains("mp3"){
@@ -421,4 +442,29 @@ extension HighLightController: Type5Delegate{
             NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
         }
     }
+}
+extension HighLightController: Type7CellDelegate{
+    func didSelectItemAt(_ cell: Type7Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func didSelectViewMore(_ cell: Type7Cell) {
+        var count = 0
+        news = bookCate
+        for item in news.components{
+            APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
+                if let data = data as? CategoryModel{
+                    item.category = data
+                    count += 1
+                    if count == news.components.count {
+                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: BookController.className) as! BookController
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
+
 }

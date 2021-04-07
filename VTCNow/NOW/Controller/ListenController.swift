@@ -7,149 +7,93 @@
 
 import UIKit
 import AVFoundation
+var count = 0
 
 class ListenController: UIViewController {
 
-    @IBOutlet weak var imgThumb: LazyImageView!
-    @IBOutlet weak var tblView: UITableView!
-    @IBOutlet weak var lblChanel: UILabel!
-    @IBOutlet weak var lblDescription: UILabel!
-    @IBOutlet weak var viewChanel: UIView!
-    @IBOutlet weak var imgPlay: UIImageView!
-    @IBOutlet weak var viewPlayer: UIView!
-    @IBOutlet weak var lblListen: UILabel!
-    @IBOutlet weak var viewButton: UIView!
-    
-    @IBOutlet weak var heightTable: NSLayoutConstraint!
-    
-    var player: AVPlayer!
-    var isPlaying = false
-    var isTapping = false
-    var listData: [ChannelModel] = []
-    var index = 0
+    @IBOutlet weak var collView: UICollectionView!
+    @IBOutlet weak var viewBack: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tblView.delegate = self
-        tblView.dataSource = self
-        tblView.register(UINib(nibName: ChanelCell.className, bundle: nil), forCellReuseIdentifier: ChanelCell.className)
-        // Do any additional setup after loading the view.
-        viewChanel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewChanel(_:))))
-        viewPlayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewPlayer(_:))))
-        NotificationCenter.default.addObserver(self, selector: #selector(stopPlaying(_:)), name: NSNotification.Name("stopRadio"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(reStartPlaying(_:)), name: NSNotification.Name("replayRadio"), object: nil)
-        APIService.shared.getRadio { (data, error) in
-            if let data = data as? [ChannelModel] {
-                self.listData = data
-                if let url = URL(string: root.cdn.imageDomain + data[0].image[0].url.replacingOccurrences(of: "\\", with: "/" )){
-                    self.imgThumb.loadImage(fromURL: url)
+
+        collView.delegate = self
+        collView.dataSource = self
+        collView.register(UINib(nibName: Type7Cell.className, bundle: nil), forCellWithReuseIdentifier: Type7Cell.className)
+        collView.register(UINib(nibName: Book3Cell.className, bundle: nil), forCellWithReuseIdentifier: Book3Cell.className)
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 414 * scaleW, height: 250 * scaleW)
+        collView.collectionViewLayout = layout
+        for item in bookCate.components{
+            APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
+                if let data = data as? CategoryModel{
+                    item.category = data
+                    count += 1
+                    if count == bookCate.components.count {
+                        news = bookCate
+                        self?.collView.reloadData()
+                    }
                 }
-                self.lblChanel.text = self.listData[0].name
-                self.lblDescription.text = self.listData[0].description
-                self.openChannel()
-                self.tblView.reloadData()
             }
+        }
+    }
+    @objc func didSelectViewBack(_ sender: Any){
+        navigationController?.popViewController(animated: true)
+    }
+}
+extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return news.components.count + 1
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.section {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Book3Cell.className, for: indexPath) as! Book3Cell
+            cell.delegate = self
+            cell.data = bookCate
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7Cell.className, for: indexPath) as! Type7Cell
+            cell.delegate = self
+            let item = news.components[indexPath.section - 1]
+            cell.lblTitle.text = item.name + " >"
+            cell.data = item.category
+            return cell
         }
         
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    @objc func stopPlaying(_ notification: Notification){
-        if let player = player{
-            player.pause()
-            lblListen.text = "NGHE"
-            isPlaying = false
-            imgPlay.image = #imageLiteral(resourceName: "icons8-play-96")
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            let vc = storyboard?.instantiateViewController(withIdentifier: BookCategoryController.className) as! BookCategoryController
+            vc.data = news
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            let vc = storyboard?.instantiateViewController(withIdentifier: BookCategoryController.className) as! BookCategoryController
+            vc.data = news.components[indexPath.section - 1].category
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-    }
-    @objc func reStartPlaying(_ notification: Notification){
-        if let player = player{
-            player.play()
-            lblListen.text = "ĐANG NGHE"
-            isPlaying = true
-            imgPlay.image = #imageLiteral(resourceName: "icons8-pause-96")
-        }
-    }
-    func openChannel(){
-        if let url = URL(string: listData[index].url[0].link){
-            do {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [])
-                try AVAudioSession.sharedInstance().setActive(true)
-                
-            }
-            catch {
-                print("Setting category to AVAudioSessionCategoryPlayback failed.")
-            }
-            
-            player = AVPlayer(url: url)
-            player.play()
-            lblListen.text = "ĐANG NGHE"
-            isPlaying = true
-            imgPlay.image = #imageLiteral(resourceName: "icons8-pause-96")
-        }
-    }
-    @objc func didSelectViewPlayer(_ sender: Any){
-        if isPlaying{
-            player.pause()
-            lblListen.text = "NGHE"
-            //lblListen.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            //viewPlayer.backgroundColor = #colorLiteral(red: 0.5019607843, green: 0.01176470588, blue: 0.2588235294, alpha: 1)
-            imgPlay.image = #imageLiteral(resourceName: "icons8-play-96")
-        } else {
-            guard let player = player else {
-                return
-            }
-            player.play()
-            lblListen.text = "ĐANG NGHE"
-            //lblListen.textColor = #colorLiteral(red: 0.5019607843, green: 0.01176470588, blue: 0.2588235294, alpha: 1)
-            //viewPlayer.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            imgPlay.image = #imageLiteral(resourceName: "icons8-pause-96")
-        }
-        isPlaying = !isPlaying
-    }
-    @objc func didSelectViewChanel(_ sender: Any){
-        if isTapping{
-            tblView.isHidden = true
-        }else{
-            tblView.isHidden = false
-        }
-        isTapping = !isTapping
-        heightTable.constant = CGFloat(listData.count * 50) * scaleH
+        
     }
 }
-extension ListenController: UITableViewDelegate, UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listData.count
+extension ListenController: Type7CellDelegate, Book3CellDelegate{
+    func didSelectItemAt(_ cell: Book3Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ChanelCell.className, for: indexPath) as! ChanelCell
-        let item = listData[indexPath.row]
-        cell.lblTitle.text = item.name
-        cell.lblDescription.text = item.description
-        if indexPath.row == index{
-            cell.lblTitle.textColor = #colorLiteral(red: 0.5019607843, green: 0.01176470588, blue: 0.2588235294, alpha: 1)
-            cell.lblDescription.textColor = #colorLiteral(red: 0.5019607843, green: 0.01176470588, blue: 0.2588235294, alpha: 1)
-        }else{
-            cell.lblTitle.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            cell.lblDescription.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        }
-        return cell
+    func didSelectItemAt(_ cell: Type7Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        lblChanel.text = listData[indexPath.row].name
-        lblDescription.text = listData[indexPath.row].description
-        index = indexPath.row
-        if let url = URL(string: root.cdn.imageDomain + listData[indexPath.row].image[0].url.replacingOccurrences(of: "\\", with: "/" )){
-            self.imgThumb.loadImage(fromURL: url)
-        }
-        openChannel()
-        tblView.isHidden = true
-        tblView.reloadData()
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50 * scaleH
+    func didSelectViewMore(_ cell: Type7Cell){
+        let vc = storyboard?.instantiateViewController(withIdentifier: BookCategoryController.className) as! BookCategoryController
+        vc.data = cell.data
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+

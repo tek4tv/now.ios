@@ -13,6 +13,11 @@
 		F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60E2F8525EC8E170002E99C /* CommentCell.xib */; };
 		F60E2F8A25EC96F70002E99C /* PopUp5Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */; };
 		F611070B25EE963100B049C3 /* PopUp6Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611070A25EE963100B049C3 /* PopUp6Controller.swift */; };
+		F6176368261AF64A00A9A547 /* Book3Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6176366261AF64A00A9A547 /* Book3Cell.swift */; };
+		F6176369261AF64A00A9A547 /* Book3Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6176367261AF64A00A9A547 /* Book3Cell.xib */; };
+		F617636D261AF6C400A9A547 /* Book3ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F617636B261AF6C400A9A547 /* Book3ItemCell.swift */; };
+		F617636E261AF6C400A9A547 /* Book3ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F617636C261AF6C400A9A547 /* Book3ItemCell.xib */; };
+		F6176371261B152700A9A547 /* MusicPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6176370261B152700A9A547 /* MusicPlayerController.swift */; };
 		F6332F7625CCFD5600305C2E /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6332F7525CCFD5600305C2E /* PlayerViewController.swift */; };
 		F645AC5725E8E113005F3C57 /* BookCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F645AC5625E8E113005F3C57 /* BookCategoryController.swift */; };
 		F647365C2612E555008BF14E /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F647365A2612E554008BF14E /* WordCell.swift */; };
@@ -164,6 +169,11 @@
 		F60E2F8525EC8E170002E99C /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp5Controller.swift; sourceTree = "<group>"; };
 		F611070A25EE963100B049C3 /* PopUp6Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp6Controller.swift; sourceTree = "<group>"; };
+		F6176366261AF64A00A9A547 /* Book3Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book3Cell.swift; sourceTree = "<group>"; };
+		F6176367261AF64A00A9A547 /* Book3Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book3Cell.xib; sourceTree = "<group>"; };
+		F617636B261AF6C400A9A547 /* Book3ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book3ItemCell.swift; sourceTree = "<group>"; };
+		F617636C261AF6C400A9A547 /* Book3ItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book3ItemCell.xib; sourceTree = "<group>"; };
+		F6176370261B152700A9A547 /* MusicPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerController.swift; sourceTree = "<group>"; };
 		F6332F7525CCFD5600305C2E /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		F645AC5625E8E113005F3C57 /* BookCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCategoryController.swift; sourceTree = "<group>"; };
 		F647365A2612E554008BF14E /* WordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
@@ -363,6 +373,7 @@
 			children = (
 				F64C601D25F22753008D44A0 /* MusicCategoryController.swift */,
 				F64C601E25F22753008D44A0 /* MusicController.swift */,
+				F6176370261B152700A9A547 /* MusicPlayerController.swift */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -779,6 +790,10 @@
 				F6F7C4E325E8B3C9008F7A45 /* BookItemCell.xib */,
 				F6488D8025ECA80200058D1D /* Book2Cell.swift */,
 				F6488D8125ECA80200058D1D /* Book2Cell.xib */,
+				F6176366261AF64A00A9A547 /* Book3Cell.swift */,
+				F6176367261AF64A00A9A547 /* Book3Cell.xib */,
+				F617636B261AF6C400A9A547 /* Book3ItemCell.swift */,
+				F617636C261AF6C400A9A547 /* Book3ItemCell.xib */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -866,6 +881,7 @@
 				F655707825F883AD00E3A062 /* DailyCell.xib in Resources */,
 				F649B52126087FA900FF3B04 /* nativeAdmobTBLCell.xib in Resources */,
 				F649761825F2149800EAC71D /* MusicCell.xib in Resources */,
+				F6176369261AF64A00A9A547 /* Book3Cell.xib in Resources */,
 				F65FD9C825C6A114007F8D0F /* Type5Cell.xib in Resources */,
 				F65FD9B825C69775007F8D0F /* Type4ItemCell.xib in Resources */,
 				F65FD9BA25C69775007F8D0F /* Type4Cell.xib in Resources */,
@@ -898,6 +914,7 @@
 				F6B82C7625F2315D009FF801 /* Music2Cell.xib in Resources */,
 				F64B02E725ECF18900AAE865 /* ChanelCell.xib in Resources */,
 				F64836B325F0D5BC00A9E878 /* MovieCell.xib in Resources */,
+				F617636E261AF6C400A9A547 /* Book3ItemCell.xib in Resources */,
 				F65EC45826145CA60088DBC7 /* Roboto-Regular.ttf in Resources */,
 				F6E8CC6F25E78D6300CD0939 /* SearchCell.xib in Resources */,
 				F64836BB25F0D64400A9E878 /* MovieItemCell.xib in Resources */,
@@ -998,7 +1015,9 @@
 				F65FD9B925C69775007F8D0F /* Type4ItemCell.swift in Sources */,
 				F65FD98825C6794F007F8D0F /* CategoryItemCell.swift in Sources */,
 				F6D0C84E25C799B80097C0EC /* PopUpController.swift in Sources */,
+				F6176371261B152700A9A547 /* MusicPlayerController.swift in Sources */,
 				F64BF5A025E64E7900752E80 /* SearchController.swift in Sources */,
+				F617636D261AF6C400A9A547 /* Book3ItemCell.swift in Sources */,
 				F65FD9AC25C694E2007F8D0F /* Type3Cell.swift in Sources */,
 				F666BEE125E3569B0000990E /* PopUp2Controller.swift in Sources */,
 				F6F7C4E425E8B3C9008F7A45 /* BookItemCell.swift in Sources */,
@@ -1048,6 +1067,7 @@
 				F6507CD425C3EFC1002E77EC /* RootModel.swift in Sources */,
 				F649761A25F2149800EAC71D /* MusicItemCell.swift in Sources */,
 				F60E2F8A25EC96F70002E99C /* PopUp5Controller.swift in Sources */,
+				F6176368261AF64A00A9A547 /* Book3Cell.swift in Sources */,
 				F65EC47A2614669F0088DBC7 /* ViewMoreCell.swift in Sources */,
 				F6332F7625CCFD5600305C2E /* PlayerViewController.swift in Sources */,
 			);

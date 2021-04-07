@@ -11,7 +11,7 @@ class Type7Cell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
-    
+    var delegate: Type7CellDelegate!
     var data = CategoryModel(){
         didSet{
             lblTitle.text = data.name
@@ -35,6 +35,16 @@ class Type7Cell: UICollectionViewCell {
     }
 }
 extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if data.media.count < 9{
+            APIService.shared.getMoreVideoPlaylist(privateKey: data.privateKey, page: "0") { (data, error) in
+                if let data = data as? [MediaModel]{
+                    self.data.media += data
+                    self.collView.reloadData()
+                }
+            }
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if data.media.count >= 9{
             return 9
@@ -58,7 +68,7 @@ extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             if let url = URL(string: root.cdn.imageDomain + item.square.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
             }
-            cell.lblTitle.text = item.name
+            cell.lblTitle.text = item.name + item.episode
             
             cell.lblAuthor.text = item.author
             return cell
@@ -74,24 +84,22 @@ extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if data.name == "Sách hay"{
+        switch indexPath.row {
+        case 0...7:
             APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
                 if let data = data as? MediaModel{
                     sharedItem = data
                     sharedList = self.data.media
                     idBookPlaying = indexPath.row
-                    NotificationCenter.default.post(name: NSNotification.Name("openBookPlayer"), object: nil)
+                    self.delegate?.didSelectItemAt(self)
                 }
             }
-        }else{
-            APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
-                if let data = data as? MediaModel{
-                    sharedItem = data
-                    sharedList = self.data.media
-                    NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-                }
-            }
+        default:
+            delegate?.didSelectViewMore(self)
         }
-        
     }
+}
+protocol Type7CellDelegate {
+    func didSelectItemAt(_ cell: Type7Cell)
+    func didSelectViewMore(_ cell: Type7Cell)
 }

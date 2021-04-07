@@ -46,15 +46,16 @@ extension MusicController: UICollectionViewDelegate, UICollectionViewDataSource,
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Music2Cell.className, for: indexPath) as! Music2Cell
+            cell.delegate = self
             let item = news.components[indexPath.section]
-            cell.lblTitle.text = item.name + " >"
+            cell.lblTitle.text = item.name
             cell.data = item.category
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MusicCell.className, for: indexPath) as! MusicCell
             cell.delegate = self
             let item = news.components[indexPath.section]
-            cell.lblTitle.text = item.name + " >"
+            cell.lblTitle.text = item.name
             cell.data = item.category
             return cell
         }
@@ -69,12 +70,21 @@ extension MusicController: UICollectionViewDelegate, UICollectionViewDataSource,
     
 }
 extension MusicController: MusicCellDelegate{
-    func didSelectItemAt() {
-        if sharedItem.path.contains("mp3"){
-            let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
-            navigationController?.pushViewController(vc, animated: true)
-        }else{
-            NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-        }
+    func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel]) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: MusicPlayerController.className) as! MusicPlayerController
+        vc.item = data
+        vc.listData = list
+        navigationController?.pushViewController(vc, animated: true)
     }
+}
+
+extension MusicController: Music2CellDelegate{
+    func didSelect2ItemAt(_ data: MediaModel, _ list: [MediaModel]) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: MusicPlayerController.className) as! MusicPlayerController
+        vc.item = data
+        vc.listData = list
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
 }

@@ -1,21 +1,25 @@
 //
-//  CollectionViewCell.swift
-//  VTCNow
+//  MusicPlayerController.swift
+//  NOW
 //
-//  Created by dovietduy on 1/28/21.
+//  Created by dovietduy on 4/5/21.
 //
 
 import UIKit
 import AVFoundation
-
-class VideoCell: UICollectionViewCell {
-
-    @IBOutlet weak var imgThumb: LazyImageView!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblTime: UILabel!
+class MusicPlayerController: UIViewController {
+    @IBOutlet weak var collView: UICollectionView!
     
+    @IBOutlet weak var imgAudio: LazyImageView!
+    @IBOutlet weak var viewBack: UIView!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblCast: UILabel!
+    @IBOutlet weak var viewShare: UIView!
+    @IBOutlet weak var viewBookmark: UIView!
     @IBOutlet weak var viewPlayer: PlayerView!
     @IBOutlet weak var btnPlay: UIButton!
+    @IBOutlet weak var btnNext: UIButton!
+    @IBOutlet weak var btnPrevious: UIButton!
     @IBOutlet weak var lblCurrentTime: UILabel!
     @IBOutlet weak var slider: CustomSlider!
     @IBOutlet weak var lblDuration: UILabel!
@@ -24,12 +28,11 @@ class VideoCell: UICollectionViewCell {
     @IBOutlet weak var imgShadow: UIImageView!
     @IBOutlet weak var viewCast: UIView!
     
-    var delegate: VideoCellDelegate!
+    @IBOutlet weak var heightCollView: NSLayoutConstraint!
     
-    var indexPath: IndexPath!
     var item: MediaModel!
+    var listData: [MediaModel] = []
     var timeObserver: Any?
-    var isCare = false
     var isPlaying = false
     var isEnded = false
     var timer = Timer()
@@ -43,37 +46,45 @@ class VideoCell: UICollectionViewCell {
         return aiv
     }()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //
+        collView.delegate = self
+        collView.dataSource = self
+        collView.register(UINib(nibName: Music3Cell.className, bundle: nil), forCellWithReuseIdentifier: Music3Cell.className)
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 414 * scaleW, height: 130 * scaleW)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        collView.collectionViewLayout = layout
+        // Do any additional setup after loading the view.
         viewPlayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewPlayer(_:))))
         viewSetting.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewSetting(_:))))
         viewFullScreen.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnFullScreen(_:))))
         slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
-        
+        viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
         hidePlayerController()
         //
         viewPlayer.addSubview(activityIndicatorView)
         activityIndicatorView.centerXAnchor.constraint(equalTo: viewPlayer.centerXAnchor).isActive = true
         activityIndicatorView.centerYAnchor.constraint(equalTo: viewPlayer.centerYAnchor).isActive = true
-        //
-        if news.name == "Đừng bỏ lỡ"{
-            NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
-           
-        }else{
-            NotificationCenter.default.removeObserver(self)
-        }
+        
+        openVideoAudio()
+        heightCollView.constant = CGFloat(listData.count * 130) * scaleW
     }
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+    @objc func didSelectViewBack(_ sender: Any){
+        self.navigationController?.popViewController(animated: true)
     }
     @objc func playerDidFinishPlaying(note: NSNotification){
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-play-49"), for: .normal)
         viewPlayer.player?.pause()
         isEnded = true
         isPlaying = false
-        UserDefaults.standard.removeObject(forKey: item.privateID)
-        UserDefaults.standard.synchronize()
+//        UserDefaults.standard.removeObject(forKey: item.privateID)
+//        UserDefaults.standard.synchronize()
+
+        
     }
     var isTapping = false
     
@@ -135,6 +146,21 @@ class VideoCell: UICollectionViewCell {
         }
         isPlaying = !isPlaying
     }
+    @IBAction func didSelectBtnNext(_ sender: Any) {
+        listData.append(item)
+        item = listData[0]
+        listData.remove(at: 0)
+        collView.reloadData()
+        openVideoAudio()
+    }
+    @IBAction func didSelectBtnPrevious(_ sender: Any) {
+        listData.insert(item, at: 0)
+        let count = listData.count
+        item = listData[count - 1]
+        listData.remove(at: count - 1)
+        collView.reloadData()
+        openVideoAudio()
+    }
     func hidePlayerController(){
         self.imgShadow.isHidden = true
         self.viewFullScreen.isHidden = true
@@ -143,6 +169,8 @@ class VideoCell: UICollectionViewCell {
         self.lblDuration.isHidden = true
         self.slider.isHidden = true
         self.btnPlay.isHidden = true
+        self.btnNext.isHidden = true
+        self.btnPrevious.isHidden = true
         self.viewCast.isHidden = true
     }
     func showPlayerController(){
@@ -153,6 +181,8 @@ class VideoCell: UICollectionViewCell {
         self.lblDuration.isHidden = false
         self.slider.isHidden = false
         self.btnPlay.isHidden = false
+        self.btnNext.isHidden = false
+        self.btnPrevious.isHidden = false
         self.viewCast.isHidden = false
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -199,34 +229,10 @@ class VideoCell: UICollectionViewCell {
             return String(format: "%02d:%02d", minutes, seconds)
         }
     }
-    override func prepareForReuse() {
-        imgThumb.image = nil
-        lblTime.text = ""
-        lblTime.textColor = .gray
-        viewPlayer.player?.pause()
-    }
-    @objc func countDown(_ notification: Notification){
-        if let futureDate = item.schedule.toDate(){
-            let interval = futureDate - Date()
-            if let day = interval.day, let hour = interval.hour, let minute = interval.minute, let second = interval.second{
-                let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
-                item.timePass = "Còn \(timeStr)"
-                lblTime.textColor = .gray
-                lblTime.text = item.timePass
-                if day < 0{
-                    lblTime.text = item.getTimePass()
-                } else if hour <= 0 && minute <= 0 && second <= 0{
-                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name ("countDownTimer2"), object: nil)
-                    item.timePass = "Trực tiếp"
-                    lblTime.textColor = .red
-                    lblTime.text = item.timePass
-                }
-            }
-        }
-    }
-    func setup(){
-        listResolution = []
+    func openVideoAudio(){
+        
         if let url = URL(string: item.path){
+            listResolution = []
             StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
                 switch result {
                 case .success(let playlist):
@@ -237,17 +243,26 @@ class VideoCell: UICollectionViewCell {
                     print(error.localizedDescription)
                 }
             }
+            viewPlayer.player  = AVPlayer(url: url)
+            viewPlayer.player?.play()
+            viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+            viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
+            NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+            isPlaying = true
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+            lblTitle.text = item.name
+            lblCast.text = "Thể hiện: " + item.cast
+            addTimeObserver()
         }
-        viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
-        viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-        isPlaying = true
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
-        addTimeObserver()
-        if let temp = UserDefaults.standard.value(forKey: item.privateID) as? Double, temp > 0.0{
-            let time: CMTime = CMTimeMake(value: Int64(temp * 1000), timescale: 1000)
-            viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: .zero)
+        if item.path.contains("mp3"){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                imgAudio.loadImage(fromURL: url)
+            }
         }
+//        if let temp = UserDefaults.standard.value(forKey: item.privateID) as? Double, temp > 0.0{
+//            let time: CMTime = CMTimeMake(value: Int64(temp * 1000), timescale: 1000)
+//            viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: .zero)
+//        }
     }
     
     func setBitRate(){
@@ -277,22 +292,20 @@ class VideoCell: UICollectionViewCell {
         if flag == false, listResolution.count > 0{
             listResolution[0].isTicked = true
         }
-        delegate?.didSelectViewSetting(self)
-//        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
-//        vc.modalPresentationStyle = .custom
-//        vc.modalTransitionStyle = .crossDissolve
-//        vc.listResolution = listResolution
-//        vc.speed = speed
-//        vc.onComplete = {[weak self] list in
-//            self?.listResolution = list
-//            self?.setBitRate()
-//        }
-//        vc.onTickedSpeed = {[weak self] value in
-//            self?.speed = value
-//            self?.setSpeed()
-//        }
-//        present(vc, animated: true, completion: nil)
-        
+        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.listResolution = listResolution
+        vc.speed = speed
+        vc.onComplete = {[weak self] list in
+            self?.listResolution = list
+            self?.setBitRate()
+        }
+        vc.onTickedSpeed = {[weak self] value in
+            self?.speed = value
+            self?.setSpeed()
+        }
+        present(vc, animated: true, completion: nil)
     }
     @objc func didSelectBtnFullScreen(_ sender: Any) {
         self.viewPlayer.player?.pause()
@@ -301,29 +314,65 @@ class VideoCell: UICollectionViewCell {
         let newPlayer = self.viewPlayer.player
         self.viewPlayer.player = nil
         
-        delegate?.didSelectViewFullScreen(self, newPlayer!)
-//        let vc = PlayerViewController()
-//
-//
-//        vc.player = newPlayer
-//        vc.onDismiss = {[weak self] in
-//            self?.viewPlayer.player = vc.player
-//            vc.player = nil
-//            self?.viewPlayer.player?.play()
-//            self?.isPlaying = true
-//            self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
-//        }
-//        present(vc, animated: true) {
-//            vc.player?.play()
-//            vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
-//        }
+        let vc = PlayerViewController()
         
+        
+        vc.player = newPlayer
+        vc.onDismiss = {[weak self] in
+            self?.viewPlayer.player = vc.player
+            vc.player = nil
+            self?.viewPlayer.player?.play()
+            self?.isPlaying = true
+            self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+        }
+        present(vc, animated: true) {
+            vc.player?.play()
+            vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+        }
     }
 }
 
-protocol VideoCellDelegate {
-    func didSelectBookMark(_ cell: VideoCell)
-    func didSelectViewSetting(_ cell: VideoCell)
-    func didSelectViewFullScreen(_ cell: VideoCell, _ newPlayer: AVPlayer)
-    func didSelectViewCast()
+extension MusicPlayerController: UICollectionViewDelegate, UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        listData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Music3Cell.className, for: indexPath) as! Music3Cell
+        let item = listData[indexPath.row]
+        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            cell.imgThumb.loadImage(fromURL: url)
+        }
+        cell.lblTitle.text = item.name
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let count = listData.count
+        
+        var list: [MediaModel] = []
+        if count == 1{
+            list = []
+        } else if count == 2{
+            if indexPath.row == 0 {
+                list.append(listData[1])
+            } else{
+                list.append(listData[0])
+            }
+        } else if count >= 3 {
+            if indexPath.row == 0{
+                list = Array(listData[1...count-1])
+            } else if indexPath.row == count-1 {
+                list = Array(listData[0...count - 2])
+            } else{
+                list = Array(listData[indexPath.row+1...count-1] + listData[0...indexPath.row-1])
+            }
+        }
+        
+        item = listData[indexPath.row]
+        listData = list
+        collView.reloadData()
+        openVideoAudio()
+    }
+    
 }

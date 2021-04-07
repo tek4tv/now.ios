@@ -48,6 +48,9 @@ class WelcomeController: UIViewController {
                 } else{
                     self?.load()
                 }
+                if data2.name == "Sách hay"{
+                    bookCate = data2
+                }
             }
         }
         APIService.shared.getRead { (data, error) in

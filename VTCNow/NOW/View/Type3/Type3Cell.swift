@@ -21,6 +21,7 @@ class Type3Cell: UICollectionViewCell {
             }
         }
     }
+    var delegate: Type3CellDelegate!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -55,6 +56,8 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
             let item = data.media[indexPath.row]
+            cell.data = item
+            cell.delegate = self
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.getTimePass()
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
@@ -65,6 +68,8 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
             let item = data.media[indexPath.row + 6]
+            cell.data = item
+            cell.delegate = self
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.getTimePass()
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
@@ -75,6 +80,8 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         case 4:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
             let item = data.media[indexPath.row + 12]
+            cell.data = item
+            cell.delegate = self
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.getTimePass()
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
@@ -85,6 +92,8 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         case 6:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
             let item = data.media[indexPath.row + 18]
+            cell.data = item
+            cell.delegate = self
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.getTimePass()
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
@@ -129,4 +138,30 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }
         
     }
+}
+
+extension Type3Cell: Type3ItemCellDelegate{
+    func didSelectViewImage(_ cell: Type3ItemCell) {
+        APIService.shared.getDetailVideo(privateKey: cell.data.privateID) { (data, error) in
+            if let data = data as? MediaModel{
+                sharedItem = data
+                sharedList = self.data.media
+                NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
+            }
+        }
+    }
+    
+    func didSelectViewBookmark(_ cell: Type3ItemCell) {
+        
+    }
+    
+    func didSelectViewShare(_ cell: Type3ItemCell) {
+        delegate?.didSelectViewShare(cell)
+    }
+    
+    
+}
+
+protocol Type3CellDelegate{
+    func didSelectViewShare(_ cell: Type3ItemCell)
 }
