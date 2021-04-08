@@ -38,13 +38,25 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="eGq-CB-Eea" secondAttribute="trailing" constant="5" id="E1B-pi-DjI"/>
-                            <constraint firstItem="eGq-CB-Eea" firstAttribute="centerY" secondItem="xyr-pJ-ajl" secondAttribute="centerY" id="dui-z4-90f"/>
-                            <constraint firstItem="eGq-CB-Eea" firstAttribute="leading" secondItem="xyr-pJ-ajl" secondAttribute="leading" constant="5" id="oO5-Qh-OTs"/>
+                            <constraint firstAttribute="trailing" secondItem="eGq-CB-Eea" secondAttribute="trailing" constant="5" id="E1B-pi-DjI">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="eGq-CB-Eea" firstAttribute="centerY" secondItem="xyr-pJ-ajl" secondAttribute="centerY" id="dui-z4-90f">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="eGq-CB-Eea" firstAttribute="leading" secondItem="xyr-pJ-ajl" secondAttribute="leading" constant="5" id="oO5-Qh-OTs">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="5"/>
+                                <real key="value" value="20"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
@@ -53,10 +65,26 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="xyr-pJ-ajl" secondAttribute="trailing" id="KwU-Py-dqc"/>
-                <constraint firstAttribute="bottom" secondItem="xyr-pJ-ajl" secondAttribute="bottom" constant="5" id="Kxj-cR-mmg"/>
-                <constraint firstItem="xyr-pJ-ajl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="RS2-wW-bOF"/>
-                <constraint firstItem="xyr-pJ-ajl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qjt-ij-7rD"/>
+                <constraint firstAttribute="trailing" secondItem="xyr-pJ-ajl" secondAttribute="trailing" id="KwU-Py-dqc">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstAttribute="bottom" secondItem="xyr-pJ-ajl" secondAttribute="bottom" constant="5" id="Kxj-cR-mmg">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="xyr-pJ-ajl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="RS2-wW-bOF">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="xyr-pJ-ajl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qjt-ij-7rD">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
             </constraints>
             <size key="customSize" width="134" height="36"/>
             <connections>

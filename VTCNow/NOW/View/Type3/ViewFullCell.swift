@@ -64,6 +64,8 @@ extension ViewFullCell: UICollectionViewDelegate, UICollectionViewDataSource{
             let item = listData[indexPath.row]
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.timePass
+            cell.lblDescription.text = item.descripTion
+            cell.lblDescription.isHidden = true
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
             }

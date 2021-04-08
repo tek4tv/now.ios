@@ -16,12 +16,12 @@ class MovieCategoryController: UIViewController {
         super.viewDidLoad()
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: MovieItemCell.className, bundle: nil), forCellWithReuseIdentifier: MovieItemCell.className)
+        collView.register(UINib(nibName: MovieItem2Cell.className, bundle: nil), forCellWithReuseIdentifier: MovieItem2Cell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 414 / 3.3 * scaleW, height: 240 * scaleW)
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
+        layout.itemSize = CGSize(width: 374 / 3.01 * scaleW, height: 280 * scaleW)
+        layout.minimumLineSpacing = 10 * scaleW
+        layout.minimumInteritemSpacing = 10 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
         collView.collectionViewLayout = layout
         
         // Do any additional setup after loading the view.
@@ -36,26 +36,43 @@ extension MovieCategoryController: UICollectionViewDelegate, UICollectionViewDat
         return data.media.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieItemCell.className, for: indexPath) as! MovieItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieItem2Cell.className, for: indexPath) as! MovieItem2Cell
         let item = data.media[indexPath.row]
         if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
-            cell.thumbImage.loadImage(fromURL: url)
+            cell.imgThumb.loadImage(fromURL: url)
         }
         cell.lblTitle.text = item.name
-        cell.lblAuthor.text = item.author
-        cell.lblTime.text =  item.country + " | " + item.minutes
+        cell.lblCountry.text = item.country
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        sharedItem = data.media[indexPath.row]
-//        sharedList = data.media
-//        NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-        APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
+        let count = data.media.count
+        
+        var list: [MediaModel] = []
+        if count == 1{
+            list = []
+        } else if count == 2{
+            if indexPath.row == 0 {
+                list.append(data.media[1])
+            } else{
+                list.append(data.media[0])
+            }
+        } else if count >= 3 {
+            if indexPath.row == 0{
+                list = Array(data.media[1...count-1])
+            } else if indexPath.row == count-1 {
+                list = Array(data.media[0...count - 2])
+            } else{
+                list = Array(data.media[indexPath.row+1...count-1] + data.media[0...indexPath.row-1])
+            }
+        }
+        APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) {[self] (data, error) in
             if let data = data as? MediaModel{
-                sharedItem = data
-                sharedList = self.data.media
-                NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
+                let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+                vc.item = data
+                vc.listData = list
+                navigationController?.pushViewController(vc, animated: true)
             }
         }
     }

@@ -121,9 +121,11 @@ extension NewsController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 
             }
             cell.imgThumb.isHidden = true
+            cell.viewShadow.isHidden = true
         } else{
             cell.viewPlayer.player?.pause()
             cell.imgThumb.isHidden = false
+            cell.viewShadow.isHidden = false
         }
         return cell
     }

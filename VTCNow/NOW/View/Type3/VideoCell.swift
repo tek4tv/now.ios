@@ -10,6 +10,7 @@ import AVFoundation
 
 class VideoCell: UICollectionViewCell {
 
+    @IBOutlet weak var viewShadow: UIView!
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
@@ -68,7 +69,7 @@ class VideoCell: UICollectionViewCell {
         NotificationCenter.default.removeObserver(self)
     }
     @objc func playerDidFinishPlaying(note: NSNotification){
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-play-49"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
         viewPlayer.player?.pause()
         isEnded = true
         isPlaying = false
@@ -123,7 +124,7 @@ class VideoCell: UICollectionViewCell {
     @IBAction func didSelectBtnPlay(_ sender: Any) {
         if isPlaying{
             viewPlayer.player?.pause()
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-play-49"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
         } else{
             if isEnded{
                 viewPlayer.player?.seek(to: CMTime.zero)
@@ -131,7 +132,7 @@ class VideoCell: UICollectionViewCell {
             }
             viewPlayer.player?.play()
             viewPlayer.player?.rate = Float(speed)
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
         }
         isPlaying = !isPlaying
     }
@@ -242,7 +243,7 @@ class VideoCell: UICollectionViewCell {
         viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         isPlaying = true
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
         addTimeObserver()
         if let temp = UserDefaults.standard.value(forKey: item.privateID) as? Double, temp > 0.0{
             let time: CMTime = CMTimeMake(value: Int64(temp * 1000), timescale: 1000)
@@ -278,46 +279,15 @@ class VideoCell: UICollectionViewCell {
             listResolution[0].isTicked = true
         }
         delegate?.didSelectViewSetting(self)
-//        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
-//        vc.modalPresentationStyle = .custom
-//        vc.modalTransitionStyle = .crossDissolve
-//        vc.listResolution = listResolution
-//        vc.speed = speed
-//        vc.onComplete = {[weak self] list in
-//            self?.listResolution = list
-//            self?.setBitRate()
-//        }
-//        vc.onTickedSpeed = {[weak self] value in
-//            self?.speed = value
-//            self?.setSpeed()
-//        }
-//        present(vc, animated: true, completion: nil)
-        
     }
     @objc func didSelectBtnFullScreen(_ sender: Any) {
         self.viewPlayer.player?.pause()
-        self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-play-49"), for: .normal)
+        self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
         self.isPlaying = false
         let newPlayer = self.viewPlayer.player
         self.viewPlayer.player = nil
         
         delegate?.didSelectViewFullScreen(self, newPlayer!)
-//        let vc = PlayerViewController()
-//
-//
-//        vc.player = newPlayer
-//        vc.onDismiss = {[weak self] in
-//            self?.viewPlayer.player = vc.player
-//            vc.player = nil
-//            self?.viewPlayer.player?.play()
-//            self?.isPlaying = true
-//            self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
-//        }
-//        present(vc, animated: true) {
-//            vc.player?.play()
-//            vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
-//        }
-        
     }
 }
 

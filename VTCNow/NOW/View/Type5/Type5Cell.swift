@@ -12,7 +12,7 @@ class Type5Cell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
-    var delegate: Type5Delegate!
+    var delegate: Type5CellDelegate!
     var admobNativeAds: GADUnifiedNativeAd?
     var data = CategoryModel(){
         didSet{
@@ -53,6 +53,9 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         case 0...5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
             cell.lblTitle.text = item.name
+            cell.row = indexPath.row
+            cell.data = item
+            cell.delegate = self
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
             }
@@ -72,23 +75,9 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        switch indexPath.section {
-//        case 0:
-//            sharedItem = data.media[0]
-//        default:
-//            sharedItem = data.media[indexPath.row + 1]
-//        }
-//        sharedList = data.media
-//        delegate?.didSelectItemAt()
-            idVideoPlaying = indexPath.row
-            APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row + 1].privateID) { (data, error) in
-                if let data = data as? MediaModel{
-                    sharedItem = data
-                    sharedList = self.data.media
-                    self.delegate?.didSelectItemAt()
-                }
-            }
+        
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.row {
         case 0...5:
@@ -98,6 +87,45 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }
     }
 }
-protocol Type5Delegate{
-    func didSelectItemAt()
+extension Type5Cell: Type3ItemCellDelegate{
+    func didSelectViewImage(_ cell: Type3ItemCell) {
+        let count = data.media.count
+        var list: [MediaModel] = []
+        if count == 1{
+            list = []
+        } else if count == 2{
+            if cell.row == 0 {
+                list.append(data.media[1])
+            } else{
+                list.append(data.media[0])
+            }
+        } else if count >= 3 {
+            if cell.row == 0{
+                list = Array(data.media[1...count-1])
+            } else if cell.row == count-1 {
+                list = Array(data.media[0...count - 2])
+            } else{
+                list = Array(data.media[cell.row+1...count-1] + data.media[0...cell.row-1])
+            }
+        }
+        APIService.shared.getDetailVideo(privateKey: data.media[cell.row].privateID) { (data, error) in
+            if let data = data as? MediaModel{
+                self.delegate?.didSelectViewImage(data, list, self)
+            }
+        }
+    }
+    
+    func didSelectViewBookmark(_ cell: Type3ItemCell) {
+        
+    }
+    
+    func didSelectViewShare(_ cell: Type3ItemCell) {
+        self.delegate?.didSelectView2Share(cell)
+    }
+    
+    
+}
+protocol Type5CellDelegate{
+    func didSelectViewImage(_ data: MediaModel,_ list: [MediaModel],_ cell: Type5Cell)
+    func didSelectView2Share(_ cell: Type3ItemCell)
 }

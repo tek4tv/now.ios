@@ -114,7 +114,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             case "2":
                 return CGSize(width: width, height: 230 * scaleW)
             case "3":
-                let temp = 12 * 200 + 50 + 260 * 3 + 10 * 11 + 20 * 6
+                let temp = 12 * 200 + 50 + 420 + 10 * 11 + 20 * 3
                 let height: CGFloat = CGFloat(temp)
                 return CGSize(width: width, height: height * scaleW)
             case "4", "14":
@@ -147,6 +147,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
         } else if section == 2{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
             if categorys.count > 0{
+                cell.delegate = self
                 cell.data = categorys[0]
                 cell.collView.reloadData()
             }
@@ -160,6 +161,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             switch item.layout.type {
             case "1":
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
+                cell.delegate = self
                 cell.data = item
                 return cell
             case "2":
@@ -174,6 +176,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                 return cell
             case "4", "14":
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4Cell.className, for: indexPath) as! Type4Cell
+                cell.delegate = self
                 cell.data = item
                 return cell
             case "5", "8":
@@ -195,6 +198,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                     return cell
                 }
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type6Cell.className, for: indexPath) as! Type6Cell
+                cell.delegate = self
                 cell.data = item
                 return cell
             default:
@@ -414,7 +418,20 @@ extension HighLightController: CategoryCellDelegate {
         }
     }
 }
+extension HighLightController: Type1CellDelegate{
+    func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel], _ cell: Type1Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+        vc.item = data
+        vc.listData = list
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
 extension HighLightController: Type3CellDelegate{
+    func didSelectViewImage(_ cell: Type3ItemCell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func didSelectViewShare(_ cell: Type3ItemCell) {
         guard let url = URL(string: cell.data.path) else {
             return
@@ -426,21 +443,44 @@ extension HighLightController: Type3CellDelegate{
     }
 }
 extension HighLightController: Type4CellDelegate{
-    func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel]) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: MusicPlayerController.className) as! MusicPlayerController
-        vc.item = data
-        vc.listData = listData
-        navigationController?.pushViewController(vc, animated: true)
+    func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel], _ cell: Type4Cell) {
+        if cell.data.name == "Sách hay"{
+            let vc = storyboard?.instantiateViewController(withIdentifier: MusicPlayerController.className) as! MusicPlayerController
+            vc.item = data
+            vc.listData = listData
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+            vc.item = data
+            vc.listData = listData
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
-extension HighLightController: Type5Delegate{
-    func didSelectItemAt() {
-        if sharedItem.path.contains("mp3"){
-            let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
-            navigationController?.pushViewController(vc, animated: true)
-        }else{
-            NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
+extension HighLightController: Type5CellDelegate{
+    func didSelectViewImage(_ data: MediaModel, _ list: [MediaModel], _ cell: Type5Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+        vc.item = data
+        vc.listData = list
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func didSelectView2Share(_ cell: Type3ItemCell) {
+        guard let url = URL(string: cell.data.path) else {
+            return
         }
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
+    }
+}
+extension HighLightController: Type6CellDelegate{
+    func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel], _ cell: Type6Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+        vc.item = data
+        vc.listData = list
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 extension HighLightController: Type7CellDelegate{

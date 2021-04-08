@@ -64,6 +64,10 @@
 		F6507CEB25C3F3CA002E77EC /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6507CE925C3F3CA002E77EC /* WelcomeController.swift */; };
 		F6507CEE25C3F76D002E77EC /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6507CED25C3F76D002E77EC /* CategoryModel.swift */; };
 		F6507CF225C41053002E77EC /* HighLightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6507CF125C41053002E77EC /* HighLightController.swift */; };
+		F65557D4261D87E7000E8AEA /* WarmodroidSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65557D3261D87E7000E8AEA /* WarmodroidSwitch.swift */; };
+		F65557D8261D8C01000E8AEA /* VideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65557D7261D8C01000E8AEA /* VideoController.swift */; };
+		F65557DD261DA4ED000E8AEA /* MovieItem2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65557DB261DA4ED000E8AEA /* MovieItem2Cell.swift */; };
+		F65557DE261DA4ED000E8AEA /* MovieItem2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F65557DC261DA4ED000E8AEA /* MovieItem2Cell.xib */; };
 		F655707725F883AD00E3A062 /* DailyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F655707525F883AD00E3A062 /* DailyCell.swift */; };
 		F655707825F883AD00E3A062 /* DailyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F655707625F883AD00E3A062 /* DailyCell.xib */; };
 		F655707B25F8868E00E3A062 /* PopUp7Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F655707A25F8868E00E3A062 /* PopUp7Controller.swift */; };
@@ -222,6 +226,10 @@
 		F6507CE925C3F3CA002E77EC /* WelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
 		F6507CED25C3F76D002E77EC /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		F6507CF125C41053002E77EC /* HighLightController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighLightController.swift; sourceTree = "<group>"; };
+		F65557D3261D87E7000E8AEA /* WarmodroidSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmodroidSwitch.swift; sourceTree = "<group>"; };
+		F65557D7261D8C01000E8AEA /* VideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoController.swift; sourceTree = "<group>"; };
+		F65557DB261DA4ED000E8AEA /* MovieItem2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieItem2Cell.swift; sourceTree = "<group>"; };
+		F65557DC261DA4ED000E8AEA /* MovieItem2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieItem2Cell.xib; sourceTree = "<group>"; };
 		F655707525F883AD00E3A062 /* DailyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCell.swift; sourceTree = "<group>"; };
 		F655707625F883AD00E3A062 /* DailyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyCell.xib; sourceTree = "<group>"; };
 		F655707A25F8868E00E3A062 /* PopUp7Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp7Controller.swift; sourceTree = "<group>"; };
@@ -372,8 +380,8 @@
 			isa = PBXGroup;
 			children = (
 				F64C601D25F22753008D44A0 /* MusicCategoryController.swift */,
-				F64C601E25F22753008D44A0 /* MusicController.swift */,
 				F6176370261B152700A9A547 /* MusicPlayerController.swift */,
+				F64C601E25F22753008D44A0 /* MusicController.swift */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -430,6 +438,8 @@
 				F64836B925F0D64400A9E878 /* MovieItemCell.xib */,
 				F64836AD25F0D5BB00A9E878 /* MovieCell.swift */,
 				F64836AF25F0D5BB00A9E878 /* MovieCell.xib */,
+				F65557DB261DA4ED000E8AEA /* MovieItem2Cell.swift */,
+				F65557DC261DA4ED000E8AEA /* MovieItem2Cell.xib */,
 			);
 			path = Movie;
 			sourceTree = "<group>";
@@ -503,6 +513,7 @@
 				F6CB90BD25F720A70071D0BB /* UserController.swift */,
 				F655707A25F8868E00E3A062 /* PopUp7Controller.swift */,
 				F64CFFBB25F8AB0F002F7F6F /* SpeechToTextController.swift */,
+				F65557D7261D8C01000E8AEA /* VideoController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -544,6 +555,7 @@
 				F65FD97A25C674CA007F8D0F /* Weather */,
 				F65FD96D25C672F0007F8D0F /* LazyLoading */,
 				F68D46D525CA43460097B9F4 /* PlayerView.swift */,
+				F65557D3261D87E7000E8AEA /* WarmodroidSwitch.swift */,
 				F6E8CC6C25E78D6300CD0939 /* SearchCell.swift */,
 				F6E8CC6D25E78D6300CD0939 /* SearchCell.xib */,
 				F647365A2612E554008BF14E /* WordCell.swift */,
@@ -885,6 +897,7 @@
 				F65FD9C825C6A114007F8D0F /* Type5Cell.xib in Resources */,
 				F65FD9B825C69775007F8D0F /* Type4ItemCell.xib in Resources */,
 				F65FD9BA25C69775007F8D0F /* Type4Cell.xib in Resources */,
+				F65557DE261DA4ED000E8AEA /* MovieItem2Cell.xib in Resources */,
 				F66B04D625EE3FF90034013F /* ReadBCell.xib in Resources */,
 				F698933825F5FD6D00EA960A /* WatchCell.xib in Resources */,
 				F67464902616CA44003A5593 /* Type7Cell.xib in Resources */,
@@ -1034,13 +1047,16 @@
 				F65FD9B725C69775007F8D0F /* Type4Cell.swift in Sources */,
 				F649B51E26087FA900FF3B04 /* nativeAdmobTBLCell.swift in Sources */,
 				F65FD9C925C6A114007F8D0F /* Type5Cell.swift in Sources */,
+				F65557D4261D87E7000E8AEA /* WarmodroidSwitch.swift in Sources */,
 				F65FD9A825C694E2007F8D0F /* Type3ItemCell.swift in Sources */,
 				F66B04D525EE3FF90034013F /* ReadBCell.swift in Sources */,
 				F674648F2616CA44003A5593 /* Type7Cell.swift in Sources */,
 				F64B02EB25ECF30400AAE865 /* ChannelModel.swift in Sources */,
 				F647365C2612E555008BF14E /* WordCell.swift in Sources */,
 				F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */,
+				F65557DD261DA4ED000E8AEA /* MovieItem2Cell.swift in Sources */,
 				F666BEEA25E35C950000990E /* PopUpItemCell.swift in Sources */,
+				F65557D8261D8C01000E8AEA /* VideoController.swift in Sources */,
 				F6E8CC6E25E78D6300CD0939 /* SearchCell.swift in Sources */,
 				F66506B62601BF41009E5B78 /* DotCell.swift in Sources */,
 				F67464952616CA59003A5593 /* Type7ItemCell.swift in Sources */,

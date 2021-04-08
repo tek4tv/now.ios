@@ -57,21 +57,6 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_play" translatesAutoresizingMaskIntoConstraints="NO" id="Dti-aI-uEO">
-                                <rect key="frame" x="177.5" y="91" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Dti-aI-uEO" secondAttribute="height" id="U8n-yv-rnt">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="40" id="naI-Mk-5Ui">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -86,11 +71,6 @@
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstItem="WaT-EZ-xLe" firstAttribute="leading" secondItem="FyC-nh-L8P" secondAttribute="leading" constant="10" id="5RO-kJ-2Cx">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="Dti-aI-uEO" firstAttribute="centerY" secondItem="FyC-nh-L8P" secondAttribute="centerY" id="CJw-Pg-20C">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -131,11 +111,6 @@
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstAttribute="trailing" secondItem="FKX-n5-EyV" secondAttribute="trailing" id="zX2-b6-JHA">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="Dti-aI-uEO" firstAttribute="centerX" secondItem="FyC-nh-L8P" secondAttribute="centerX" id="zlu-d5-Zr2">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -187,7 +162,6 @@
     </objects>
     <resources>
         <image name="Rectangle 12" width="480" height="56"/>
-        <image name="ic_play" width="96" height="96"/>
         <image name="placeHolderImage" width="640" height="360"/>
     </resources>
 </document>

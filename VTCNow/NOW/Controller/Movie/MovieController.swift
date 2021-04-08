@@ -39,13 +39,14 @@ extension MovieController: UICollectionViewDelegate, UICollectionViewDataSource,
         case 0:
             return CGSize(width: 414 * scaleW, height: 250 * scaleW)
         default:
-            return CGSize(width: 414 * scaleW, height: 320 * scaleW)
+            return CGSize(width: 414 * scaleW, height: 280 * scaleW)
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
+            cell.delegate = self
             cell.data = news
             return cell
         default:
@@ -67,7 +68,21 @@ extension MovieController: UICollectionViewDelegate, UICollectionViewDataSource,
     
 }
 extension MovieController: MovieCellDelegate{
-    func didSelectItemAt() {
-        
+    func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel]) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+        vc.item = data
+        vc.listData = list
+        navigationController?.pushViewController(vc, animated: true)
     }
+    
+}
+extension MovieController: Type1CellDelegate{
+    func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel], _ cell: Type1Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+        vc.item = data
+        vc.listData = list
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
 }

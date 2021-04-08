@@ -48,24 +48,10 @@ extension Type4Cell: UICollectionViewDelegate, UICollectionViewDataSource{
             cell.thumbImage.loadImage(fromURL: url)
         }
         cell.lblTitle.text = item.name + item.episode
-        if item.path.contains(".mp3"){
-            cell.imgOverlay.isHidden = true
-        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        sharedItem = data.media[indexPath.row]
-//        sharedList = data.media
-//        NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-//        APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
-//            if let data = data as? MediaModel{
-//                sharedItem = data
-//                sharedList = self.data.media
-//                NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-//            }
-//        }
         let count = data.media.count
-        
         var list: [MediaModel] = []
         if count == 1{
             list = []
@@ -86,11 +72,11 @@ extension Type4Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         }
         APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
             if let data = data as? MediaModel{
-                self.delegate?.didSelectItemAt(data, list)
+                self.delegate?.didSelectItemAt(data, list, self)
             }
         }
     }
 }
 protocol Type4CellDelegate{
-    func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel])
+    func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel], _ cell: Type4Cell)
 }

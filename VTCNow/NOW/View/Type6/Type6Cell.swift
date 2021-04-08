@@ -10,7 +10,7 @@ class Type6Cell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
-    
+    var delegate: Type6CellDelegate!
     var data = CategoryModel(){
         didSet{
             lblTitle.text = data.name
@@ -44,9 +44,9 @@ extension Type6Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.row {
         case 0...7:
-            return CGSize(width: 130 * scaleW, height: 260 * scaleW)
+            return CGSize(width: 120 * scaleW, height: 260 * scaleW)
         default:
-            return CGSize(width: 138 * scaleW, height: 260 * scaleW)
+            return CGSize(width: 128 * scaleW, height: 260 * scaleW)
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -74,31 +74,35 @@ extension Type6Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if data.name == "Sách hay"{
-            APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
-                if let data = data as? MediaModel{
-                    sharedItem = data
-                    sharedList = self.data.media
-                    idBookPlaying = indexPath.row
-                    NotificationCenter.default.post(name: NSNotification.Name("openBookPlayer"), object: nil)
-                }
+        
+        let count = data.media.count
+        
+        var list: [MediaModel] = []
+        if count == 1{
+            list = []
+        } else if count == 2{
+            if indexPath.row == 0 {
+                list.append(data.media[1])
+            } else{
+                list.append(data.media[0])
             }
-//            sharedItem = data.media[indexPath.row]
-//            sharedList = data.media
-//            idBookPlaying = indexPath.row
-//            NotificationCenter.default.post(name: NSNotification.Name("openBookPlayer"), object: nil)
-        }else{
-            APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
-                if let data = data as? MediaModel{
-                    sharedItem = data
-                    sharedList = self.data.media
-                    NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-                }
+        } else if count >= 3 {
+            if indexPath.row == 0{
+                list = Array(data.media[1...count-1])
+            } else if indexPath.row == count-1 {
+                list = Array(data.media[0...count - 2])
+            } else{
+                list = Array(data.media[indexPath.row+1...count-1] + data.media[0...indexPath.row-1])
             }
-//            sharedItem = data.media[indexPath.row]
-//            sharedList = data.media
-//            NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
+        }
+        APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
+            if let data = data as? MediaModel{
+                self.delegate?.didSelectItemAt(data, list, self)
+            }
         }
         
     }
+}
+protocol Type6CellDelegate{
+    func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel] , _ cell: Type6Cell)
 }

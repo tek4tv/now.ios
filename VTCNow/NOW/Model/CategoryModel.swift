@@ -36,6 +36,16 @@ class CategoryModel{
         }
         return self
     }
+    func copy() -> CategoryModel{
+        let copy = CategoryModel()
+        copy.privateKey = self.privateKey
+        copy.name = self.name
+        copy.cdn = self.cdn
+        copy.layout = self.layout
+        copy.media = self.media
+        copy.components = self.components
+        return copy
+    }
 }
 class MediaModel{
     var privateID = ""

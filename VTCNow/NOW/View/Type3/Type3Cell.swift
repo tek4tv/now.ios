@@ -42,14 +42,16 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // 6 1 6 1 6 1 6
         switch section {
-        case 0, 2, 4, 6:
+        case 0:
             return 6
-        default:
+        case 1:
             return 1
+        default:
+            return 18
         }
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 7
+        return 3
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
@@ -57,6 +59,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
             let item = data.media[indexPath.row]
             cell.data = item
+            cell.row = indexPath.row
             cell.delegate = self
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.getTimePass()
@@ -65,76 +68,36 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
                 cell.thumbImage.contentMode = .scaleAspectFill
             }
             return cell
-        case 2:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
-            let item = data.media[indexPath.row + 6]
-            cell.data = item
-            cell.delegate = self
-            cell.lblTitle.text = item.name
-            cell.lblTime.text = item.getTimePass()
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-                cell.thumbImage.loadImage(fromURL: url)
-                cell.thumbImage.contentMode = .scaleAspectFill
-            }
-            return cell
-        case 4:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
-            let item = data.media[indexPath.row + 12]
-            cell.data = item
-            cell.delegate = self
-            cell.lblTitle.text = item.name
-            cell.lblTime.text = item.getTimePass()
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-                cell.thumbImage.loadImage(fromURL: url)
-                cell.thumbImage.contentMode = .scaleAspectFill
-            }
-            return cell
-        case 6:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
-            let item = data.media[indexPath.row + 18]
-            cell.data = item
-            cell.delegate = self
-            cell.lblTitle.text = item.name
-            cell.lblTime.text = item.getTimePass()
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-                cell.thumbImage.loadImage(fromURL: url)
-                cell.thumbImage.contentMode = .scaleAspectFill
-            }
-            return cell
-        case 1, 3, 5:
+        case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewFullCell.className, for: indexPath) as! ViewFullCell
             cell.listData = Array(data.media.prefix(6))
             return cell
         default:
-            return UICollectionViewCell()
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+            let item = data.media[indexPath.row + 6]
+            cell.data = item
+            cell.row = indexPath.row + 6
+            cell.delegate = self
+            cell.lblTitle.text = item.name
+            cell.lblTime.text = item.getTimePass()
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.thumbImage.loadImage(fromURL: url)
+                cell.thumbImage.contentMode = .scaleAspectFill
+            }
+            return cell
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        switch indexPath.section {
-//        case 0:
-//            sharedItem = data.media[0]
-//            idVideoPlaying = 0
-//        default:
-//            sharedItem = data.media[indexPath.row + 1]
-//            idVideoPlaying = indexPath.row + 1
-//        }
-//        sharedList = data.media
-//        NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-        idVideoPlaying = indexPath.row
-        APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
-            if let data = data as? MediaModel{
-                sharedItem = data
-                sharedList = self.data.media
-                NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-            }
-        }
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
-        case 0, 2, 4, 6:
+        case 0:
             return CGSize(width: 190 * scaleW, height: 200 * scaleW)
+        case 1:
+            return CGSize(width: 414 * scaleW, height: 420 * scaleW)
         default:
-            return CGSize(width: 414 * scaleW, height: 260 * scaleW)
+            return CGSize(width: 190 * scaleW, height: 200 * scaleW)
         }
         
     }
@@ -142,13 +105,13 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
 
 extension Type3Cell: Type3ItemCellDelegate{
     func didSelectViewImage(_ cell: Type3ItemCell) {
-        APIService.shared.getDetailVideo(privateKey: cell.data.privateID) { (data, error) in
-            if let data = data as? MediaModel{
-                sharedItem = data
-                sharedList = self.data.media
-                NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-            }
-        }
+        let temp = self.data.copy()
+        let item = cell.data
+        print(cell.row)
+        temp.media.remove(at: cell.row)
+        temp.media.insert(item, at: 0)
+        news = temp
+        delegate?.didSelectViewImage(cell)
     }
     
     func didSelectViewBookmark(_ cell: Type3ItemCell) {
@@ -164,4 +127,5 @@ extension Type3Cell: Type3ItemCellDelegate{
 
 protocol Type3CellDelegate{
     func didSelectViewShare(_ cell: Type3ItemCell)
+    func didSelectViewImage(_ cell: Type3ItemCell)
 }

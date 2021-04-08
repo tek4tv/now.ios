@@ -1,13 +1,13 @@
 //
-//  MusicPlayerController.swift
+//  VideoController.swift
 //  NOW
 //
-//  Created by dovietduy on 4/5/21.
+//  Created by dovietduy on 4/7/21.
 //
 
 import UIKit
 import AVFoundation
-class MusicPlayerController: UIViewController {
+class VideoController: UIViewController {
     @IBOutlet weak var collView: UICollectionView!
     
     @IBOutlet weak var imgAudio: LazyImageView!
@@ -27,6 +27,7 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var viewSetting: UIView!
     @IBOutlet weak var imgShadow: UIImageView!
     @IBOutlet weak var viewCast: UIView!
+    @IBOutlet weak var lblDescription: UILabel!
     
     @IBOutlet weak var heightCollView: NSLayoutConstraint!
     
@@ -257,8 +258,14 @@ class MusicPlayerController: UIViewController {
             NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             isPlaying = true
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
-            lblTitle.text = item.name
-            lblCast.text = "Thể hiện: " + item.cast
+            lblTitle.text = item.name + item.episode
+            if item.country != "" {
+                lblCast.text = "Quốc gia: " + item.country
+            } else{
+                lblCast.text = item.getTimePass()
+            }
+            
+            lblDescription.text = item.descripTion
             addTimeObserver()
         }
         if item.path.contains("mp3"){
@@ -339,7 +346,7 @@ class MusicPlayerController: UIViewController {
     }
 }
 
-extension MusicPlayerController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension VideoController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         listData.count
     }

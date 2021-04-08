@@ -16,6 +16,7 @@ class Type3ItemCell: UICollectionViewCell {
     @IBOutlet weak var viewShare: UIView!
     var delegate: Type3ItemCellDelegate!
     var data = MediaModel()
+    var row = 0
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
