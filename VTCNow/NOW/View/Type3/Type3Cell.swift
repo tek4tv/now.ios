@@ -93,11 +93,11 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return CGSize(width: 190 * scaleW, height: 200 * scaleW)
+            return CGSize(width: (414 - 30) / 2.001 * scaleW, height: 220 * scaleW)
         case 1:
             return CGSize(width: 414 * scaleW, height: 420 * scaleW)
         default:
-            return CGSize(width: 190 * scaleW, height: 200 * scaleW)
+            return CGSize(width: (414 - 30) / 2.001 * scaleW, height: 220 * scaleW)
         }
         
     }

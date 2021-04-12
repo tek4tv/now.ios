@@ -24,7 +24,7 @@ class NewsController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 414 * scaleW, height: 330 * scaleW)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumLineSpacing = 0
+        layout.minimumLineSpacing = 20 * scaleW
         layout.minimumInteritemSpacing = 0
         collView.collectionViewLayout = layout
         
@@ -35,6 +35,12 @@ class NewsController: UIViewController {
         super.viewWillDisappear(animated)
         if let cell = collView.cellForItem(at: indexPath) as? VideoCell{
             cell.viewPlayer.player?.pause()
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let cell = collView.cellForItem(at: indexPath) as? VideoCell{
+            cell.viewPlayer.player?.play()
         }
     }
 }

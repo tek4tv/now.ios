@@ -12,6 +12,7 @@ class Type2Cell: UICollectionViewCell {
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
     var timer = Timer()
+    var delegate: Type2CellDelegate!
     var data = CategoryModel(){
         didSet{
             lblTitle.text = data.name
@@ -102,15 +103,20 @@ extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        sharedItem = data.media[indexPath.row]
-        sharedList = data.media
-        NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-//        APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in // khong có fileCode
-//            if let data = data as? MediaModel{
-//                sharedItem = data
-//                sharedList = self.data.media
-//                NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-//            }
-//        }
+        switch indexPath.row {
+        case 0...5:
+            let temp = self.data.copy()
+            let item = data.media[indexPath.row]
+            temp.media.remove(at: indexPath.row)
+            temp.media.insert(item, at: 0)
+            news = temp
+            delegate?.didSelectItemAt(self)
+        default:
+            delegate?.didSelectViewMore(self)
+        }
     }
+}
+protocol Type2CellDelegate {
+    func didSelectItemAt(_ cell: Type2Cell)
+    func didSelectViewMore(_ cell: Type2Cell)
 }

@@ -54,9 +54,9 @@ extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.row {
         case 0...7:
-            return CGSize(width: 110 * scaleW, height: 190 * scaleW)
+            return CGSize(width: 110 * scaleW, height: 200 * scaleW)
         default:
-            return CGSize(width: 118 * scaleW, height: 190 * scaleW)
+            return CGSize(width: 118 * scaleW, height: 200 * scaleW)
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

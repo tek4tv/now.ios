@@ -11,6 +11,7 @@ import MediaPlayer
 import MarqueeLabel
 class BookPlayerController: UIViewController {
 
+    @IBOutlet weak var CdImage: UIImageView!
     @IBOutlet weak var backImage: LazyImageView!
     @IBOutlet weak var squareImage: LazyImageView!
     @IBOutlet weak var lblTitle: MarqueeLabel!
@@ -48,7 +49,20 @@ class BookPlayerController: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name("StopPlayVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didStopBook(_:)), name: NSNotification.Name("StopPlayBook"), object: nil)
         setupRemoteTransportControls()
-        
+        animation()
+    }
+    func animation(){
+        UIView.animate(withDuration: 10, delay: 0, options: .curveLinear) {
+            self.CdImage.transform = CGAffineTransform.identity
+            self.CdImage.transform = CGAffineTransform(rotationAngle: -CGFloat.pi * 0.999)
+        } completion: { (true) in
+            UIView.animate(withDuration: 10, delay: 0, options: .curveLinear) {
+                self.CdImage.transform = CGAffineTransform(rotationAngle: -CGFloat.pi * 0.999 * 2)
+            } completion: { (true) in
+                self.animation()
+            }
+
+        }
     }
     @objc func didStopBook(_ notification: Notification){
         if let player = player{

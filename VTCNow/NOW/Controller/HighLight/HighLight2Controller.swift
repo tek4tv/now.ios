@@ -120,7 +120,7 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
         let item = news.media[indexPath.row]
         cell.item = item
         cell.indexPath = indexPath
-        cell.lblTitle.text = item.name
+        cell.lblTitle.text = item.name + item.episode
         cell.lblTime.text = item.timePass
         cell.delegate = self
         if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){

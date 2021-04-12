@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TVCell" customModule="NOW" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="896"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="896"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="VCK-D9-VR4" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
+                        <rect key="frame" x="115" y="20" width="70" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="VCK-D9-VR4" secondAttribute="height" id="vgI-Va-Dy5"/>
+                            <constraint firstAttribute="height" constant="70" id="wdx-vJ-pbd"/>
+                        </constraints>
+                    </imageView>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="fPK-MI-CPD">
+                        <rect key="frame" x="0.0" y="100" width="300" height="796"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pXI-o4-YfU">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="VCK-D9-VR4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="C1q-1W-6H1"/>
+                <constraint firstAttribute="bottom" secondItem="fPK-MI-CPD" secondAttribute="bottom" id="M2c-HA-w8m"/>
+                <constraint firstAttribute="trailing" secondItem="fPK-MI-CPD" secondAttribute="trailing" id="XIq-cU-BHJ"/>
+                <constraint firstItem="fPK-MI-CPD" firstAttribute="top" secondItem="VCK-D9-VR4" secondAttribute="bottom" constant="10" id="eKv-Br-Avf"/>
+                <constraint firstItem="fPK-MI-CPD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="g62-WG-U4h"/>
+                <constraint firstItem="VCK-D9-VR4" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="zkc-F2-82q"/>
+            </constraints>
+            <connections>
+                <outlet property="collView" destination="fPK-MI-CPD" id="cVF-6C-uzq"/>
+                <outlet property="imgThumb" destination="VCK-D9-VR4" id="R3b-LZ-gCr"/>
+            </connections>
+            <point key="canvasLocation" x="8.6956521739130448" y="126.5625"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="logo" width="232" height="232"/>
+    </resources>
+</document>

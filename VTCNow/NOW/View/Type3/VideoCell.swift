@@ -53,6 +53,8 @@ class VideoCell: UICollectionViewCell {
         slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
         
         hidePlayerController()
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        btnPlay.isHidden = false
         //
         viewPlayer.addSubview(activityIndicatorView)
         activityIndicatorView.centerXAnchor.constraint(equalTo: viewPlayer.centerXAnchor).isActive = true
@@ -68,6 +70,7 @@ class VideoCell: UICollectionViewCell {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
     @objc func playerDidFinishPlaying(note: NSNotification){
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
         viewPlayer.player?.pause()
@@ -205,6 +208,7 @@ class VideoCell: UICollectionViewCell {
         lblTime.text = ""
         lblTime.textColor = .gray
         viewPlayer.player?.pause()
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
     }
     @objc func countDown(_ notification: Notification){
         if let futureDate = item.schedule.toDate(){
@@ -226,6 +230,8 @@ class VideoCell: UICollectionViewCell {
         }
     }
     func setup(){
+        btnPlay.isHidden = true
+        activityIndicatorView.startAnimating()
         listResolution = []
         if let url = URL(string: item.path){
             StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in

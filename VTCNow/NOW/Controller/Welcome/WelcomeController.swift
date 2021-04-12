@@ -39,7 +39,7 @@ class WelcomeController: UIViewController {
                 categorys.append(data2)
                 self?.count += 1
                 print(data2.name + " " + data2.layout.type + " - " + data2.layout.subType)
-                print(data2.components)
+                print(data2.privateKey)
                 if categorys.count == root.components.count{
                     let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeController.className) as! HomeController
                     vc.modalTransitionStyle = .crossDissolve
@@ -56,6 +56,11 @@ class WelcomeController: UIViewController {
         APIService.shared.getRead { (data, error) in
             if let data = data as? [ReadModel]{
                 reads = data
+            }
+        }
+        APIService.shared.getLive { (data, error) in
+            if let data = data as? [ChannelModel]{
+                lives = data
             }
         }
     }

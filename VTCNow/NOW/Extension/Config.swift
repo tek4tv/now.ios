@@ -17,7 +17,7 @@ var reads : [ReadModel] = []
 var tabBarIndex = 0
 var isMessaging = false
 var bookCate: CategoryModel!
-
+var lives: [ChannelModel] = []
 
 let admobBanner = "ca-app-pub-3940256099942544/2934735716"
 let admobFull = "ca-app-pub-5372862349743986/9369434422"

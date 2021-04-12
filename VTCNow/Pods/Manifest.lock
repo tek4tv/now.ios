@@ -94,6 +94,7 @@ PODS:
   - nanopb/decode (2.30907.0)
   - nanopb/encode (2.30907.0)
   - PromisesObjC (1.2.12)
+  - UPCarouselFlowLayout (1.1.2)
   - XLPagerTabStrip (9.0.0)
 
 DEPENDENCIES:
@@ -105,6 +106,7 @@ DEPENDENCIES:
   - GoogleAds-IMA-iOS-SDK (~> 3.11.4)
   - Kingfisher (~> 6.0)
   - MarqueeLabel
+  - UPCarouselFlowLayout
   - XLPagerTabStrip
 
 SPEC REPOS:
@@ -129,6 +131,7 @@ SPEC REPOS:
     - MarqueeLabel
     - nanopb
     - PromisesObjC
+    - UPCarouselFlowLayout
     - XLPagerTabStrip
 
 SPEC CHECKSUMS:
@@ -152,8 +155,9 @@ SPEC CHECKSUMS:
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 8fffe4e81e8c695cc866b6202bde1e5e6a1c65b4
+PODFILE CHECKSUM: 9838df789d5ec8615dcf36cafe17cb1f5e47607e
 
 COCOAPODS: 1.10.0

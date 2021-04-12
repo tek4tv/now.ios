@@ -18,11 +18,12 @@ class CategoryCell: UICollectionViewCell {
         "Đừng bỏ lỡ": #imageLiteral(resourceName: "tvshow"),
         "Tin mới": #imageLiteral(resourceName: "tinmoi"),
         "Tài liệu": #imageLiteral(resourceName: "tailieu"),
-        "Ẩm thực": #imageLiteral(resourceName: "noibat"),
-        "Sức khoẻ": #imageLiteral(resourceName: "noibat"),
+        "Món ngon": #imageLiteral(resourceName: "noibat"),
+        "Sức khỏe": #imageLiteral(resourceName: "noibat"),
         "TV Show": #imageLiteral(resourceName: "noibat"),
         "Âm nhạc": #imageLiteral(resourceName: "noibat"),
         "Phim": #imageLiteral(resourceName: "noibat"),
+        "Phim bộ": #imageLiteral(resourceName: "noibat"),
         "Sách hay": #imageLiteral(resourceName: "noibat"),
     ]
     override func awakeFromNib() {
@@ -32,10 +33,11 @@ class CategoryCell: UICollectionViewCell {
         collView.dataSource = self
         collView.register(UINib(nibName: "CategoryItemCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCell")
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 90 * scaleW, height: collView.bounds.height * scaleH)
+        layout.itemSize = CGSize(width: 93 * scaleW, height: 95 * scaleW)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 0, bottom: 0, right: 0)
         collView.collectionViewLayout = layout
     }
 

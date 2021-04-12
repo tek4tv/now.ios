@@ -22,17 +22,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-sun-96" translatesAutoresizingMaskIntoConstraints="NO" id="1YW-wK-pPy">
                                 <rect key="frame" x="20" y="5" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="a5U-Op-OdG">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
+                                    <constraint firstAttribute="width" secondItem="1YW-wK-pPy" secondAttribute="height" id="HZb-If-Frh"/>
                                     <constraint firstAttribute="width" constant="40" id="hwz-Vx-qLl">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
-                                    <constraint firstAttribute="width" secondItem="1YW-wK-pPy" secondAttribute="height" id="o73-XI-EQm">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
                                         </userDefinedRuntimeAttributes>
@@ -49,7 +40,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TP Hồ Chí Minh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPU-6y-v1p">
-                                <rect key="frame" x="70" y="10" width="77.5" height="13"/>
+                                <rect key="frame" x="70" y="5" width="77.5" height="13"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -61,10 +52,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="OPU-6y-v1p" firstAttribute="leading" secondItem="1YW-wK-pPy" secondAttribute="trailing" constant="10" id="7G7-71-jsY"/>
+                            <constraint firstItem="OPU-6y-v1p" firstAttribute="top" secondItem="1YW-wK-pPy" secondAttribute="top" id="8cD-gJ-ga8"/>
                             <constraint firstItem="1YW-wK-pPy" firstAttribute="centerY" secondItem="LfU-WZ-dQ5" secondAttribute="centerY" id="Gqo-bI-NMJ"/>
-                            <constraint firstAttribute="bottom" secondItem="0yl-at-YXV" secondAttribute="bottom" constant="5" id="K0c-xI-k1f"/>
                             <constraint firstItem="0yl-at-YXV" firstAttribute="leading" secondItem="1YW-wK-pPy" secondAttribute="trailing" constant="10" id="Ndl-Y0-4o3"/>
-                            <constraint firstItem="OPU-6y-v1p" firstAttribute="top" secondItem="LfU-WZ-dQ5" secondAttribute="top" constant="10" id="Tut-7C-oAz"/>
+                            <constraint firstItem="0yl-at-YXV" firstAttribute="bottom" secondItem="1YW-wK-pPy" secondAttribute="bottom" id="YS7-GE-OVh"/>
                             <constraint firstItem="1YW-wK-pPy" firstAttribute="leading" secondItem="LfU-WZ-dQ5" secondAttribute="leading" constant="20" id="uLx-Up-u5A"/>
                             <constraint firstAttribute="width" constant="160" id="v2j-cE-aUc"/>
                         </constraints>

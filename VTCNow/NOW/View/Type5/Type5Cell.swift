@@ -32,27 +32,33 @@ class Type5Cell: UICollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 20 * scaleW, right: 10 * scaleW)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 10 * scaleW, right: 10 * scaleW)
         collView.collectionViewLayout = layout
     }
 
 }
 extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if data.media.count >= 7 {
-            return 7
+        switch section {
+        case 0:
+            if data.media.count >= 6 {
+                return 6
+            }
+            return data.media.count
+        default:
+            return 1
         }
-        return data.media.count
+        
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = data.media[indexPath.row]
-        switch indexPath.row {
-        case 0...5:
+        switch indexPath.section {
+        case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
-            cell.lblTitle.text = item.name
+            cell.lblTitle.text = item.name + item.episode
             cell.row = indexPath.row
             cell.data = item
             cell.delegate = self
@@ -73,18 +79,36 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             }
             return cell
         }
+        
+//        switch indexPath.row {
+//        case 0...5:
+//
+//        default:
+//
+//        }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        switch indexPath.section {
+        case 0:
+            break
+        default:
+            delegate?.didSelectViewMore(self)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.row {
-        case 0...5:
-            return CGSize(width: 160 * scaleW, height: 180 * scaleW)
+        switch indexPath.section {
+        case 0:
+            return CGSize(width: 160 * scaleW, height: 200 * scaleW)
         default:
-            return CGSize(width: 168 * scaleW, height: 180 * scaleW)
+            return CGSize(width: 168 * scaleW, height: 200 * scaleW)
         }
+//        switch indexPath.row {
+//        case 0...5:
+//
+//        default:
+//
+//        }
     }
 }
 extension Type5Cell: Type3ItemCellDelegate{
@@ -128,4 +152,5 @@ extension Type5Cell: Type3ItemCellDelegate{
 protocol Type5CellDelegate{
     func didSelectViewImage(_ data: MediaModel,_ list: [MediaModel],_ cell: Type5Cell)
     func didSelectView2Share(_ cell: Type3ItemCell)
+    func didSelectViewMore(_ cell: Type5Cell)
 }

@@ -9,8 +9,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Medium.ttf">
-            <string>Roboto-Medium</string>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -35,16 +35,16 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phim lẻ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jem-nd-mOI">
-                        <rect key="frame" x="10" y="20" width="60.5" height="21.5"/>
-                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
-                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="frame" x="10" y="25" width="60" height="21.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8wD-VL-wiL">
-                        <rect key="frame" x="0.0" y="51.5" width="414" height="257.5"/>
+                        <rect key="frame" x="0.0" y="61.5" width="414" height="247.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gul-8Q-xRE">
                             <size key="itemSize" width="128" height="128"/>
@@ -54,7 +54,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-next-page-52" translatesAutoresizingMaskIntoConstraints="NO" id="WMC-G8-Dh5">
-                        <rect key="frame" x="384" y="21" width="20" height="20"/>
+                        <rect key="frame" x="384" y="26" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="rHb-dn-afw"/>
                             <constraint firstAttribute="width" secondItem="WMC-G8-Dh5" secondAttribute="height" id="wKw-3D-1Oy"/>
@@ -82,7 +82,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="jem-nd-mOI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="fd8-KB-MOV">
+                <constraint firstItem="jem-nd-mOI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="25" id="fd8-KB-MOV">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -107,7 +107,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="8wD-VL-wiL" firstAttribute="top" secondItem="jem-nd-mOI" secondAttribute="bottom" constant="10" id="xce-Eu-6t2">
+                <constraint firstItem="8wD-VL-wiL" firstAttribute="top" secondItem="jem-nd-mOI" secondAttribute="bottom" constant="15" id="xce-Eu-6t2">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -117,7 +117,7 @@
                 <outlet property="collView" destination="8wD-VL-wiL" id="oID-9y-e2I"/>
                 <outlet property="lblTitle" destination="jem-nd-mOI" id="TBB-v2-JQW"/>
             </connections>
-            <point key="canvasLocation" x="141" y="127"/>
+            <point key="canvasLocation" x="140.57971014492756" y="126.5625"/>
         </collectionViewCell>
     </objects>
     <resources>

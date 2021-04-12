@@ -40,6 +40,10 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     }
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         var child :[UIViewController] = []
+        let child0 = storyboard?.instantiateViewController(withIdentifier: NewsController.className) as! NewsController
+        child0.name = "Mới nhất"
+        child0.category = news
+        child.append(child0)
         for item in news.components{
             let childAdd = storyboard?.instantiateViewController(withIdentifier: NewsController.className) as! NewsController
             childAdd.name = item.name

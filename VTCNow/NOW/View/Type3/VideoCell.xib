@@ -9,9 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Medium.ttf">
-            <string>Roboto-Medium</string>
-        </array>
         <array key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
         </array>
@@ -27,9 +24,9 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cháy lớn tại siêu thị 90K Bắc Giang, khói bốc cao hàng chục mét" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7g-p5-2rx">
-                        <rect key="frame" x="10" y="241.5" width="394" height="35.5"/>
-                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
-                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="frame" x="10" y="241.5" width="394" height="37.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
@@ -125,13 +122,13 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lV0-lg-ojq">
-                                <rect key="frame" x="294" y="171.5" width="100" height="50"/>
+                                <rect key="frame" x="314" y="171.5" width="80" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDT-Qc-HVf">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="50"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-settings-48" translatesAutoresizingMaskIntoConstraints="NO" id="xnb-Ge-Rs9">
-                                                <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                <rect key="frame" x="10" y="15" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="MQ1-KB-hIy"/>
                                                     <constraint firstAttribute="width" secondItem="xnb-Ge-Rs9" secondAttribute="height" id="OTG-Pb-qRY"/>
@@ -145,10 +142,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jGu-e0-YAY">
-                                        <rect key="frame" x="50" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="40" y="0.0" width="40" height="50"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_fullScreen" translatesAutoresizingMaskIntoConstraints="NO" id="EOY-B5-aXX">
-                                                <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                <rect key="frame" x="0.0" y="15" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="2jB-78-sph"/>
                                                     <constraint firstAttribute="width" secondItem="EOY-B5-aXX" secondAttribute="height" id="qf9-8Q-0jc"/>
@@ -158,23 +155,23 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="EOY-B5-aXX" firstAttribute="centerY" secondItem="jGu-e0-YAY" secondAttribute="centerY" id="4ep-QC-8Qh"/>
-                                            <constraint firstItem="EOY-B5-aXX" firstAttribute="centerX" secondItem="jGu-e0-YAY" secondAttribute="centerX" id="q99-Ir-0OB"/>
+                                            <constraint firstItem="EOY-B5-aXX" firstAttribute="centerX" secondItem="jGu-e0-YAY" secondAttribute="centerX" constant="-10" id="q99-Ir-0OB"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="Lv6-YD-FfY"/>
+                                    <constraint firstAttribute="width" constant="80" id="Lv6-YD-FfY"/>
                                     <constraint firstAttribute="height" constant="50" id="fy1-q5-ORr"/>
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ez1-XH-Ngq">
-                                <rect key="frame" x="269" y="190.5" width="25" height="12"/>
+                                <rect key="frame" x="289" y="190.5" width="25" height="12"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JNO-T9-O5L" customClass="CustomSlider" customModule="NOW" customModuleProvider="target">
-                                <rect key="frame" x="43" y="171.5" width="218" height="51"/>
+                                <rect key="frame" x="43" y="171.5" width="238" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="oOw-HA-Ry0"/>
                                 </constraints>
@@ -220,14 +217,9 @@
                             <constraint firstAttribute="trailing" secondItem="MK0-nR-drb" secondAttribute="trailing" id="xhH-iL-SJB"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3X-Qz-0ps">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="330"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69691780821917804" colorSpace="custom" customColorSpace="sRGB"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="5"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3X-Qz-0ps">
+                        <rect key="frame" x="0.0" y="10" width="414" height="320"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.4043503852739726" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     </view>
                 </subviews>
             </view>
@@ -252,7 +244,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="I3X-Qz-0ps" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="EKm-qc-GCA"/>
+                <constraint firstItem="I3X-Qz-0ps" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="EKm-qc-GCA"/>
                 <constraint firstItem="hZw-fc-vMh" firstAttribute="centerY" secondItem="h9T-Pd-ilG" secondAttribute="centerY" id="Gc8-ze-fnx"/>
                 <constraint firstItem="h9T-Pd-ilG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="H8H-Kv-5pV">
                     <userDefinedRuntimeAttributes>

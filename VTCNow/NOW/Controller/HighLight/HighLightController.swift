@@ -99,36 +99,47 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
         let width = collView.bounds.width
         let section = indexPath.section
         if section == 0{
-            return CGSize(width: width, height: 50 * scaleW)
+            return CGSize(width: width, height: 60 * scaleW)
         } else if section == 1{
-            return CGSize(width: width, height: 40 * scaleW)
+            return CGSize(width: width, height: 60 * scaleW)
         } else if section == 2{
             return CGSize(width: width, height: 232 * scaleW)
         } else if section == 3{
-            return CGSize(width: width, height: 85 * scaleW)
+            return CGSize(width: width, height: 105 * scaleW)
         } else {
             let item = categorys[section - 3]
             switch item.layout.type {
             case "1":
                 return CGSize(width: width, height: 260 * scaleW)
             case "2":
-                return CGSize(width: width, height: 230 * scaleW)
+                return CGSize(width: width, height: 240 * scaleW)
             case "3":
-                let temp = 12 * 200 + 50 + 420 + 10 * 11 + 20 * 3
+                let temp = 12 * 220 + 60 + 420 + 10 * 11 + 20 * 3
                 let height: CGFloat = CGFloat(temp)
                 return CGSize(width: width, height: height * scaleW)
             case "4", "14":
-                return CGSize(width: width, height: 420 * scaleW)
+                if item.name == "Phim bộ"{
+                    let temp = 60 + 200 + 10
+                    let height: CGFloat = CGFloat(temp)
+                    return CGSize(width: width, height: height * scaleW)
+                }
+                return CGSize(width: width, height: 440 * scaleW)
             case "5", "8":
                 if item.name == "Âm nhạc"{
-                    return CGSize(width: width, height: 420 * scaleW)
+                    return CGSize(width: width, height: 440 * scaleW)
                 }
-                return CGSize(width: width, height: 250 * scaleW)
+                let temp = 60 + 200 + 10
+                let height: CGFloat = CGFloat(temp)
+                return CGSize(width: width, height: height * scaleW)
             case "6", "7" :
                 if item.name == "Sách hay"{
-                    return CGSize(width: width, height: 250 * scaleW)
+                    let temp = 60 + 200
+                    let height: CGFloat = CGFloat(temp)
+                    return CGSize(width: width, height: height * scaleW )
                 }
-                return CGSize(width: width, height: 320 * scaleW )
+                let temp = 60 + 260 + 10
+                let height: CGFloat = CGFloat(temp)
+                return CGSize(width: width, height: height * scaleW )
             default:
                 return CGSize(width: 0, height: 200)
             }
@@ -166,6 +177,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                 return cell
             case "2":
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type2Cell.className, for: indexPath) as! Type2Cell
+                cell.delegate = self
                 cell.data = item
                 return cell
             case "3":
@@ -175,6 +187,12 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                 cell.refresh()
                 return cell
             case "4", "14":
+                if item.name == "Phim bộ"{
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type5Cell.className, for: indexPath) as! Type5Cell
+                    cell.delegate = self
+                    cell.data = item
+                    return cell
+                }
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4Cell.className, for: indexPath) as! Type4Cell
                 cell.delegate = self
                 cell.data = item
@@ -426,6 +444,17 @@ extension HighLightController: Type1CellDelegate{
         navigationController?.pushViewController(vc, animated: true)
     }
 }
+extension HighLightController: Type2CellDelegate{
+    func didSelectItemAt(_ cell: Type2Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    func didSelectViewMore(_ cell: Type2Cell) {
+        news = cell.data
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
 extension HighLightController: Type3CellDelegate{
     func didSelectViewImage(_ cell: Type3ItemCell) {
         let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
@@ -444,7 +473,7 @@ extension HighLightController: Type3CellDelegate{
 }
 extension HighLightController: Type4CellDelegate{
     func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel], _ cell: Type4Cell) {
-        if cell.data.name == "Sách hay"{
+        if cell.data.name == "Âm nhạc"{
             let vc = storyboard?.instantiateViewController(withIdentifier: MusicPlayerController.className) as! MusicPlayerController
             vc.item = data
             vc.listData = listData
@@ -474,6 +503,11 @@ extension HighLightController: Type5CellDelegate{
         ac.popoverPresentationController?.sourceView = self.view
         self.present(ac, animated: true)
     }
+    func didSelectViewMore(_ cell: Type5Cell) {
+        news = cell.data
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 extension HighLightController: Type6CellDelegate{
     func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel], _ cell: Type6Cell) {
@@ -481,6 +515,22 @@ extension HighLightController: Type6CellDelegate{
         vc.item = data
         vc.listData = list
         navigationController?.pushViewController(vc, animated: true)
+    }
+    func didSelectViewMore(_ cell: Type6Cell) {
+        var count = 0
+        news = cell.data
+        for item in news.components{
+            APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
+                if let data = data as? CategoryModel{
+                    item.category = data
+                    count += 1
+                    if count == news.components.count {
+                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: MovieController.className) as! MovieController
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+            }
+        }
     }
 }
 extension HighLightController: Type7CellDelegate{
