@@ -91,7 +91,7 @@ class WarmodroidSwitch: UIView {
      It gives nice animation to thumb when switched ON or OFF.
      Changes the color.
      */
-    private func setState() {
+    func setState() {
         if isOn {
             UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.thumbTrailingConstraint.constant = 0

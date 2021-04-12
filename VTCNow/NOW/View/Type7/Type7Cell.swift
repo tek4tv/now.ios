@@ -30,7 +30,7 @@ class Type7Cell: UICollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
+        layout.sectionInset = UIEdgeInsets(top: 0, left:0, bottom: 0, right: 10 * scaleW)
         collView.collectionViewLayout = layout
     }
 }

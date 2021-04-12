@@ -7,7 +7,11 @@
 
 import UIKit
 import AVFoundation
-class MusicPlayerController: UIViewController {
+class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
+    func didTapSwitch(isON: Bool) {
+        UserDefaults.standard.setValue((isON == true ? 0 : 1) , forKey: "switcher")
+    }
+    
     @IBOutlet weak var collView: UICollectionView!
     
     @IBOutlet weak var imgAudio: LazyImageView!
@@ -27,6 +31,7 @@ class MusicPlayerController: UIViewController {
     @IBOutlet weak var viewSetting: UIView!
     @IBOutlet weak var imgShadow: UIImageView!
     @IBOutlet weak var viewCast: UIView!
+    @IBOutlet weak var switcher: WarmodroidSwitch!
     
     @IBOutlet weak var heightCollView: NSLayoutConstraint!
     
@@ -72,6 +77,11 @@ class MusicPlayerController: UIViewController {
         
         openVideoAudio()
         heightCollView.constant = CGFloat(listData.count * 130) * scaleW
+        //
+        switcher.delegate = self
+        let mode = UserDefaults.standard.integer(forKey: "switcher")
+        switcher.isOn = (mode == 0) ? true : false
+        switcher.setState()
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -88,8 +98,13 @@ class MusicPlayerController: UIViewController {
         viewPlayer.player?.pause()
         isEnded = true
         isPlaying = false
-//        UserDefaults.standard.removeObject(forKey: item.privateID)
-//        UserDefaults.standard.synchronize()
+        //
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
+        //
+        let mode = UserDefaults.standard.integer(forKey: "switcher")
+        if mode == 0 {
+            didSelectBtnNext(Any.self)
+        }
 
         
     }
@@ -240,16 +255,13 @@ class MusicPlayerController: UIViewController {
         
         if let url = URL(string: item.path){
             listResolution = []
-            StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
-                switch result {
-                case .success(let playlist):
-                    self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
-                    self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
-                    self?.listResolution[0].isTicked = true
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [])
             }
+            catch {
+                print("Setting category to AVAudioSessionCategoryPlayback failed.")
+            }
+            
             viewPlayer.player  = AVPlayer(url: url)
             viewPlayer.player?.play()
             viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
@@ -262,9 +274,12 @@ class MusicPlayerController: UIViewController {
             addTimeObserver()
         }
         if item.path.contains("mp3"){
+            imgAudio.isHidden = false
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 imgAudio.loadImage(fromURL: url)
             }
+        }else {
+            imgAudio.isHidden = true
         }
 //        if let temp = UserDefaults.standard.value(forKey: item.privateID) as? Double, temp > 0.0{
 //            let time: CMTime = CMTimeMake(value: Int64(temp * 1000), timescale: 1000)

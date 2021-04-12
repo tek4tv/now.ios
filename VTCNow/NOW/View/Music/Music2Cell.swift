@@ -19,7 +19,7 @@ class Music2Cell: UICollectionViewCell {
     var delegate: Music2CellDelegate!
     var data = CategoryModel(){
         didSet{
-            lblTitle.text = data.name + " >"
+            lblTitle.text = data.name 
             if data.name != oldValue.name{
                 collView.reloadData()
             }

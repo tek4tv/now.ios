@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -55,7 +54,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="PrX-4f-fTT" secondAttribute="trailing" constant="15" id="gbW-OA-4Yc"/>
                                 </constraints>
@@ -71,12 +70,13 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="hZw-fc-vMh" secondAttribute="trailing" constant="20" id="uIW-lu-iV9"/>
                                 </constraints>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="B3y-RR-IZB"/>
                             <constraint firstAttribute="height" constant="30" id="e0W-Mr-uE6"/>
@@ -244,7 +244,6 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="I3X-Qz-0ps" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="EKm-qc-GCA"/>
                 <constraint firstItem="hZw-fc-vMh" firstAttribute="centerY" secondItem="h9T-Pd-ilG" secondAttribute="centerY" id="Gc8-ze-fnx"/>
                 <constraint firstItem="h9T-Pd-ilG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="H8H-Kv-5pV">
                     <userDefinedRuntimeAttributes>
@@ -262,6 +261,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstItem="sc5-zG-2dP" firstAttribute="top" secondItem="I3X-Qz-0ps" secondAttribute="top" id="TmR-Zv-XtD"/>
                 <constraint firstItem="u7g-p5-2rx" firstAttribute="top" secondItem="sc5-zG-2dP" secondAttribute="bottom" constant="10" id="U14-WU-Lof">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -301,8 +301,5 @@
         <image name="icons8-chromecast-cast-button-49" width="48" height="48"/>
         <image name="icons8-settings-48" width="48" height="48"/>
         <image name="icons8-share-49" width="48" height="48"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

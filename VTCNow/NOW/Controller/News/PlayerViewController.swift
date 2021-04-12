@@ -9,7 +9,12 @@ import UIKit
 import AVKit
 
 class PlayerViewController: AVPlayerViewController {
-
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        return .landscapeRight
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -24,5 +29,5 @@ class PlayerViewController: AVPlayerViewController {
             onDismiss?()
         }
     }
-
+    
 }

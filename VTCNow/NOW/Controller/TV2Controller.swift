@@ -82,7 +82,7 @@ extension TV2Controller: UICollectionViewDelegate, UICollectionViewDataSource, U
         
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 3
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

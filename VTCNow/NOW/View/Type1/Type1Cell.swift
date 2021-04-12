@@ -54,8 +54,9 @@ class Type1Cell: UICollectionViewCell {
             } else{
                 indexPath.row = 0
             }
+            collView.isPagingEnabled = false
             collView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
-            
+            collView.isPagingEnabled = true
         })
         
         

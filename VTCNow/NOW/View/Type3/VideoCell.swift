@@ -213,37 +213,44 @@ class VideoCell: UICollectionViewCell {
     @objc func countDown(_ notification: Notification){
         if let futureDate = item.schedule.toDate(){
             let interval = futureDate - Date()
-            if let day = interval.day, let hour = interval.hour, let minute = interval.minute, let second = interval.second{
+            if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
                 let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
-                item.timePass = "Còn \(timeStr)"
-                lblTime.textColor = .gray
-                lblTime.text = item.timePass
-                if day < 0{
-                    lblTime.text = item.getTimePass()
-                } else if hour <= 0 && minute <= 0 && second <= 0{
-                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name ("countDownTimer2"), object: nil)
-                    item.timePass = "Trực tiếp"
-                    lblTime.textColor = .red
-                    lblTime.text = item.timePass
+                
+                if hour <= 0 && minute <= 0 && second <= 0{
+                    item.timePass = "Đang phát"
+                    lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
+                } else{
+                    item.timePass = "Còn \(timeStr)"
+                    lblTime.textColor = .gray
                 }
             }
+            lblTime.text = item.timePass
         }
     }
     func setup(){
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [])
+        }
+        catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
         btnPlay.isHidden = true
         activityIndicatorView.startAnimating()
         listResolution = []
         if let url = URL(string: item.path){
-            StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
-                switch result {
-                case .success(let playlist):
-                    self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
-                    self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
-                    self?.listResolution[0].isTicked = true
-                case .failure(let error):
-                    print(error.localizedDescription)
+            if item.path.contains(".m3u8"){
+                StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
+                    switch result {
+                    case .success(let playlist):
+                        self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
+                        self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
+                        self?.listResolution[0].isTicked = true
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
                 }
             }
+            
         }
         viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)

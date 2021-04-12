@@ -15,16 +15,15 @@ class CategoryCell: UICollectionViewCell {
     var delegate: CategoryCellDelegate!
     var images: [String: UIImage] = [
         "Nổi bật": #imageLiteral(resourceName: "noibat"),
-        "Đừng bỏ lỡ": #imageLiteral(resourceName: "tvshow"),
+        "Đừng bỏ lỡ": #imageLiteral(resourceName: "tailieu"),
         "Tin mới": #imageLiteral(resourceName: "tinmoi"),
-        "Tài liệu": #imageLiteral(resourceName: "tailieu"),
-        "Món ngon": #imageLiteral(resourceName: "noibat"),
-        "Sức khỏe": #imageLiteral(resourceName: "noibat"),
-        "TV Show": #imageLiteral(resourceName: "noibat"),
-        "Âm nhạc": #imageLiteral(resourceName: "noibat"),
-        "Phim": #imageLiteral(resourceName: "noibat"),
-        "Phim bộ": #imageLiteral(resourceName: "noibat"),
-        "Sách hay": #imageLiteral(resourceName: "noibat"),
+        "Món ngon": #imageLiteral(resourceName: "MON NGON"),
+        "Sức khỏe": #imageLiteral(resourceName: "SUC KHOE"),
+        "TV Show": #imageLiteral(resourceName: "tvshow"),
+        "Âm nhạc": #imageLiteral(resourceName: "AM NHAC"),
+        "Phim": #imageLiteral(resourceName: "PHIM LE"),
+        "Phim bộ": #imageLiteral(resourceName: "PHIM BO"),
+        "Sách hay": #imageLiteral(resourceName: "SACH HAY"),
     ]
     override func awakeFromNib() {
         super.awakeFromNib()

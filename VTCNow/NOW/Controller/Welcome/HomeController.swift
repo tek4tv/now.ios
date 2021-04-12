@@ -280,19 +280,15 @@ class HomeController: UITabBarController, UITabBarControllerDelegate{//}, IMAAds
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard let items = tabBar.items else { return }
         guard let index = items.firstIndex(of: item) else{return}
-        if  index != tabBarIndex, tabBarIndex == 2{
-            NotificationCenter.default.post(name: NSNotification.Name("stopRadio"), object: nil)
-        } else if index != tabBarIndex, tabBarIndex == 1{
+        if  index != tabBarIndex, tabBarIndex == 1{
+            NotificationCenter.default.post(name: NSNotification.Name("StopPlayBook"), object: nil)
+        } else if index != tabBarIndex, tabBarIndex == 2{
             NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)
         }
-        if index == 1{
-            NotificationCenter.default.post(name: NSNotification.Name("replayLive"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name("StopPlayVideo"), object: nil)
+        if index == 2{
             NotificationCenter.default.post(name: NSNotification.Name("StopPlayBook"), object: nil)
         }
-        if index == 2{
-            NotificationCenter.default.post(name: NSNotification.Name("replayRadio"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name("StopPlayVideo"), object: nil)
+        if index == 1{
             NotificationCenter.default.post(name: NSNotification.Name("StopPlayBook"), object: nil)
         }
         if index == 3{
@@ -753,7 +749,7 @@ class CustomTabBar : UITabBar {
     override open func sizeThatFits(_ size: CGSize) -> CGSize {
         super.sizeThatFits(size)
         var sizeThatFits = super.sizeThatFits(size)
-        sizeThatFits.height = 80 * scaleH
+        sizeThatFits.height = 90 * scaleH
         return sizeThatFits
     }
 }

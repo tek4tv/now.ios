@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -24,10 +23,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xyr-pJ-ajl">
-                        <rect key="frame" x="0.0" y="5" width="100" height="30"/>
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGq-CB-Eea">
-                                <rect key="frame" x="5" y="7.5" width="90" height="15.5"/>
+                                <rect key="frame" x="5" y="12.5" width="90" height="15.5"/>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
                                 <color key="textColor" red="0.50196078430000002" green="0.01176470588" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -36,19 +35,19 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="eGq-CB-Eea" secondAttribute="trailing" constant="5" id="E1B-pi-DjI">
+                            <constraint firstAttribute="trailing" secondItem="eGq-CB-Eea" secondAttribute="trailing" constant="5" id="JmF-AW-a8T">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="eGq-CB-Eea" firstAttribute="leading" secondItem="xyr-pJ-ajl" secondAttribute="leading" constant="5" id="Yqt-Ym-adV">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstItem="eGq-CB-Eea" firstAttribute="centerY" secondItem="xyr-pJ-ajl" secondAttribute="centerY" id="dui-z4-90f">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="eGq-CB-Eea" firstAttribute="leading" secondItem="xyr-pJ-ajl" secondAttribute="leading" constant="5" id="oO5-Qh-OTs">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -65,22 +64,22 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="xyr-pJ-ajl" secondAttribute="trailing" id="KwU-Py-dqc">
+                <constraint firstItem="xyr-pJ-ajl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="guf-yT-DZg">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstAttribute="bottom" secondItem="xyr-pJ-ajl" secondAttribute="bottom" constant="5" id="Kxj-cR-mmg">
+                <constraint firstAttribute="trailing" secondItem="xyr-pJ-ajl" secondAttribute="trailing" id="oiK-l5-stb">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="xyr-pJ-ajl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="RS2-wW-bOF">
+                <constraint firstItem="xyr-pJ-ajl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="pea-4N-PnX">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="xyr-pJ-ajl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qjt-ij-7rD">
+                <constraint firstAttribute="bottom" secondItem="xyr-pJ-ajl" secondAttribute="bottom" id="zO7-FO-nYx">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -93,9 +92,4 @@
             <point key="canvasLocation" x="89.855072463768124" y="127.23214285714285"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

@@ -23,6 +23,7 @@ class Type3ItemCell: UICollectionViewCell {
         viewImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewImage(_:))))
         viewBookmark.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBookmark(_:))))
         viewShare.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewShare(_:))))
+        lblTitle.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectLblTitle(_:))))
     }
     override func prepareForReuse() {
         thumbImage.image = #imageLiteral(resourceName: "placeHolderImage")
@@ -35,6 +36,9 @@ class Type3ItemCell: UICollectionViewCell {
     }
     @objc func didSelectViewShare(_ sender: Any){
         delegate?.didSelectViewShare(self)
+    }
+    @objc func didSelectLblTitle(_ sender: Any){
+        delegate?.didSelectViewImage(self)
     }
 }
 protocol Type3ItemCellDelegate {

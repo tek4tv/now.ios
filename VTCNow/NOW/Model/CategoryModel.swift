@@ -181,7 +181,11 @@ class MediaModel{
         }
         if let data = json["Metadata"] as? [String: Any]{
             
-            if let temp = data["Episode"] as? String { episode = " - Tập " + temp}
+            if let temp = data["Episode"] as? String {
+                if temp != ""{
+                    episode = " - Tập " + temp
+                }
+            }
             if let temp = data["Country"] as? String { country = temp}
             if let temp = data["Cast"] as? String { cast = temp}
             if let temp = data["GenredDescription"] as? String { genred = temp}

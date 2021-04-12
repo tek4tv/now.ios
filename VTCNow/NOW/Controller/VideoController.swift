@@ -8,6 +8,12 @@
 import UIKit
 import AVFoundation
 class VideoController: UIViewController {
+    
+    override func didReceiveMemoryWarning() {
+        URLCache.shared.removeAllCachedResponses()
+        URLCache.shared.diskCapacity = 0
+        URLCache.shared.memoryCapacity = 0
+    }
     @IBOutlet weak var collView: UICollectionView!
     
     @IBOutlet weak var imgAudio: LazyImageView!
@@ -52,12 +58,12 @@ class VideoController: UIViewController {
         //
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Music3Cell.className, bundle: nil), forCellWithReuseIdentifier: Music3Cell.className)
+        collView.register(UINib(nibName: Type4ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type4ItemCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 414 * scaleW, height: 130 * scaleW)
+        layout.itemSize = CGSize(width: (414 - 30) / 2.01 * scaleW, height: 200 * scaleW)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
         collView.collectionViewLayout = layout
         // Do any additional setup after loading the view.
         viewPlayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewPlayer(_:))))
@@ -241,16 +247,25 @@ class VideoController: UIViewController {
         
         if let url = URL(string: item.path){
             listResolution = []
-            StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
-                switch result {
-                case .success(let playlist):
-                    self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
-                    self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
-                    self?.listResolution[0].isTicked = true
-                case .failure(let error):
-                    print(error.localizedDescription)
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [])
+            }
+            catch {
+                print("Setting category to AVAudioSessionCategoryPlayback failed.")
+            }
+            if item.path.contains("m3u8"){
+                StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
+                    switch result {
+                    case .success(let playlist):
+                        self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
+                        self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
+                        self?.listResolution[0].isTicked = true
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
                 }
             }
+            
             viewPlayer.player  = AVPlayer(url: url)
             viewPlayer.player?.play()
             viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
@@ -352,10 +367,10 @@ extension VideoController: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Music3Cell.className, for: indexPath) as! Music3Cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4ItemCell.className, for: indexPath) as! Type4ItemCell
         let item = listData[indexPath.row]
         if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-            cell.imgThumb.loadImage(fromURL: url)
+            cell.thumbImage.loadImage(fromURL: url)
         }
         cell.lblTitle.text = item.name
         return cell

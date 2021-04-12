@@ -20,7 +20,7 @@ class HashTagCell: UICollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 10 * scaleW)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
         collView.collectionViewLayout = layout
     }
 
@@ -34,7 +34,7 @@ extension HashTagCell: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         label.text = "# " + listData[indexPath.row]
         label.font = UIFont(name: "Roboto-Medium", size: 13 * scaleW)
         label.sizeToFit()
-        return CGSize(width: label.frame.width + 10 * scaleW, height: 40 * scaleW)
+        return CGSize(width: label.frame.width + 10 * scaleW, height: 40 * scaleH)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

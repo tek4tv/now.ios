@@ -215,6 +215,13 @@ class Video2Cell: UICollectionViewCell {
     }
 
     func setup(){
+        activityIndicatorView.startAnimating()
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [])
+        }
+        catch {
+            print("Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
         listResolution = []
         if let url = URL(string: item.url[0].link){
             StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in

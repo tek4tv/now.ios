@@ -23,8 +23,9 @@ class HighLight2Controller: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 414 * scaleW, height: 330 * scaleW)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumLineSpacing = 0
+        layout.minimumLineSpacing = 25 * scaleW
         layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 20 * scaleW, left: 0, bottom: 0, right: 0)
         collView.collectionViewLayout = layout
         
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnBack(_:))))
@@ -171,6 +172,7 @@ extension HighLight2Controller: VideoCellDelegate{
     func didSelectViewFullScreen(_ cell: VideoCell, _ newPlayer: AVPlayer) {
         let vc = PlayerViewController()
         vc.player = newPlayer
+        vc.videoGravity = .resizeAspect
         vc.onDismiss = { () in
             cell.viewPlayer.player = vc.player
             vc.player = nil

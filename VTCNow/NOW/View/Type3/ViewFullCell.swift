@@ -45,8 +45,9 @@ class ViewFullCell: UICollectionViewCell {
             } else{
                 indexPath.row = 0
             }
-            collView.scrollToItem(at: indexPath, at: .right, animated: true)
-            
+            collView.isPagingEnabled = false
+            collView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            collView.isPagingEnabled = true
         })
         
     }
