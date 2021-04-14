@@ -167,7 +167,7 @@ class MediaModel{
                     genred = metaDataAdd.value
                 }
                 if metaDataAdd.name == "FileCode"{
-                    path = metaDataAdd.value
+                    //path = metaDataAdd.value
                     fileCode = metaDataAdd.value
                 }
                 if metaDataAdd.name == "Director"{

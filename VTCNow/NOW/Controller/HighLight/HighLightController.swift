@@ -94,12 +94,17 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return categorys.count + 3
+//        return categorys.count + 2
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collView.bounds.width
         let section = indexPath.section
         if section == 0{
             return CGSize(width: width, height: 60 * scaleW)
+//        } else if section == 1 {
+//            return CGSize(width: width, height: 232 * scaleW)
+//        } else if section == 2 {
+//            return CGSize(width: width, height: 105 * scaleW)
         } else if section == 1{
             return CGSize(width: width, height: 60 * scaleW)
         } else if section == 2{
@@ -108,6 +113,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             return CGSize(width: width, height: 105 * scaleW)
         } else {
             let item = categorys[section - 3]
+//            let item = categorys[section - 2]
             switch item.layout.type {
             case "1":
                 return CGSize(width: width, height: 260 * scaleW)
@@ -152,8 +158,21 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             cell.viewSearch.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnSearch(_:))))
             cell.viewWeather.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewWeather(_:))))
             return cell
+//        } else if section == 1 {
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
+//            if categorys.count > 0{
+//                cell.delegate = self
+//                cell.data = categorys[0]
+//                cell.collView.reloadData()
+//            }
+//            return cell
+//        } else if section == 2 {
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.className, for: indexPath) as! CategoryCell
+//            cell.delegate = self
+//            return cell
         } else if section == 1{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashTagCell.className, for: indexPath) as! HashTagCell
+            cell.delegate = self
             return cell
         } else if section == 2{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
@@ -169,6 +188,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             return cell
         }else {
             let item = categorys[section - 3]
+//            let item = categorys[section - 2]
             switch item.layout.type {
             case "1":
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
@@ -237,10 +257,10 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
         } else if section == 2{
             
         } else if section == 3{
-            
+
         } else {
             let cate = categorys[section - 3]
-            
+//            let cate = categorys[section - 2]
             switch cate.layout.subType {
             case "1", "2", "5", "12", "13", "14":
                 if cate.components.isEmpty{
@@ -555,6 +575,17 @@ extension HighLightController: Type7CellDelegate{
             }
         }
     }
-    
+}
+extension HighLightController: HashTagCellDelegate{
+    func didSelectItemAt(_ word: String) {
+        APIService.shared.searchAll(keySearch: word) {[self] (data, error) in
+            if let data = data as? [MediaModel]{
+                let vc = storyboard?.instantiateViewController(withIdentifier: SearchController.className) as! SearchController
+                vc.listData = data
+                vc.isPushByHashTag = true
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
 
 }

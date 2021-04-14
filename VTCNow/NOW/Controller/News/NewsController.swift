@@ -138,9 +138,21 @@ extension NewsController: UICollectionViewDelegate, UICollectionViewDataSource, 
 }
 
 extension NewsController: VideoCellDelegate{
-    func didSelectBookMark(_ cell: VideoCell) {
+    func didSelectViewShare(_ cell: VideoCell) {
+        guard let url = URL(string: cell.item.path) else {
+            return
+        }
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
+    }
+    
+    func didSelectViewBookmark(_ cell: VideoCell) {
         
     }
+    
+
     
     func didSelectViewSetting(_ cell: VideoCell) {
         let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
@@ -161,18 +173,33 @@ extension NewsController: VideoCellDelegate{
     }
     
     func didSelectViewFullScreen(_ cell: VideoCell, _ newPlayer: AVPlayer) {
-        let vc = PlayerViewController()
-        vc.player = newPlayer
-        vc.onDismiss = { () in
-            cell.viewPlayer.player = vc.player
-            vc.player = nil
-            cell.viewPlayer.player?.play()
-            cell.isPlaying = true
-            cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
-        }
-        present(vc, animated: true) {
-            vc.player?.play()
-            vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+        if #available(iOS 13.0, *) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
+            vc.player = newPlayer
+            vc.listResolution = cell.listResolution
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.viewPlayer.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+            }
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        } else {
+            let vc = PlayerViewController()
+            vc.player = newPlayer
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+            }
+            present(vc, animated: true) {
+                vc.player?.play()
+                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+            }
         }
     }
     

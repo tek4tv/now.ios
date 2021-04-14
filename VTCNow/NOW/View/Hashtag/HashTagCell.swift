@@ -10,7 +10,8 @@ import UIKit
 class HashTagCell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
-    let listData = ["Võ Hoàng Yến", "Chính biến Myanmar", "Vắc xin AstraZeneca", "Sơn Tùng MTP", "Covid 19"]
+    let listData = ["Võ Hoàng Yên", "Chính biến Myanmar", "Vắc xin AstraZeneca", "Sơn Tùng MTP", "Covid 19"]
+    var delegate: HashTagCellDelegate!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -43,5 +44,11 @@ extension HashTagCell: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.didSelectItemAt(listData[indexPath.row])
+    }
     
+}
+protocol HashTagCellDelegate {
+    func didSelectItemAt(_ word: String)
 }

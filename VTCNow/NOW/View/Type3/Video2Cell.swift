@@ -28,10 +28,10 @@ class Video2Cell: UICollectionViewCell {
     var delegate: Video2CellDelegate!
     
     var indexPath: IndexPath!
-    var item: ChannelModel!
+    var item: Any!
     var timeObserver: Any?
     var isCare = false
-    var isPlaying = false
+    var isPlaying = true
     var isEnded = false
     var timer = Timer()
     var listResolution: [StreamResolution] = []
@@ -125,6 +125,7 @@ class Video2Cell: UICollectionViewCell {
             viewPlayer.player?.pause()
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
         } else{
+            isPlaying = true
             if isEnded{
                 viewPlayer.player?.seek(to: CMTime.zero)
                 isEnded = false
@@ -133,7 +134,7 @@ class Video2Cell: UICollectionViewCell {
             viewPlayer.player?.rate = Float(speed)
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
         }
-        isPlaying = !isPlaying
+        //isPlaying = !isPlaying
     }
     func hidePlayerController(){
         self.imgShadow.isHidden = true
@@ -168,11 +169,24 @@ class Video2Cell: UICollectionViewCell {
             else if (viewPlayer.player?.timeControlStatus == .paused) {
                 //player is pause
                 if isPlaying{
-                    if let url = URL(string: item.url[0].link){
-                        viewPlayer.player  = AVPlayer(url: url)
-                        viewPlayer.player?.play()
-                        activityIndicatorView.stopAnimating()
+                    if item is ChannelModel{
+                        if let item = item as? ChannelModel{
+                            if let url = URL(string: item.url[0].link){
+                                viewPlayer.player  = AVPlayer(url: url)
+                                viewPlayer.player?.play()
+                                activityIndicatorView.stopAnimating()
+                            }
+                        }
+                    } else{
+                        if let item = item as? MediaModel{
+                            if let url = URL(string: item.path){
+                                viewPlayer.player  = AVPlayer(url: url)
+                                viewPlayer.player?.play()
+                                activityIndicatorView.stopAnimating()
+                            }
+                        }
                     }
+                    
 
                 }
             }
@@ -223,19 +237,40 @@ class Video2Cell: UICollectionViewCell {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
         listResolution = []
-        if let url = URL(string: item.url[0].link){
-            StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
-                switch result {
-                case .success(let playlist):
-                    self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
-                    self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
-                    self?.listResolution[0].isTicked = true
-                case .failure(let error):
-                    print(error.localizedDescription)
+        if item is ChannelModel{
+            if let item = item as? ChannelModel {
+                if let url = URL(string: item.url[0].link){
+                    StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
+                        switch result {
+                        case .success(let playlist):
+                            self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
+                            self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
+                            self?.listResolution[0].isTicked = true
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
+                    viewPlayer.player  = AVPlayer(url: url)
                 }
             }
-            viewPlayer.player  = AVPlayer(url: url)
+        } else {
+            if let item = item as? MediaModel {
+                if let url = URL(string: item.path){
+                    StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
+                        switch result {
+                        case .success(let playlist):
+                            self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
+                            self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
+                            self?.listResolution[0].isTicked = true
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
+                    viewPlayer.player  = AVPlayer(url: url)
+                }
+            }
         }
+        
         viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)

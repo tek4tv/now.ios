@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 import MarqueeLabel
-import GoogleInteractiveMediaAds
+//import GoogleInteractiveMediaAds
 class HomeController: UITabBarController, UITabBarControllerDelegate{//}, IMAAdsLoaderDelegate , IMAAdsManagerDelegate {
 //    func adsManagerDidRequestContentPause(_ adsManager: IMAAdsManager!) {
 //        // Pause the content for the SDK to play ads.

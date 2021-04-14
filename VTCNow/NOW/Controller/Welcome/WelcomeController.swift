@@ -41,10 +41,16 @@ class WelcomeController: UIViewController {
                 print(data2.name + " " + data2.layout.type + " - " + data2.layout.subType)
                 print(data2.privateKey)
                 if categorys.count == root.components.count{
-                    let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeController.className) as! HomeController
-                    vc.modalTransitionStyle = .crossDissolve
-                    vc.modalPresentationStyle = .fullScreen
-                    self?.navigationController?.pushViewController(vc, animated: true)
+                    APIService.shared.getLive { (data, error) in
+                        if let data = data as? [ChannelModel]{
+                            lives = data
+                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeController.className) as! HomeController
+                            vc.modalTransitionStyle = .crossDissolve
+                            vc.modalPresentationStyle = .fullScreen
+                            self?.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                    
                 } else{
                     self?.load()
                 }
@@ -58,11 +64,7 @@ class WelcomeController: UIViewController {
                 reads = data
             }
         }
-        APIService.shared.getLive { (data, error) in
-            if let data = data as? [ChannelModel]{
-                lives = data
-            }
-        }
+        
     }
 }
 

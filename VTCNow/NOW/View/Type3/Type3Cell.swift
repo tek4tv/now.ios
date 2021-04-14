@@ -6,13 +6,13 @@
 //
 
 import UIKit
-import GoogleMobileAds
+//import GoogleMobileAds
 class Type3Cell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
 //    var delegate: Type3CellDelegate!
-    var admobNativeAds: GADUnifiedNativeAd?
+//    var admobNativeAds: GADUnifiedNativeAd?
     var data = CategoryModel(){
         didSet{
             lblTitle.text = data.name

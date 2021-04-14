@@ -108,7 +108,7 @@ extension ReadController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return  CGSize(width: 414 * scaleW, height: 50 * scaleW)
+            return  CGSize(width: 414 * scaleW, height: 60 * scaleW)
         case 1:
             return  CGSize(width: 414 * scaleW, height: 330 * scaleW)
         case 2:

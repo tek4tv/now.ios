@@ -284,11 +284,13 @@
                 <outlet property="lblTime" destination="h9T-Pd-ilG" id="YgY-Wl-zDn"/>
                 <outlet property="lblTitle" destination="u7g-p5-2rx" id="bPl-dI-h8A"/>
                 <outlet property="slider" destination="JNO-T9-O5L" id="ht0-hl-d8d"/>
+                <outlet property="viewBookmark" destination="U7z-jS-jGQ" id="yQS-CT-MVO"/>
                 <outlet property="viewCast" destination="oKR-j8-oGX" id="ZYG-mx-puu"/>
                 <outlet property="viewFullScreen" destination="jGu-e0-YAY" id="OkS-iC-Cyf"/>
                 <outlet property="viewPlayer" destination="sc5-zG-2dP" id="UZ8-Ta-PRf"/>
                 <outlet property="viewSetting" destination="YDT-Qc-HVf" id="91W-LS-2FL"/>
                 <outlet property="viewShadow" destination="I3X-Qz-0ps" id="58R-W3-fcc"/>
+                <outlet property="viewShare" destination="ivh-lM-86W" id="uPv-Li-fPn"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="126.5625"/>
         </collectionViewCell>

@@ -32,15 +32,15 @@
 		F64836C025F0E9AC00A9E878 /* MovieCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64836BF25F0E9AC00A9E878 /* MovieCategoryController.swift */; };
 		F6488D8225ECA80200058D1D /* Book2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6488D8025ECA80200058D1D /* Book2Cell.swift */; };
 		F6488D8325ECA80200058D1D /* Book2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6488D8125ECA80200058D1D /* Book2Cell.xib */; };
+		F649521F2626D77900F601F6 /* NoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649521D2626D77900F601F6 /* NoCell.swift */; };
+		F64952202626D77900F601F6 /* NoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F649521E2626D77900F601F6 /* NoCell.xib */; };
 		F649761825F2149800EAC71D /* MusicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F649761425F2149800EAC71D /* MusicCell.xib */; };
 		F649761925F2149800EAC71D /* MusicItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F649761525F2149800EAC71D /* MusicItemCell.xib */; };
 		F649761A25F2149800EAC71D /* MusicItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649761625F2149800EAC71D /* MusicItemCell.swift */; };
 		F649761B25F2149800EAC71D /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649761725F2149800EAC71D /* MusicCell.swift */; };
-		F649B51E26087FA900FF3B04 /* nativeAdmobTBLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B51926087FA900FF3B04 /* nativeAdmobTBLCell.swift */; };
-		F649B51F26087FA900FF3B04 /* nativeAdmobCLVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F649B51A26087FA900FF3B04 /* nativeAdmobCLVCell.xib */; };
-		F649B52026087FA900FF3B04 /* AdmobManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B51B26087FA900FF3B04 /* AdmobManager.swift */; };
-		F649B52126087FA900FF3B04 /* nativeAdmobTBLCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F649B51C26087FA900FF3B04 /* nativeAdmobTBLCell.xib */; };
-		F649B52226087FA900FF3B04 /* nativeAdmobCLVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649B51D26087FA900FF3B04 /* nativeAdmobCLVCell.swift */; };
+		F649FE8F2625441F0041148E /* FullScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649FE8E2625441F0041148E /* FullScreenController.swift */; };
+		F649FEBF26258B8C0041148E /* ClearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649FEBD26258B8C0041148E /* ClearCell.swift */; };
+		F649FEC026258B8C0041148E /* ClearCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F649FEBE26258B8C0041148E /* ClearCell.xib */; };
 		F64A41E025ECC42D0011F8B1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64A41DF25ECC42D0011F8B1 /* Config.swift */; };
 		F64B02E125ECF0BD00AAE865 /* ListenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64B02E025ECF0BD00AAE865 /* ListenController.swift */; };
 		F64B02E625ECF18900AAE865 /* ChanelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64B02E425ECF18900AAE865 /* ChanelCell.swift */; };
@@ -198,15 +198,15 @@
 		F64836BF25F0E9AC00A9E878 /* MovieCategoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCategoryController.swift; sourceTree = "<group>"; };
 		F6488D8025ECA80200058D1D /* Book2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book2Cell.swift; sourceTree = "<group>"; };
 		F6488D8125ECA80200058D1D /* Book2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book2Cell.xib; sourceTree = "<group>"; };
+		F649521D2626D77900F601F6 /* NoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCell.swift; sourceTree = "<group>"; };
+		F649521E2626D77900F601F6 /* NoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoCell.xib; sourceTree = "<group>"; };
 		F649761425F2149800EAC71D /* MusicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicCell.xib; sourceTree = "<group>"; };
 		F649761525F2149800EAC71D /* MusicItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicItemCell.xib; sourceTree = "<group>"; };
 		F649761625F2149800EAC71D /* MusicItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicItemCell.swift; sourceTree = "<group>"; };
 		F649761725F2149800EAC71D /* MusicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
-		F649B51926087FA900FF3B04 /* nativeAdmobTBLCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nativeAdmobTBLCell.swift; sourceTree = "<group>"; };
-		F649B51A26087FA900FF3B04 /* nativeAdmobCLVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = nativeAdmobCLVCell.xib; sourceTree = "<group>"; };
-		F649B51B26087FA900FF3B04 /* AdmobManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdmobManager.swift; sourceTree = "<group>"; };
-		F649B51C26087FA900FF3B04 /* nativeAdmobTBLCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = nativeAdmobTBLCell.xib; sourceTree = "<group>"; };
-		F649B51D26087FA900FF3B04 /* nativeAdmobCLVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nativeAdmobCLVCell.swift; sourceTree = "<group>"; };
+		F649FE8E2625441F0041148E /* FullScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenController.swift; sourceTree = "<group>"; };
+		F649FEBD26258B8C0041148E /* ClearCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearCell.swift; sourceTree = "<group>"; };
+		F649FEBE26258B8C0041148E /* ClearCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClearCell.xib; sourceTree = "<group>"; };
 		F64A41DF25ECC42D0011F8B1 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		F64B02E025ECF0BD00AAE865 /* ListenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenController.swift; sourceTree = "<group>"; };
 		F64B02E425ECF18900AAE865 /* ChanelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChanelCell.swift; sourceTree = "<group>"; };
@@ -422,16 +422,53 @@
 			path = Music;
 			sourceTree = "<group>";
 		};
-		F649B51826087FA900FF3B04 /* Admod */ = {
+		F649FEC2262597F00041148E /* PopUp */ = {
 			isa = PBXGroup;
 			children = (
-				F649B51926087FA900FF3B04 /* nativeAdmobTBLCell.swift */,
-				F649B51A26087FA900FF3B04 /* nativeAdmobCLVCell.xib */,
-				F649B51B26087FA900FF3B04 /* AdmobManager.swift */,
-				F649B51C26087FA900FF3B04 /* nativeAdmobTBLCell.xib */,
-				F649B51D26087FA900FF3B04 /* nativeAdmobCLVCell.swift */,
+				F666BEE025E3569B0000990E /* PopUp2Controller.swift */,
+				F666BEE325E35A1D0000990E /* PopUp3Controller.swift */,
+				F65597D425E3B88F008C1050 /* PopUp4Controller.swift */,
+				F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */,
+				F611070A25EE963100B049C3 /* PopUp6Controller.swift */,
+				F655707A25F8868E00E3A062 /* PopUp7Controller.swift */,
 			);
-			path = Admod;
+			path = PopUp;
+			sourceTree = "<group>";
+		};
+		F649FECA2625981E0041148E /* TV */ = {
+			isa = PBXGroup;
+			children = (
+				F698933125F5FC9E00EA960A /* WatchController.swift */,
+				F6614706261EB0BF00FD9469 /* TVController.swift */,
+				F6614739261EF25600FD9469 /* TV2Controller.swift */,
+			);
+			path = TV;
+			sourceTree = "<group>";
+		};
+		F649FECB262598460041148E /* Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				F6BC46182615A5D600DDD828 /* LongDotCell.xib */,
+				F6BC46172615A5D600DDD828 /* LongDotCell.swift */,
+				F649FEBD26258B8C0041148E /* ClearCell.swift */,
+				F649FEBE26258B8C0041148E /* ClearCell.xib */,
+				F649521D2626D77900F601F6 /* NoCell.swift */,
+				F649521E2626D77900F601F6 /* NoCell.xib */,
+			);
+			path = Stuff;
+			sourceTree = "<group>";
+		};
+		F649FECC262598920041148E /* ViewMore */ = {
+			isa = PBXGroup;
+			children = (
+				F65EC4782614669F0088DBC7 /* ViewMoreCell.swift */,
+				F65EC4792614669F0088DBC7 /* ViewMoreCell.xib */,
+				F67464872616C118003A5593 /* ViewMore2Cell.swift */,
+				F67464882616C118003A5593 /* ViewMore2Cell.xib */,
+				F67464982616D1F4003A5593 /* ViewMore3Cell.swift */,
+				F67464992616D1F4003A5593 /* ViewMore3Cell.xib */,
+			);
+			path = ViewMore;
 			sourceTree = "<group>";
 		};
 		F64B02E325ECF16700AAE865 /* Listen */ = {
@@ -479,7 +516,6 @@
 			isa = PBXGroup;
 			children = (
 				F65EC45626145C860088DBC7 /* Font */,
-				F649B51826087FA900FF3B04 /* Admod */,
 				F6507CDE25C3F2CB002E77EC /* Service */,
 				F6507CD725C3F034002E77EC /* Extension */,
 				F6507CD125C3EF72002E77EC /* Model */,
@@ -514,20 +550,13 @@
 				F6D0C84B25C799B80097C0EC /* News */,
 				F6507CF025C40F8E002E77EC /* HighLight */,
 				F6507CE725C3F3CA002E77EC /* Welcome */,
-				F666BEE025E3569B0000990E /* PopUp2Controller.swift */,
-				F666BEE325E35A1D0000990E /* PopUp3Controller.swift */,
-				F65597D425E3B88F008C1050 /* PopUp4Controller.swift */,
-				F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */,
-				F611070A25EE963100B049C3 /* PopUp6Controller.swift */,
+				F649FEC2262597F00041148E /* PopUp */,
+				F649FECA2625981E0041148E /* TV */,
 				F64BF59F25E64E7900752E80 /* SearchController.swift */,
 				F64B02E025ECF0BD00AAE865 /* ListenController.swift */,
-				F698933125F5FC9E00EA960A /* WatchController.swift */,
 				F6CB90BD25F720A70071D0BB /* UserController.swift */,
-				F655707A25F8868E00E3A062 /* PopUp7Controller.swift */,
 				F64CFFBB25F8AB0F002F7F6F /* SpeechToTextController.swift */,
 				F65557D7261D8C01000E8AEA /* VideoController.swift */,
-				F6614706261EB0BF00FD9469 /* TVController.swift */,
-				F6614739261EF25600FD9469 /* TV2Controller.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -549,7 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				F65EC497261476B90088DBC7 /* Hashtag */,
-				F698933425F5FD3B00EA960A /* Watch */,
+				F698933425F5FD3B00EA960A /* TV */,
 				F649761325F2142100EAC71D /* Music */,
 				F64C116325EF9417001C3A7C /* Movie */,
 				F655978025EE187E00FDA5CA /* Read */,
@@ -568,20 +597,14 @@
 				F65FD98025C6794F007F8D0F /* Category */,
 				F65FD97A25C674CA007F8D0F /* Weather */,
 				F65FD96D25C672F0007F8D0F /* LazyLoading */,
+				F649FECC262598920041148E /* ViewMore */,
+				F649FECB262598460041148E /* Stuff */,
 				F68D46D525CA43460097B9F4 /* PlayerView.swift */,
 				F65557D3261D87E7000E8AEA /* WarmodroidSwitch.swift */,
 				F6E8CC6C25E78D6300CD0939 /* SearchCell.swift */,
 				F6E8CC6D25E78D6300CD0939 /* SearchCell.xib */,
 				F647365A2612E554008BF14E /* WordCell.swift */,
 				F647365B2612E554008BF14E /* WordCell.xib */,
-				F65EC4782614669F0088DBC7 /* ViewMoreCell.swift */,
-				F65EC4792614669F0088DBC7 /* ViewMoreCell.xib */,
-				F6BC46172615A5D600DDD828 /* LongDotCell.swift */,
-				F6BC46182615A5D600DDD828 /* LongDotCell.xib */,
-				F67464872616C118003A5593 /* ViewMore2Cell.swift */,
-				F67464882616C118003A5593 /* ViewMore2Cell.xib */,
-				F67464982616D1F4003A5593 /* ViewMore3Cell.swift */,
-				F67464992616D1F4003A5593 /* ViewMore3Cell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -768,7 +791,7 @@
 			path = Type7;
 			sourceTree = "<group>";
 		};
-		F698933425F5FD3B00EA960A /* Watch */ = {
+		F698933425F5FD3B00EA960A /* TV */ = {
 			isa = PBXGroup;
 			children = (
 				F698933525F5FD6D00EA960A /* WatchCell.swift */,
@@ -776,7 +799,7 @@
 				F6614709261EB1B800FD9469 /* TVCell.swift */,
 				F661470A261EB1B800FD9469 /* TVCell.xib */,
 			);
-			path = Watch;
+			path = TV;
 			sourceTree = "<group>";
 		};
 		F6AA30E025EDDB3D007E3477 /* Read */ = {
@@ -796,6 +819,7 @@
 				F6D0C84D25C799B80097C0EC /* NewsController.swift */,
 				F6332F7525CCFD5600305C2E /* PlayerViewController.swift */,
 				F6F3875F2602F07F004E916A /* PlayerView2Controller.swift */,
+				F649FE8E2625441F0041148E /* FullScreenController.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -909,7 +933,7 @@
 				F65FD9AA25C694E2007F8D0F /* Type3Cell.xib in Resources */,
 				F65FD97725C672F0007F8D0F /* Type1ItemCell.xib in Resources */,
 				F655707825F883AD00E3A062 /* DailyCell.xib in Resources */,
-				F649B52126087FA900FF3B04 /* nativeAdmobTBLCell.xib in Resources */,
+				F64952202626D77900F601F6 /* NoCell.xib in Resources */,
 				F649761825F2149800EAC71D /* MusicCell.xib in Resources */,
 				F6176369261AF64A00A9A547 /* Book3Cell.xib in Resources */,
 				F65FD9C825C6A114007F8D0F /* Type5Cell.xib in Resources */,
@@ -918,6 +942,7 @@
 				F65557DE261DA4ED000E8AEA /* MovieItem2Cell.xib in Resources */,
 				F66B04D625EE3FF90034013F /* ReadBCell.xib in Resources */,
 				F698933825F5FD6D00EA960A /* WatchCell.xib in Resources */,
+				F649FEC026258B8C0041148E /* ClearCell.xib in Resources */,
 				F67464902616CA44003A5593 /* Type7Cell.xib in Resources */,
 				F6F2BD8F260DBD81001056C7 /* GoogleService-Info.plist in Resources */,
 				F65FD98625C6794F007F8D0F /* CategoryItemCell.xib in Resources */,
@@ -933,7 +958,6 @@
 				F65EC45E26145CBA0088DBC7 /* Roboto-Bold.ttf in Resources */,
 				F6BC461A2615A5D600DDD828 /* LongDotCell.xib in Resources */,
 				F65EC4A0261478320088DBC7 /* HashTagItemCell.xib in Resources */,
-				F649B51F26087FA900FF3B04 /* nativeAdmobCLVCell.xib in Resources */,
 				F6507CBF25C3EEFF002E77EC /* Main.storyboard in Resources */,
 				F67464962616CA59003A5593 /* Type7ItemCell.xib in Resources */,
 				F6BC461526158C4200DDD828 /* ViewFullCell.xib in Resources */,
@@ -1015,7 +1039,6 @@
 				F65FD97625C672F0007F8D0F /* Type1ItemCell.swift in Sources */,
 				F65FD97425C672F0007F8D0F /* LazyImageView.swift in Sources */,
 				F68D46D625CA43460097B9F4 /* PlayerView.swift in Sources */,
-				F649B52226087FA900FF3B04 /* nativeAdmobCLVCell.swift in Sources */,
 				F65FD97D25C674CA007F8D0F /* WeatherCell.swift in Sources */,
 				F6614707261EB0BF00FD9469 /* TVController.swift in Sources */,
 				F64B02E125ECF0BD00AAE865 /* ListenController.swift in Sources */,
@@ -1034,6 +1057,7 @@
 				F677795525DD0CB50000FBB2 /* HighLight2Controller.swift in Sources */,
 				F64C601F25F22753008D44A0 /* MusicCategoryController.swift in Sources */,
 				F6CB90BE25F720A70071D0BB /* UserController.swift in Sources */,
+				F649521F2626D77900F601F6 /* NoCell.swift in Sources */,
 				F6507CE025C3F2CB002E77EC /* APIService.swift in Sources */,
 				4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */,
 				F65FD97525C672F0007F8D0F /* Type1Cell.swift in Sources */,
@@ -1066,7 +1090,6 @@
 				F6488D8225ECA80200058D1D /* Book2Cell.swift in Sources */,
 				F64836A925F0D12000A9E878 /* MovieController.swift in Sources */,
 				F65FD9B725C69775007F8D0F /* Type4Cell.swift in Sources */,
-				F649B51E26087FA900FF3B04 /* nativeAdmobTBLCell.swift in Sources */,
 				F6614735261EC0D700FD9469 /* Video2Cell.swift in Sources */,
 				F65FD9C925C6A114007F8D0F /* Type5Cell.swift in Sources */,
 				F65557D4261D87E7000E8AEA /* WarmodroidSwitch.swift in Sources */,
@@ -1084,7 +1107,6 @@
 				F67464952616CA59003A5593 /* Type7ItemCell.swift in Sources */,
 				F661470B261EB1B800FD9469 /* TVCell.swift in Sources */,
 				F64E6ADA26049C22000F2A22 /* ReportModel.swift in Sources */,
-				F649B52026087FA900FF3B04 /* AdmobManager.swift in Sources */,
 				F6BC461E2615A8FD00DDD828 /* ViewFullItemCell.swift in Sources */,
 				F64A41E025ECC42D0011F8B1 /* Config.swift in Sources */,
 				F65FD99325C68BEC007F8D0F /* Type2ItemCell.swift in Sources */,
@@ -1099,11 +1121,13 @@
 				F6624D0025EE329C00622AA1 /* ReadController.swift in Sources */,
 				F611070B25EE963100B049C3 /* PopUp6Controller.swift in Sources */,
 				F65FD98525C6794F007F8D0F /* CategoryCell.swift in Sources */,
+				F649FE8F2625441F0041148E /* FullScreenController.swift in Sources */,
 				F6507CB825C3EEFF002E77EC /* AppDelegate.swift in Sources */,
 				F6D0C85425C79C5C0097C0EC /* ParentViewController.swift in Sources */,
 				F6507CEB25C3F3CA002E77EC /* WelcomeController.swift in Sources */,
 				F698933725F5FD6D00EA960A /* WatchCell.swift in Sources */,
 				F6507CBA25C3EEFF002E77EC /* SceneDelegate.swift in Sources */,
+				F649FEBF26258B8C0041148E /* ClearCell.swift in Sources */,
 				F6507CD425C3EFC1002E77EC /* RootModel.swift in Sources */,
 				F649761A25F2149800EAC71D /* MusicItemCell.swift in Sources */,
 				F60E2F8A25EC96F70002E99C /* PopUp5Controller.swift in Sources */,

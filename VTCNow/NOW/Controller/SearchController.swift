@@ -21,6 +21,8 @@ class SearchController: UIViewController {
     var listData : [MediaModel] = []
     var listString: [String] = []
     var filterListString: [String] = []
+    var indexPath = IndexPath(row: 0, section: 0)
+    var isPushByHashTag = false
     override func viewDidLoad() {
         super.viewDidLoad()
         viewSpeech.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewSpeech(_:))))
@@ -63,6 +65,20 @@ class SearchController: UIViewController {
         }
         lblNotFound.isHidden = true
         self.collView.isHidden = true
+        
+        //
+        if isPushByHashTag{
+            collView.isHidden = false
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let cell = collView.cellForItem(at: indexPath) as? VideoCell{
+            cell.viewPlayer.player?.pause()
+        }
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     @objc func didSelectViewSpeech(_ sender: Any){
         let vc = storyboard?.instantiateViewController(withIdentifier: SpeechToTextController.className) as! SpeechToTextController
@@ -123,7 +139,51 @@ class SearchController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
 }
-extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        txfView.endEditing(true)
+        let count = collView.visibleCells.count
+        if count == 2{
+            let id0 = collView.indexPath(for: collView.visibleCells[0])!
+            let id1 = collView.indexPath(for: collView.visibleCells[1])!
+            if id0.row < id1.row {
+                if self.indexPath != id0{
+                    if let cell = collView.visibleCells[1] as? VideoCell {
+                        cell.viewPlayer.player?.pause()
+                    }
+                    self.indexPath = id0
+                    collView.reloadData()
+                }
+            }else{
+                if self.indexPath != id1{
+                    if let cell = collView.visibleCells[0] as? VideoCell {
+                        cell.viewPlayer.player?.pause()
+                    }
+                    self.indexPath = id1
+                    collView.reloadData()
+                }
+            }
+        }
+        if count == 3{
+            var list: [IndexPath] = []
+            for cell in collView.visibleCells {
+                let id = collView.indexPath(for: cell)
+                list.append(id!)
+            }
+            list = list.sorted(by: { $0.row > $1.row })
+            if self.indexPath != list[1]{
+                if let cell = collView.visibleCells[0] as? VideoCell {
+                    cell.viewPlayer.player?.pause()
+                }
+                if let cell = collView.visibleCells[2] as? VideoCell {
+                    cell.viewPlayer.player?.pause()
+                }
+                self.indexPath = list[1]
+                collView.reloadData()
+            }
+        }
+        
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
         case 0:
@@ -138,16 +198,31 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
         switch collectionView.tag{
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.className, for: indexPath) as! VideoCell
-            //cell.delegate = self
+            cell.delegate = self
             
             let item = listData[indexPath.row]
             cell.item = item
             cell.indexPath = indexPath
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.timePass
-//            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-//                cell.thumbImage.loadImage(fromURL: url)
-//            }
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.imgThumb.loadImage(fromURL: url)
+            }
+            if indexPath == self.indexPath{
+                if let url = URL(string: item.path){
+                    
+                    cell.viewPlayer.player  = AVPlayer(url: url)
+                    cell.viewPlayer.player?.play()
+                    cell.setup()
+                    
+                }
+                cell.imgThumb.isHidden = true
+                cell.viewShadow.isHidden = true
+            } else{
+                cell.viewPlayer.player?.pause()
+                cell.imgThumb.isHidden = false
+                cell.viewShadow.isHidden = false
+            }
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.className, for: indexPath) as! WordCell
@@ -184,6 +259,79 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
 }
+extension SearchController: VideoCellDelegate{
+    func didSelectViewShare(_ cell: VideoCell) {
+        guard let url = URL(string: cell.item.path) else {
+            return
+        }
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
+    }
+    
+    func didSelectViewBookmark(_ cell: VideoCell) {
+        
+    }
+    
+    
+    func didSelectViewSetting(_ cell: VideoCell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.listResolution = cell.listResolution
+        vc.speed = cell.speed
+        vc.onComplete = { list in
+            cell.listResolution = list
+            cell.setBitRate()
+        }
+        vc.onTickedSpeed = { value in
+            cell.speed = value
+            cell.setSpeed()
+        }
+        present(vc, animated: true, completion: nil)
+                
+    }
+    
+    func didSelectViewFullScreen(_ cell: VideoCell, _ newPlayer: AVPlayer) {
+        if #available(iOS 13.0, *) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
+            vc.player = newPlayer
+            vc.listResolution = cell.listResolution
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.viewPlayer.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+            }
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        } else {
+            let vc = PlayerViewController()
+            vc.player = newPlayer
+            vc.videoGravity = .resizeAspect
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+            }
+            present(vc, animated: true) {
+                vc.player?.play()
+                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+            }
+        }
+    }
+    
+    func didSelectViewCast() {
+        
+    }
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+    }
+}
 extension SearchController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         txfView.endEditing(true)
@@ -204,35 +352,6 @@ extension SearchController: UITextFieldDelegate {
         }
         return true
     }
-}
-extension SearchController: VideoCellDelegate{
-    func didSelectBookMark(_ cell: VideoCell) {
-        
-    }
-    
-    func didSelectViewSetting(_ cell: VideoCell) {
-        
-    }
-    
-    func didSelectViewFullScreen(_ cell: VideoCell, _ newPlayer: AVPlayer) {
-        
-    }
-    
-    func didSelectViewCast() {
-        
-    }
-    
-//    func didSelect3Dot(_ cell: VideoCell) {
-//        let vc = storyboard?.instantiateViewController(withIdentifier: "PopUpController") as! PopUpController
-//        vc.data = cell.item
-//        vc.modalPresentationStyle = .overFullScreen
-//        present(vc, animated: true, completion: nil)
-//    }
-//
-//    func didSelectVideo(_ cell: VideoCell) {
-//        sharedItem = cell.item
-//        NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-//    }
 }
 
 extension SearchController: UITableViewDelegate, UITableViewDataSource{
@@ -272,9 +391,7 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource{
         }
         
     }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        txfView.endEditing(true)
-    }
+
 }
 extension SearchController: SearchCellDelegate{
     func didSelectViewFillText(_ text: String) {

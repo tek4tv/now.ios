@@ -6,14 +6,14 @@
 //
 
 import UIKit
-import GoogleMobileAds
+//import GoogleMobileAds
 
 class Type5Cell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
     var delegate: Type5CellDelegate!
-    var admobNativeAds: GADUnifiedNativeAd?
+//    var admobNativeAds: GADUnifiedNativeAd?
     var data = CategoryModel(){
         didSet{
             lblTitle.text = data.name
@@ -65,8 +65,8 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
             }
-            if item.cast != ""{
-                cell.lblTime.text = item.cast
+            if item.country != ""{
+                cell.lblTime.text = item.country
             }else{
                 cell.lblTime.text = item.timePass
             }
