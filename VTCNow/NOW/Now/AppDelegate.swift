@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1), NSAttributedString.Key.font: UIFont(name: "Roboto-Regular", size: 12 * scaleW)!], for: .normal)
 //        GADMobileAds.sharedInstance().start(completionHandler: nil)
 //        FirebaseApp.configure() // gọi hàm để cấu hình 1 app Firebase mặc định
 //        Messaging.messaging().delegate = self //Nhận các message từ FirebaseMessaging

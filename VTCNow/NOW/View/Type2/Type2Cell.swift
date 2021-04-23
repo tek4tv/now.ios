@@ -40,8 +40,8 @@ class Type2Cell: UICollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10 * scaleW)
+        layout.minimumInteritemSpacing = 20 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
     }
     func stopTimer(){
@@ -50,15 +50,16 @@ class Type2Cell: UICollectionViewCell {
     
 }
 extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if data.media.count >= 7{
-            return 7
+        if data.media.count >= 8{
+            return 8
         }
         return data.media.count
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.row {
-        case 0...5:
+        case 0...6:
             return CGSize(width: 160 * scaleW, height: 180 * scaleW)
         default:
             return CGSize(width: 168 * scaleW, height: 180 * scaleW)
@@ -67,7 +68,7 @@ extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = data.media[indexPath.row]
         switch indexPath.row {
-        case 0...5:
+        case 0...6:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type2ItemCell.className, for: indexPath) as! Type2ItemCell
             cell.lblTitle.text = item.name
             cell.item = item
@@ -108,7 +109,7 @@ extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0...5:
+        case 0...6:
             let temp = self.data.copy()
             let item = data.media[indexPath.row]
             temp.media.remove(at: indexPath.row)

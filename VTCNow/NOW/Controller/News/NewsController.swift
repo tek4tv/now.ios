@@ -29,7 +29,7 @@ class NewsController: UIViewController {
         collView.collectionViewLayout = layout
         
         //
-        sharedList = category.media
+        //sharedList = category.media
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -127,11 +127,9 @@ extension NewsController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 
             }
             cell.imgThumb.isHidden = true
-            cell.viewShadow.isHidden = true
         } else{
             cell.viewPlayer.player?.pause()
             cell.imgThumb.isHidden = false
-            cell.viewShadow.isHidden = false
         }
         return cell
     }
@@ -182,7 +180,7 @@ extension NewsController: VideoCellDelegate{
                 vc.player = nil
                 cell.viewPlayer.player?.play()
                 cell.isPlaying = true
-                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
             }
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
@@ -194,7 +192,7 @@ extension NewsController: VideoCellDelegate{
                 vc.player = nil
                 cell.viewPlayer.player?.play()
                 cell.isPlaying = true
-                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
             }
             present(vc, animated: true) {
                 vc.player?.play()

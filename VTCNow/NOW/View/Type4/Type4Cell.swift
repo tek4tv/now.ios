@@ -28,10 +28,10 @@ class Type4Cell: UICollectionViewCell {
         collView.dataSource = self
         collView.register(UINib(nibName: "Type4ItemCell", bundle: nil), forCellWithReuseIdentifier: "Type4ItemCell")
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: (414 - 30) / 2.001 * scaleW, height: 180 * scaleW)
+        layout.itemSize = CGSize(width: (414 - 60) / 2.001 * scaleW, height: 180 * scaleW)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
     }
 
@@ -47,7 +47,14 @@ extension Type4Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
             cell.thumbImage.loadImage(fromURL: url)
         }
-        cell.lblTitle.text = item.name + item.episode
+        cell.lblTitle.text = item.name
+        if item.episode != "" {
+            cell.viewEpisode.isHidden = false
+            cell.lblEpisode.text = item.episode
+            cell.lblTotalEpisode.text = item.totalEpisode
+        } else {
+            cell.viewEpisode.isHidden = true
+        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

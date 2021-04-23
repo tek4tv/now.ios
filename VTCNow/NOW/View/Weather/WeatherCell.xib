@@ -10,28 +10,28 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="WeatherCell" customModule="NOW" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfU-WZ-dQ5">
-                        <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="60"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-sun-96" translatesAutoresizingMaskIntoConstraints="NO" id="1YW-wK-pPy">
-                                <rect key="frame" x="20" y="5" width="40" height="40"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1YW-wK-pPy">
+                                <rect key="frame" x="20" y="5" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="1YW-wK-pPy" secondAttribute="height" id="HZb-If-Frh"/>
-                                    <constraint firstAttribute="width" constant="40" id="hwz-Vx-qLl">
+                                    <constraint firstAttribute="width" constant="50" id="hwz-Vx-qLl">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="34°C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yl-at-YXV">
-                                <rect key="frame" x="70" y="28" width="32" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yl-at-YXV">
+                                <rect key="frame" x="80" y="50" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -39,8 +39,8 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TP Hồ Chí Minh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPU-6y-v1p">
-                                <rect key="frame" x="70" y="5" width="77.5" height="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPU-6y-v1p">
+                                <rect key="frame" x="80" y="10" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -52,21 +52,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="OPU-6y-v1p" firstAttribute="leading" secondItem="1YW-wK-pPy" secondAttribute="trailing" constant="10" id="7G7-71-jsY"/>
-                            <constraint firstItem="OPU-6y-v1p" firstAttribute="top" secondItem="1YW-wK-pPy" secondAttribute="top" id="8cD-gJ-ga8"/>
+                            <constraint firstItem="OPU-6y-v1p" firstAttribute="top" secondItem="1YW-wK-pPy" secondAttribute="top" constant="5" id="8cD-gJ-ga8"/>
                             <constraint firstItem="1YW-wK-pPy" firstAttribute="centerY" secondItem="LfU-WZ-dQ5" secondAttribute="centerY" id="Gqo-bI-NMJ"/>
                             <constraint firstItem="0yl-at-YXV" firstAttribute="leading" secondItem="1YW-wK-pPy" secondAttribute="trailing" constant="10" id="Ndl-Y0-4o3"/>
-                            <constraint firstItem="0yl-at-YXV" firstAttribute="bottom" secondItem="1YW-wK-pPy" secondAttribute="bottom" id="YS7-GE-OVh"/>
+                            <constraint firstItem="0yl-at-YXV" firstAttribute="bottom" secondItem="1YW-wK-pPy" secondAttribute="bottom" constant="-5" id="YS7-GE-OVh"/>
                             <constraint firstItem="1YW-wK-pPy" firstAttribute="leading" secondItem="LfU-WZ-dQ5" secondAttribute="leading" constant="20" id="uLx-Up-u5A"/>
                             <constraint firstAttribute="width" constant="160" id="v2j-cE-aUc"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgm-Iz-MFN">
-                        <rect key="frame" x="349" y="0.0" width="65" height="50"/>
+                        <rect key="frame" x="339" y="0.0" width="65" height="60"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-search-50" translatesAutoresizingMaskIntoConstraints="NO" id="kHW-91-CwT">
-                                <rect key="frame" x="20" y="12.5" width="25" height="25"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-search-100" translatesAutoresizingMaskIntoConstraints="NO" id="kHW-91-CwT">
+                                <rect key="frame" x="12.5" y="10" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="3yq-Sq-G3d"/>
+                                    <constraint firstAttribute="height" constant="40" id="3yq-Sq-G3d"/>
                                     <constraint firstAttribute="width" secondItem="kHW-91-CwT" secondAttribute="height" id="8aB-mH-igl"/>
                                 </constraints>
                             </imageView>
@@ -85,11 +85,14 @@
                 <constraint firstAttribute="bottom" secondItem="fgm-Iz-MFN" secondAttribute="bottom" id="2Js-Fs-gQu"/>
                 <constraint firstItem="LfU-WZ-dQ5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4Ly-ut-EIa"/>
                 <constraint firstAttribute="bottom" secondItem="LfU-WZ-dQ5" secondAttribute="bottom" id="DVd-5Y-kQ7"/>
-                <constraint firstAttribute="trailing" secondItem="fgm-Iz-MFN" secondAttribute="trailing" id="Q3r-Zj-g6Z"/>
+                <constraint firstAttribute="trailing" secondItem="fgm-Iz-MFN" secondAttribute="trailing" constant="10" id="Q3r-Zj-g6Z"/>
                 <constraint firstItem="LfU-WZ-dQ5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="aIj-L4-I9Y"/>
                 <constraint firstItem="fgm-Iz-MFN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="t6l-Jz-gE9"/>
             </constraints>
             <connections>
+                <outlet property="icon" destination="1YW-wK-pPy" id="lGR-tA-ztV"/>
+                <outlet property="lblC" destination="0yl-at-YXV" id="7Dw-YP-yPV"/>
+                <outlet property="lblCity" destination="OPU-6y-v1p" id="D1V-2W-cIs"/>
                 <outlet property="viewSearch" destination="fgm-Iz-MFN" id="nKl-KL-wfZ"/>
                 <outlet property="viewWeather" destination="LfU-WZ-dQ5" id="cPQ-zf-4We"/>
             </connections>
@@ -97,7 +100,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="icons8-search-50" width="50" height="50"/>
-        <image name="icons8-sun-96" width="96" height="96"/>
+        <image name="icons8-search-100" width="100" height="100"/>
     </resources>
 </document>

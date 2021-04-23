@@ -13,12 +13,12 @@ class PopUp5Controller: UIViewController {
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var imgRepeat: UIImageView!
     @IBOutlet weak var imgShuffle: UIImageView!
-    var onDississ: (() -> Void)!
+    var onDississ: ((Int) -> Void)!
     var onSelected: (() -> Void)!
     var repeatType = 0
     var isShuffle = false
-    var listStored = sharedList
-    var idBook = idBookPlaying
+    var listData: [MediaModel] = []
+    var idPlaying = 0
     override func viewDidLoad() {
         tblView.delegate = self
         tblView.dataSource = self
@@ -51,16 +51,16 @@ class PopUp5Controller: UIViewController {
 }
 extension PopUp5Controller: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sharedList.count
+        return listData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Book2Cell.className, for: indexPath) as! Book2Cell
-        let item = sharedList[indexPath.row]
+        let item = listData[indexPath.row]
         
         cell.lblTitle.text = item.name
-        cell.lblAuthor.text = item.author
-        if idBook == indexPath.row{
+        cell.lblAuthor.text = "Phần " + item.episode + "/" + item.totalEpisode
+        if indexPath.row == idPlaying{
             cell.lblTitle.textColor = .purple
             cell.lblAuthor.textColor = .purple
             cell.imgView.image = #imageLiteral(resourceName: "icons8-audio-60")
@@ -73,18 +73,9 @@ extension PopUp5Controller: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        idBookPlaying = indexPath.row
-//        sharedItem = sharedList[indexPath.row]
-//        onSelected?()
-//        dismiss(animated: true, completion: nil)
-        APIService.shared.getDetailVideo(privateKey: sharedList[indexPath.row].privateID) {[self] (data, error) in
-            if let data = data as? MediaModel{
-                sharedItem = data
-                idBookPlaying = indexPath.row
-                onSelected?()
-                dismiss(animated: true, completion: nil)
-            }
-        }
+        idPlaying = indexPath.row
+        onDississ?(idPlaying)
+        dismiss(animated: true, completion: nil)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60 * scaleH

@@ -7,7 +7,8 @@
 
 import UIKit
 import AVFoundation
-class VideoController: UIViewController {
+import ExpandableLabel
+class VideoController: UIViewController{
     
     override func didReceiveMemoryWarning() {
         URLCache.shared.removeAllCachedResponses()
@@ -33,7 +34,7 @@ class VideoController: UIViewController {
     @IBOutlet weak var viewSetting: UIView!
     @IBOutlet weak var imgShadow: UIImageView!
     @IBOutlet weak var viewCast: UIView!
-    @IBOutlet weak var lblDescription: UILabel!
+    @IBOutlet weak var lblDescription: ExpandableLabel!
     
     @IBOutlet weak var heightCollView: NSLayoutConstraint!
     
@@ -45,7 +46,6 @@ class VideoController: UIViewController {
     var timer = Timer()
     var listResolution: [StreamResolution] = []
     var speed: Double = 1.0
-    
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
@@ -60,10 +60,10 @@ class VideoController: UIViewController {
         collView.dataSource = self
         collView.register(UINib(nibName: Type4ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type4ItemCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: (414 - 30) / 2.01 * scaleW, height: 200 * scaleW)
+        layout.itemSize = CGSize(width: (414 - 60) / 2.01 * scaleW, height: 190 * scaleW)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
+        layout.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
         // Do any additional setup after loading the view.
         viewPlayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewPlayer(_:))))
@@ -79,6 +79,8 @@ class VideoController: UIViewController {
         
         openVideoAudio()
         heightCollView.constant = CGFloat(listData.count * 130) * scaleW
+        
+        
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -88,15 +90,15 @@ class VideoController: UIViewController {
         self.viewPlayer.player?.pause()
     }
     @objc func didSelectViewBack(_ sender: Any){
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
     @objc func playerDidFinishPlaying(note: NSNotification){
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         viewPlayer.player?.pause()
         isEnded = true
         isPlaying = false
-//        UserDefaults.standard.removeObject(forKey: item.privateID)
-//        UserDefaults.standard.synchronize()
+        UserDefaults.standard.removeObject(forKey: item.privateID)
+        UserDefaults.standard.synchronize()
 
         
     }
@@ -148,7 +150,7 @@ class VideoController: UIViewController {
     @IBAction func didSelectBtnPlay(_ sender: Any) {
         if isPlaying{
             viewPlayer.player?.pause()
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         } else{
             if isEnded{
                 viewPlayer.player?.seek(to: CMTime.zero)
@@ -156,7 +158,7 @@ class VideoController: UIViewController {
             }
             viewPlayer.player?.play()
             viewPlayer.player?.rate = Float(speed)
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         }
         isPlaying = !isPlaying
     }
@@ -272,7 +274,7 @@ class VideoController: UIViewController {
             viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
             NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             isPlaying = true
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
             lblTitle.text = item.name + item.episode
             if item.country != "" {
                 lblCast.text = "Quốc gia: " + item.country
@@ -281,6 +283,12 @@ class VideoController: UIViewController {
             }
             
             lblDescription.text = item.descripTion
+            lblDescription.numberOfLines = 4
+            lblDescription.collapsedAttributedLink = NSAttributedString(string: "Xem thêm", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)])
+            lblDescription.expandedAttributedLink = NSAttributedString(string: "Ẩn bớt", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)])
+            lblDescription.shouldCollapse = true
+            lblDescription.textReplacementType = .character
+            lblDescription.collapsed = true
             addTimeObserver()
         }
         if item.path.contains("mp3"){
@@ -288,10 +296,10 @@ class VideoController: UIViewController {
                 imgAudio.loadImage(fromURL: url)
             }
         }
-//        if let temp = UserDefaults.standard.value(forKey: item.privateID) as? Double, temp > 0.0{
-//            let time: CMTime = CMTimeMake(value: Int64(temp * 1000), timescale: 1000)
-//            viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: .zero)
-//        }
+        if let temp = UserDefaults.standard.value(forKey: item.privateID) as? Double, temp > 0.0{
+            let time: CMTime = CMTimeMake(value: Int64(temp * 1000), timescale: 1000)
+            viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: .zero)
+        }
     }
     
     func setBitRate(){
@@ -338,7 +346,7 @@ class VideoController: UIViewController {
     }
     @objc func didSelectBtnFullScreen(_ sender: Any) {
         self.viewPlayer.player?.pause()
-        self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         self.isPlaying = false
         let newPlayer = self.viewPlayer.player
         self.viewPlayer.player = nil
@@ -352,7 +360,7 @@ class VideoController: UIViewController {
             vc.player = nil
             self?.viewPlayer.player?.play()
             self?.isPlaying = true
-            self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+            self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         }
         present(vc, animated: true) {
             vc.player?.play()
@@ -373,6 +381,17 @@ extension VideoController: UICollectionViewDelegate, UICollectionViewDataSource{
             cell.thumbImage.loadImage(fromURL: url)
         }
         cell.lblTitle.text = item.name
+        if item.country != "" {
+            cell.lblCountry.isHidden = false
+            cell.lblCountry.text = item.country
+        }
+        if item.episode != "" {
+            cell.viewEpisode.isHidden = false
+            cell.lblEpisode.text = item.episode
+            cell.lblTotalEpisode.text = item.totalEpisode
+        } else {
+            cell.viewEpisode.isHidden = true
+        }
         return cell
     }
     
@@ -405,3 +424,4 @@ extension VideoController: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
 }
+

@@ -12,14 +12,17 @@ class BookItemCell: UICollectionViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblAuthor: UILabel!
     @IBOutlet weak var viewImage: UIView!
+    @IBOutlet weak var viewEpisode: UIView!
+    @IBOutlet weak var lblEpisode: UILabel!
+    @IBOutlet weak var lblTotalEpisode: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        viewImage.dropShadow()
         lblAuthor.text = ""
     }
     override func prepareForReuse() {
         thumbImage.image = #imageLiteral(resourceName: "placeHolderImage")
         lblAuthor.text = ""
+        viewEpisode.isHidden = true
     }
 }

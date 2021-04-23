@@ -91,10 +91,10 @@ class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
         self.viewPlayer.player?.pause()
     }
     @objc func didSelectViewBack(_ sender: Any){
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
     @objc func playerDidFinishPlaying(note: NSNotification){
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         viewPlayer.player?.pause()
         isEnded = true
         isPlaying = false
@@ -156,7 +156,7 @@ class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
     @IBAction func didSelectBtnPlay(_ sender: Any) {
         if isPlaying{
             viewPlayer.player?.pause()
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         } else{
             if isEnded{
                 viewPlayer.player?.seek(to: CMTime.zero)
@@ -164,7 +164,7 @@ class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
             }
             viewPlayer.player?.play()
             viewPlayer.player?.rate = Float(speed)
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         }
         isPlaying = !isPlaying
     }
@@ -268,9 +268,9 @@ class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
             viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
             NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             isPlaying = true
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
             lblTitle.text = item.name
-            lblCast.text = "Thể hiện: " + item.cast
+            lblCast.text = item.cast
             addTimeObserver()
         }
         if item.path.contains("mp3"){
@@ -331,7 +331,7 @@ class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
     }
     @objc func didSelectBtnFullScreen(_ sender: Any) {
         self.viewPlayer.player?.pause()
-        self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         self.isPlaying = false
         let newPlayer = self.viewPlayer.player
         self.viewPlayer.player = nil
@@ -345,7 +345,7 @@ class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
             vc.player = nil
             self?.viewPlayer.player?.play()
             self?.isPlaying = true
-            self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+            self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         }
         present(vc, animated: true) {
             vc.player?.play()

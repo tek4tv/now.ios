@@ -21,7 +21,7 @@ class SearchController: UIViewController {
     var listData : [MediaModel] = []
     var listString: [String] = []
     var filterListString: [String] = []
-    var indexPath = IndexPath(row: 0, section: 0)
+    var indexPath = IndexPath(row: 1, section: 0)
     var isPushByHashTag = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +34,10 @@ class SearchController: UIViewController {
         collView.tag = 0
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: "VideoCell", bundle: nil), forCellWithReuseIdentifier: "VideoCell")
+        collView.register(UINib(nibName: VideoCell.className, bundle: nil), forCellWithReuseIdentifier: VideoCell.className)
+        collView.register(UINib(nibName: NoCell.className, bundle: nil), forCellWithReuseIdentifier: NoCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 414 * scaleW, height: 330 * scaleW)
+        //layout.itemSize = CGSize(width: 414 * scaleW, height: 330 * scaleW)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
@@ -136,10 +137,10 @@ class SearchController: UIViewController {
         
     }
     @objc func didSelectViewBack(_ sender: Any){
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
 }
-extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate{
+extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         txfView.endEditing(true)
         let count = collView.visibleCells.count
@@ -182,12 +183,41 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
                 collView.reloadData()
             }
         }
+        if count == 4 {
+            var list: [IndexPath] = []
+            for cell in collView.visibleCells {
+                let id = collView.indexPath(for: cell)
+                list.append(id!)
+            }
+            list = list.sorted(by: { $0.row > $1.row })
+            if self.indexPath != list[2]{
+                NotificationCenter.default.post(name: NSNotification.Name("stopVOD"), object: nil)
+                self.indexPath = list[2]
+                collView.reloadData()
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch collectionView {
+        case collView:
+            switch indexPath.row {
+            case 0:
+                return CGSize(width: 414 * scaleW, height: 1)
+            case listData.count + 1:
+                return CGSize(width: 414 * scaleW, height: 320 * scaleW)
+            default:
+                return CGSize(width: 414 * scaleW, height: 320 * scaleW)
+            }
+        default:
+            return CGSize(width: 1, height: 40 * scaleH)
+        }
         
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView.tag {
-        case 0:
-            return listData.count
+        switch collectionView {
+        case collView:
+            return listData.count + 2
         default:
             return listWord.count
         }
@@ -195,35 +225,42 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch collectionView.tag{
-        case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.className, for: indexPath) as! VideoCell
-            cell.delegate = self
-            
-            let item = listData[indexPath.row]
-            cell.item = item
-            cell.indexPath = indexPath
-            cell.lblTitle.text = item.name
-            cell.lblTime.text = item.timePass
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-                cell.imgThumb.loadImage(fromURL: url)
-            }
-            if indexPath == self.indexPath{
-                if let url = URL(string: item.path){
-                    
-                    cell.viewPlayer.player  = AVPlayer(url: url)
-                    cell.viewPlayer.player?.play()
-                    cell.setup()
-                    
+        switch collectionView{
+        case collView:
+            switch indexPath.row {
+            case 0:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
+                return cell
+            case listData.count + 1:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
+                return cell
+            default:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.className, for: indexPath) as! VideoCell
+                cell.delegate = self
+                
+                let item = listData[indexPath.row - 1]
+                cell.item = item
+                cell.indexPath = indexPath
+                cell.lblTitle.text = item.name
+                cell.lblTime.text = item.timePass
+                if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                    cell.imgThumb.loadImage(fromURL: url)
                 }
-                cell.imgThumb.isHidden = true
-                cell.viewShadow.isHidden = true
-            } else{
-                cell.viewPlayer.player?.pause()
-                cell.imgThumb.isHidden = false
-                cell.viewShadow.isHidden = false
+                if indexPath == self.indexPath{
+                    if let url = URL(string: item.path){
+                        
+                        cell.viewPlayer.player  = AVPlayer(url: url)
+                        cell.viewPlayer.player?.play()
+                        cell.setup()
+                        
+                    }
+                    cell.imgThumb.isHidden = true
+                } else{
+                    cell.viewPlayer.player?.pause()
+                    cell.imgThumb.isHidden = false
+                }
+                return cell
             }
-            return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.className, for: indexPath) as! WordCell
             cell.lblTitle.text = "#" + listWord[indexPath.row]

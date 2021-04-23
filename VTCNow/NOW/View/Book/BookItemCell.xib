@@ -7,21 +7,31 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BookItemCell" customModule="VTC_Now" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="150" height="260"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BookItemCell" customModule="NOW" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="110" height="260"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="150" height="260"/>
+                <rect key="frame" x="0.0" y="0.0" width="110" height="260"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cz-Jf-hZb">
-                        <rect key="frame" x="10" y="10" width="130" height="195"/>
+                        <rect key="frame" x="0.0" y="0.0" width="110" height="165"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolderImage" translatesAutoresizingMaskIntoConstraints="NO" id="CHv-OM-OKu" customClass="LazyImageView" customModule="VTC_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="130" height="195"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolderImage" translatesAutoresizingMaskIntoConstraints="NO" id="CHv-OM-OKu" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="110" height="165"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -52,57 +62,141 @@
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Những cuộc phiêu lưu của Huckleberry Finn" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1YV-gm-bdS">
-                        <rect key="frame" x="10" y="213" width="130" height="29"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
-                        </userDefinedRuntimeAttributes>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tác giả" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Kzp-Wu-wAF">
-                        <rect key="frame" x="10" y="243" width="130" height="12"/>
+                        <rect key="frame" x="0.0" y="243" width="110" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Những cuộc phiêu lưu của Huckleberry Finn" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1YV-gm-bdS">
+                        <rect key="frame" x="0.0" y="180" width="110" height="47"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sas-qF-hyQ">
+                        <rect key="frame" x="5" y="5" width="40" height="40"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HyW-EE-7E7">
+                                <rect key="frame" x="3" y="3" width="34" height="34"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gic-xn-SDi">
+                                        <rect key="frame" x="13.5" y="0.0" width="7" height="14.5"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66G-I0-VUP">
+                                        <rect key="frame" x="7" y="16.5" width="20" height="1"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="0zv-eK-DY0"/>
+                                            <constraint firstAttribute="width" constant="20" id="I9d-nI-Xmv"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="44" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvA-P7-vDa">
+                                        <rect key="frame" x="10.5" y="19.5" width="13.5" height="14.5"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.50588235290000005" green="0.0" blue="0.25882352939999997" alpha="0.60303403249999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="HyW-EE-7E7" secondAttribute="bottom" constant="3" id="Ckc-3f-0vm">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="HyW-EE-7E7" secondAttribute="trailing" constant="3" id="DIh-cX-YTP">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="width" secondItem="Sas-qF-hyQ" secondAttribute="height" id="QMz-Ur-WrI">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="height" constant="40" id="SSU-LF-Tct">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="HyW-EE-7E7" firstAttribute="leading" secondItem="Sas-qF-hyQ" secondAttribute="leading" constant="3" id="WOo-FD-3Zu">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="HyW-EE-7E7" firstAttribute="top" secondItem="Sas-qF-hyQ" secondAttribute="top" constant="3" id="oeV-QN-13z">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="Sas-qF-hyQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="8AF-jv-20q"/>
                 <constraint firstItem="Kzp-Wu-wAF" firstAttribute="leading" secondItem="1YV-gm-bdS" secondAttribute="leading" id="BFu-CY-q5e"/>
-                <constraint firstItem="5cz-Jf-hZb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="LrZ-oU-4Fy">
+                <constraint firstItem="5cz-Jf-hZb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="LrZ-oU-4Fy">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstItem="Sas-qF-hyQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="Pi3-Pk-fNq"/>
                 <constraint firstItem="1YV-gm-bdS" firstAttribute="leading" secondItem="5cz-Jf-hZb" secondAttribute="leading" id="W21-UJ-3Ye"/>
                 <constraint firstAttribute="bottom" secondItem="Kzp-Wu-wAF" secondAttribute="bottom" constant="5" id="Ymx-MH-9FV"/>
                 <constraint firstItem="1YV-gm-bdS" firstAttribute="trailing" secondItem="5cz-Jf-hZb" secondAttribute="trailing" id="dKf-Y9-k9u"/>
                 <constraint firstItem="Kzp-Wu-wAF" firstAttribute="trailing" secondItem="1YV-gm-bdS" secondAttribute="trailing" id="mzf-3R-lpE"/>
-                <constraint firstItem="5cz-Jf-hZb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="oLB-tb-mdh">
+                <constraint firstItem="5cz-Jf-hZb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="oLB-tb-mdh">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstAttribute="trailing" secondItem="5cz-Jf-hZb" secondAttribute="trailing" constant="10" id="tQm-e3-u6O">
+                <constraint firstAttribute="trailing" secondItem="5cz-Jf-hZb" secondAttribute="trailing" id="tQm-e3-u6O">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="1YV-gm-bdS" firstAttribute="top" secondItem="5cz-Jf-hZb" secondAttribute="bottom" constant="8" symbolic="YES" id="tff-b4-lvm"/>
+                <constraint firstItem="1YV-gm-bdS" firstAttribute="top" secondItem="5cz-Jf-hZb" secondAttribute="bottom" constant="15" id="tff-b4-lvm"/>
             </constraints>
             <size key="customSize" width="120" height="295"/>
             <connections>
                 <outlet property="lblAuthor" destination="Kzp-Wu-wAF" id="YdB-WT-hqI"/>
+                <outlet property="lblEpisode" destination="Gic-xn-SDi" id="0nO-WO-elb"/>
                 <outlet property="lblTitle" destination="1YV-gm-bdS" id="aDB-jf-Dse"/>
+                <outlet property="lblTotalEpisode" destination="QvA-P7-vDa" id="jDy-29-i9Q"/>
                 <outlet property="thumbImage" destination="CHv-OM-OKu" id="Cj2-Kw-sHO"/>
+                <outlet property="viewEpisode" destination="Sas-qF-hyQ" id="QvQ-cE-AAI"/>
                 <outlet property="viewImage" destination="5cz-Jf-hZb" id="7A5-c3-iZM"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="143.30357142857142"/>

@@ -31,7 +31,7 @@ class Type3Cell: UICollectionViewCell {
         collView.register(UINib(nibName: ViewFullCell.className, bundle: nil), forCellWithReuseIdentifier: ViewFullCell.className)
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 20 * scaleW, right: 10 * scaleW)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 20 * scaleW, right: 20 * scaleW)
         collView.collectionViewLayout = layout
     }
     func refresh(){
@@ -94,7 +94,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        switch indexPath.section {
 //        case 0:
-            return CGSize(width: (414 - 30) / 2.01 * scaleW, height: 220 * scaleW)
+            return CGSize(width: (414 - 60) / 2.01 * scaleW, height: 220 * scaleW)
 //        case 1:
 //            return CGSize(width: 414 * scaleW, height: 420 * scaleW)
 //        default:

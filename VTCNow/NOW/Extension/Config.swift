@@ -7,11 +7,11 @@
 
 import Foundation
 import UIKit
-var sharedItem : MediaModel!
-var sharedList : [MediaModel] = []
+//var sharedItem : MediaModel!
+//var sharedList : [MediaModel] = []
 var root = RootModel()
 var categorys: [CategoryModel] = []
-var idBookPlaying = 0
+//var idBookPlaying = 0
 var idVideoPlaying = 0
 var reads : [ReadModel] = []
 var tabBarIndex = 0

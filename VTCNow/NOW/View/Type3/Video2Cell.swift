@@ -10,7 +10,6 @@ import AVFoundation
 
 class Video2Cell: UICollectionViewCell {
 
-    @IBOutlet weak var viewShadow: UIView!
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
@@ -59,6 +58,7 @@ class Video2Cell: UICollectionViewCell {
         activityIndicatorView.centerYAnchor.constraint(equalTo: viewPlayer.centerYAnchor).isActive = true
         //
         NotificationCenter.default.addObserver(self, selector: #selector(stopLive), name: NSNotification.Name("stopLive"), object: nil)
+        btnPlay.isHidden = false
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -68,7 +68,7 @@ class Video2Cell: UICollectionViewCell {
         viewPlayer.player?.pause()
     }
     @objc func playerDidFinishPlaying(note: NSNotification){
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         isPlaying = false
         viewPlayer.player?.pause()
         isEnded = true
@@ -123,7 +123,7 @@ class Video2Cell: UICollectionViewCell {
         if isPlaying{
             isPlaying = false
             viewPlayer.player?.pause()
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         } else{
             isPlaying = true
             if isEnded{
@@ -132,7 +132,7 @@ class Video2Cell: UICollectionViewCell {
             }
             viewPlayer.player?.play()
             viewPlayer.player?.rate = Float(speed)
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         }
         //isPlaying = !isPlaying
     }
@@ -226,9 +226,13 @@ class Video2Cell: UICollectionViewCell {
         lblTime.textColor = .gray
         isPlaying = false
         viewPlayer.player?.pause()
+        activityIndicatorView.stopAnimating()
+        btnPlay.isHidden = false
     }
 
     func setup(){
+        btnPlay.isHidden = true
+
         activityIndicatorView.startAnimating()
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [])
@@ -275,7 +279,7 @@ class Video2Cell: UICollectionViewCell {
         viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         isPlaying = true
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         addTimeObserver()
     }
     
@@ -312,7 +316,7 @@ class Video2Cell: UICollectionViewCell {
     @objc func didSelectBtnFullScreen(_ sender: Any) {
         self.isPlaying = false
         self.viewPlayer.player?.pause()
-        self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         
         let newPlayer = self.viewPlayer.player
         self.viewPlayer.player = nil

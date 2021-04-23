@@ -29,8 +29,8 @@ class Type6Cell: UICollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 10 * scaleW, right: 10 * scaleW)
+        layout.minimumInteritemSpacing = 20 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 10 * scaleW, right: 20 * scaleW)
         collView.collectionViewLayout = layout
     }
 }

@@ -24,7 +24,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sách hay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSg-8L-nwj">
-                        <rect key="frame" x="10" y="25" width="73" height="21.5"/>
+                        <rect key="frame" x="20" y="25" width="73" height="21.5"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -33,7 +33,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="TTL-p2-bsc">
-                        <rect key="frame" x="0.0" y="61.5" width="414" height="137.5"/>
+                        <rect key="frame" x="0.0" y="66.5" width="414" height="132.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QkL-Wd-hyv">
                             <size key="itemSize" width="128" height="128"/>
@@ -43,7 +43,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cii-ZY-12L">
-                        <rect key="frame" x="10" y="199" width="394" height="1"/>
+                        <rect key="frame" x="20" y="199" width="374" height="1"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="Mor-V9-y0K">
@@ -53,8 +53,8 @@
                             </constraint>
                         </constraints>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-next-page-52" translatesAutoresizingMaskIntoConstraints="NO" id="ded-zT-1p0">
-                        <rect key="frame" x="384" y="26" width="20" height="20"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NEXT" translatesAutoresizingMaskIntoConstraints="NO" id="ded-zT-1p0">
+                        <rect key="frame" x="374" y="26" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="3ev-6G-TBJ"/>
                             <constraint firstAttribute="width" secondItem="ded-zT-1p0" secondAttribute="height" id="Luv-q3-C8R"/>
@@ -68,14 +68,14 @@
                 <constraint firstItem="Cii-ZY-12L" firstAttribute="top" secondItem="TTL-p2-bsc" secondAttribute="bottom" id="4lt-4w-UU2"/>
                 <constraint firstAttribute="bottom" secondItem="Cii-ZY-12L" secondAttribute="bottom" id="6mS-L7-JDb"/>
                 <constraint firstItem="aSg-8L-nwj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="25" id="CEM-aK-o7X"/>
-                <constraint firstItem="TTL-p2-bsc" firstAttribute="top" secondItem="aSg-8L-nwj" secondAttribute="bottom" constant="15" id="CHf-f9-ys4"/>
-                <constraint firstItem="aSg-8L-nwj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="He7-Jk-nf5"/>
+                <constraint firstItem="TTL-p2-bsc" firstAttribute="top" secondItem="aSg-8L-nwj" secondAttribute="bottom" constant="20" id="CHf-f9-ys4"/>
+                <constraint firstItem="aSg-8L-nwj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="He7-Jk-nf5"/>
                 <constraint firstItem="ded-zT-1p0" firstAttribute="centerY" secondItem="aSg-8L-nwj" secondAttribute="centerY" id="XC8-zJ-Bv0"/>
                 <constraint firstItem="TTL-p2-bsc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="b2Y-Kd-SXx"/>
-                <constraint firstItem="Cii-ZY-12L" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="jC7-WK-Sfk"/>
+                <constraint firstItem="Cii-ZY-12L" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="jC7-WK-Sfk"/>
                 <constraint firstAttribute="trailing" secondItem="TTL-p2-bsc" secondAttribute="trailing" id="kE9-mi-UhH"/>
-                <constraint firstAttribute="trailing" secondItem="Cii-ZY-12L" secondAttribute="trailing" constant="10" id="nXw-YL-G0y"/>
-                <constraint firstAttribute="trailing" secondItem="ded-zT-1p0" secondAttribute="trailing" constant="10" id="y46-ec-o3c"/>
+                <constraint firstAttribute="trailing" secondItem="Cii-ZY-12L" secondAttribute="trailing" constant="20" id="nXw-YL-G0y"/>
+                <constraint firstAttribute="trailing" secondItem="ded-zT-1p0" secondAttribute="trailing" constant="20" id="y46-ec-o3c"/>
             </constraints>
             <connections>
                 <outlet property="collView" destination="TTL-p2-bsc" id="gwC-f1-BI1"/>
@@ -85,7 +85,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="icons8-next-page-52" width="52" height="52"/>
+        <image name="NEXT" width="512" height="512"/>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

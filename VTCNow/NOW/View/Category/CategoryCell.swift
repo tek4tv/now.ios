@@ -13,15 +13,14 @@ class CategoryCell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
     var delegate: CategoryCellDelegate!
+    var listCate: [CategoryModel] = []
     var images: [String: UIImage] = [
-        "Nổi bật": #imageLiteral(resourceName: "noibat"),
-        "Đừng bỏ lỡ": #imageLiteral(resourceName: "tailieu"),
         "Tin mới": #imageLiteral(resourceName: "tinmoi"),
         "Món ngon": #imageLiteral(resourceName: "MON NGON"),
         "Sức khỏe": #imageLiteral(resourceName: "SUC KHOE"),
-        "TV Show": #imageLiteral(resourceName: "tvshow"),
+        "TV Show": #imageLiteral(resourceName: "TV SHOW"),
         "Âm nhạc": #imageLiteral(resourceName: "AM NHAC"),
-        "Phim": #imageLiteral(resourceName: "PHIM LE"),
+        "Phim lẻ": #imageLiteral(resourceName: "PHIM LE"),
         "Phim bộ": #imageLiteral(resourceName: "PHIM BO"),
         "Sách hay": #imageLiteral(resourceName: "SACH HAY"),
     ]
@@ -36,24 +35,32 @@ class CategoryCell: UICollectionViewCell {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collView.collectionViewLayout = layout
+        
+        //
+        for cate in categorys {
+            if cate.name != "Nổi bật" && cate.name != "Đừng bỏ lỡ" {
+                listCate.append(cate)
+            }
+        }
+        collView.reloadData()
     }
 
 }
 extension CategoryCell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categorys.count
+        return listCate.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCell.className, for: indexPath) as! CategoryItemCell
-        let item = categorys[indexPath.row]
+        let item = listCate[indexPath.row]
         cell.lblTitle.text = item.name
         cell.thumbImage.image = images[item.name]
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cate = categorys[indexPath.row]
+        let cate = listCate[indexPath.row]
         delegate?.didSelectItem(cate)
     }
 }

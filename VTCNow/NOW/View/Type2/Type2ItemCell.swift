@@ -10,6 +10,7 @@ class Type2ItemCell: UICollectionViewCell{
     @IBOutlet weak var thumbImage: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
+    @IBOutlet weak var viewShadow: UIView!
     var item = MediaModel()
     
     override func awakeFromNib() {
@@ -28,8 +29,11 @@ class Type2ItemCell: UICollectionViewCell{
                 let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
                 
                 if hour <= 0 && minute <= 0 && second <= 0{
-                    item.timePass = "Đang phát"
-                    lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
+                    if item.name.contains("Trực tiếp"){
+                        item.timePass = "Trực tiếp"
+                    } else {
+                        item.timePass = "Đang phát"
+                    }
                 } else{
                     item.timePass = "\(timeStr)"
                     lblTime.textColor = .white

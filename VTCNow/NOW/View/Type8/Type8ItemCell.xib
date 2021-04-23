@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="Type8ItemCell" customModule="NOW" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="190" height="180"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="190" height="180"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bài hát mộc - số 1 Nguyễn Trần Trung Quân" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvt-dK-0fx">
+                        <rect key="frame" x="0.0" y="122" width="190" height="35.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fli-Ad-Baq">
+                        <rect key="frame" x="0.0" y="0.0" width="190" height="107"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAM-0V-wAW">
+                                <rect key="frame" x="90" y="3.5" width="100" height="100"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DIA AM NHAC" translatesAutoresizingMaskIntoConstraints="NO" id="OTA-XH-KGI">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="OTA-XH-KGI" firstAttribute="leading" secondItem="ZAM-0V-wAW" secondAttribute="leading" id="FIG-VG-qfZ"/>
+                                    <constraint firstItem="OTA-XH-KGI" firstAttribute="top" secondItem="ZAM-0V-wAW" secondAttribute="top" id="Ie7-pd-ImQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="OTA-XH-KGI" secondAttribute="trailing" id="O7z-GO-e0E"/>
+                                    <constraint firstAttribute="bottom" secondItem="OTA-XH-KGI" secondAttribute="bottom" id="T79-8f-KNV"/>
+                                    <constraint firstAttribute="width" secondItem="ZAM-0V-wAW" secondAttribute="height" multiplier="1:1" id="XvS-Ug-9fH">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="100" id="fV5-50-6Ah">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zvH-hX-I5d" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="166.5" height="107"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="zvH-hX-I5d" secondAttribute="height" multiplier="14/9" id="S9C-xp-fIR">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZAM-0V-wAW" firstAttribute="centerY" secondItem="fli-Ad-Baq" secondAttribute="centerY" id="5Fw-7u-Hwf">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="width" secondItem="fli-Ad-Baq" secondAttribute="height" multiplier="16/9" id="TR1-6o-jPl">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="bottom" secondItem="zvH-hX-I5d" secondAttribute="bottom" id="ZsK-Px-zM5">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="zvH-hX-I5d" firstAttribute="leading" secondItem="fli-Ad-Baq" secondAttribute="leading" id="gHw-t4-eR1">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="ZAM-0V-wAW" secondAttribute="trailing" id="hKU-cl-zvW">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="zvH-hX-I5d" firstAttribute="top" secondItem="fli-Ad-Baq" secondAttribute="top" id="haa-jZ-Gyx">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="fli-Ad-Baq" secondAttribute="trailing" id="6El-sx-djs"/>
+                <constraint firstItem="fli-Ad-Baq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="EZr-vT-hwE"/>
+                <constraint firstItem="fli-Ad-Baq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="EdU-Rt-DEH"/>
+                <constraint firstAttribute="trailing" secondItem="qvt-dK-0fx" secondAttribute="trailing" id="SPg-qW-gSo">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="qvt-dK-0fx" firstAttribute="top" secondItem="fli-Ad-Baq" secondAttribute="bottom" constant="15" id="gFt-oy-VRC"/>
+                <constraint firstItem="qvt-dK-0fx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="lAx-bK-hbS">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="fli-Ad-Baq" firstAttribute="width" secondItem="fli-Ad-Baq" secondAttribute="height" multiplier="16/9" id="shY-ZL-17c"/>
+            </constraints>
+            <connections>
+                <outlet property="lblTitle" destination="qvt-dK-0fx" id="RNd-wR-fua"/>
+                <outlet property="thumbImage" destination="zvH-hX-I5d" id="YR8-OP-Bt4"/>
+            </connections>
+            <point key="canvasLocation" x="140.57971014492756" y="123.88392857142857"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="DIA AM NHAC" width="512" height="512"/>
+    </resources>
+</document>

@@ -12,6 +12,25 @@ class TVController: UIViewController {
 
     @IBOutlet weak var collView: UICollectionView!
     var indexPath = IndexPath(row: 0, section: 0)
+    
+    var images: [String: UIImage] = [
+        "VTC1": UIImage(named: "VTC 1")!,
+        "VTC2": UIImage(named: "VTC 2")!,
+        "VTC3": UIImage(named: "VTC 3")!,
+        "VTC4": UIImage(named: "VTC 4")!,
+        "VTC5": UIImage(named: "VTC 5")!,
+        "VTC6": UIImage(named: "VTC 6")!,
+        "VTC7": UIImage(named: "VTC 7")!,
+        "VTC8": UIImage(named: "VTC 8")!,
+        "VTC9": UIImage(named: "VTC 9")!,
+        "VTC10": UIImage(named: "VTC 10")!,
+        "VTC11": UIImage(named: "VTC 11")!,
+        "VTC12": UIImage(named: "VTC 12")!,
+        "VTC13": UIImage(named: "VTC 13")!,
+        "VTC14": UIImage(named: "VTC 14")!,
+        "VTC16": UIImage(named: "VTC 16")!,
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collView.delegate = self
@@ -36,10 +55,7 @@ class TVController: UIViewController {
     @objc func didTapTwoTime(_ sender: Any){
         let vc = storyboard?.instantiateViewController(withIdentifier: TV2Controller.className) as! TV2Controller
         vc.data = lives[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
-//        if let cell = collView.cellForItem(at: indexPath) as? TVCell{
-//            cell.stopLive()
-//        }
+        navigationController?.pushViewController(vc, animated: false)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -52,9 +68,6 @@ class TVController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        if let cell = collView.cellForItem(at: indexPath) as? TVCell{
-//            cell.stopLive()
-//        }
         NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)
     }
 }
@@ -67,18 +80,13 @@ extension TVController: UICollectionViewDelegate, UICollectionViewDataSource, UI
             let id1 = collView.indexPath(for: collView.visibleCells[1])!
             if id0.row < id1.row {
                 if self.indexPath != id0{
-//                    if let cell = collView.visibleCells[1] as? TVCell {
-//                        cell.stopLive()
-//                    }
+
                     NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)
                     self.indexPath = id0
                     collView.reloadData()
                 }
             }else{
                 if self.indexPath != id1{
-//                    if let cell = collView.visibleCells[0] as? TVCell {
-//                        cell.stopLive()
-//                    }
                     NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)
                     self.indexPath = id1
                     collView.reloadData()
@@ -122,9 +130,10 @@ extension TVController: UICollectionViewDelegate, UICollectionViewDataSource, UI
             cell.data = item
             cell.collView.reloadData()
             cell.delegate = self
-            if let url = URL(string: root.cdn.imageDomain + item.image[0].url.replacingOccurrences(of: "\\", with: "/" )){
-                cell.imgThumb.loadImage(fromURL: url)
-            }
+//            if let url = URL(string: root.cdn.imageDomain + item.image[0].url.replacingOccurrences(of: "\\", with: "/" )){
+//                cell.imgThumb.loadImage(fromURL: url)
+//            }
+            cell.imgThumb.image = images[item.name]
             if indexPath == self.indexPath {
                 cell.playLive()
             } else{
@@ -158,19 +167,6 @@ extension TVController: TVCellDelegate{
     }
     
     func didSelectViewFullScreen(_ cell: Video2Cell, _ newPlayer: AVPlayer) {
-//        let vc = PlayerViewController()
-//        vc.player = newPlayer
-//        vc.onDismiss = { () in
-//            cell.viewPlayer.player = vc.player
-//            vc.player = nil
-//            cell.viewPlayer.player?.play()
-//            cell.isPlaying = true
-//            cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
-//        }
-//        present(vc, animated: true) {
-//            vc.player?.play()
-//            vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
-//        }
         if #available(iOS 13.0, *) {
             let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
             vc.player = newPlayer
@@ -180,12 +176,8 @@ extension TVController: TVCellDelegate{
                 vc.player = nil
                 cell.viewPlayer.player?.play()
                 cell.isPlaying = true
-                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
             }
-//            present(vc, animated: true) {
-//                vc.player?.play()
-//                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
-//            }
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         } else {
@@ -196,7 +188,7 @@ extension TVController: TVCellDelegate{
                 vc.player = nil
                 cell.viewPlayer.player?.play()
                 cell.isPlaying = true
-                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
             }
             present(vc, animated: true) {
                 vc.player?.play()

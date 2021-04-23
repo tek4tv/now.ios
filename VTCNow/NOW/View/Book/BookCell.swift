@@ -26,10 +26,10 @@ class BookCell: UICollectionViewCell {
         collView.dataSource = self
         collView.register(UINib(nibName: BookItemCell.className, bundle: nil), forCellWithReuseIdentifier: BookItemCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 150 * scaleW, height: 260 * scaleW)
+        layout.itemSize = CGSize(width: 150 * scaleW, height: 250 * scaleW)
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 5
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 5 * scaleW, bottom: 0, right: 5 * scaleW)
+        layout.minimumLineSpacing = 20 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
     }
     override func prepareForReuse() {
@@ -47,7 +47,8 @@ extension BookCell: UICollectionViewDelegate, UICollectionViewDataSource{
         if let url = URL(string: root.cdn.imageDomain + item.image[0].url.replacingOccurrences(of: "\\", with: "/" )){
             cell.thumbImage.loadImage(fromURL: url)
         }
-        cell.lblTitle.text = item.name + item.episode
+        cell.lblTitle.text = item.name
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -57,9 +58,9 @@ extension BookCell: UICollectionViewDelegate, UICollectionViewDataSource{
 //        delegate?.didSelectItemAt()
         APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
             if let data = data as? MediaModel{
-                sharedItem = data
-                sharedList = self.data.media
-                idBookPlaying = indexPath.row
+//                sharedItem = data
+//                sharedList = self.data.media
+//                idBookPlaying = indexPath.row
                 self.delegate?.didSelectItemAt()
             }
         }

@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.2)
+  - ExpandableLabel (0.5.2)
   - Kingfisher (6.2.1)
   - MarqueeLabel (4.0.5)
   - UPCarouselFlowLayout (1.1.2)
@@ -7,6 +8,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - ExpandableLabel
   - Kingfisher (~> 6.0)
   - MarqueeLabel
   - UPCarouselFlowLayout
@@ -15,6 +17,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - ExpandableLabel
     - Kingfisher
     - MarqueeLabel
     - UPCarouselFlowLayout
@@ -22,11 +25,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
+  ExpandableLabel: c2fab6d27860c572d67134b30522a5917746171d
   Kingfisher: e71c6fac2aebb1262888cabc2cb13d313362a48f
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: c2567f51da4e4552b76fc39a1db8bff6568315e0
+PODFILE CHECKSUM: bd215109e95aa789fcefc1a57e4c534e0f59ba1c
 
 COCOAPODS: 1.10.0

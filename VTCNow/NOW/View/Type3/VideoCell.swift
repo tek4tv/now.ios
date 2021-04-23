@@ -10,10 +10,10 @@ import AVFoundation
 
 class VideoCell: UICollectionViewCell {
 
-    @IBOutlet weak var viewShadow: UIView!
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
+    @IBOutlet weak var lblCountDown: UILabel!
     
     @IBOutlet weak var viewPlayer: PlayerView!
     @IBOutlet weak var btnPlay: UIButton!
@@ -57,24 +57,29 @@ class VideoCell: UICollectionViewCell {
         slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
         
         hidePlayerController()
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
-        btnPlay.isHidden = false
         //
         viewPlayer.addSubview(activityIndicatorView)
         activityIndicatorView.centerXAnchor.constraint(equalTo: viewPlayer.centerXAnchor).isActive = true
         activityIndicatorView.centerYAnchor.constraint(equalTo: viewPlayer.centerYAnchor).isActive = true
         //
+        NotificationCenter.default.addObserver(self, selector: #selector(stopVOD(_:)), name: NSNotification.Name("stopVOD"), object: nil)
+        //
         if news.name == "Đừng bỏ lỡ"{
+
             NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
            
         }else{
             NotificationCenter.default.removeObserver(self)
         }
+        btnPlay.isHidden = false
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+    @objc func stopVOD(_ sender: Any){
+        isPlaying = false
+        viewPlayer.player?.pause()
+    }
     @objc func didSelectViewShare(_ sender: Any){
         delegate?.didSelectViewShare(self)
     }
@@ -83,7 +88,7 @@ class VideoCell: UICollectionViewCell {
     }
     
     @objc func playerDidFinishPlaying(note: NSNotification){
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         viewPlayer.player?.pause()
         isEnded = true
         isPlaying = false
@@ -138,7 +143,7 @@ class VideoCell: UICollectionViewCell {
     @IBAction func didSelectBtnPlay(_ sender: Any) {
         if isPlaying{
             viewPlayer.player?.pause()
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         } else{
             if isEnded{
                 viewPlayer.player?.seek(to: CMTime.zero)
@@ -146,7 +151,7 @@ class VideoCell: UICollectionViewCell {
             }
             viewPlayer.player?.play()
             viewPlayer.player?.rate = Float(speed)
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         }
         isPlaying = !isPlaying
     }
@@ -219,7 +224,7 @@ class VideoCell: UICollectionViewCell {
         lblTime.text = ""
         lblTime.textColor = .gray
         viewPlayer.player?.pause()
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
     }
     @objc func countDown(_ notification: Notification){
         if let futureDate = item.schedule.toDate(){
@@ -228,24 +233,38 @@ class VideoCell: UICollectionViewCell {
                 let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
                 
                 if hour <= 0 && minute <= 0 && second <= 0{
-                    item.timePass = "Đang phát"
-                    lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
+                    if item.name.contains("Trực tiếp") {
+                        item.timePass = "Trực tiếp"
+                    } else{
+                        item.timePass = "Đang phát"
+                    }
+                    lblTime.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+                    lblCountDown.isHidden = true
+//                    imgShadow.isHidden = true
+                    lblCountDown.text = item.timePass
+//                    imgThumb.isHidden = true
                 } else{
                     item.timePass = "Còn \(timeStr)"
                     lblTime.textColor = .gray
+                    lblCountDown.isHidden = false
+                    imgShadow.isHidden = false
+                    lblCountDown.text = timeStr
+                    viewPlayer.player?.pause()
+                    activityIndicatorView.stopAnimating()
+                    imgThumb.isHidden = false
                 }
             }
             lblTime.text = item.timePass
         }
     }
     func setup(){
+        btnPlay.isHidden = true
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [])
         }
         catch {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
-        btnPlay.isHidden = true
         activityIndicatorView.startAnimating()
         listResolution = []
         var link = ""
@@ -273,7 +292,7 @@ class VideoCell: UICollectionViewCell {
         viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         isPlaying = true
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         addTimeObserver()
         if let temp = UserDefaults.standard.value(forKey: item.privateID) as? Double, temp > 0.0{
             let time: CMTime = CMTimeMake(value: Int64(temp * 1000), timescale: 1000)
@@ -312,7 +331,7 @@ class VideoCell: UICollectionViewCell {
     }
     @objc func didSelectBtnFullScreen(_ sender: Any) {
         self.viewPlayer.player?.pause()
-        self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         self.isPlaying = false
         let newPlayer = self.viewPlayer.player
         self.viewPlayer.player = nil

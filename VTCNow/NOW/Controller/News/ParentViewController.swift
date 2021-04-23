@@ -36,7 +36,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     }
     
     @objc func didSelectViewBack(_ sender: Any){
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         var child :[UIViewController] = []

@@ -22,7 +22,7 @@ class ListenController: UIViewController {
         collView.register(UINib(nibName: Type7Cell.className, bundle: nil), forCellWithReuseIdentifier: Type7Cell.className)
         collView.register(UINib(nibName: Book3Cell.className, bundle: nil), forCellWithReuseIdentifier: Book3Cell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 414 * scaleW, height: 250 * scaleW)
+        //layout.itemSize = CGSize(width: 414 * scaleW, height: 250 * scaleW)
         collView.collectionViewLayout = layout
         for item in bookCate.components{
             APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
@@ -38,18 +38,26 @@ class ListenController: UIViewController {
         }
     }
     @objc func didSelectViewBack(_ sender: Any){
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
     }
 }
-extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.row {
+        case 0:
+            return CGSize(width: 414 * scaleW, height: (167 + 70) * scaleW)
+        default:
+            return CGSize(width: 414 * scaleW, height: 270 * scaleW)
+        }
     }
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return news.components.count + 1
     }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section {
+        switch indexPath.row {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Book3Cell.className, for: indexPath) as! Book3Cell
             cell.delegate = self
@@ -58,8 +66,8 @@ extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7Cell.className, for: indexPath) as! Type7Cell
             cell.delegate = self
-            let item = news.components[indexPath.section - 1]
-            cell.lblTitle.text = item.name + " >"
+            let item = news.components[indexPath.row - 1]
+            cell.lblTitle.text = item.name
             cell.data = item.category
             return cell
         }
@@ -67,33 +75,40 @@ extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.section {
+        switch indexPath.row {
         case 0:
             let vc = storyboard?.instantiateViewController(withIdentifier: BookCategoryController.className) as! BookCategoryController
             vc.data = news
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: false)
         default:
             let vc = storyboard?.instantiateViewController(withIdentifier: BookCategoryController.className) as! BookCategoryController
             vc.data = news.components[indexPath.section - 1].category
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: false)
         }
         
     }
 }
 extension ListenController: Type7CellDelegate, Book3CellDelegate{
-    func didSelectItemAt(_ cell: Book3Cell) {
+    func didSelectItemAt(_ cell: Book3Cell, _ data: MediaModel) {
         let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
-        self.navigationController?.pushViewController(vc, animated: true)
+        vc.data = data
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    func didSelectItemAt(_ cell: Type7Cell, _ data: MediaModel) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
+        vc.data = data
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     func didSelectItemAt(_ cell: Type7Cell) {
         let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     func didSelectViewMore(_ cell: Type7Cell){
         let vc = storyboard?.instantiateViewController(withIdentifier: BookCategoryController.className) as! BookCategoryController
         vc.data = cell.data
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
 }
 

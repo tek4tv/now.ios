@@ -16,10 +16,10 @@ class Type1Cell: UICollectionViewCell {
     var indexPath = IndexPath(row: 0, section: 0)
     var data = CategoryModel(){
         didSet{
-            if data.media.count >= 6 {
-                widthCollDot.constant = 100 * scaleW
+            if data.media.count >= 3 {
+                widthCollDot.constant = 40 * scaleW
             }else{
-                widthCollDot.constant = CGFloat(data.media.count * 10) * scaleW
+                widthCollDot.constant = 40 * scaleW
             }
         }
     }
@@ -33,6 +33,7 @@ class Type1Cell: UICollectionViewCell {
         collView.register(UINib(nibName: Type1ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type1ItemCell.className)
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: collView.bounds.width * scaleW, height: collView.bounds.height * scaleW)
+        layout.minimumLineSpacing = 0
         layout.minimumLineSpacing = 0
         layout.scrollDirection = .horizontal
         collView.collectionViewLayout = layout
@@ -48,8 +49,8 @@ class Type1Cell: UICollectionViewCell {
         layout2.scrollDirection = .horizontal
         collViewDot.collectionViewLayout = layout2
         
-        timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: {[self] (timer) in
-            if indexPath.row < data.media.count{
+        timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true, block: {[self] (timer) in
+            if indexPath.row < 3{
                 indexPath.row += 1
             } else{
                 indexPath.row = 0
@@ -66,13 +67,13 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
         case 0:
-            if data.media.count >= 6 {
-                return 6
+            if data.media.count >= 3 {
+                return 3
             }
             return data.media.count
         default:
-            if data.media.count >= 6 {
-                return 6
+            if data.media.count >= 3 {
+                return 3
             }
             return data.media.count
         }
@@ -107,11 +108,11 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         case 0:
             self.indexPath = indexPath
             collViewDot.reloadData()
-            if data.media.count < 9{
+            if data.media.count < 3{
                 APIService.shared.getMoreVideoPlaylist(privateKey: data.privateKey, page: "0") { (data, error) in
                     if let data = data as? [MediaModel]{
                         self.data.media += data
-                        self.widthCollDot.constant = 100 * scaleW
+                        self.widthCollDot.constant = 40 * scaleW
                         self.collView.reloadData()
                     }
                 }

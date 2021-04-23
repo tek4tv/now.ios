@@ -11,6 +11,7 @@ class ReadModel{
     var title = ""
     var description = ""
     var publishedDate = ""
+    var image344_220 = ""
     var image16_9 = ""
     var detailUrl = ""
     var timePass = ""
@@ -22,6 +23,7 @@ class ReadModel{
         if let temp = json["PublishedDate"] as? String { publishedDate = temp}
         if let temp = json["DetailURL"] as? String {detailUrl = temp}
         if let temp = json["image16_9"] as? String { image16_9 = temp}
+        if let temp = json["image344_220"] as? String { image344_220 = temp}
         if let temp = json["IsVideoArticle"] as? Int { isVideoArticle = temp}
         if let previousDate = publishedDate.toDate(){
             let interval = Date() - previousDate
@@ -36,10 +38,29 @@ class ReadModel{
             }else if let second = interval.second, second != 0{
                     timePass = "\(second) giây trước"
             }else {
-                timePass = "trực tiếp"
+                timePass = "Đang phát"
             }
         }
         return self
+    }
+    func getTimePass() -> String{
+        if let previousDate = publishedDate.toDate(){
+            let interval = Date() - previousDate
+            if let month = interval.month, month != 0{
+                timePass = "\(month) tháng trước"
+            } else if let day = interval.day, day != 0{
+                timePass = "\(day) ngày trước"
+            }else if let hour = interval.hour, hour != 0{
+                timePass = "\(hour) giờ trước"
+            }else if let minute = interval.minute, minute != 0{
+                timePass = "\(minute) phút trước"
+            }else if let second = interval.second, second != 0{
+                    timePass = "\(second) giây trước"
+            }else {
+                timePass = "Đang phát"
+            }
+        }
+        return timePass
     }
 }
 class ReadDetailModel{

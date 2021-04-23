@@ -12,8 +12,11 @@ class Type3ItemCell: UICollectionViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var viewImage: LazyImageView!
-    @IBOutlet weak var viewBookmark: UIView!
+    //@IBOutlet weak var viewBookmark: UIView!
     @IBOutlet weak var viewShare: UIView!
+    @IBOutlet weak var lblEpisode: UILabel!
+    @IBOutlet weak var lblTotalEpisode: UILabel!
+    @IBOutlet weak var viewEpisode: UIView!
     var delegate: Type3ItemCellDelegate!
     var data = MediaModel()
     var row = 0
@@ -21,12 +24,13 @@ class Type3ItemCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         viewImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewImage(_:))))
-        viewBookmark.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBookmark(_:))))
+        //viewBookmark.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBookmark(_:))))
         viewShare.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewShare(_:))))
         lblTitle.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectLblTitle(_:))))
     }
     override func prepareForReuse() {
         thumbImage.image = #imageLiteral(resourceName: "placeHolderImage")
+        viewEpisode.isHidden = true
     }
     @objc func didSelectViewImage(_ sender: Any){
         delegate?.didSelectViewImage(self)

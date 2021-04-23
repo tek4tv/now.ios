@@ -17,10 +17,10 @@ class Book3Cell: UICollectionViewCell {
         collView.dataSource = self
         collView.register(UINib(nibName: Book3ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Book3ItemCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 375 * scaleW, height: 190 * scaleW)
+        layout.itemSize = CGSize(width: 334 * scaleW, height: 167 * scaleW)
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
+        layout.minimumLineSpacing = 20 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
         // Initialization code
     }
@@ -40,13 +40,10 @@ extension Book3Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        sharedItem = data.media[indexPath.row]
-        sharedList = self.data.media
-        idBookPlaying = indexPath.row
-        delegate?.didSelectItemAt(self)
+        self.delegate?.didSelectItemAt(self, self.data.media[indexPath.row])
     }
     
 }
 protocol Book3CellDelegate {
-    func didSelectItemAt(_ cell: Book3Cell)
+    func didSelectItemAt(_ cell: Book3Cell,_ data: MediaModel)
 }

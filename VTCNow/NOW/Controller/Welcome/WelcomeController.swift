@@ -30,7 +30,7 @@ class WelcomeController: UIViewController {
                             }
                         }
           }, completion: nil)
-        
+
     }
     func load(){
         let item = root.components[count]
@@ -47,7 +47,7 @@ class WelcomeController: UIViewController {
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeController.className) as! HomeController
                             vc.modalTransitionStyle = .crossDissolve
                             vc.modalPresentationStyle = .fullScreen
-                            self?.navigationController?.pushViewController(vc, animated: true)
+                            self?.navigationController?.pushViewController(vc, animated: false)
                         }
                     }
                     
@@ -56,6 +56,7 @@ class WelcomeController: UIViewController {
                 }
                 if data2.name == "Sách hay"{
                     bookCate = data2
+                    categorys.removeLast()
                 }
             }
         }

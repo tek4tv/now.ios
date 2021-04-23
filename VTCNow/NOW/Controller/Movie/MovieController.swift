@@ -17,14 +17,14 @@ class MovieController: UIViewController {
         collView.delegate = self
         collView.dataSource = self
         collView.register(UINib(nibName: MovieCell.className, bundle: nil), forCellWithReuseIdentifier: MovieCell.className)
-        collView.register(UINib(nibName: Type1Cell.className, bundle: nil), forCellWithReuseIdentifier: Type1Cell.className)
+        collView.register(UINib(nibName: Movie2Cell.className, bundle: nil), forCellWithReuseIdentifier: Movie2Cell.className)
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         collView.collectionViewLayout = layout
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
     }
     @objc func didSelectViewBack(_ sender: Any){
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
     }
 }
 extension MovieController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -37,15 +37,15 @@ extension MovieController: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return CGSize(width: 414 * scaleW, height: 250 * scaleW)
+            return CGSize(width: 414 * scaleW, height: 230 * scaleW)
         default:
-            return CGSize(width: 414 * scaleW, height: 280 * scaleW)
+            return CGSize(width: 414 * scaleW, height: 290 * scaleW)
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Movie2Cell.className, for: indexPath) as! Movie2Cell
             cell.delegate = self
             cell.data = news
             return cell
@@ -63,7 +63,7 @@ extension MovieController: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: MovieCategoryController.className) as! MovieCategoryController
         vc.data = news.components[indexPath.section - 1].category
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
 }
@@ -72,16 +72,16 @@ extension MovieController: MovieCellDelegate{
         let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
         vc.item = data
         vc.listData = list
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: false)
     }
     
 }
-extension MovieController: Type1CellDelegate{
-    func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel], _ cell: Type1Cell) {
+extension MovieController: Movie2CellDelegate{
+    func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel], _ cell: Movie2Cell) {
         let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
         vc.item = data
         vc.listData = list
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: false)
     }
     
     

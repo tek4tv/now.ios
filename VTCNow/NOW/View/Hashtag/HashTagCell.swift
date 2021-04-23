@@ -10,7 +10,7 @@ import UIKit
 class HashTagCell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
-    let listData = ["Võ Hoàng Yên", "Chính biến Myanmar", "Vắc xin AstraZeneca", "Sơn Tùng MTP", "Covid 19"]
+    let listData = ["Võ Hoàng Yên", "Chính biến Myanmar", "Manchester", "Sơn Tùng MTP", "Covid 19"]
     var delegate: HashTagCellDelegate!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,8 +20,9 @@ class HashTagCell: UICollectionViewCell {
         collView.register(UINib(nibName: HashTagItemCell.className, bundle: nil), forCellWithReuseIdentifier: HashTagItemCell.className)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 20 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
     }
 
@@ -35,7 +36,7 @@ extension HashTagCell: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         label.text = "# " + listData[indexPath.row]
         label.font = UIFont(name: "Roboto-Medium", size: 13 * scaleW)
         label.sizeToFit()
-        return CGSize(width: label.frame.width + 10 * scaleW, height: 40 * scaleH)
+        return CGSize(width: label.frame.width + 10 * scaleW, height: 35 * scaleW)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

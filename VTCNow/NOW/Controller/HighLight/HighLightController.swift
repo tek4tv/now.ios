@@ -27,6 +27,7 @@ class HighLightController: UIViewController {
         collView.register(UINib(nibName: Type5Cell.className, bundle: nil), forCellWithReuseIdentifier: Type5Cell.className)
         collView.register(UINib(nibName: Type6Cell.className, bundle: nil), forCellWithReuseIdentifier: Type6Cell.className)
         collView.register(UINib(nibName: Type7Cell.className, bundle: nil), forCellWithReuseIdentifier: Type7Cell.className)
+        collView.register(UINib(nibName: Type8Cell.className, bundle: nil), forCellWithReuseIdentifier: Type8Cell.className)
         collView.refreshControl = UIRefreshControl()
         collView.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(didSelectBookItem(_:)), name: NSNotification.Name("openBookPlayer"), object: nil)
@@ -48,7 +49,7 @@ class HighLightController: UIViewController {
     }
     @objc func didSelectBookItem(_ sender: Any){
         let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: false)
     }
     @objc func pullToRefresh(_ sender: Any){
         APIService.shared.getRootPlaylist {[weak self] (data, error) in
@@ -108,9 +109,9 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
         } else if section == 1{
             return CGSize(width: width, height: 60 * scaleW)
         } else if section == 2{
-            return CGSize(width: width, height: 232 * scaleW)
+            return CGSize(width: width, height: 260 * scaleW)
         } else if section == 3{
-            return CGSize(width: width, height: 105 * scaleW)
+            return CGSize(width: width, height: 95 * scaleW)
         } else {
             let item = categorys[section - 3]
 //            let item = categorys[section - 2]
@@ -118,32 +119,33 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             case "1":
                 return CGSize(width: width, height: 260 * scaleW)
             case "2":
-                return CGSize(width: width, height: 240 * scaleW)
+                let temp = 70 + 180
+                let height: CGFloat = CGFloat(temp)
+                return CGSize(width: width, height: height * scaleW)
             case "3":
-                let temp = 12 * 220 + 60 + 10 * 11 + 20 * 1
+                let temp = 12 * 220 + 70 + 10 * 11 + 20 * 1 + 30
                 let height: CGFloat = CGFloat(temp)
                 return CGSize(width: width, height: height * scaleW)
             case "4", "14":
                 if item.name == "Phim bộ"{
-                    let temp = 60 + 200 + 10
+                    let temp = 70 + 200 + 10
                     let height: CGFloat = CGFloat(temp)
                     return CGSize(width: width, height: height * scaleW)
                 }
-                return CGSize(width: width, height: 440 * scaleW)
+                let temp = 70 + 180 * 2 + 30
+                let height: CGFloat = CGFloat(temp)
+                return CGSize(width: width, height: height * scaleW)
             case "5", "8":
                 if item.name == "Âm nhạc"{
-                    return CGSize(width: width, height: 440 * scaleW)
+                    let temp = 70 + 180 * 2 + 30
+                    let height: CGFloat = CGFloat(temp)
+                    return CGSize(width: width, height: height * scaleW)
                 }
-                let temp = 60 + 200 + 10
+                let temp = 70 + 200 + 10
                 let height: CGFloat = CGFloat(temp)
                 return CGSize(width: width, height: height * scaleW)
             case "6", "7" :
-                if item.name == "Sách hay"{
-                    let temp = 60 + 200
-                    let height: CGFloat = CGFloat(temp)
-                    return CGSize(width: width, height: height * scaleW )
-                }
-                let temp = 60 + 260 + 10
+                let temp = 70 + 260 + 10
                 let height: CGFloat = CGFloat(temp)
                 return CGSize(width: width, height: height * scaleW )
             default:
@@ -155,21 +157,9 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
         let section = indexPath.section
         if section == 0{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.className, for: indexPath) as! WeatherCell
+            cell.delegate = self
             cell.viewSearch.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnSearch(_:))))
-            cell.viewWeather.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewWeather(_:))))
             return cell
-//        } else if section == 1 {
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
-//            if categorys.count > 0{
-//                cell.delegate = self
-//                cell.data = categorys[0]
-//                cell.collView.reloadData()
-//            }
-//            return cell
-//        } else if section == 2 {
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.className, for: indexPath) as! CategoryCell
-//            cell.delegate = self
-//            return cell
         } else if section == 1{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashTagCell.className, for: indexPath) as! HashTagCell
             cell.delegate = self
@@ -188,7 +178,6 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             return cell
         }else {
             let item = categorys[section - 3]
-//            let item = categorys[section - 2]
             switch item.layout.type {
             case "1":
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
@@ -219,7 +208,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                 return cell
             case "5", "8":
                 if item.name == "Âm nhạc"{
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4Cell.className, for: indexPath) as! Type4Cell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type8Cell.className, for: indexPath) as! Type8Cell
                     cell.delegate = self
                     cell.data = item
                     return cell
@@ -229,12 +218,6 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                 cell.data = item
                 return cell
             case "6", "7":
-                if item.name == "Sách hay"{
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7Cell.className, for: indexPath) as! Type7Cell
-                    cell.delegate = self
-                    cell.data = item
-                    return cell
-                }
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type6Cell.className, for: indexPath) as! Type6Cell
                 cell.delegate = self
                 cell.data = item
@@ -260,13 +243,12 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
 
         } else {
             let cate = categorys[section - 3]
-//            let cate = categorys[section - 2]
             switch cate.layout.subType {
             case "1", "2", "5", "12", "13", "14":
                 if cate.components.isEmpty{
                     news = cate
                     let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.navigationController?.pushViewController(vc, animated: false)
                 }else{
                     var count = 0
                     news = cate
@@ -277,7 +259,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                                 count += 1
                                 if count == news.components.count {
                                     let vc = self?.storyboard?.instantiateViewController(withIdentifier: ParentViewController.className) as! ParentViewController
-                                    self?.navigationController?.pushViewController(vc, animated: true)
+                                    self?.navigationController?.pushViewController(vc, animated: false)
                                 }
                             }
                         }
@@ -293,7 +275,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                             count += 1
                             if count == news.components.count {
                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: ParentViewController.className) as! ParentViewController
-                                self?.navigationController?.pushViewController(vc, animated: true)
+                                self?.navigationController?.pushViewController(vc, animated: false)
                             }
                         }
                     }
@@ -308,7 +290,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                             count += 1
                             if count == news.components.count {
                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: MusicController.className) as! MusicController
-                                self?.navigationController?.pushViewController(vc, animated: true)
+                                self?.navigationController?.pushViewController(vc, animated: false)
                             }
                         }
                     }
@@ -324,7 +306,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                             count += 1
                             if count == news.components.count {
                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: MovieController.className) as! MovieController
-                                self?.navigationController?.pushViewController(vc, animated: true)
+                                self?.navigationController?.pushViewController(vc, animated: false)
                             }
                         }
                     }
@@ -339,7 +321,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                             count += 1
                             if count == news.components.count {
                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: BookController.className) as! BookController
-                                self?.navigationController?.pushViewController(vc, animated: true)
+                                self?.navigationController?.pushViewController(vc, animated: false)
                             }
                         }
                     }
@@ -347,21 +329,25 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             default:
                 news = cate
                 let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.navigationController?.pushViewController(vc, animated: false)
                 break
             }
         }
     }
     @objc func didSelectBtnSearch(_ sender: Any){
         let vc = storyboard?.instantiateViewController(withIdentifier: SearchController.className) as! SearchController
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
-    @objc func didSelectViewWeather(_ sender: Any){
+}
+extension HighLightController: WeatherDelegate{
+    func didSelectViewWeather(_ listW: WeatherModel) {
         let vc = storyboard?.instantiateViewController(withIdentifier: PopUp7Controller.className) as! PopUp7Controller
         vc.modalPresentationStyle = .custom
         vc.modalTransitionStyle = .crossDissolve
+        vc.item = listW
         self.present(vc, animated: true, completion: nil)
     }
+
 }
 extension HighLightController: CategoryCellDelegate {
     func didSelectItem(_ cate: CategoryModel) {
@@ -370,7 +356,7 @@ extension HighLightController: CategoryCellDelegate {
             if cate.components.isEmpty{
                 news = cate
                 let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.navigationController?.pushViewController(vc, animated: false)
             }else{
                 var count = 0
                 news = cate
@@ -381,7 +367,7 @@ extension HighLightController: CategoryCellDelegate {
                             count += 1
                             if count == news.components.count {
                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: ParentViewController.className) as! ParentViewController
-                                self?.navigationController?.pushViewController(vc, animated: true)
+                                self?.navigationController?.pushViewController(vc, animated: false)
                             }
                         }
                     }
@@ -397,7 +383,7 @@ extension HighLightController: CategoryCellDelegate {
                         count += 1
                         if count == news.components.count {
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: ParentViewController.className) as! ParentViewController
-                            self?.navigationController?.pushViewController(vc, animated: true)
+                            self?.navigationController?.pushViewController(vc, animated: false)
                         }
                     }
                 }
@@ -412,7 +398,7 @@ extension HighLightController: CategoryCellDelegate {
                         count += 1
                         if count == news.components.count {
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: MusicController.className) as! MusicController
-                            self?.navigationController?.pushViewController(vc, animated: true)
+                            self?.navigationController?.pushViewController(vc, animated: false)
                         }
                     }
                 }
@@ -428,7 +414,7 @@ extension HighLightController: CategoryCellDelegate {
                         count += 1
                         if count == news.components.count {
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: MovieController.className) as! MovieController
-                            self?.navigationController?.pushViewController(vc, animated: true)
+                            self?.navigationController?.pushViewController(vc, animated: false)
                         }
                     }
                 }
@@ -443,7 +429,7 @@ extension HighLightController: CategoryCellDelegate {
                         count += 1
                         if count == news.components.count {
                             let vc = self?.storyboard?.instantiateViewController(withIdentifier: BookController.className) as! BookController
-                            self?.navigationController?.pushViewController(vc, animated: true)
+                            self?.navigationController?.pushViewController(vc, animated: false)
                         }
                     }
                 }
@@ -451,7 +437,7 @@ extension HighLightController: CategoryCellDelegate {
         default:
             news = cate
             let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: false)
             break
         }
     }
@@ -461,24 +447,24 @@ extension HighLightController: Type1CellDelegate{
         let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
         vc.item = data
         vc.listData = list
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: false)
     }
 }
 extension HighLightController: Type2CellDelegate{
     func didSelectItemAt(_ cell: Type2Cell) {
         let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     func didSelectViewMore(_ cell: Type2Cell) {
         news = cell.data
         let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
 }
 extension HighLightController: Type3CellDelegate{
     func didSelectViewImage(_ cell: Type3ItemCell) {
         let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     func didSelectViewShare(_ cell: Type3ItemCell) {
@@ -493,17 +479,18 @@ extension HighLightController: Type3CellDelegate{
 }
 extension HighLightController: Type4CellDelegate{
     func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel], _ cell: Type4Cell) {
-        if cell.data.name == "Âm nhạc"{
-            let vc = storyboard?.instantiateViewController(withIdentifier: MusicPlayerController.className) as! MusicPlayerController
-            vc.item = data
-            vc.listData = listData
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
-            vc.item = data
-            vc.listData = listData
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+        vc.item = data
+        vc.listData = listData
+        navigationController?.pushViewController(vc, animated: false)
+    }
+}
+extension HighLightController: Type8CellDelegate{
+    func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel], _ cell: Type8Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: MusicPlayerController.className) as! MusicPlayerController
+        vc.item = data
+        vc.listData = listData
+        navigationController?.pushViewController(vc, animated: false)
     }
 }
 extension HighLightController: Type5CellDelegate{
@@ -511,7 +498,7 @@ extension HighLightController: Type5CellDelegate{
         let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
         vc.item = data
         vc.listData = list
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: false)
     }
     
     func didSelectView2Share(_ cell: Type3ItemCell) {
@@ -526,7 +513,7 @@ extension HighLightController: Type5CellDelegate{
     func didSelectViewMore(_ cell: Type5Cell) {
         news = cell.data
         let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
 }
 extension HighLightController: Type6CellDelegate{
@@ -534,7 +521,7 @@ extension HighLightController: Type6CellDelegate{
         let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
         vc.item = data
         vc.listData = list
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: false)
     }
     func didSelectViewMore(_ cell: Type6Cell) {
         var count = 0
@@ -546,36 +533,36 @@ extension HighLightController: Type6CellDelegate{
                     count += 1
                     if count == news.components.count {
                         let vc = self?.storyboard?.instantiateViewController(withIdentifier: MovieController.className) as! MovieController
-                        self?.navigationController?.pushViewController(vc, animated: true)
+                        self?.navigationController?.pushViewController(vc, animated: false)
                     }
                 }
             }
         }
     }
 }
-extension HighLightController: Type7CellDelegate{
-    func didSelectItemAt(_ cell: Type7Cell) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func didSelectViewMore(_ cell: Type7Cell) {
-        var count = 0
-        news = bookCate
-        for item in news.components{
-            APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
-                if let data = data as? CategoryModel{
-                    item.category = data
-                    count += 1
-                    if count == news.components.count {
-                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: BookController.className) as! BookController
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-            }
-        }
-    }
-}
+//extension HighLightController: Type7CellDelegate{
+//    func didSelectItemAt(_ cell: Type7Cell) {
+//        let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
+//        self.navigationController?.pushViewController(vc, animated: true)
+//    }
+//    
+//    func didSelectViewMore(_ cell: Type7Cell) {
+//        var count = 0
+//        news = bookCate
+//        for item in news.components{
+//            APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
+//                if let data = data as? CategoryModel{
+//                    item.category = data
+//                    count += 1
+//                    if count == news.components.count {
+//                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: BookController.className) as! BookController
+//                        self?.navigationController?.pushViewController(vc, animated: true)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
 extension HighLightController: HashTagCellDelegate{
     func didSelectItemAt(_ word: String) {
         APIService.shared.searchAll(keySearch: word) {[self] (data, error) in
@@ -583,7 +570,7 @@ extension HighLightController: HashTagCellDelegate{
                 let vc = storyboard?.instantiateViewController(withIdentifier: SearchController.className) as! SearchController
                 vc.listData = data
                 vc.isPushByHashTag = true
-                navigationController?.pushViewController(vc, animated: true)
+                navigationController?.pushViewController(vc, animated: false)
             }
         }
     }

@@ -28,7 +28,7 @@ class MusicCategoryController: UIViewController {
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
     }
     @objc func didSelectViewBack(_ sender: Any){
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
     }
 }
 extension MusicCategoryController: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -46,15 +46,7 @@ extension MusicCategoryController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        sharedItem = data.media[indexPath.row]
-//        sharedList = data.media
-//        if sharedItem.path.contains("mp3"){
-//            let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
-//            navigationController?.pushViewController(vc, animated: true)
-//        }else{
-//            NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-//        }
-        //
+
         let count = data.media.count
         
         var list: [MediaModel] = []
@@ -75,22 +67,12 @@ extension MusicCategoryController: UICollectionViewDelegate, UICollectionViewDat
                 list = Array(data.media[indexPath.row+1...count-1] + data.media[0...indexPath.row-1])
             }
         }
-        //
-        
         APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) {[self] (data, error) in
             if let data = data as? MediaModel{
-//                sharedItem = data
-//                sharedList = self.data.media
-//                if sharedItem.path.contains("mp3"){
-//                    let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
-//                    navigationController?.pushViewController(vc, animated: true)
-//                }else{
-//                    NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-//                }
                 let vc = storyboard?.instantiateViewController(withIdentifier: MusicPlayerController.className) as! MusicPlayerController
                 vc.item = data
                 vc.listData = list
-                navigationController?.pushViewController(vc, animated: true)
+                navigationController?.pushViewController(vc, animated: false)
             }
         }
     }

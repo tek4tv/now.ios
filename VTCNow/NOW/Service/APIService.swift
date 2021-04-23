@@ -223,4 +223,49 @@ class APIService{
             }
         })
     }
+    func getEpisode(privateKey: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://now.vtc.vn/api/now/v1/videos/\(privateKey)/episode", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var list: [MediaModel] = []
+                if let data = data as? [[String: Any]]{
+                    for json in data{
+                        let itemAdd = MediaModel().initLoad(json)
+                        list.append(itemAdd)
+                    }
+                }
+                closure(list, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+
+    func getWeather(_ latitude : String,_ longitude: String, closure: @escaping (_ response: Any?, _ list: Any?, _ error: Error?) -> Void) {
+        AF.request("https://api.darksky.net/forecast/f3ce92e52d7509098b59805b2e280a60/\(latitude),\(longitude)?units=si", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                if let data = data as? [String : Any] {
+                    if let currentData = data["currently"] as? [String: Any]{
+                        var today = TodayModel()
+                        today = today.initLoad(currentData)
+                        if let daily = data["daily"] as? [String: Any]{
+                            if let listData = daily["data"] as? [[String: Any]]{
+                                var listDaily = [DailyModel]()
+                                for day in listData{
+                                    var dayAdd = DailyModel()
+                                    dayAdd = dayAdd.initLoad(day)
+                                    listDaily.append(dayAdd)
+                                }
+                                closure(today, listDaily, nil)
+                            }
+                        }
+                        
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
 }

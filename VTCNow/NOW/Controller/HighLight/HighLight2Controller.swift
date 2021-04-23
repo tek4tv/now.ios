@@ -12,20 +12,20 @@ class HighLight2Controller: UIViewController {
     @IBOutlet weak var viewBack: UIView!
     var timer = Timer()
     var page = 0
-    var indexPath = IndexPath(row: 0, section: 0)
+    var indexPath = IndexPath(row: 1, section: 0)
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: "VideoCell", bundle: nil), forCellWithReuseIdentifier: "VideoCell")
+        collView.register(UINib(nibName: VideoCell.className, bundle: nil), forCellWithReuseIdentifier: VideoCell.className)
+        collView.register(UINib(nibName: NoCell.className, bundle: nil), forCellWithReuseIdentifier: NoCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 414 * scaleW, height: 330 * scaleW)
+//        layout.itemSize = CGSize(width: 414 * scaleW, height: 320 * scaleW)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumLineSpacing = 25 * scaleW
+        layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 20 * scaleW, left: 0, bottom: 0, right: 0)
         collView.collectionViewLayout = layout
         
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnBack(_:))))
@@ -44,7 +44,7 @@ class HighLight2Controller: UIViewController {
         }
     }
     @objc func didSelectBtnBack(_ sender: Any){
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -52,7 +52,7 @@ class HighLight2Controller: UIViewController {
     }
 }
 
-extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate{
+extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout{
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let count = collView.visibleCells.count
@@ -61,17 +61,13 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
             let id1 = collView.indexPath(for: collView.visibleCells[1])!
             if id0.row < id1.row {
                 if self.indexPath != id0{
-                    if let cell = collView.visibleCells[1] as? VideoCell {
-                        cell.viewPlayer.player?.pause()
-                    }
+                    NotificationCenter.default.post(name: NSNotification.Name("stopVOD"), object: nil)
                     self.indexPath = id0
                     collView.reloadData()
                 }
             }else{
                 if self.indexPath != id1{
-                    if let cell = collView.visibleCells[0] as? VideoCell {
-                        cell.viewPlayer.player?.pause()
-                    }
+                    NotificationCenter.default.post(name: NSNotification.Name("stopVOD"), object: nil)
                     self.indexPath = id1
                     collView.reloadData()
                 }
@@ -85,20 +81,38 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
             }
             list = list.sorted(by: { $0.row > $1.row })
             if self.indexPath != list[1]{
-                if let cell = collView.visibleCells[0] as? VideoCell {
-                    cell.viewPlayer.player?.pause()
-                }
-                if let cell = collView.visibleCells[2] as? VideoCell {
-                    cell.viewPlayer.player?.pause()
-                }
+                NotificationCenter.default.post(name: NSNotification.Name("stopVOD"), object: nil)
                 self.indexPath = list[1]
+                collView.reloadData()
+            }
+        }
+        if count == 4 {
+            var list: [IndexPath] = []
+            for cell in collView.visibleCells {
+                let id = collView.indexPath(for: cell)
+                list.append(id!)
+            }
+            list = list.sorted(by: { $0.row > $1.row })
+            if self.indexPath != list[2]{
+                NotificationCenter.default.post(name: NSNotification.Name("stopVOD"), object: nil)
+                self.indexPath = list[2]
                 collView.reloadData()
             }
         }
         
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.row {
+        case 0:
+            return CGSize(width: 414 * scaleW, height: 1)
+        case news.media.count + 1:
+            return CGSize(width: 414 * scaleW, height: 320 * scaleW)
+        default:
+            return CGSize(width: 414 * scaleW, height: 320 * scaleW)
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return news.media.count
+        return news.media.count + 2
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == news.media.count - 1 {
@@ -115,40 +129,52 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.className, for: indexPath) as! VideoCell
-        //cell.delegate = self
+        switch indexPath.row {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
+            return cell
+        case news.media.count + 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.className, for: indexPath) as! VideoCell
+            //cell.delegate = self
+            
+            let item = news.media[indexPath.row - 1]
+            cell.item = item
+            cell.indexPath = indexPath
+            cell.lblTitle.text = item.name + item.episode
+            if news.name == "Đừng bỏ lỡ"{
+                cell.lblTime.text = ""
+            } else{
+                cell.lblTime.text = item.timePass
+            }
+            
+            cell.delegate = self
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.imgThumb.loadImage(fromURL: url)
+            }
+            if indexPath == self.indexPath{
+                var link = ""
+                if item.fileCode != "" {
+                    link = item.fileCode
+                }else{
+                    link = item.path
+                }
+                if let url = URL(string: link){
+                    
+                    cell.viewPlayer.player = AVPlayer(url: url)
+                    cell.viewPlayer.player?.play()
+                    cell.setup()
+                }
+                cell.imgThumb.isHidden = true
+            } else{
+                cell.viewPlayer.player?.pause()
+                cell.imgThumb.isHidden = false
+            }
+            return cell
+        }
         
-        let item = news.media[indexPath.row]
-        cell.item = item
-        cell.indexPath = indexPath
-        cell.lblTitle.text = item.name + item.episode
-        cell.lblTime.text = item.timePass
-        cell.delegate = self
-        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-            cell.imgThumb.loadImage(fromURL: url)
-        }
-        if indexPath == self.indexPath{
-            var link = ""
-            if item.fileCode != "" {
-                link = item.fileCode
-            }else{
-                link = item.path
-            }
-            if let url = URL(string: link){
-                
-                cell.viewPlayer.player  = AVPlayer(url: url)
-                cell.viewPlayer.player?.play()
-                cell.setup()
-                
-            }
-            cell.imgThumb.isHidden = true
-            cell.viewShadow.isHidden = true
-        } else{
-            cell.viewPlayer.player?.pause()
-            cell.imgThumb.isHidden = false
-            cell.viewShadow.isHidden = false
-        }
-        return cell
     }
     
 }
@@ -196,7 +222,7 @@ extension HighLight2Controller: VideoCellDelegate{
                 vc.player = nil
                 cell.viewPlayer.player?.play()
                 cell.isPlaying = true
-                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
             }
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
@@ -209,7 +235,7 @@ extension HighLight2Controller: VideoCellDelegate{
                 vc.player = nil
                 cell.viewPlayer.player?.play()
                 cell.isPlaying = true
-                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-49"), for: .normal)
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
             }
             present(vc, animated: true) {
                 vc.player?.play()

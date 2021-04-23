@@ -29,9 +29,9 @@ class MovieCell: UICollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 110 * scaleW, height: 230 * scaleW)
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10 * scaleW
+        layout.minimumLineSpacing = 20 * scaleW
         layout.minimumInteritemSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
     }
     override func prepareForReuse() {

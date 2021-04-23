@@ -18,17 +18,17 @@ class MovieCategoryController: UIViewController {
         collView.dataSource = self
         collView.register(UINib(nibName: MovieItem2Cell.className, bundle: nil), forCellWithReuseIdentifier: MovieItem2Cell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 374 / 3.01 * scaleW, height: 280 * scaleW)
-        layout.minimumLineSpacing = 10 * scaleW
-        layout.minimumInteritemSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
+        layout.itemSize = CGSize(width: (414 - 80) / 3.01 * scaleW, height: 250 * scaleW)
+        layout.minimumLineSpacing = 20 * scaleW
+        layout.minimumInteritemSpacing = 20 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
         
         // Do any additional setup after loading the view.
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
     }
     @objc func didSelectViewBack(_ sender: Any){
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
     }
 }
 extension MovieCategoryController: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -72,7 +72,7 @@ extension MovieCategoryController: UICollectionViewDelegate, UICollectionViewDat
                 let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
                 vc.item = data
                 vc.listData = list
-                navigationController?.pushViewController(vc, animated: true)
+                navigationController?.pushViewController(vc, animated: false)
             }
         }
     }

@@ -12,18 +12,26 @@
 		F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2F8425EC8E170002E99C /* CommentCell.swift */; };
 		F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60E2F8525EC8E170002E99C /* CommentCell.xib */; };
 		F60E2F8A25EC96F70002E99C /* PopUp5Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */; };
+		F610E0E5262EAEB900089FD8 /* Movie2ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F610E0E1262EAEB800089FD8 /* Movie2ItemCell.xib */; };
+		F610E0E6262EAEB900089FD8 /* Movie2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F610E0E2262EAEB800089FD8 /* Movie2Cell.swift */; };
+		F610E0E7262EAEB900089FD8 /* Movie2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F610E0E3262EAEB900089FD8 /* Movie2Cell.xib */; };
+		F610E0E8262EAEB900089FD8 /* Movie2ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F610E0E4262EAEB900089FD8 /* Movie2ItemCell.swift */; };
 		F611070B25EE963100B049C3 /* PopUp6Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F611070A25EE963100B049C3 /* PopUp6Controller.swift */; };
+		F61707492628005300CFEC48 /* ReadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61707472628005300CFEC48 /* ReadCell.swift */; };
+		F617074A2628005300CFEC48 /* ReadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F61707482628005300CFEC48 /* ReadCell.xib */; };
 		F6176368261AF64A00A9A547 /* Book3Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6176366261AF64A00A9A547 /* Book3Cell.swift */; };
 		F6176369261AF64A00A9A547 /* Book3Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6176367261AF64A00A9A547 /* Book3Cell.xib */; };
 		F617636D261AF6C400A9A547 /* Book3ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F617636B261AF6C400A9A547 /* Book3ItemCell.swift */; };
 		F617636E261AF6C400A9A547 /* Book3ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F617636C261AF6C400A9A547 /* Book3ItemCell.xib */; };
 		F6176371261B152700A9A547 /* MusicPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6176370261B152700A9A547 /* MusicPlayerController.swift */; };
 		F6332F7625CCFD5600305C2E /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6332F7525CCFD5600305C2E /* PlayerViewController.swift */; };
+		F641344026284CD100BCB777 /* Type8ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F641343C26284CD000BCB777 /* Type8ItemCell.xib */; };
+		F641344126284CD100BCB777 /* Type8Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F641343D26284CD000BCB777 /* Type8Cell.xib */; };
+		F641344226284CD100BCB777 /* Type8Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F641343E26284CD000BCB777 /* Type8Cell.swift */; };
+		F641344326284CD100BCB777 /* Type8ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F641343F26284CD000BCB777 /* Type8ItemCell.swift */; };
 		F645AC5725E8E113005F3C57 /* BookCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F645AC5625E8E113005F3C57 /* BookCategoryController.swift */; };
 		F647365C2612E555008BF14E /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F647365A2612E554008BF14E /* WordCell.swift */; };
 		F647365D2612E555008BF14E /* WordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F647365B2612E554008BF14E /* WordCell.xib */; };
-		F648029925DFA03700D6485B /* SubTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648029725DFA03700D6485B /* SubTypeCell.swift */; };
-		F648029A25DFA03700D6485B /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F648029825DFA03700D6485B /* SubTypeCell.xib */; };
 		F64836A925F0D12000A9E878 /* MovieController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64836A825F0D12000A9E878 /* MovieController.swift */; };
 		F64836B125F0D5BC00A9E878 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64836AD25F0D5BB00A9E878 /* MovieCell.swift */; };
 		F64836B325F0D5BC00A9E878 /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F64836AF25F0D5BB00A9E878 /* MovieCell.xib */; };
@@ -42,6 +50,7 @@
 		F649FEBF26258B8C0041148E /* ClearCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F649FEBD26258B8C0041148E /* ClearCell.swift */; };
 		F649FEC026258B8C0041148E /* ClearCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F649FEBE26258B8C0041148E /* ClearCell.xib */; };
 		F64A41E025ECC42D0011F8B1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64A41DF25ECC42D0011F8B1 /* Config.swift */; };
+		F64AB6DC26296E1100ABB691 /* TodayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64AB6DB26296E1100ABB691 /* TodayModel.swift */; };
 		F64B02E125ECF0BD00AAE865 /* ListenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64B02E025ECF0BD00AAE865 /* ListenController.swift */; };
 		F64B02E625ECF18900AAE865 /* ChanelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64B02E425ECF18900AAE865 /* ChanelCell.swift */; };
 		F64B02E725ECF18900AAE865 /* ChanelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F64B02E525ECF18900AAE865 /* ChanelCell.xib */; };
@@ -115,17 +124,14 @@
 		F6614735261EC0D700FD9469 /* Video2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6614733261EC0D700FD9469 /* Video2Cell.swift */; };
 		F6614736261EC0D700FD9469 /* Video2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6614734261EC0D700FD9469 /* Video2Cell.xib */; };
 		F661473A261EF25600FD9469 /* TV2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6614739261EF25600FD9469 /* TV2Controller.swift */; };
-		F6624CFB25EE2D4E00622AA1 /* ReadACell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624CF925EE2D4E00622AA1 /* ReadACell.swift */; };
-		F6624CFC25EE2D4E00622AA1 /* ReadACell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6624CFA25EE2D4E00622AA1 /* ReadACell.xib */; };
 		F6624D0025EE329C00622AA1 /* ReadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6624CFF25EE329C00622AA1 /* ReadController.swift */; };
 		F66506B62601BF41009E5B78 /* DotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66506B42601BF41009E5B78 /* DotCell.swift */; };
 		F66506B72601BF41009E5B78 /* DotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F66506B52601BF41009E5B78 /* DotCell.xib */; };
+		F6650FA226326B7F0057F46C /* User2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6650FA126326B7F0057F46C /* User2Controller.swift */; };
 		F666BEE125E3569B0000990E /* PopUp2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F666BEE025E3569B0000990E /* PopUp2Controller.swift */; };
 		F666BEE425E35A1D0000990E /* PopUp3Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F666BEE325E35A1D0000990E /* PopUp3Controller.swift */; };
 		F666BEEA25E35C950000990E /* PopUpItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F666BEE825E35C950000990E /* PopUpItemCell.swift */; };
 		F666BEEB25E35C950000990E /* PopUpItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F666BEE925E35C950000990E /* PopUpItemCell.xib */; };
-		F66B04D525EE3FF90034013F /* ReadBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66B04D325EE3FF90034013F /* ReadBCell.swift */; };
-		F66B04D625EE3FF90034013F /* ReadBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F66B04D425EE3FF90034013F /* ReadBCell.xib */; };
 		F67464892616C118003A5593 /* ViewMore2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67464872616C118003A5593 /* ViewMore2Cell.swift */; };
 		F674648A2616C118003A5593 /* ViewMore2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F67464882616C118003A5593 /* ViewMore2Cell.xib */; };
 		F674648F2616CA44003A5593 /* Type7Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F674648D2616CA44003A5593 /* Type7Cell.swift */; };
@@ -140,6 +146,11 @@
 		F698933225F5FC9E00EA960A /* WatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698933125F5FC9E00EA960A /* WatchController.swift */; };
 		F698933725F5FD6D00EA960A /* WatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698933525F5FD6D00EA960A /* WatchCell.swift */; };
 		F698933825F5FD6D00EA960A /* WatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F698933625F5FD6D00EA960A /* WatchCell.xib */; };
+		F69EDA892631292F00E7122C /* PickUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69EDA882631292F00E7122C /* PickUpController.swift */; };
+		F69EDA8E26312B9400E7122C /* NoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69EDA8C26312B9400E7122C /* NoneCell.swift */; };
+		F69EDA8F26312B9400E7122C /* NoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F69EDA8D26312B9400E7122C /* NoneCell.xib */; };
+		F69F7A18263155A8001494A9 /* NewBroadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69F7A16263155A8001494A9 /* NewBroadCell.swift */; };
+		F69F7A19263155A8001494A9 /* NewBroadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F69F7A17263155A8001494A9 /* NewBroadCell.xib */; };
 		F6AA30E625EDDBD6007E3477 /* ReadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AA30E525EDDBD6007E3477 /* ReadModel.swift */; };
 		F6B82C7525F2315D009FF801 /* Music2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B82C7325F2315D009FF801 /* Music2Cell.swift */; };
 		F6B82C7625F2315D009FF801 /* Music2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6B82C7425F2315D009FF801 /* Music2Cell.xib */; };
@@ -178,18 +189,26 @@
 		F60E2F8425EC8E170002E99C /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		F60E2F8525EC8E170002E99C /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp5Controller.swift; sourceTree = "<group>"; };
+		F610E0E1262EAEB800089FD8 /* Movie2ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Movie2ItemCell.xib; sourceTree = "<group>"; };
+		F610E0E2262EAEB800089FD8 /* Movie2Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie2Cell.swift; sourceTree = "<group>"; };
+		F610E0E3262EAEB900089FD8 /* Movie2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Movie2Cell.xib; sourceTree = "<group>"; };
+		F610E0E4262EAEB900089FD8 /* Movie2ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie2ItemCell.swift; sourceTree = "<group>"; };
 		F611070A25EE963100B049C3 /* PopUp6Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp6Controller.swift; sourceTree = "<group>"; };
+		F61707472628005300CFEC48 /* ReadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadCell.swift; sourceTree = "<group>"; };
+		F61707482628005300CFEC48 /* ReadCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadCell.xib; sourceTree = "<group>"; };
 		F6176366261AF64A00A9A547 /* Book3Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book3Cell.swift; sourceTree = "<group>"; };
 		F6176367261AF64A00A9A547 /* Book3Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book3Cell.xib; sourceTree = "<group>"; };
 		F617636B261AF6C400A9A547 /* Book3ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book3ItemCell.swift; sourceTree = "<group>"; };
 		F617636C261AF6C400A9A547 /* Book3ItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book3ItemCell.xib; sourceTree = "<group>"; };
 		F6176370261B152700A9A547 /* MusicPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerController.swift; sourceTree = "<group>"; };
 		F6332F7525CCFD5600305C2E /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		F641343C26284CD000BCB777 /* Type8ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Type8ItemCell.xib; sourceTree = "<group>"; };
+		F641343D26284CD000BCB777 /* Type8Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Type8Cell.xib; sourceTree = "<group>"; };
+		F641343E26284CD000BCB777 /* Type8Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type8Cell.swift; sourceTree = "<group>"; };
+		F641343F26284CD000BCB777 /* Type8ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type8ItemCell.swift; sourceTree = "<group>"; };
 		F645AC5625E8E113005F3C57 /* BookCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCategoryController.swift; sourceTree = "<group>"; };
 		F647365A2612E554008BF14E /* WordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
 		F647365B2612E554008BF14E /* WordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordCell.xib; sourceTree = "<group>"; };
-		F648029725DFA03700D6485B /* SubTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubTypeCell.swift; sourceTree = "<group>"; };
-		F648029825DFA03700D6485B /* SubTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTypeCell.xib; sourceTree = "<group>"; };
 		F64836A825F0D12000A9E878 /* MovieController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieController.swift; sourceTree = "<group>"; };
 		F64836AD25F0D5BB00A9E878 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		F64836AF25F0D5BB00A9E878 /* MovieCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
@@ -208,6 +227,7 @@
 		F649FEBD26258B8C0041148E /* ClearCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearCell.swift; sourceTree = "<group>"; };
 		F649FEBE26258B8C0041148E /* ClearCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClearCell.xib; sourceTree = "<group>"; };
 		F64A41DF25ECC42D0011F8B1 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		F64AB6DB26296E1100ABB691 /* TodayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayModel.swift; sourceTree = "<group>"; };
 		F64B02E025ECF0BD00AAE865 /* ListenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenController.swift; sourceTree = "<group>"; };
 		F64B02E425ECF18900AAE865 /* ChanelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChanelCell.swift; sourceTree = "<group>"; };
 		F64B02E525ECF18900AAE865 /* ChanelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChanelCell.xib; sourceTree = "<group>"; };
@@ -283,17 +303,14 @@
 		F6614733261EC0D700FD9469 /* Video2Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video2Cell.swift; sourceTree = "<group>"; };
 		F6614734261EC0D700FD9469 /* Video2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Video2Cell.xib; sourceTree = "<group>"; };
 		F6614739261EF25600FD9469 /* TV2Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TV2Controller.swift; sourceTree = "<group>"; };
-		F6624CF925EE2D4E00622AA1 /* ReadACell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadACell.swift; sourceTree = "<group>"; };
-		F6624CFA25EE2D4E00622AA1 /* ReadACell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadACell.xib; sourceTree = "<group>"; };
 		F6624CFF25EE329C00622AA1 /* ReadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadController.swift; sourceTree = "<group>"; };
 		F66506B42601BF41009E5B78 /* DotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotCell.swift; sourceTree = "<group>"; };
 		F66506B52601BF41009E5B78 /* DotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DotCell.xib; sourceTree = "<group>"; };
+		F6650FA126326B7F0057F46C /* User2Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User2Controller.swift; sourceTree = "<group>"; };
 		F666BEE025E3569B0000990E /* PopUp2Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp2Controller.swift; sourceTree = "<group>"; };
 		F666BEE325E35A1D0000990E /* PopUp3Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp3Controller.swift; sourceTree = "<group>"; };
 		F666BEE825E35C950000990E /* PopUpItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpItemCell.swift; sourceTree = "<group>"; };
 		F666BEE925E35C950000990E /* PopUpItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpItemCell.xib; sourceTree = "<group>"; };
-		F66B04D325EE3FF90034013F /* ReadBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadBCell.swift; sourceTree = "<group>"; };
-		F66B04D425EE3FF90034013F /* ReadBCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadBCell.xib; sourceTree = "<group>"; };
 		F67464872616C118003A5593 /* ViewMore2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMore2Cell.swift; sourceTree = "<group>"; };
 		F67464882616C118003A5593 /* ViewMore2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewMore2Cell.xib; sourceTree = "<group>"; };
 		F674648D2616CA44003A5593 /* Type7Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type7Cell.swift; sourceTree = "<group>"; };
@@ -308,6 +325,11 @@
 		F698933125F5FC9E00EA960A /* WatchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchController.swift; sourceTree = "<group>"; };
 		F698933525F5FD6D00EA960A /* WatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCell.swift; sourceTree = "<group>"; };
 		F698933625F5FD6D00EA960A /* WatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WatchCell.xib; sourceTree = "<group>"; };
+		F69EDA882631292F00E7122C /* PickUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpController.swift; sourceTree = "<group>"; };
+		F69EDA8C26312B9400E7122C /* NoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoneCell.swift; sourceTree = "<group>"; };
+		F69EDA8D26312B9400E7122C /* NoneCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoneCell.xib; sourceTree = "<group>"; };
+		F69F7A16263155A8001494A9 /* NewBroadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBroadCell.swift; sourceTree = "<group>"; };
+		F69F7A17263155A8001494A9 /* NewBroadCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewBroadCell.xib; sourceTree = "<group>"; };
 		F6AA30E525EDDBD6007E3477 /* ReadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadModel.swift; sourceTree = "<group>"; };
 		F6B82C7325F2315D009FF801 /* Music2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music2Cell.swift; sourceTree = "<group>"; };
 		F6B82C7425F2315D009FF801 /* Music2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Music2Cell.xib; sourceTree = "<group>"; };
@@ -379,13 +401,15 @@
 			path = Comment;
 			sourceTree = "<group>";
 		};
-		F648029625DF9FC700D6485B /* SubType */ = {
+		F641343B26284CD000BCB777 /* Type8 */ = {
 			isa = PBXGroup;
 			children = (
-				F648029725DFA03700D6485B /* SubTypeCell.swift */,
-				F648029825DFA03700D6485B /* SubTypeCell.xib */,
+				F641343C26284CD000BCB777 /* Type8ItemCell.xib */,
+				F641343D26284CD000BCB777 /* Type8Cell.xib */,
+				F641343E26284CD000BCB777 /* Type8Cell.swift */,
+				F641343F26284CD000BCB777 /* Type8ItemCell.swift */,
 			);
-			path = SubType;
+			path = Type8;
 			sourceTree = "<group>";
 		};
 		F64836A625F0CF8A00A9E878 /* Music */ = {
@@ -483,6 +507,10 @@
 		F64C116325EF9417001C3A7C /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				F610E0E2262EAEB800089FD8 /* Movie2Cell.swift */,
+				F610E0E3262EAEB900089FD8 /* Movie2Cell.xib */,
+				F610E0E4262EAEB900089FD8 /* Movie2ItemCell.swift */,
+				F610E0E1262EAEB800089FD8 /* Movie2ItemCell.xib */,
 				F64836B825F0D64400A9E878 /* MovieItemCell.swift */,
 				F64836B925F0D64400A9E878 /* MovieItemCell.xib */,
 				F64836AD25F0D5BB00A9E878 /* MovieCell.swift */,
@@ -552,9 +580,9 @@
 				F6507CE725C3F3CA002E77EC /* Welcome */,
 				F649FEC2262597F00041148E /* PopUp */,
 				F649FECA2625981E0041148E /* TV */,
+				F69EDA87263127CF00E7122C /* User */,
 				F64BF59F25E64E7900752E80 /* SearchController.swift */,
 				F64B02E025ECF0BD00AAE865 /* ListenController.swift */,
-				F6CB90BD25F720A70071D0BB /* UserController.swift */,
 				F64CFFBB25F8AB0F002F7F6F /* SpeechToTextController.swift */,
 				F65557D7261D8C01000E8AEA /* VideoController.swift */,
 			);
@@ -570,6 +598,7 @@
 				F64B02EA25ECF30400AAE865 /* ChannelModel.swift */,
 				F6CB90C025F72D9D0071D0BB /* NewsVideoModel.swift */,
 				F64E6AD926049C22000F2A22 /* ReportModel.swift */,
+				F64AB6DB26296E1100ABB691 /* TodayModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -577,6 +606,7 @@
 		F6507CD225C3EF98002E77EC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F69EDA8526311E2A00E7122C /* User */,
 				F65EC497261476B90088DBC7 /* Hashtag */,
 				F698933425F5FD3B00EA960A /* TV */,
 				F649761325F2142100EAC71D /* Music */,
@@ -586,7 +616,6 @@
 				F60E2F8325EC8DF60002E99C /* Comment */,
 				F6F7C4DA25E8B1FF008F7A45 /* Book */,
 				F666BEE625E35C590000990E /* PopUpItem */,
-				F648029625DF9FC700D6485B /* SubType */,
 				F65FD96F25C672F0007F8D0F /* Type1 */,
 				F65FD98A25C68BEC007F8D0F /* Type2 */,
 				F65FD9A025C694E2007F8D0F /* Type3 */,
@@ -594,6 +623,7 @@
 				F65FD9C525C6A114007F8D0F /* Type5 */,
 				F6D5068725C6A84B002BEA99 /* Type6 */,
 				F674648C2616C9B0003A5593 /* Type7 */,
+				F641343B26284CD000BCB777 /* Type8 */,
 				F65FD98025C6794F007F8D0F /* Category */,
 				F65FD97A25C674CA007F8D0F /* Weather */,
 				F65FD96D25C672F0007F8D0F /* LazyLoading */,
@@ -649,10 +679,8 @@
 		F655978025EE187E00FDA5CA /* Read */ = {
 			isa = PBXGroup;
 			children = (
-				F6624CF925EE2D4E00622AA1 /* ReadACell.swift */,
-				F6624CFA25EE2D4E00622AA1 /* ReadACell.xib */,
-				F66B04D425EE3FF90034013F /* ReadBCell.xib */,
-				F66B04D325EE3FF90034013F /* ReadBCell.swift */,
+				F61707472628005300CFEC48 /* ReadCell.swift */,
+				F61707482628005300CFEC48 /* ReadCell.xib */,
 			);
 			path = Read;
 			sourceTree = "<group>";
@@ -802,6 +830,27 @@
 			path = TV;
 			sourceTree = "<group>";
 		};
+		F69EDA8526311E2A00E7122C /* User */ = {
+			isa = PBXGroup;
+			children = (
+				F69EDA8C26312B9400E7122C /* NoneCell.swift */,
+				F69EDA8D26312B9400E7122C /* NoneCell.xib */,
+				F69F7A16263155A8001494A9 /* NewBroadCell.swift */,
+				F69F7A17263155A8001494A9 /* NewBroadCell.xib */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		F69EDA87263127CF00E7122C /* User */ = {
+			isa = PBXGroup;
+			children = (
+				F6CB90BD25F720A70071D0BB /* UserController.swift */,
+				F69EDA882631292F00E7122C /* PickUpController.swift */,
+				F6650FA126326B7F0057F46C /* User2Controller.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		F6AA30E025EDDB3D007E3477 /* Read */ = {
 			isa = PBXGroup;
 			children = (
@@ -923,6 +972,7 @@
 			files = (
 				F6BC461F2615A8FD00DDD828 /* ViewFullItemCell.xib in Resources */,
 				F65FD99025C68BEC007F8D0F /* Type2ItemCell.xib in Resources */,
+				F641344026284CD100BCB777 /* Type8ItemCell.xib in Resources */,
 				F666BEEB25E35C950000990E /* PopUpItemCell.xib in Resources */,
 				F65FD9A725C694E2007F8D0F /* Type3ItemCell.xib in Resources */,
 				F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */,
@@ -932,15 +982,17 @@
 				F6F7C4E625E8B3C9008F7A45 /* BookCell.xib in Resources */,
 				F65FD9AA25C694E2007F8D0F /* Type3Cell.xib in Resources */,
 				F65FD97725C672F0007F8D0F /* Type1ItemCell.xib in Resources */,
+				F69F7A19263155A8001494A9 /* NewBroadCell.xib in Resources */,
 				F655707825F883AD00E3A062 /* DailyCell.xib in Resources */,
+				F69EDA8F26312B9400E7122C /* NoneCell.xib in Resources */,
 				F64952202626D77900F601F6 /* NoCell.xib in Resources */,
+				F617074A2628005300CFEC48 /* ReadCell.xib in Resources */,
 				F649761825F2149800EAC71D /* MusicCell.xib in Resources */,
 				F6176369261AF64A00A9A547 /* Book3Cell.xib in Resources */,
 				F65FD9C825C6A114007F8D0F /* Type5Cell.xib in Resources */,
 				F65FD9B825C69775007F8D0F /* Type4ItemCell.xib in Resources */,
 				F65FD9BA25C69775007F8D0F /* Type4Cell.xib in Resources */,
 				F65557DE261DA4ED000E8AEA /* MovieItem2Cell.xib in Resources */,
-				F66B04D625EE3FF90034013F /* ReadBCell.xib in Resources */,
 				F698933825F5FD6D00EA960A /* WatchCell.xib in Resources */,
 				F649FEC026258B8C0041148E /* ClearCell.xib in Resources */,
 				F67464902616CA44003A5593 /* Type7Cell.xib in Resources */,
@@ -952,7 +1004,6 @@
 				F661470C261EB1B800FD9469 /* TVCell.xib in Resources */,
 				F674648A2616C118003A5593 /* ViewMore2Cell.xib in Resources */,
 				F649761925F2149800EAC71D /* MusicItemCell.xib in Resources */,
-				F6624CFC25EE2D4E00622AA1 /* ReadACell.xib in Resources */,
 				F65FD99225C68BEC007F8D0F /* Type2Cell.xib in Resources */,
 				F6F7C4E725E8B3C9008F7A45 /* BookItemCell.xib in Resources */,
 				F65EC45E26145CBA0088DBC7 /* Roboto-Bold.ttf in Resources */,
@@ -964,10 +1015,10 @@
 				F674649B2616D1F4003A5593 /* ViewMore3Cell.xib in Resources */,
 				F64DAC5026083A5900A2C688 /* LaunchScreen.storyboard in Resources */,
 				F65FD97825C672F0007F8D0F /* Type1Cell.xib in Resources */,
-				F648029A25DFA03700D6485B /* SubTypeCell.xib in Resources */,
 				F6488D8325ECA80200058D1D /* Book2Cell.xib in Resources */,
 				F6D5068C25C6A84B002BEA99 /* Type6Cell.xib in Resources */,
 				F6B82C7625F2315D009FF801 /* Music2Cell.xib in Resources */,
+				F610E0E7262EAEB900089FD8 /* Movie2Cell.xib in Resources */,
 				F64B02E725ECF18900AAE865 /* ChanelCell.xib in Resources */,
 				F64836B325F0D5BC00A9E878 /* MovieCell.xib in Resources */,
 				F617636E261AF6C400A9A547 /* Book3ItemCell.xib in Resources */,
@@ -975,8 +1026,10 @@
 				F6E8CC6F25E78D6300CD0939 /* SearchCell.xib in Resources */,
 				F64836BB25F0D64400A9E878 /* MovieItemCell.xib in Resources */,
 				F6D5068D25C6A84B002BEA99 /* Type6ItemCell.xib in Resources */,
+				F610E0E5262EAEB900089FD8 /* Movie2ItemCell.xib in Resources */,
 				F65FD98725C6794F007F8D0F /* CategoryCell.xib in Resources */,
 				F66506B72601BF41009E5B78 /* DotCell.xib in Resources */,
+				F641344126284CD100BCB777 /* Type8Cell.xib in Resources */,
 				F65EC49B261476EC0088DBC7 /* HashTagCell.xib in Resources */,
 				F6614736261EC0D700FD9469 /* Video2Cell.xib in Resources */,
 				F65EC45B26145CAF0088DBC7 /* Roboto-Medium.ttf in Resources */,
@@ -1033,8 +1086,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6F387602602F07F004E916A /* PlayerView2Controller.swift in Sources */,
+				F6650FA226326B7F0057F46C /* User2Controller.swift in Sources */,
 				F6D5068F25C6A84B002BEA99 /* Type6Cell.swift in Sources */,
 				F65EC49A261476EC0088DBC7 /* HashTagCell.swift in Sources */,
+				F64AB6DC26296E1100ABB691 /* TodayModel.swift in Sources */,
 				F67464892616C118003A5593 /* ViewMore2Cell.swift in Sources */,
 				F65FD97625C672F0007F8D0F /* Type1ItemCell.swift in Sources */,
 				F65FD97425C672F0007F8D0F /* LazyImageView.swift in Sources */,
@@ -1060,8 +1115,8 @@
 				F649521F2626D77900F601F6 /* NoCell.swift in Sources */,
 				F6507CE025C3F2CB002E77EC /* APIService.swift in Sources */,
 				4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */,
+				F69EDA892631292F00E7122C /* PickUpController.swift in Sources */,
 				F65FD97525C672F0007F8D0F /* Type1Cell.swift in Sources */,
-				F648029925DFA03700D6485B /* SubTypeCell.swift in Sources */,
 				F65FD99125C68BEC007F8D0F /* Type2Cell.swift in Sources */,
 				F6BC461426158C4200DDD828 /* ViewFullCell.swift in Sources */,
 				F6560B5625EB824E009996D1 /* BookPlayerController.swift in Sources */,
@@ -1078,10 +1133,10 @@
 				F617636D261AF6C400A9A547 /* Book3ItemCell.swift in Sources */,
 				F65FD9AC25C694E2007F8D0F /* Type3Cell.swift in Sources */,
 				F666BEE125E3569B0000990E /* PopUp2Controller.swift in Sources */,
+				F610E0E6262EAEB900089FD8 /* Movie2Cell.swift in Sources */,
 				F6F7C4E425E8B3C9008F7A45 /* BookItemCell.swift in Sources */,
 				F6507CF225C41053002E77EC /* HighLightController.swift in Sources */,
 				F65EC49F261478320088DBC7 /* HashTagItemCell.swift in Sources */,
-				F6624CFB25EE2D4E00622AA1 /* ReadACell.swift in Sources */,
 				F6507CEE25C3F76D002E77EC /* CategoryModel.swift in Sources */,
 				F6507CDC25C3F045002E77EC /* StringDateExtension.swift in Sources */,
 				F64CFFBC25F8AB0F002F7F6F /* SpeechToTextController.swift in Sources */,
@@ -1094,13 +1149,15 @@
 				F65FD9C925C6A114007F8D0F /* Type5Cell.swift in Sources */,
 				F65557D4261D87E7000E8AEA /* WarmodroidSwitch.swift in Sources */,
 				F65FD9A825C694E2007F8D0F /* Type3ItemCell.swift in Sources */,
-				F66B04D525EE3FF90034013F /* ReadBCell.swift in Sources */,
 				F674648F2616CA44003A5593 /* Type7Cell.swift in Sources */,
 				F64B02EB25ECF30400AAE865 /* ChannelModel.swift in Sources */,
 				F647365C2612E555008BF14E /* WordCell.swift in Sources */,
+				F641344326284CD100BCB777 /* Type8ItemCell.swift in Sources */,
+				F69F7A18263155A8001494A9 /* NewBroadCell.swift in Sources */,
 				F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */,
 				F65557DD261DA4ED000E8AEA /* MovieItem2Cell.swift in Sources */,
 				F666BEEA25E35C950000990E /* PopUpItemCell.swift in Sources */,
+				F610E0E8262EAEB900089FD8 /* Movie2ItemCell.swift in Sources */,
 				F65557D8261D8C01000E8AEA /* VideoController.swift in Sources */,
 				F6E8CC6E25E78D6300CD0939 /* SearchCell.swift in Sources */,
 				F66506B62601BF41009E5B78 /* DotCell.swift in Sources */,
@@ -1112,6 +1169,7 @@
 				F65FD99325C68BEC007F8D0F /* Type2ItemCell.swift in Sources */,
 				F698933225F5FC9E00EA960A /* WatchController.swift in Sources */,
 				F6F7C4E525E8B3C9008F7A45 /* BookCell.swift in Sources */,
+				F61707492628005300CFEC48 /* ReadCell.swift in Sources */,
 				F661473A261EF25600FD9469 /* TV2Controller.swift in Sources */,
 				F6D5068E25C6A84B002BEA99 /* Type6ItemCell.swift in Sources */,
 				F674649A2616D1F4003A5593 /* ViewMore3Cell.swift in Sources */,
@@ -1127,6 +1185,8 @@
 				F6507CEB25C3F3CA002E77EC /* WelcomeController.swift in Sources */,
 				F698933725F5FD6D00EA960A /* WatchCell.swift in Sources */,
 				F6507CBA25C3EEFF002E77EC /* SceneDelegate.swift in Sources */,
+				F641344226284CD100BCB777 /* Type8Cell.swift in Sources */,
+				F69EDA8E26312B9400E7122C /* NoneCell.swift in Sources */,
 				F649FEBF26258B8C0041148E /* ClearCell.swift in Sources */,
 				F6507CD425C3EFC1002E77EC /* RootModel.swift in Sources */,
 				F649761A25F2149800EAC71D /* MusicItemCell.swift in Sources */,

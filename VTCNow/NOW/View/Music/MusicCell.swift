@@ -26,10 +26,11 @@ class MusicCell: UICollectionViewCell {
         collView.dataSource = self
         collView.register(UINib(nibName: MusicItemCell.className, bundle: nil), forCellWithReuseIdentifier: MusicItemCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 170 * scaleW, height: 220 * scaleW)
+        layout.itemSize = CGSize(width: 170 * scaleW, height: 250 * scaleW)
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 2 * scaleW, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 20 * scaleW
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
     }
     override func prepareForReuse() {

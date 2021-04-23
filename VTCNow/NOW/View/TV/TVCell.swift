@@ -11,7 +11,7 @@ class TVCell: UICollectionViewCell {
 
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var collView: UICollectionView!
-    var indexPath = IndexPath(row: 0, section: 0)
+    var indexPath = IndexPath(row: 1, section: 0)
     var data = ChannelModel()
     var isPlaying = false
     var delegate: TVCellDelegate!
@@ -24,7 +24,7 @@ class TVCell: UICollectionViewCell {
         collView.register(UINib(nibName: Video2Cell.className, bundle: nil), forCellWithReuseIdentifier: Video2Cell.className)
         collView.register(UINib(nibName: NoCell.className, bundle: nil), forCellWithReuseIdentifier: NoCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: collView.bounds.width * scaleW, height: 360 * scaleW)
+//        layout.itemSize = CGSize(width: collView.bounds.width * scaleW, height: 300 * scaleW)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -38,10 +38,12 @@ class TVCell: UICollectionViewCell {
         }
     }
     func playLive(){
+        collView.isScrollEnabled = true
         isPlaying = true
         collView.reloadData()
     }
     func stopLive(){
+        collView.isScrollEnabled = false
         isPlaying = false
         collView.reloadData()
     }
@@ -50,42 +52,24 @@ class TVCell: UICollectionViewCell {
     }
     override func prepareForReuse() {
         collView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        indexPath = IndexPath(row: 1, section: 0)
     }
 }
-extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate{
+extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let count = collView.visibleCells.count
-
-//        if count == 1 {
-//            let id0 = collView.indexPath(for: collView.visibleCells[0])!
-//            if self.indexPath != id0 {
-//                if let cell = collView.cellForItem(at: IndexPath(row: id0.row - 1, section: 0)) as? Video2Cell {
-//                    cell.viewPlayer.player?.pause()
-//                    cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
-//                }
-//                self.indexPath = id0
-//                collView.reloadData()
-//            }
-//        }
+        
         if count == 2 {
             let id0 = collView.indexPath(for: collView.visibleCells[0])!
             let id1 = collView.indexPath(for: collView.visibleCells[1])!
             if id0.row < id1.row {
                 if self.indexPath != id0{
-//                    if let cell = collView.visibleCells[1] as? Video2Cell {
-//                        cell.viewPlayer.player?.pause()
-//                        cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
-//                    }
                     NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)
                     self.indexPath = id0
                     collView.reloadData()
                 }
             }else{
                 if self.indexPath != id1{
-//                    if let cell = collView.visibleCells[0] as? Video2Cell {
-//                        cell.viewPlayer.player?.pause()
-//                        cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
-//                    }
                     NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)
                     self.indexPath = id1
                     collView.reloadData()
@@ -101,23 +85,37 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
             list = list.sorted(by: { $0.row < $1.row })
             
             if self.indexPath != list[1]{
-//                if let cell = collView.visibleCells[0] as? Video2Cell {
-//                    cell.viewPlayer.player?.pause()
-//                    cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
-//                }
-//                if let cell = collView.visibleCells[2] as? Video2Cell {
-//                    cell.viewPlayer.player?.pause()
-//                    cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
-//                }
                 NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)
                 self.indexPath = list[1]
                 collView.reloadData()
             }
         }
-        
+        if count == 4 {
+            var list: [IndexPath] = []
+            for cell in collView.visibleCells {
+                let id = collView.indexPath(for: cell)
+                list.append(id!)
+            }
+            list = list.sorted(by: { $0.row > $1.row })
+            if self.indexPath != list[2]{
+                NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)
+                self.indexPath = list[2]
+                collView.reloadData()
+            }
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.row {
+        case 0:
+            return CGSize(width: collView.bounds.width * scaleW, height: 0)
+        case listVideos.count + 2:
+            return CGSize(width: collView.bounds.width * scaleW, height: 300 * scaleW)
+        default:
+            return CGSize(width: collView.bounds.width * scaleW, height: 300 * scaleW)
+        }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        1 + listVideos.count + 1
+        1 + listVideos.count + 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -125,14 +123,17 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
         cell.delegate = self
         switch indexPath.row {
         case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
+            return cell
+        case 1:
             cell.item = data
             cell.lblTitle.text = data.name
             cell.lblTime.text = "Đang phát trực tiếp"
-        case listVideos.count + 1:
+        case listVideos.count + 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
             return cell
         default:
-            let item = listVideos[indexPath.row - 1]
+            let item = listVideos[indexPath.row - 2]
             cell.item = item
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.getTimePass()
@@ -145,7 +146,7 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
             if cell.item is ChannelModel {
                 link = data.url[0].link
             } else {
-                link = listVideos[indexPath.row - 1].path
+                link = listVideos[indexPath.row - 2].path
             }
             if let url = URL(string: link){
                 
@@ -153,16 +154,14 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
                 cell.setup()
                 if isPlaying == true{
                     cell.viewPlayer.player?.play()
-                    cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+                    cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
                 }
             }
             cell.imgThumb.isHidden = true
-            cell.viewShadow.isHidden = true
         } else{
             cell.viewPlayer.player?.pause()
-            cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+            cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
             cell.imgThumb.isHidden = false
-            cell.viewShadow.isHidden = false
         }
         return cell
     }

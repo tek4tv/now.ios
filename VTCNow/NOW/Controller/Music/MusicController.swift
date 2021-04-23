@@ -24,7 +24,7 @@ class MusicController: UIViewController {
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
     }
     @objc func didSelectViewBack(_ sender: Any){
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
     }
 }
 extension MusicController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -39,7 +39,7 @@ extension MusicController: UICollectionViewDelegate, UICollectionViewDataSource,
         case 0:
             return CGSize(width: 414 * scaleW, height: 280 * scaleW)
         default:
-            return CGSize(width: 414 * scaleW, height: 300 * scaleW)
+            return CGSize(width: 414 * scaleW, height: 350 * scaleW)
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,7 +65,7 @@ extension MusicController: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: MusicCategoryController.className) as! MusicCategoryController
         vc.data = news.components[indexPath.section].category
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
 }
@@ -74,7 +74,7 @@ extension MusicController: MusicCellDelegate{
         let vc = storyboard?.instantiateViewController(withIdentifier: MusicPlayerController.className) as! MusicPlayerController
         vc.item = data
         vc.listData = list
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: false)
     }
 }
 
@@ -83,7 +83,7 @@ extension MusicController: Music2CellDelegate{
         let vc = storyboard?.instantiateViewController(withIdentifier: MusicPlayerController.className) as! MusicPlayerController
         vc.item = data
         vc.listData = list
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: false)
     }
     
     

@@ -8,8 +8,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Medium.ttf">
-            <string>Roboto-Medium</string>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -23,13 +23,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mới nhất" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UK-bi-jzr">
-                        <rect key="frame" x="10" y="20" width="71" height="22"/>
-                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
-                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="frame" x="20" y="20" width="71" height="22"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="B3s-Zh-H2A">
-                        <rect key="frame" x="0.0" y="52" width="414" height="198"/>
+                        <rect key="frame" x="0.0" y="62" width="414" height="188"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="I11-Dq-xWi">
                             <size key="itemSize" width="128" height="128"/>
@@ -38,8 +38,8 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-next-page-52" translatesAutoresizingMaskIntoConstraints="NO" id="wPE-hm-GB6">
-                        <rect key="frame" x="384" y="21" width="20" height="20"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NEXT" translatesAutoresizingMaskIntoConstraints="NO" id="wPE-hm-GB6">
+                        <rect key="frame" x="374" y="21" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="wPE-hm-GB6" secondAttribute="height" id="tLG-gg-XOE"/>
                             <constraint firstAttribute="height" constant="20" id="wib-jB-yDy"/>
@@ -51,10 +51,10 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="wPE-hm-GB6" firstAttribute="centerY" secondItem="4UK-bi-jzr" secondAttribute="centerY" id="1dv-OR-Dlu"/>
-                <constraint firstItem="B3s-Zh-H2A" firstAttribute="top" secondItem="4UK-bi-jzr" secondAttribute="bottom" constant="10" id="58D-eC-aqb"/>
-                <constraint firstAttribute="trailing" secondItem="wPE-hm-GB6" secondAttribute="trailing" constant="10" id="CRk-Du-F2s"/>
+                <constraint firstItem="B3s-Zh-H2A" firstAttribute="top" secondItem="4UK-bi-jzr" secondAttribute="bottom" constant="20" id="58D-eC-aqb"/>
+                <constraint firstAttribute="trailing" secondItem="wPE-hm-GB6" secondAttribute="trailing" constant="20" id="CRk-Du-F2s"/>
                 <constraint firstAttribute="trailing" secondItem="B3s-Zh-H2A" secondAttribute="trailing" id="K9d-Q4-gSD"/>
-                <constraint firstItem="4UK-bi-jzr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="Sou-lG-rd3"/>
+                <constraint firstItem="4UK-bi-jzr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="Sou-lG-rd3"/>
                 <constraint firstAttribute="bottom" secondItem="B3s-Zh-H2A" secondAttribute="bottom" id="b7A-uQ-yKq"/>
                 <constraint firstItem="B3s-Zh-H2A" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="kZO-4K-hFN"/>
                 <constraint firstItem="4UK-bi-jzr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="umg-i7-zns"/>
@@ -66,6 +66,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="icons8-next-page-52" width="52" height="52"/>
+        <image name="NEXT" width="512" height="512"/>
     </resources>
 </document>

@@ -21,19 +21,36 @@ class BookPlayerController: UIViewController {
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var slider: CustomSlider!
     @IBOutlet weak var viewBack: UIView!
-    @IBOutlet weak var viewRepeat: UIView!
-    @IBOutlet weak var viewShuffle: UIView!
     @IBOutlet weak var viewShare: UIView!
-    @IBOutlet weak var imgRepeat: UIImageView!
-    @IBOutlet weak var imgShuffle: UIImageView!
+    @IBOutlet weak var btnList: UIButton!
+    @IBOutlet weak var btnPrevious: UIButton!
+    @IBOutlet weak var btnNext: UIButton!
     var timeObserver: Any?
     var isPlaying = false
     var player: AVPlayer!
     var isEnded = false
     var isExpand = false
-    var repeatType = 0
-    var isShuffle = false
-    var idShuffle = idBookPlaying
+    var idPlaying = 0
+    var data: MediaModel!
+    var listData: [MediaModel] = []
+    let activityIndicatorView1: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .gray)
+        aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.startAnimating()
+        return aiv
+    }()
+    let activityIndicatorView2: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .gray)
+        aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.startAnimating()
+        return aiv
+    }()
+    let activityIndicatorView3: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .gray)
+        aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.startAnimating()
+        return aiv
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
@@ -43,13 +60,37 @@ class BookPlayerController: UIViewController {
         
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnBack(_:))))
         viewShare.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewShare(_:))))
-        viewRepeat.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewRepeat(_:))))
-        viewShuffle.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewShuffle(_:))))
         //
         NotificationCenter.default.post(name: NSNotification.Name("StopPlayVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didStopBook(_:)), name: NSNotification.Name("StopPlayBook"), object: nil)
         setupRemoteTransportControls()
         animation()
+        btnList.isUserInteractionEnabled = false
+        btnList.addSubview(activityIndicatorView1)
+        activityIndicatorView1.centerXAnchor.constraint(equalTo: btnList.centerXAnchor).isActive = true
+        activityIndicatorView1.centerYAnchor.constraint(equalTo: btnList.centerYAnchor).isActive = true
+        btnNext.addSubview(activityIndicatorView2)
+        activityIndicatorView2.centerXAnchor.constraint(equalTo: btnNext.centerXAnchor).isActive = true
+        activityIndicatorView2.centerYAnchor.constraint(equalTo: btnNext.centerYAnchor).isActive = true
+        btnPrevious.addSubview(activityIndicatorView3)
+        activityIndicatorView3.centerXAnchor.constraint(equalTo: btnPrevious.centerXAnchor).isActive = true
+        activityIndicatorView3.centerYAnchor.constraint(equalTo: btnPrevious.centerYAnchor).isActive = true
+        APIService.shared.getEpisode(privateKey: data.privateID) {[self] (list, error) in
+            if let list = list as? [MediaModel] {
+                listData = list
+                
+                listData = listData.reversed()
+                for (index, book) in listData.enumerated() {
+                    if book.episode == data.episode {
+                        idPlaying = index
+                    }
+                }
+                btnList.isUserInteractionEnabled = true
+                activityIndicatorView1.stopAnimating()
+                activityIndicatorView2.stopAnimating()
+                activityIndicatorView3.stopAnimating()
+            }
+        }
     }
     func animation(){
         UIView.animate(withDuration: 10, delay: 0, options: .curveLinear) {
@@ -79,7 +120,7 @@ class BookPlayerController: UIViewController {
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [:]
     }
     @objc func didSelectBtnBack(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
         if self.isPlaying {
             self.pause()
             self.isPlaying = false
@@ -89,7 +130,7 @@ class BookPlayerController: UIViewController {
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [:]
     }
     @objc func didSelectViewShare(_ sender: Any){
-        guard let url = URL(string: sharedItem.path) else {
+        guard let url = URL(string: data.path) else {
             return
         }
         let itemsToShare = [url]
@@ -100,57 +141,46 @@ class BookPlayerController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    var listStored = sharedList
-    @objc func didSelectViewShuffle(_ sender: Any) {
-        if isShuffle {
-            imgShuffle.image = #imageLiteral(resourceName: "icons8-cross-shuffle-64")
-            sharedList = listStored
-            idShuffle = idBookPlaying
-        }else{
-            imgShuffle.image = #imageLiteral(resourceName: "icons8-cross-shuffle-64 (1)")
-            let temp = listStored[idBookPlaying]
-            sharedList.remove(at: idBookPlaying)
-            sharedList.shuffle()
-            idShuffle = (0...sharedList.count - 1).randomElement()!
-            sharedList.insert(temp, at: idShuffle)
+
+    @IBAction func didSelectBtnReplay5s(_ sender: Any) {
+        let currentTime = CMTimeGetSeconds(player.currentTime())
+        var newTime = currentTime - 5.0
+        
+        if newTime < 0 {
+            newTime = 0
         }
-        isShuffle = !isShuffle
+        let time: CMTime = CMTimeMake(value: Int64(newTime * 1000), timescale: 1000)
+        player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
     }
-    @objc func didSelectViewRepeat(_ sender: Any) {
-        if repeatType < 2{
-            repeatType += 1
-        }else{
-            repeatType = 0
+    @IBAction func didSelectBtnForward5s(_ sender: Any) {
+        guard let duration = player.currentItem?.duration else { return }
+        let currentTime = CMTimeGetSeconds(player.currentTime())
+        let newTime = currentTime + 5.0
+        
+        if newTime < (CMTimeGetSeconds(duration) - 5.0) {
+            let time: CMTime = CMTimeMake(value: Int64(newTime * 1000), timescale: 1000)
+            player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         }
-        switch repeatType {
-        case 0:
-            imgRepeat.image = #imageLiteral(resourceName: "icons8-repeat-48")
-            break
-        case 1:
-            imgRepeat.image = #imageLiteral(resourceName: "icons8-repeat-48 (1)")
-            break
-        case 2:
-            imgRepeat.image = #imageLiteral(resourceName: "icons8-repeat-one-64")
-            break
-        default:
-            break
+    }
+    @IBAction func didSelectList(_ sender: Any) {
+        if listData.isEmpty {
+            view.showToast(message: "Hệ thống đang gặp sự cố!")
+        } else {
+            let vc = storyboard?.instantiateViewController(withIdentifier: PopUp5Controller.className) as! PopUp5Controller
+            vc.modalPresentationStyle = .overFullScreen
+            vc.listData = listData
+            vc.idPlaying = idPlaying
+            present(vc, animated: true, completion: nil)
+            vc.onDississ = {[self] (idPlaying) in
+                self.idPlaying = idPlaying
+                data = listData[idPlaying]
+                playAudio()
+            }
         }
         
     }
-    @IBAction func didSelectList(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp5Controller.className) as! PopUp5Controller
-        vc.modalPresentationStyle = .overFullScreen
-        vc.idBook = idShuffle
-        vc.isShuffle = isShuffle
-        vc.repeatType = repeatType
-        vc.onSelected = {[weak self] in
-            self?.playAudio()
-            self?.idShuffle = idBookPlaying
-        }
-        present(vc, animated: true, completion: nil)
-    }
     func playAudio(){
-        if let url = URL(string: sharedItem.path){
+        if let url = URL(string: data.path){
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [])
             }
@@ -164,19 +194,15 @@ class BookPlayerController: UIViewController {
             isPlaying = true
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-button-96 (1)"), for: .normal)
             addTimeObserver()
-            if let url = URL(string: root.cdn.imageDomain + sharedItem.square.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + data.square.replacingOccurrences(of: "\\", with: "/" )){
                 backImage.kf.setImage(with: url){_ in
                     self.backImage.image = self.backImage.blurImage(usingImage: self.backImage.image ?? UIImage(), blurAmount: 5.0)
                 }
                 
                 squareImage.loadImage(fromURL: url)
             }
-            lblTitle.text = sharedItem.name + sharedItem.episode
-            if sharedItem.cast != ""{
-                lblAuthor.text = sharedItem.cast
-            }else{
-                lblAuthor.text = sharedItem.author
-            }
+            lblTitle.text = data.name + " - Phần " + data.episode + "/" + data.totalEpisode + "       "
+            lblAuthor.text = data.author
         }
         setupNowPlaying()
     }
@@ -224,7 +250,7 @@ class BookPlayerController: UIViewController {
             return
         }
         var nowPlayingInfo = [String : Any]()
-        nowPlayingInfo[MPMediaItemPropertyTitle] = sharedItem.name
+        nowPlayingInfo[MPMediaItemPropertyTitle] = data.name
         nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: self.squareImage.image!.size) { size in
             return #imageLiteral(resourceName: "logo")
         }
@@ -260,35 +286,6 @@ class BookPlayerController: UIViewController {
         player.pause()
         isEnded = true
         isPlaying = false
-        switch repeatType {
-        case 0:
-            if idBookPlaying == sharedList.count - 1{
-                
-            }else{
-                idBookPlaying += 1
-                sharedItem = sharedList[idBookPlaying]
-                playAudio()
-            }
-            break
-        case 1:
-            if idBookPlaying < sharedList.count - 1{
-                idBookPlaying += 1
-                sharedItem = sharedList[idBookPlaying]
-                playAudio()
-            }else{
-                idBookPlaying = 0
-                sharedItem = sharedList[idBookPlaying]
-                playAudio()
-            }
-            break
-        case 2:
-            sharedItem = sharedList[idBookPlaying]
-            playAudio()
-            break
-        default:
-            break
-        }
-        idShuffle = idBookPlaying
         
     }
     func getTimeString(from time: CMTime) -> String{
@@ -348,28 +345,35 @@ class BookPlayerController: UIViewController {
         isPlaying = !isPlaying
     }
     @IBAction func didSelectBtnNext(_ sender: Any) {
-        if idBookPlaying < sharedList.count - 1{
-            idBookPlaying += 1
-            sharedItem = sharedList[idBookPlaying]
-            playAudio()
-        }else{
-            idBookPlaying = 0
-            sharedItem = sharedList[idBookPlaying]
-            playAudio()
+        if listData.isEmpty {
+            
+        } else {
+            if idPlaying < listData.count - 1 {
+                idPlaying += 1
+                data = listData[idPlaying]
+                playAudio()
+            }else{
+                idPlaying = 0
+                data = listData[idPlaying]
+                playAudio()
+            }
         }
-        idShuffle = idBookPlaying
+        
     }
     @IBAction func didSelectBtnPrevious(_ sender: Any) {
-        if idBookPlaying > 0{
-            idBookPlaying -= 1
-            sharedItem = sharedList[idBookPlaying]
-            playAudio()
-        }else{
-            idBookPlaying = sharedList.count - 1
-            sharedItem = sharedList[idBookPlaying]
-            playAudio()
+        if listData.isEmpty {
+            
+        } else {
+            if idPlaying > 0{
+                idPlaying -= 1
+                data = listData[idPlaying]
+                playAudio()
+            }else{
+                idPlaying = listData.count - 1
+                data = listData[idPlaying]
+                playAudio()
+            }
         }
-        idShuffle = idBookPlaying
     }
     
 }

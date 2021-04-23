@@ -42,7 +42,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trực tiếp: U23 Việt Nam vs U23 Thái Lan" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xG-yd-qX4">
-                        <rect key="frame" x="0.0" y="100" width="155" height="35.5"/>
+                        <rect key="frame" x="0.0" y="105" width="155" height="35.5"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -54,9 +54,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="160" height="90"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="48:12:22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEo-LY-k7g">
-                                <rect key="frame" x="44.5" y="34.5" width="71" height="21.5"/>
+                                <rect key="frame" x="40.5" y="33.5" width="79" height="23.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -64,7 +64,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.60472601232394363" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="pEo-LY-k7g" firstAttribute="centerX" secondItem="GL5-6L-KSG" secondAttribute="centerX" id="GWb-tT-l6T"/>
                             <constraint firstItem="pEo-LY-k7g" firstAttribute="centerY" secondItem="GL5-6L-KSG" secondAttribute="centerY" id="eut-tc-Y3T"/>
@@ -81,7 +81,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="GL5-6L-KSG" firstAttribute="leading" secondItem="8Dl-0c-OdO" secondAttribute="leading" id="225-Z5-Pb0"/>
-                <constraint firstItem="6xG-yd-qX4" firstAttribute="top" secondItem="8Dl-0c-OdO" secondAttribute="bottom" constant="10" id="B4M-FQ-Zh0">
+                <constraint firstItem="6xG-yd-qX4" firstAttribute="top" secondItem="8Dl-0c-OdO" secondAttribute="bottom" constant="15" id="B4M-FQ-Zh0">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -116,6 +116,7 @@
                 <outlet property="lblTime" destination="pEo-LY-k7g" id="ax9-B7-sWW"/>
                 <outlet property="lblTitle" destination="6xG-yd-qX4" id="cAG-pf-Ie7"/>
                 <outlet property="thumbImage" destination="8Dl-0c-OdO" id="qLg-JW-ifz"/>
+                <outlet property="viewShadow" destination="GL5-6L-KSG" id="5NT-vE-0uy"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="118.52678571428571"/>
         </collectionViewCell>

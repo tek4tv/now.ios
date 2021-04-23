@@ -26,7 +26,7 @@ class PopUp6Controller: UIViewController {
    
     @objc func didSelectViewBack(_ sender: Any){
         //self.navigationController?.popViewController(animated: true)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     @objc func didSelectViewShare(_ sender: Any){
         guard let url = URL(string: data.detailUrl) else {

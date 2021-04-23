@@ -31,34 +31,44 @@ class Type5Cell: UICollectionViewCell {
         collView.register(UINib(nibName: ViewMoreCell.className, bundle: nil), forCellWithReuseIdentifier: ViewMoreCell.className)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 10 * scaleW, right: 10 * scaleW)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 20 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 10 * scaleW, right: 20 * scaleW)
         collView.collectionViewLayout = layout
     }
 
 }
 extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            if data.media.count >= 6 {
-                return 6
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if data.media.count < 7 {
+            APIService.shared.getMoreVideoPlaylist(privateKey: data.privateKey, page: "0") { (data, error) in
+                if let data = data as? [MediaModel]{
+                    self.data.media += data
+                    self.collView.reloadData()
+                }
             }
-            return data.media.count
-        default:
-            return 1
         }
-        
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if data.media.count >= 7 {
+            return 7
+        }
+        return data.media.count
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = data.media[indexPath.row]
-        switch indexPath.section {
-        case 0:
+        switch indexPath.row {
+        case 0...5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
-            cell.lblTitle.text = item.name + item.episode
+            cell.lblTitle.text = item.name
+            if item.episode != "" {
+                cell.viewEpisode.isHidden = false
+                cell.lblEpisode.text = item.episode
+                cell.lblTotalEpisode.text = item.totalEpisode
+            }
             cell.row = indexPath.row
             cell.data = item
             cell.delegate = self
@@ -79,17 +89,10 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             }
             return cell
         }
-        
-//        switch indexPath.row {
-//        case 0...5:
-//
-//        default:
-//
-//        }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
+        switch indexPath.row {
+        case 0...5:
             break
         default:
             delegate?.didSelectViewMore(self)
@@ -97,18 +100,12 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.section {
-        case 0:
+        switch indexPath.row {
+        case 0...5:
             return CGSize(width: 160 * scaleW, height: 200 * scaleW)
         default:
             return CGSize(width: 168 * scaleW, height: 200 * scaleW)
         }
-//        switch indexPath.row {
-//        case 0...5:
-//
-//        default:
-//
-//        }
     }
 }
 extension Type5Cell: Type3ItemCellDelegate{

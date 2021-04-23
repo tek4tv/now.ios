@@ -17,14 +17,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="Type3Cell" customModule="NOW" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="210"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="210"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-Or-uve">
-                        <rect key="frame" x="10" y="209" width="394" height="1"/>
+                        <rect key="frame" x="20" y="299" width="374" height="1"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="VeU-hg-nmm">
@@ -35,7 +35,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tin mới" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2X-Xa-bP8">
-                        <rect key="frame" x="10" y="25" width="60" height="21.5"/>
+                        <rect key="frame" x="20" y="25" width="60" height="21.5"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -43,8 +43,15 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NEXT" translatesAutoresizingMaskIntoConstraints="NO" id="PLs-rz-PbK">
+                        <rect key="frame" x="374" y="26" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="PLs-rz-PbK" secondAttribute="height" id="JrZ-i9-tUY"/>
+                            <constraint firstAttribute="height" constant="20" id="pGz-yU-N2i"/>
+                        </constraints>
+                    </imageView>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="VGv-j8-jDc">
-                        <rect key="frame" x="0.0" y="61.5" width="414" height="143.5"/>
+                        <rect key="frame" x="0.0" y="66.5" width="414" height="203.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BfS-tT-MgN">
                             <size key="itemSize" width="128" height="128"/>
@@ -53,24 +60,26 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-next-page-52" translatesAutoresizingMaskIntoConstraints="NO" id="PLs-rz-PbK">
-                        <rect key="frame" x="384" y="26" width="20" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="PLs-rz-PbK" secondAttribute="height" id="JrZ-i9-tUY"/>
-                            <constraint firstAttribute="height" constant="20" id="pGz-yU-N2i"/>
-                        </constraints>
-                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xem thêm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NnH-Ks-JrT">
+                        <rect key="frame" x="338" y="278" width="56" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.51282179360000002" green="0.1558732092" blue="0.25946056839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="bbO-Or-uve" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="6LK-BZ-HM1">
+                <constraint firstItem="bbO-Or-uve" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="6LK-BZ-HM1">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="VGv-j8-jDc" firstAttribute="top" secondItem="O2X-Xa-bP8" secondAttribute="bottom" constant="15" id="7U6-cY-4lZ">
+                <constraint firstItem="VGv-j8-jDc" firstAttribute="top" secondItem="O2X-Xa-bP8" secondAttribute="bottom" constant="20" id="7U6-cY-4lZ">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -80,23 +89,25 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstAttribute="bottom" secondItem="VGv-j8-jDc" secondAttribute="bottom" constant="5" id="Q58-7v-Twx">
+                <constraint firstAttribute="bottom" secondItem="VGv-j8-jDc" secondAttribute="bottom" constant="30" id="Q58-7v-Twx">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstAttribute="trailing" secondItem="bbO-Or-uve" secondAttribute="trailing" constant="10" id="ZcB-ot-VL6">
+                <constraint firstAttribute="trailing" secondItem="NnH-Ks-JrT" secondAttribute="trailing" constant="20" id="XeX-3K-q8X"/>
+                <constraint firstAttribute="trailing" secondItem="bbO-Or-uve" secondAttribute="trailing" constant="20" id="ZcB-ot-VL6">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstItem="NnH-Ks-JrT" firstAttribute="top" secondItem="VGv-j8-jDc" secondAttribute="bottom" constant="8" symbolic="YES" id="eSZ-s8-WjE"/>
                 <constraint firstItem="PLs-rz-PbK" firstAttribute="centerY" secondItem="O2X-Xa-bP8" secondAttribute="centerY" id="icb-Eh-fTB"/>
                 <constraint firstAttribute="trailing" secondItem="VGv-j8-jDc" secondAttribute="trailing" id="mmd-Nn-v59">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="O2X-Xa-bP8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="roh-ea-4X7">
+                <constraint firstItem="O2X-Xa-bP8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="roh-ea-4X7">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -111,7 +122,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstAttribute="trailing" secondItem="PLs-rz-PbK" secondAttribute="trailing" constant="10" id="zhB-Pc-aZi"/>
+                <constraint firstAttribute="trailing" secondItem="PLs-rz-PbK" secondAttribute="trailing" constant="20" id="zhB-Pc-aZi"/>
             </constraints>
             <size key="customSize" width="89" height="87"/>
             <connections>
@@ -122,7 +133,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="icons8-next-page-52" width="52" height="52"/>
+        <image name="NEXT" width="512" height="512"/>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

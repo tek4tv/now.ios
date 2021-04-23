@@ -60,6 +60,7 @@ class MediaModel{
     var metaData: [MetaDataModel] = []
     var country = ""
     var episode = ""
+    var totalEpisode = ""
     var genred = ""
     var thumnail = ""
     var portrait = ""
@@ -151,7 +152,7 @@ class MediaModel{
                     timePass = "Còn \(second) giây"
                 }
             }else {
-                timePass = "trực tiếp"
+                timePass = "Đang phát"
             }
         }
         if let temp = json["Metadata"] as? [[String: Any]]{
@@ -161,7 +162,10 @@ class MediaModel{
                     country = metaDataAdd.value
                 }
                 if metaDataAdd.name == "Episode"{
-                    episode = " - Tập " + metaDataAdd.value
+                    episode = metaDataAdd.value
+                }
+                if metaDataAdd.name == "TotalEpisode"{
+                    totalEpisode =  metaDataAdd.value
                 }
                 if metaDataAdd.name == "GenredDescription"{
                     genred = metaDataAdd.value
@@ -183,7 +187,12 @@ class MediaModel{
             
             if let temp = data["Episode"] as? String {
                 if temp != ""{
-                    episode = " - Tập " + temp
+                    episode = temp
+                }
+            }
+            if let temp = data["TotalEpisode"] as? String {
+                if temp != ""{
+                    totalEpisode = temp
                 }
             }
             if let temp = data["Country"] as? String { country = temp}
@@ -230,7 +239,7 @@ class MediaModel{
                     timePass = "Còn \(second) giây"
                 }
             }else {
-                timePass = "trực tiếp"
+                timePass = "Đang phát"
             }
         }
         return timePass
