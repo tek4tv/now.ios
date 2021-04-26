@@ -108,7 +108,7 @@ class BookPlayerController: UIViewController {
     @objc func didStopBook(_ notification: Notification){
         if let player = player{
             player.pause()
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-circled-play-96 (2)"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
             isPlaying = false
         }
         UIApplication.shared.endReceivingRemoteControlEvents()
@@ -124,7 +124,7 @@ class BookPlayerController: UIViewController {
         if self.isPlaying {
             self.pause()
             self.isPlaying = false
-            self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-circled-play-96 (2)"), for: .normal)
+            self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
         }
         UIApplication.shared.endReceivingRemoteControlEvents()
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [:]
@@ -192,7 +192,7 @@ class BookPlayerController: UIViewController {
             player.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
             NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             isPlaying = true
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-button-96 (1)"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE nghe"), for: .normal)
             addTimeObserver()
             if let url = URL(string: root.cdn.imageDomain + data.square.replacingOccurrences(of: "\\", with: "/" )){
                 backImage.kf.setImage(with: url){_ in
@@ -216,7 +216,7 @@ class BookPlayerController: UIViewController {
             if !self.isPlaying {
                 self.play()
                 self.isPlaying = true
-                self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-button-96 (1)"), for: .normal)
+                self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE nghe"), for: .normal)
                 return .success
             }
             return .commandFailed
@@ -228,7 +228,7 @@ class BookPlayerController: UIViewController {
             if self.isPlaying {
                 self.pause()
                 self.isPlaying = false
-                self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-circled-play-96 (2)"), for: .normal)
+                self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
                 return .success
             }
             return .commandFailed
@@ -282,7 +282,7 @@ class BookPlayerController: UIViewController {
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
     @objc func playerDidFinishPlaying(note: NSNotification){
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-circled-play-96 (2)"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
         player.pause()
         isEnded = true
         isPlaying = false
@@ -336,11 +336,11 @@ class BookPlayerController: UIViewController {
     @IBAction func didSelectBtnPlay(_ sender: Any) {
         if isPlaying{
             player.pause()
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-circled-play-96 (2)"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
             
         } else{
             player.play()
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "icons8-pause-button-96 (1)"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE nghe"), for: .normal)
         }
         isPlaying = !isPlaying
     }

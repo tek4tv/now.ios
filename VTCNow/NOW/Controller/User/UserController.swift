@@ -29,6 +29,7 @@ class UserController: UIViewController {
             if list.isEmpty {
                 
             } else {
+                cate.index = index
                 var listName = ""
                 for (index, text) in list.enumerated() {
                     if index == list.count - 1 {
@@ -40,6 +41,7 @@ class UserController: UIViewController {
                         if let data = data as? [MediaModel]{
                             cate.media += data
                             if index == list.count - 1 {
+                                
                                 cate.name = listName
                                 listCate.append(cate)
                                 collView.reloadData()
@@ -83,11 +85,12 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource {
             let item = listCate[indexPath.row]
             cell.delegate = self
             cell.lblTitle.text = item.name
+            cell.imgAdd.image = #imageLiteral(resourceName: "NEXT")
             cell.data = item
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.className, for: indexPath) as! NewBroadCell
-            cell.lblTitle.text = "Chọn theo nhiều chủ đề"
+            cell.lblTitle.text = "Theo dõi nhiều chủ đề"
             cell.data = CategoryModel()
             return cell
         }
@@ -101,6 +104,12 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource {
             news = listCate[indexPath.row]
             let vc = storyboard?.instantiateViewController(withIdentifier: User2Controller.className) as! User2Controller
             navigationController?.pushViewController(vc, animated: false)
+            vc.onComplete = {[self] in
+                refresh()
+            }
+            vc.onDelete = {[self] in
+                refresh()
+            }
         default:
             let vc = storyboard?.instantiateViewController(withIdentifier: PickUpController.className) as! PickUpController
             navigationController?.pushViewController(vc, animated: false)
@@ -111,6 +120,7 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource {
                 if list.isEmpty {
                     
                 } else {
+                    cate.index = index
                     var listName = ""
                     for (index, text) in list.enumerated() {
                         if index == list.count - 1 {
@@ -133,13 +143,58 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource {
             }
         }
     }
-    
+
+    func refresh(){
+        let count = UserDefaults.standard.integer(forKey: "NumberOfList")
+        for index in 0..<count{
+            let cate = CategoryModel()
+            let list = UserDefaults.standard.stringArray(forKey: "\(index)")!
+            
+            if list.isEmpty {
+                print("empty")
+                print(index.description)
+                if index == count - 1 {
+                    listCate = []
+                    collView.reloadData()
+                }
+            } else {
+                print("full")
+                print(index.description)
+                cate.index = index
+                var listName = ""
+                listCate = []
+                for (index, text) in list.enumerated() {
+                    if index == list.count - 1 {
+                        listName += text
+                    } else{
+                        listName += text + ", "
+                    }
+                    APIService.shared.searchAll(keySearch: text) {[self] (data, error) in
+                        if let data = data as? [MediaModel]{
+                            cate.media += data
+                            if index == list.count - 1 {
+                                cate.name = listName
+                                listCate.append(cate)
+                                collView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension UserController: NewBroadCellDelegate{
     func didSelectItemAt(_ cell: NewBroadCell) {
         let vc = storyboard?.instantiateViewController(withIdentifier: User2Controller.className) as! User2Controller
         navigationController?.pushViewController(vc, animated: false)
+        vc.onComplete = {[self] in
+            refresh()
+        }
+        vc.onDelete = {[self] in
+            refresh()
+        }
     }
     
     

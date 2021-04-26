@@ -22,7 +22,6 @@ class VideoController: UIViewController{
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblCast: UILabel!
     @IBOutlet weak var viewShare: UIView!
-    @IBOutlet weak var viewBookmark: UIView!
     @IBOutlet weak var viewPlayer: PlayerView!
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var btnNext: UIButton!
@@ -71,6 +70,7 @@ class VideoController: UIViewController{
         viewFullScreen.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnFullScreen(_:))))
         slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
+        viewShare.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewShare(_:))))
         hidePlayerController()
         //
         viewPlayer.addSubview(activityIndicatorView)
@@ -91,6 +91,15 @@ class VideoController: UIViewController{
     }
     @objc func didSelectViewBack(_ sender: Any){
         self.navigationController?.popViewController(animated: false)
+    }
+    @objc func didSelectViewShare(_ sender: Any){
+        guard let url = URL(string: item.path) else {
+            return
+        }
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
     }
     @objc func playerDidFinishPlaying(note: NSNotification){
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)

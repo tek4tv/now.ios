@@ -443,12 +443,17 @@ extension HighLightController: CategoryCellDelegate {
     }
 }
 extension HighLightController: Type1CellDelegate{
-    func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel], _ cell: Type1Cell) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
-        vc.item = data
-        vc.listData = list
-        navigationController?.pushViewController(vc, animated: false)
+    func didSelectItemAt(_ cell: Type1Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        self.navigationController?.pushViewController(vc, animated: false)
     }
+    
+//    func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel], _ cell: Type1Cell) {
+//        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+//        vc.item = data
+//        vc.listData = list
+//        navigationController?.pushViewController(vc, animated: false)
+//    }
 }
 extension HighLightController: Type2CellDelegate{
     func didSelectItemAt(_ cell: Type2Cell) {

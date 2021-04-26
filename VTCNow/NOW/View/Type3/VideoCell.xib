@@ -70,7 +70,7 @@
                                     <action selector="didSelectBtnPlay:" destination="gTV-IL-0wX" eventType="touchUpInside" id="EYk-Ny-xeT"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oKR-j8-oGX">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oKR-j8-oGX">
                                 <rect key="frame" x="314" y="0.0" width="60" height="60"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-chromecast-cast-button-49" translatesAutoresizingMaskIntoConstraints="NO" id="KuH-Cz-Tms">

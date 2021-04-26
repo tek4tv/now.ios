@@ -11,12 +11,10 @@ class PopUp5Controller: UIViewController {
 
     @IBOutlet weak var tblView: UITableView!
     @IBOutlet weak var viewBack: UIView!
-    @IBOutlet weak var imgRepeat: UIImageView!
-    @IBOutlet weak var imgShuffle: UIImageView!
+
     var onDississ: ((Int) -> Void)!
     var onSelected: (() -> Void)!
-    var repeatType = 0
-    var isShuffle = false
+
     var listData: [MediaModel] = []
     var idPlaying = 0
     override func viewDidLoad() {
@@ -25,25 +23,6 @@ class PopUp5Controller: UIViewController {
         tblView.register(UINib(nibName: Book2Cell.className, bundle: nil), forCellReuseIdentifier: Book2Cell.className)
         super.viewDidLoad()
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
-        
-        switch repeatType {
-        case 0:
-            imgRepeat.image = #imageLiteral(resourceName: "icons8-repeat-48")
-            break
-        case 1:
-            imgRepeat.image = #imageLiteral(resourceName: "icons8-repeat-48 (1)")
-            break
-        case 2:
-            imgRepeat.image = #imageLiteral(resourceName: "icons8-repeat-one-64")
-            break
-        default:
-            break
-        }
-        if isShuffle {
-            imgShuffle.image = #imageLiteral(resourceName: "icons8-cross-shuffle-64 (1)")
-        }else{
-            imgShuffle.image = #imageLiteral(resourceName: "icons8-cross-shuffle-64")
-        }
     }
     @objc func didSelectViewBack(_ sender: Any){
         dismiss(animated: true, completion: nil)

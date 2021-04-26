@@ -123,33 +123,39 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch collectionView.tag {
-        case 0:
-            let count = data.media.count
-            
-            var list: [MediaModel] = []
-            if count == 1{
-                list = []
-            } else if count == 2{
-                if indexPath.row == 0 {
-                    list.append(data.media[1])
-                } else{
-                    list.append(data.media[0])
-                }
-            } else if count >= 3 {
-                if indexPath.row == 0{
-                    list = Array(data.media[1...count-1])
-                } else if indexPath.row == count-1 {
-                    list = Array(data.media[0...count - 2])
-                } else{
-                    list = Array(data.media[indexPath.row+1...count-1] + data.media[0...indexPath.row-1])
-                }
-            }
-            APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
-                if let data = data as? MediaModel{
-                    self.delegate?.didSelectItemAt(data, list, self)
-                }
-            }
+        switch collectionView {
+        case collView:
+//            let count = data.media.count
+//
+//            var list: [MediaModel] = []
+//            if count == 1{
+//                list = []
+//            } else if count == 2{
+//                if indexPath.row == 0 {
+//                    list.append(data.media[1])
+//                } else{
+//                    list.append(data.media[0])
+//                }
+//            } else if count >= 3 {
+//                if indexPath.row == 0{
+//                    list = Array(data.media[1...count-1])
+//                } else if indexPath.row == count-1 {
+//                    list = Array(data.media[0...count - 2])
+//                } else{
+//                    list = Array(data.media[indexPath.row+1...count-1] + data.media[0...indexPath.row-1])
+//                }
+//            }
+//            APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
+//                if let data = data as? MediaModel{
+//                    self.delegate?.didSelectItemAt(data, list, self)
+//                }
+//            }
+            let temp = self.data.copy()
+            let item = data.media[indexPath.row]
+            temp.media.remove(at: indexPath.row)
+            temp.media.insert(item, at: 0)
+            news = temp
+            delegate?.didSelectItemAt(self)
         default:
             break
         }
@@ -157,5 +163,6 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
     }
 }
 protocol Type1CellDelegate{
-    func didSelectItemAt(_ data: MediaModel,_ list: [MediaModel],_ cell: Type1Cell)
+//    func didSelectItemAt(_ data: MediaModel,_ list: [MediaModel],_ cell: Type1Cell)
+    func didSelectItemAt(_ cell: Type1Cell)
 }

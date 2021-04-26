@@ -9,12 +9,16 @@ import UIKit
 class PickUpController: UIViewController {
     @IBOutlet weak var collView1: UICollectionView!
     @IBOutlet weak var collView2: UICollectionView!
-    
+    @IBOutlet weak var viewDelete: UIView!
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var viewDone: UIView!
     var onComplete: ((Int) -> ())!
+    var onDelete: (() -> ())!
     let listData = ["Võ Hoàng Yên", "Chính biến Myanmar", "Manchester", "Sơn Tùng MTP", "Covid 19", "Cuộc sống", "Việt Nam", "Thời sự"]
     var list5: [String] = []
+    var idList = 0
+    
+    var isEditor = false
     override func viewDidLoad() {
         super.viewDidLoad()
         collView1.delegate = self
@@ -40,20 +44,39 @@ class PickUpController: UIViewController {
         //
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
         viewDone.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewDone(_:))))
+        viewDelete.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewDelete(_:))))
+        if isEditor {
+            viewDelete.isHidden = false
+        } else{
+            viewDelete.isHidden = true
+        }
     }
     @objc func didSelectViewBack(_ sender: Any){
         navigationController?.popViewController(animated: false)
     }
     @objc func didSelectViewDone(_ sender: Any){
-        var count = UserDefaults.standard.integer(forKey: "NumberOfList")
-        UserDefaults.standard.setValue(list5, forKey: "\(count)")
-        onComplete?(count)
-        count += 1
-        UserDefaults.standard.setValue(count, forKey: "NumberOfList")
-        
-        
+        if list5.isEmpty {
+            
+        } else{
+            if isEditor {
+                UserDefaults.standard.setValue(list5, forKey: "\(idList)")
+                onComplete?(idList)
+                navigationController?.popViewController(animated: false)
+            } else{
+                var count = UserDefaults.standard.integer(forKey: "NumberOfList")
+                UserDefaults.standard.setValue(list5, forKey: "\(count)")
+                onComplete?(count)
+                count += 1
+                UserDefaults.standard.setValue(count, forKey: "NumberOfList")
+                navigationController?.popViewController(animated: false)
+            }
+            
+        }
+    }
+    @objc func didSelectViewDelete(_ sender: Any) {
+        UserDefaults.standard.setValue([], forKey: "\(idList)")
+        onDelete?()
         navigationController?.popViewController(animated: false)
-        
     }
 }
 
@@ -118,8 +141,13 @@ extension PickUpController: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case collView1:
-            list5.remove(at: indexPath.row)
-            collView1.reloadData()
+            switch indexPath.row {
+            case 0..<list5.count:
+                list5.remove(at: indexPath.row)
+                collView1.reloadData()
+            default:
+                break
+            }
         default:
             let text = listData[indexPath.row]
             for item in list5 {
@@ -132,7 +160,9 @@ extension PickUpController: UICollectionViewDelegate, UICollectionViewDataSource
             if list5.count < 4 {
                 list5.insert(text, at: 0)
                 collView1.reloadData()
-                
+                 
+            } else{
+                view.showToast(message: "Tối đa 4 chọn!")
             }
             
         }

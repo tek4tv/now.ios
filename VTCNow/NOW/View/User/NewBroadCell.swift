@@ -9,6 +9,7 @@ import UIKit
 
 class NewBroadCell: UICollectionViewCell {
     @IBOutlet weak var collView: UICollectionView!
+    @IBOutlet weak var imgAdd: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     var delegate: NewBroadCellDelegate!
     var data: CategoryModel = CategoryModel(){
@@ -29,6 +30,9 @@ class NewBroadCell: UICollectionViewCell {
         layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
+    }
+    override func prepareForReuse() {
+        imgAdd.image = #imageLiteral(resourceName: "icons8-add-50")
     }
 
 }

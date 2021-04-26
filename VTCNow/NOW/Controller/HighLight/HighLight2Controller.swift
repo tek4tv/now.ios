@@ -39,6 +39,7 @@ class HighLight2Controller: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        NotificationCenter.default.post(name: NSNotification.Name("stopVOD"), object: nil)
         if let cell = collView.cellForItem(at: indexPath) as? VideoCell{
             cell.viewPlayer.player?.pause()
         }
@@ -143,7 +144,7 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
             let item = news.media[indexPath.row - 1]
             cell.item = item
             cell.indexPath = indexPath
-            cell.lblTitle.text = item.name + item.episode
+            cell.lblTitle.text = item.name
             if news.name == "Đừng bỏ lỡ"{
                 cell.lblTime.text = ""
             } else{

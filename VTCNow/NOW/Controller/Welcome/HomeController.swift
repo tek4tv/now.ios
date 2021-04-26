@@ -126,9 +126,35 @@ class HomeController: UITabBarController, UITabBarControllerDelegate{//}, IMAAds
 //    var listResolution: [StreamResolution] = []
 //    var speed: Double = 1.0
     
+    let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: 90 * scaleW, height: 90 * scaleW))
+    func setupMiddleButton() {
+        var menuButtonFrame = menuButton.frame
+        menuButtonFrame.origin.y = self.view.bounds.height - menuButtonFrame.height
+        menuButtonFrame.origin.x = self.view.bounds.width/2 - menuButtonFrame.size.width/2
+        menuButton.frame = menuButtonFrame
+        
+        menuButton.backgroundColor = UIColor.white
+        menuButton.layer.cornerRadius = menuButtonFrame.height/2
+        
+        menuButton.setImage(#imageLiteral(resourceName: "xem 1"), for: .normal) // 450 x 450px
+        
+        menuButton.contentMode = .scaleAspectFit
+        menuButton.addTarget(self, action: #selector(menuButtonAction(_:)), for: .touchUpInside)
+        
+        self.view.addSubview(menuButton)
+        
+        
+        self.view.layoutIfNeeded()
+    }
+    @objc func menuButtonAction(_ sender: Any) {
+        menuButton.setImage(#imageLiteral(resourceName: "xem 2"), for: .normal)
+        self.selectedIndex = 2
+        tabBarIndex = 2
+    }
     override func viewDidLoad() {
         //setUpAdsLoader()
         super.viewDidLoad()
+        //self.setupMiddleButton()
 //        txfView.delegate = self
 //        viewPlayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewPlayer(_:))))
 //        viewBackward.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBackward(_:))))
@@ -283,6 +309,7 @@ class HomeController: UITabBarController, UITabBarControllerDelegate{//}, IMAAds
         if  index != tabBarIndex, tabBarIndex == 1{
             NotificationCenter.default.post(name: NSNotification.Name("StopPlayBook"), object: nil)
         } else if index != tabBarIndex, tabBarIndex == 2{
+            //menuButton.setImage(#imageLiteral(resourceName: "xem 1"), for: .normal)
             NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)
         }
         if index == 2{

@@ -13,6 +13,7 @@ class CategoryModel{
     var layout = LayoutModel()
     var media: [MediaModel] = []
     var components: [ComponentModel] = []
+    var index = 0
     func initLoad(_ json: [String: Any]) -> CategoryModel{
         if let temp = json["PrivateKey"] as? String { privateKey = temp}
         if let temp = json["Name"] as? String { name = temp}

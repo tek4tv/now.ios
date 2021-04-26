@@ -11,10 +11,13 @@ class User2Controller: UIViewController {
 
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var viewBack: UIView!
+    @IBOutlet weak var viewEdit: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     var timer = Timer()
     var page = 0
     var indexPath = IndexPath(row: 1, section: 0)
+    var onComplete: (() -> ())!
+    var onDelete: (() -> ())!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,6 +33,7 @@ class User2Controller: UIViewController {
         collView.collectionViewLayout = layout
         
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnBack(_:))))
+        viewEdit.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewEdit(_:))))
         //
         lblTitle.text = news.name
     }
@@ -42,6 +46,53 @@ class User2Controller: UIViewController {
     }
     @objc func didSelectBtnBack(_ sender: Any){
         self.navigationController?.popViewController(animated: false)
+        onComplete?()
+    }
+    @objc func didSelectViewEdit(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PickUpController.className) as! PickUpController
+        vc.idList = news.index
+        let listSplit = news.name.split(separator: ",")
+        var listString: [String] = []
+        for text in listSplit {
+            listString.append(String(text.trimmingCharacters(in: .whitespacesAndNewlines)))
+        }
+        vc.list5 = listString
+        vc.isEditor = true
+        navigationController?.pushViewController(vc, animated: false)
+        vc.onComplete = {[self] (index) in
+            let list = UserDefaults.standard.stringArray(forKey: "\(index)")!
+            let cate = CategoryModel()
+            if list.isEmpty {
+                
+            } else {
+                cate.index = index
+                var listName = ""
+                for (index, text) in list.enumerated() {
+                    if index == list.count - 1 {
+                        listName += text
+                    } else{
+                        listName += text + ", "
+                    }
+                    APIService.shared.searchAll(keySearch: text) {[self] (data, error) in
+                        if let data = data as? [MediaModel]{
+                            cate.media += data
+                            if index == list.count - 1 {
+                                cate.name = listName
+                                lblTitle.text = listName
+                                news = cate
+                                collView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        vc.onDelete = {[self] in
+            onDelete?()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                navigationController?.popViewController(animated: false)
+            }) 
+        }
     }
     deinit {
         NotificationCenter.default.removeObserver(self)

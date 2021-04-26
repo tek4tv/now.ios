@@ -32,7 +32,7 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NEXT" translatesAutoresizingMaskIntoConstraints="NO" id="aMZ-v2-Hgv">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-add-50" translatesAutoresizingMaskIntoConstraints="NO" id="aMZ-v2-Hgv">
                                 <rect key="frame" x="374" y="15" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aMZ-v2-Hgv" secondAttribute="height" id="9b9-za-363"/>
@@ -85,13 +85,14 @@
             </constraints>
             <connections>
                 <outlet property="collView" destination="rC5-DU-49i" id="Hvv-Xn-O04"/>
+                <outlet property="imgAdd" destination="aMZ-v2-Hgv" id="Esd-uj-6lp"/>
                 <outlet property="lblTitle" destination="xN3-pY-L5a" id="Tr0-1y-yGK"/>
             </connections>
             <point key="canvasLocation" x="140.57971014492756" y="132.58928571428572"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="NEXT" width="512" height="512"/>
+        <image name="icons8-add-50" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
