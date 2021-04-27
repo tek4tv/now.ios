@@ -20,8 +20,16 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="VCK-D9-VR4" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
                         <rect key="frame" x="115" y="20" width="70" height="70"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="VCK-D9-VR4" secondAttribute="height" id="vgI-Va-Dy5"/>
-                            <constraint firstAttribute="height" constant="70" id="wdx-vJ-pbd"/>
+                            <constraint firstAttribute="width" secondItem="VCK-D9-VR4" secondAttribute="height" id="vgI-Va-Dy5">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="height" constant="70" id="wdx-vJ-pbd">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                         </constraints>
                     </imageView>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="fPK-MI-CPD">
@@ -39,12 +47,36 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="VCK-D9-VR4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="C1q-1W-6H1"/>
-                <constraint firstAttribute="bottom" secondItem="fPK-MI-CPD" secondAttribute="bottom" id="M2c-HA-w8m"/>
-                <constraint firstAttribute="trailing" secondItem="fPK-MI-CPD" secondAttribute="trailing" id="XIq-cU-BHJ"/>
-                <constraint firstItem="fPK-MI-CPD" firstAttribute="top" secondItem="VCK-D9-VR4" secondAttribute="bottom" constant="10" id="eKv-Br-Avf"/>
-                <constraint firstItem="fPK-MI-CPD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="g62-WG-U4h"/>
-                <constraint firstItem="VCK-D9-VR4" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="zkc-F2-82q"/>
+                <constraint firstItem="VCK-D9-VR4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="C1q-1W-6H1">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstAttribute="bottom" secondItem="fPK-MI-CPD" secondAttribute="bottom" id="M2c-HA-w8m">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstAttribute="trailing" secondItem="fPK-MI-CPD" secondAttribute="trailing" id="XIq-cU-BHJ">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="fPK-MI-CPD" firstAttribute="top" secondItem="VCK-D9-VR4" secondAttribute="bottom" constant="10" id="eKv-Br-Avf">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="fPK-MI-CPD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="g62-WG-U4h">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="VCK-D9-VR4" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="zkc-F2-82q">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
             </constraints>
             <connections>
                 <outlet property="collView" destination="fPK-MI-CPD" id="cVF-6C-uzq"/>

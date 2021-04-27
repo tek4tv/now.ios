@@ -49,7 +49,7 @@ class SearchController: UIViewController {
         collWordView.dataSource = self
         collWordView.register(UINib(nibName: WordCell.className, bundle: nil), forCellWithReuseIdentifier: WordCell.className)
         let layout2 = LeftAlignedCellsCustomFlowLayout()
-        layout2.estimatedItemSize = CGSize(width: 1, height: 40 * scaleH)
+        layout2.estimatedItemSize = CGSize(width: 1, height: 40 * scaleW)
         layout2.minimumLineSpacing = 5
         layout2.minimumInteritemSpacing = 5
         collWordView.collectionViewLayout = layout2
@@ -210,7 +210,7 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
                 return CGSize(width: 414 * scaleW, height: 320 * scaleW)
             }
         default:
-            return CGSize(width: 1, height: 40 * scaleH)
+            return CGSize(width: 1, height: 40 * scaleW)
         }
         
     }

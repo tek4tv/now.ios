@@ -779,6 +779,12 @@ class CustomTabBar : UITabBar {
         sizeThatFits.height = 90 * scaleH
         return sizeThatFits
     }
+    override open var traitCollection: UITraitCollection {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return UITraitCollection(horizontalSizeClass: .compact)
+        }
+        return super.traitCollection
+    }
 }
 
 //extension HomeController: UICollectionViewDelegate, UICollectionViewDataSource{

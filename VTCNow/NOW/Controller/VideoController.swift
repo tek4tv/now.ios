@@ -84,10 +84,21 @@ class VideoController: UIViewController{
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
+        timer.invalidate()
+        if let timeObserver = timeObserver {
+            viewPlayer.player?.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.viewPlayer.player?.pause()
+        self.viewPlayer.player = nil
+        timer.invalidate()
+        if let timeObserver = timeObserver {
+            viewPlayer.player?.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
     }
     @objc func didSelectViewBack(_ sender: Any){
         self.navigationController?.popViewController(animated: false)
@@ -284,7 +295,7 @@ class VideoController: UIViewController{
             NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             isPlaying = true
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
-            lblTitle.text = item.name + item.episode
+            lblTitle.text = item.name
             if item.country != "" {
                 lblCast.text = "Quốc gia: " + item.country
             } else{

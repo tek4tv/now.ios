@@ -28,6 +28,7 @@ class HighLightController: UIViewController {
         collView.register(UINib(nibName: Type6Cell.className, bundle: nil), forCellWithReuseIdentifier: Type6Cell.className)
         collView.register(UINib(nibName: Type7Cell.className, bundle: nil), forCellWithReuseIdentifier: Type7Cell.className)
         collView.register(UINib(nibName: Type8Cell.className, bundle: nil), forCellWithReuseIdentifier: Type8Cell.className)
+        collView.register(UINib(nibName: Type9Cell.className, bundle: nil), forCellWithReuseIdentifier: Type9Cell.className)
         collView.refreshControl = UIRefreshControl()
         collView.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(didSelectBookItem(_:)), name: NSNotification.Name("openBookPlayer"), object: nil)
@@ -197,7 +198,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                 return cell
             case "4", "14":
                 if item.name == "Phim bộ"{
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type5Cell.className, for: indexPath) as! Type5Cell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type9Cell.className, for: indexPath) as! Type9Cell
                     cell.delegate = self
                     cell.data = item
                     return cell
@@ -516,6 +517,29 @@ extension HighLightController: Type5CellDelegate{
         self.present(ac, animated: true)
     }
     func didSelectViewMore(_ cell: Type5Cell) {
+        news = cell.data
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+}
+extension HighLightController: Type9CellDelegate{
+    func didSelectViewImage(_ data: MediaModel, _ list: [MediaModel], _ cell: Type9Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+        vc.item = data
+        vc.listData = list
+        navigationController?.pushViewController(vc, animated: false)
+    }
+    
+//    func didSelectView2Share(_ cell: Type3ItemCell) {
+//        guard let url = URL(string: cell.data.path) else {
+//            return
+//        }
+//        let itemsToShare = [url]
+//        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+//        ac.popoverPresentationController?.sourceView = self.view
+//        self.present(ac, animated: true)
+//    }
+    func didSelectViewMore(_ cell: Type9Cell) {
         news = cell.data
         let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
         self.navigationController?.pushViewController(vc, animated: false)

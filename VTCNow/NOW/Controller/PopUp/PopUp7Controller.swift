@@ -14,7 +14,15 @@ class PopUp7Controller: UIViewController {
     
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var viewBack: UIView!
-    
+    let thu: [String: String] = [
+        "Mon": "Th 2",
+        "Tue": "Th 3",
+        "Wed": "Th 4",
+        "Thu": "Th 5",
+        "Fri": "Th 6",
+        "Sat": "Th 7",
+        "Sun": "CN"
+    ]
     var item: WeatherModel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +30,7 @@ class PopUp7Controller: UIViewController {
         collView.dataSource = self
         collView.register(UINib(nibName: DailyCell.className, bundle: nil), forCellWithReuseIdentifier: DailyCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: (369 * scaleW) / 6.0, height: 100 * scaleH)
+        layout.itemSize = CGSize(width: (369 * scaleW) / 6.0, height: 100 * scaleW)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 5 * scaleW
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 10 * scaleW)
@@ -46,7 +54,7 @@ extension PopUp7Controller: UICollectionViewDelegate, UICollectionViewDataSource
         let data = item.daily[indexPath.row + 1]
         cell.lblHigh.text = Int(data.temperatureHigh.rounded(.toNearestOrEven)).description + "°"
         cell.lblLow.text = Int(data.temperatureLow.rounded(.toNearestOrEven)).description + "°"
-        cell.lblThu.text = getDayOfDate(Date(timeIntervalSince1970: Double(data.time)))
+        cell.lblThu.text = thu[getDayOfDate(Date(timeIntervalSince1970: Double(data.time)))]
         cell.imgIcon.image = UIImage(named: data.icon)
         return cell
     }

@@ -54,7 +54,7 @@ extension UIView {
         get { return layer.cornerRadius }
         set {
             
-            layer.cornerRadius = newValue * scaleH
+            layer.cornerRadius = newValue * scaleW
             layer.masksToBounds = newValue > 0
         }
     }
@@ -195,7 +195,19 @@ extension UITextField{
     @IBInspectable var myAutoFontSize: Bool{
         get{ true }
         set {
-            self.font = self.font?.withSize(self.font!.pointSize * scaleH)
+            self.font = self.font?.withSize(self.font!.pointSize * scaleW)
+        }
+    }
+}
+extension UITextField {
+    @IBInspectable var placeholderColor: UIColor {
+        get {
+            return attributedPlaceholder?.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? UIColor ?? .clear
+        }
+        set {
+            guard let attributedPlaceholder = attributedPlaceholder else { return }
+            let attributes: [NSAttributedString.Key: UIColor] = [.foregroundColor: newValue]
+            self.attributedPlaceholder = NSAttributedString(string: attributedPlaceholder.string, attributes: attributes)
         }
     }
 }

@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -25,7 +24,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-Or-uve">
                         <rect key="frame" x="20" y="299" width="374" height="1"/>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="VeU-hg-nmm">
                                 <userDefinedRuntimeAttributes>
@@ -46,8 +45,16 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NEXT" translatesAutoresizingMaskIntoConstraints="NO" id="PLs-rz-PbK">
                         <rect key="frame" x="374" y="26" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="PLs-rz-PbK" secondAttribute="height" id="JrZ-i9-tUY"/>
-                            <constraint firstAttribute="height" constant="20" id="pGz-yU-N2i"/>
+                            <constraint firstAttribute="width" secondItem="PLs-rz-PbK" secondAttribute="height" id="JrZ-i9-tUY">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="height" constant="20" id="pGz-yU-N2i">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                         </constraints>
                     </imageView>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="VGv-j8-jDc">
@@ -94,14 +101,26 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstAttribute="trailing" secondItem="NnH-Ks-JrT" secondAttribute="trailing" constant="20" id="XeX-3K-q8X"/>
+                <constraint firstAttribute="trailing" secondItem="NnH-Ks-JrT" secondAttribute="trailing" constant="20" id="XeX-3K-q8X">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
                 <constraint firstAttribute="trailing" secondItem="bbO-Or-uve" secondAttribute="trailing" constant="20" id="ZcB-ot-VL6">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="NnH-Ks-JrT" firstAttribute="top" secondItem="VGv-j8-jDc" secondAttribute="bottom" constant="8" symbolic="YES" id="eSZ-s8-WjE"/>
-                <constraint firstItem="PLs-rz-PbK" firstAttribute="centerY" secondItem="O2X-Xa-bP8" secondAttribute="centerY" id="icb-Eh-fTB"/>
+                <constraint firstItem="NnH-Ks-JrT" firstAttribute="top" secondItem="VGv-j8-jDc" secondAttribute="bottom" constant="8" symbolic="YES" id="eSZ-s8-WjE">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="PLs-rz-PbK" firstAttribute="centerY" secondItem="O2X-Xa-bP8" secondAttribute="centerY" id="icb-Eh-fTB">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
                 <constraint firstAttribute="trailing" secondItem="VGv-j8-jDc" secondAttribute="trailing" id="mmd-Nn-v59">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -122,7 +141,11 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstAttribute="trailing" secondItem="PLs-rz-PbK" secondAttribute="trailing" constant="20" id="zhB-Pc-aZi"/>
+                <constraint firstAttribute="trailing" secondItem="PLs-rz-PbK" secondAttribute="trailing" constant="20" id="zhB-Pc-aZi">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
             </constraints>
             <size key="customSize" width="89" height="87"/>
             <connections>
@@ -134,8 +157,5 @@
     </objects>
     <resources>
         <image name="NEXT" width="512" height="512"/>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

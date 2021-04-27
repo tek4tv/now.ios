@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -25,7 +24,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWu-XK-93p">
                         <rect key="frame" x="20" y="309" width="374" height="1"/>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="xNZ-5T-FCZ">
                                 <userDefinedRuntimeAttributes>
@@ -56,8 +55,16 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NEXT" translatesAutoresizingMaskIntoConstraints="NO" id="WMC-G8-Dh5">
                         <rect key="frame" x="374" y="26" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="rHb-dn-afw"/>
-                            <constraint firstAttribute="width" secondItem="WMC-G8-Dh5" secondAttribute="height" id="wKw-3D-1Oy"/>
+                            <constraint firstAttribute="height" constant="20" id="rHb-dn-afw">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="width" secondItem="WMC-G8-Dh5" secondAttribute="height" id="wKw-3D-1Oy">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -65,8 +72,16 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="WMC-G8-Dh5" firstAttribute="centerY" secondItem="jem-nd-mOI" secondAttribute="centerY" id="EJy-Rz-nR4"/>
-                <constraint firstAttribute="trailing" secondItem="WMC-G8-Dh5" secondAttribute="trailing" constant="20" id="KWb-Lf-kWi"/>
+                <constraint firstItem="WMC-G8-Dh5" firstAttribute="centerY" secondItem="jem-nd-mOI" secondAttribute="centerY" id="EJy-Rz-nR4">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstAttribute="trailing" secondItem="WMC-G8-Dh5" secondAttribute="trailing" constant="20" id="KWb-Lf-kWi">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
                 <constraint firstAttribute="bottom" secondItem="YWu-XK-93p" secondAttribute="bottom" id="PQb-yc-1gs">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -122,8 +137,5 @@
     </objects>
     <resources>
         <image name="NEXT" width="512" height="512"/>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

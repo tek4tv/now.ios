@@ -26,7 +26,7 @@ class VideoCell: UICollectionViewCell {
     @IBOutlet weak var viewCast: UIView!
     
     @IBOutlet weak var viewShare: UIView!
-    @IBOutlet weak var viewBookmark: UIView!
+
     var delegate: VideoCellDelegate!
     
     var indexPath: IndexPath!
@@ -53,7 +53,7 @@ class VideoCell: UICollectionViewCell {
         viewSetting.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewSetting(_:))))
         viewFullScreen.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnFullScreen(_:))))
         viewShare.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewShare(_:))))
-        viewBookmark.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBookmark(_:))))
+        
         slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
         
         hidePlayerController()

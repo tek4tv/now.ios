@@ -57,6 +57,6 @@ extension PopUp5Controller: UITableViewDelegate, UITableViewDataSource{
         dismiss(animated: true, completion: nil)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60 * scaleH
+        return 60 * scaleW
     }
 }

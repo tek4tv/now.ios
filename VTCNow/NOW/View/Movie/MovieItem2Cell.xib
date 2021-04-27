@@ -38,26 +38,64 @@
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mỹ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39H-dx-FOH">
                         <rect key="frame" x="0.0" y="228" width="14" height="12"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="UNL-ti-3gM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4ig-KO-dGF"/>
-                <constraint firstAttribute="bottom" secondItem="39H-dx-FOH" secondAttribute="bottom" constant="10" id="5n3-tn-D9r"/>
-                <constraint firstAttribute="trailing" secondItem="xGm-n8-Xqf" secondAttribute="trailing" id="Fi9-UK-QpC"/>
-                <constraint firstItem="xGm-n8-Xqf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Npc-Ww-YLg"/>
-                <constraint firstAttribute="trailing" secondItem="UNL-ti-3gM" secondAttribute="trailing" id="c0j-St-M0p"/>
-                <constraint firstItem="UNL-ti-3gM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dNB-Ga-v4a"/>
-                <constraint firstItem="39H-dx-FOH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fca-fT-8Pc"/>
-                <constraint firstItem="xGm-n8-Xqf" firstAttribute="top" secondItem="UNL-ti-3gM" secondAttribute="bottom" constant="15" id="loj-ng-3c8"/>
+                <constraint firstItem="UNL-ti-3gM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4ig-KO-dGF">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstAttribute="bottom" secondItem="39H-dx-FOH" secondAttribute="bottom" constant="10" id="5n3-tn-D9r">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstAttribute="trailing" secondItem="xGm-n8-Xqf" secondAttribute="trailing" id="Fi9-UK-QpC">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="xGm-n8-Xqf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Npc-Ww-YLg">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstAttribute="trailing" secondItem="UNL-ti-3gM" secondAttribute="trailing" id="c0j-St-M0p">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="UNL-ti-3gM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dNB-Ga-v4a">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="39H-dx-FOH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fca-fT-8Pc">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="xGm-n8-Xqf" firstAttribute="top" secondItem="UNL-ti-3gM" secondAttribute="bottom" constant="15" id="loj-ng-3c8">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
             </constraints>
             <connections>
                 <outlet property="imgThumb" destination="UNL-ti-3gM" id="YTd-Ao-NuJ"/>

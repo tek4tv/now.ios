@@ -23,12 +23,12 @@
                         <constraints>
                             <constraint firstAttribute="width" secondItem="1X7-RW-Qqx" secondAttribute="height" multiplier="1:1" id="X98-HA-fW2">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstAttribute="height" constant="9" id="YET-d9-Ffm">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                         </constraints>
@@ -44,12 +44,12 @@
             <constraints>
                 <constraint firstItem="1X7-RW-Qqx" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="e42-Dn-hC3">
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
                 <constraint firstItem="1X7-RW-Qqx" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="e9U-Pj-9Ih">
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
             </constraints>

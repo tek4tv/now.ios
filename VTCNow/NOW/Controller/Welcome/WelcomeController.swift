@@ -17,7 +17,7 @@ class WelcomeController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.heightLogo.constant = 128 
+        self.heightLogo.constant = 128 * scaleW
         UIView.animate(withDuration: 0.5,
                        delay: 0,
                        options: [],

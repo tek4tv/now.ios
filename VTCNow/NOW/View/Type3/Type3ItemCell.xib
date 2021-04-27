@@ -52,8 +52,16 @@
                                                 <rect key="frame" x="7" y="16.5" width="20" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="RVc-yU-jlH"/>
-                                                    <constraint firstAttribute="width" constant="20" id="se6-vF-otS"/>
+                                                    <constraint firstAttribute="height" constant="1" id="RVc-yU-jlH">
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </constraint>
+                                                    <constraint firstAttribute="width" constant="20" id="se6-vF-otS">
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </constraint>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="44" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHG-3u-tTx">
@@ -72,32 +80,32 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Hao-MF-XDG">
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                     <constraint firstAttribute="width" secondItem="3GD-HW-Ndp" secondAttribute="height" id="Mdl-Wl-mEY">
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="6o9-kK-xYY" secondAttribute="trailing" constant="3" id="NDZ-7i-d6D">
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                     <constraint firstItem="6o9-kK-xYY" firstAttribute="top" secondItem="3GD-HW-Ndp" secondAttribute="top" constant="3" id="SbM-PF-xzp">
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                     <constraint firstItem="6o9-kK-xYY" firstAttribute="leading" secondItem="3GD-HW-Ndp" secondAttribute="leading" constant="3" id="XEu-5H-Rij">
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                     <constraint firstAttribute="bottom" secondItem="6o9-kK-xYY" secondAttribute="bottom" constant="3" id="ZH6-Ch-2tK">
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                 </constraints>
@@ -125,7 +133,11 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
-                            <constraint firstItem="3GD-HW-Ndp" firstAttribute="top" secondItem="f19-Q2-4gO" secondAttribute="top" constant="5" id="cN7-14-hhQ"/>
+                            <constraint firstItem="3GD-HW-Ndp" firstAttribute="top" secondItem="f19-Q2-4gO" secondAttribute="top" constant="5" id="cN7-14-hhQ">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                             <constraint firstAttribute="bottom" secondItem="UDj-LX-c8z" secondAttribute="bottom" id="lzq-fB-Dcz">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -136,7 +148,11 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
-                            <constraint firstItem="3GD-HW-Ndp" firstAttribute="leading" secondItem="f19-Q2-4gO" secondAttribute="leading" constant="5" id="u8o-Da-bb2"/>
+                            <constraint firstItem="3GD-HW-Ndp" firstAttribute="leading" secondItem="f19-Q2-4gO" secondAttribute="leading" constant="5" id="u8o-Da-bb2">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                         </constraints>
                     </view>
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Người hâm mộ mưa dự buổi ra mắt sách của 'đả nữ' Ngô Thanh Vân" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETX-5u-vt3">
@@ -181,13 +197,21 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="fws-LZ-DfI" secondAttribute="trailing" constant="10" id="S3n-vT-ame"/>
+                                    <constraint firstAttribute="trailing" secondItem="fws-LZ-DfI" secondAttribute="trailing" constant="10" id="S3n-vT-ame">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="54F-HF-hz1"/>
+                            <constraint firstAttribute="height" constant="40" id="54F-HF-hz1">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
                             <constraint firstAttribute="width" constant="80" id="lBU-QB-isw">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>

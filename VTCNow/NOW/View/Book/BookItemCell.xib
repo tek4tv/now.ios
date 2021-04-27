@@ -38,27 +38,27 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="CHv-OM-OKu" secondAttribute="trailing" id="8Vt-yv-oRG">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstAttribute="width" secondItem="5cz-Jf-hZb" secondAttribute="height" multiplier="2/3" id="R7W-Ej-RBp">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstAttribute="bottom" secondItem="CHv-OM-OKu" secondAttribute="bottom" id="TtA-tq-hcR">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstItem="CHv-OM-OKu" firstAttribute="leading" secondItem="5cz-Jf-hZb" secondAttribute="leading" id="Uog-NV-j8q">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstItem="CHv-OM-OKu" firstAttribute="top" secondItem="5cz-Jf-hZb" secondAttribute="top" id="dBW-XM-XjF">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                         </constraints>
@@ -105,8 +105,16 @@
                                         <rect key="frame" x="7" y="16.5" width="20" height="1"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="0zv-eK-DY0"/>
-                                            <constraint firstAttribute="width" constant="20" id="I9d-nI-Xmv"/>
+                                            <constraint firstAttribute="height" constant="1" id="0zv-eK-DY0">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="20" id="I9d-nI-Xmv">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="44" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvA-P7-vDa">
@@ -125,32 +133,32 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="HyW-EE-7E7" secondAttribute="bottom" constant="3" id="Ckc-3f-0vm">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstAttribute="trailing" secondItem="HyW-EE-7E7" secondAttribute="trailing" constant="3" id="DIh-cX-YTP">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstAttribute="width" secondItem="Sas-qF-hyQ" secondAttribute="height" id="QMz-Ur-WrI">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstAttribute="height" constant="40" id="SSU-LF-Tct">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstItem="HyW-EE-7E7" firstAttribute="leading" secondItem="Sas-qF-hyQ" secondAttribute="leading" constant="3" id="WOo-FD-3Zu">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstItem="HyW-EE-7E7" firstAttribute="top" secondItem="Sas-qF-hyQ" secondAttribute="top" constant="3" id="oeV-QN-13z">
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                         </constraints>
@@ -165,29 +173,61 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Sas-qF-hyQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="8AF-jv-20q"/>
-                <constraint firstItem="Kzp-Wu-wAF" firstAttribute="leading" secondItem="1YV-gm-bdS" secondAttribute="leading" id="BFu-CY-q5e"/>
-                <constraint firstItem="5cz-Jf-hZb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="LrZ-oU-4Fy">
+                <constraint firstItem="Sas-qF-hyQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="8AF-jv-20q">
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="Sas-qF-hyQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="Pi3-Pk-fNq"/>
-                <constraint firstItem="1YV-gm-bdS" firstAttribute="leading" secondItem="5cz-Jf-hZb" secondAttribute="leading" id="W21-UJ-3Ye"/>
-                <constraint firstAttribute="bottom" secondItem="Kzp-Wu-wAF" secondAttribute="bottom" constant="5" id="Ymx-MH-9FV"/>
-                <constraint firstItem="1YV-gm-bdS" firstAttribute="trailing" secondItem="5cz-Jf-hZb" secondAttribute="trailing" id="dKf-Y9-k9u"/>
-                <constraint firstItem="Kzp-Wu-wAF" firstAttribute="trailing" secondItem="1YV-gm-bdS" secondAttribute="trailing" id="mzf-3R-lpE"/>
+                <constraint firstItem="Kzp-Wu-wAF" firstAttribute="leading" secondItem="1YV-gm-bdS" secondAttribute="leading" id="BFu-CY-q5e">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="5cz-Jf-hZb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="LrZ-oU-4Fy">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="Sas-qF-hyQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="Pi3-Pk-fNq">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="1YV-gm-bdS" firstAttribute="leading" secondItem="5cz-Jf-hZb" secondAttribute="leading" id="W21-UJ-3Ye">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstAttribute="bottom" secondItem="Kzp-Wu-wAF" secondAttribute="bottom" constant="5" id="Ymx-MH-9FV">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="1YV-gm-bdS" firstAttribute="trailing" secondItem="5cz-Jf-hZb" secondAttribute="trailing" id="dKf-Y9-k9u">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="Kzp-Wu-wAF" firstAttribute="trailing" secondItem="1YV-gm-bdS" secondAttribute="trailing" id="mzf-3R-lpE">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
                 <constraint firstItem="5cz-Jf-hZb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="oLB-tb-mdh">
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
                 <constraint firstAttribute="trailing" secondItem="5cz-Jf-hZb" secondAttribute="trailing" id="tQm-e3-u6O">
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="1YV-gm-bdS" firstAttribute="top" secondItem="5cz-Jf-hZb" secondAttribute="bottom" constant="15" id="tff-b4-lvm"/>
+                <constraint firstItem="1YV-gm-bdS" firstAttribute="top" secondItem="5cz-Jf-hZb" secondAttribute="bottom" constant="15" id="tff-b4-lvm">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
             </constraints>
             <size key="customSize" width="120" height="295"/>
             <connections>

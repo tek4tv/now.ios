@@ -25,7 +25,7 @@ class PickUpController: UIViewController {
         collView1.dataSource = self
         collView1.register(UINib(nibName: WordCell.className, bundle: nil), forCellWithReuseIdentifier: WordCell.className)
         let layout2 = LeftAlignedCellsCustomFlowLayout()
-        layout2.estimatedItemSize = CGSize(width: 1, height: 40 * scaleH)
+        layout2.estimatedItemSize = CGSize(width: 1, height: 40 * scaleW)
         layout2.minimumLineSpacing = 10 * scaleW
         layout2.minimumInteritemSpacing = 10 * scaleW
         layout2.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
@@ -35,7 +35,7 @@ class PickUpController: UIViewController {
         collView2.dataSource = self
         collView2.register(UINib(nibName: WordCell.className, bundle: nil), forCellWithReuseIdentifier: WordCell.className)
         let layout = LeftAlignedCellsCustomFlowLayout()
-        layout.estimatedItemSize = CGSize(width: 1, height: 40 * scaleH)
+        layout.estimatedItemSize = CGSize(width: 1, height: 40 * scaleW)
         layout.minimumLineSpacing = 10 * scaleW
         layout.minimumInteritemSpacing = 10 * scaleW
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
@@ -90,7 +90,7 @@ extension PickUpController: UICollectionViewDelegate, UICollectionViewDataSource
                 label.text = list5[indexPath.row]
                 label.font = UIFont(name: "Roboto-Medium", size: 13 * scaleW)
                 label.sizeToFit()
-                return CGSize(width: label.frame.width + 20 * scaleW, height: 35 * scaleW)
+                return CGSize(width: label.frame.width + 20 * scaleW, height: 40 * scaleW)
             default:
                 if list5.count == 4 {
                     return CGSize(width: 0, height: 0)
@@ -99,11 +99,11 @@ extension PickUpController: UICollectionViewDelegate, UICollectionViewDataSource
                 label.text = "Hãy chọn chủ đề"
                 label.font = UIFont(name: "Roboto-Medium", size: 13 * scaleW)
                 label.sizeToFit()
-                return CGSize(width: label.frame.width + 20 * scaleW, height: 35 * scaleW)
+                return CGSize(width: label.frame.width + 20 * scaleW, height: 40 * scaleW)
             }
             
         default:
-            return CGSize(width: 1, height: 40 * scaleH)
+            return CGSize(width: 1, height: 40 * scaleW)
         }
         
     }

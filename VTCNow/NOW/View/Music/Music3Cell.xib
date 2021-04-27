@@ -34,20 +34,36 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="YeN-0N-N8o" firstAttribute="leading" secondItem="sdX-Vj-6VN" secondAttribute="leading" id="AA2-sG-3BC"/>
+                                    <constraint firstItem="YeN-0N-N8o" firstAttribute="leading" secondItem="sdX-Vj-6VN" secondAttribute="leading" id="AA2-sG-3BC">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
                                     <constraint firstAttribute="height" constant="110" id="O9h-iZ-E92">
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
-                                    <constraint firstAttribute="trailing" secondItem="YeN-0N-N8o" secondAttribute="trailing" id="U1U-Jn-2KQ"/>
-                                    <constraint firstItem="YeN-0N-N8o" firstAttribute="top" secondItem="sdX-Vj-6VN" secondAttribute="top" id="bG4-qt-tZo"/>
+                                    <constraint firstAttribute="trailing" secondItem="YeN-0N-N8o" secondAttribute="trailing" id="U1U-Jn-2KQ">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstItem="YeN-0N-N8o" firstAttribute="top" secondItem="sdX-Vj-6VN" secondAttribute="top" id="bG4-qt-tZo">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
                                     <constraint firstAttribute="width" secondItem="sdX-Vj-6VN" secondAttribute="height" multiplier="1:1" id="qgf-Yv-upI">
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
-                                    <constraint firstAttribute="bottom" secondItem="YeN-0N-N8o" secondAttribute="bottom" id="t0X-rk-kkf"/>
+                                    <constraint firstAttribute="bottom" secondItem="YeN-0N-N8o" secondAttribute="bottom" id="t0X-rk-kkf">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dPm-pc-Ab3" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
@@ -105,6 +121,9 @@
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </label>
                 </subviews>
             </view>
