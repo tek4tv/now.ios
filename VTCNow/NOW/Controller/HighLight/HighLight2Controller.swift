@@ -44,6 +44,13 @@ class HighLight2Controller: UIViewController {
             cell.viewPlayer.player?.pause()
         }
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let cell = collView.cellForItem(at: indexPath) as? VideoCell{
+            cell.viewPlayer.player?.pause()
+        }
+        NotificationCenter.default.post(name: NSNotification.Name("stopVOD"), object: nil)
+    }
     @objc func didSelectBtnBack(_ sender: Any){
         self.navigationController?.popViewController(animated: false)
     }
@@ -120,11 +127,11 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
             if news.name == "Đừng bỏ lỡ"{
                 return
             }
-            APIService.shared.getMoreVideoPlaylist(privateKey: news.privateKey, page: page.description) { (data, error) in
+            APIService.shared.getMoreVideoPlaylist(privateKey: news.privateKey, page: page.description) {[weak self] (data, error) in
                 if let data = data as? [MediaModel]{
                     news.media += data
-                    self.page += 1
-                    self.collView.reloadData()
+                    self?.page += 1
+                    self?.collView.reloadData()
                 }
             }
         }
@@ -147,6 +154,8 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
             cell.lblTitle.text = item.name
             if news.name == "Đừng bỏ lỡ"{
                 cell.lblTime.text = ""
+            } else if item.episode != ""{
+                cell.lblTime.text = "Tập " + item.episode + "/" + item.totalEpisode
             } else{
                 cell.lblTime.text = item.timePass
             }
@@ -181,7 +190,7 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
 }
 extension HighLight2Controller: VideoCellDelegate{
     func didSelectViewShare(_ cell: VideoCell) {
-        guard let url = URL(string: cell.item.path) else {
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
             return
         }
         let itemsToShare = [url]
@@ -209,8 +218,7 @@ extension HighLight2Controller: VideoCellDelegate{
             cell.speed = value
             cell.setSpeed()
         }
-        present(vc, animated: true, completion: nil)
-                
+        present(vc, animated: true, completion: nil)        
     }
     
     func didSelectViewFullScreen(_ cell: VideoCell, _ newPlayer: AVPlayer) {

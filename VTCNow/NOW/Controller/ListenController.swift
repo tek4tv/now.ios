@@ -89,6 +89,24 @@ extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource
     }
 }
 extension ListenController: Type7CellDelegate, Book3CellDelegate{
+    func didSelectNovel(_ cell: Book3Cell, _ data: MediaModel, _ list: [MediaModel]) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
+        vc.data = data
+        vc.listData = list
+        vc.isNovel = true
+        vc.idPlaying = cell.row
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    func didSelectNovel(_ cell: Type7Cell, _ data: MediaModel, _ list: [MediaModel]) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
+        vc.data = data
+        vc.listData = list
+        vc.isNovel = true
+        vc.idPlaying = cell.row
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
     func didSelectItemAt(_ cell: Book3Cell, _ data: MediaModel) {
         let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
         vc.data = data

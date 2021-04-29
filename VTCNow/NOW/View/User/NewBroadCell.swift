@@ -63,6 +63,7 @@ extension NewBroadCell: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 protocol NewBroadCellDelegate {
     func didSelectItemAt(_ cell: NewBroadCell)
+    func didSelectViewShare(_ cell: Type3ItemCell)
 }
 extension NewBroadCell: Type3ItemCellDelegate {
     func didSelectViewImage(_ cell: Type3ItemCell) {
@@ -79,7 +80,7 @@ extension NewBroadCell: Type3ItemCellDelegate {
     }
     
     func didSelectViewShare(_ cell: Type3ItemCell) {
-        
+        delegate?.didSelectViewShare(cell)
     }
     
     

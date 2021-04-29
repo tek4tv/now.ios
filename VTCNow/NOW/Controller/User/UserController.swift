@@ -90,7 +90,7 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.className, for: indexPath) as! NewBroadCell
-            cell.lblTitle.text = "Theo dõi nhiều chủ đề"
+            cell.lblTitle.text = "Chọn theo nhiều chủ đề"
             cell.data = CategoryModel()
             return cell
         }
@@ -186,6 +186,16 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 extension UserController: NewBroadCellDelegate{
+    func didSelectViewShare(_ cell: Type3ItemCell) {
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.data.privateID).html") else {
+            return
+        }
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
+    }
+    
     func didSelectItemAt(_ cell: NewBroadCell) {
         let vc = storyboard?.instantiateViewController(withIdentifier: User2Controller.className) as! User2Controller
         navigationController?.pushViewController(vc, animated: false)

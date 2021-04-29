@@ -65,7 +65,7 @@ class WarmodroidSwitch: UIView {
         elipticalView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding).isActive = true
         elipticalView.topAnchor.constraint(equalTo: topAnchor, constant: padding).isActive = true
         elipticalView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding).isActive = true
-        elipticalView.layer.cornerRadius = (frame.size.height - padding*2)/2
+        elipticalView.layer.cornerRadius = (frame.size.height - padding*2)/2 * scaleW
         
         thumb = UIView()
         //thumb.backgroundColor = UIColor.green

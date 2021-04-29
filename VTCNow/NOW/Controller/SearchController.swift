@@ -298,7 +298,7 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
 }
 extension SearchController: VideoCellDelegate{
     func didSelectViewShare(_ cell: VideoCell) {
-        guard let url = URL(string: cell.item.path) else {
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
             return
         }
         let itemsToShare = [url]

@@ -362,7 +362,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivh-lM-86W">
                                 <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-share-49" translatesAutoresizingMaskIntoConstraints="NO" id="PrX-4f-fTT">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CHIA SE" translatesAutoresizingMaskIntoConstraints="NO" id="PrX-4f-fTT">
                                         <rect key="frame" x="60" y="-3.5" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="PrX-4f-fTT" secondAttribute="height" id="gN7-S1-K43">
@@ -502,11 +502,11 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="CHIA SE" width="512" height="512"/>
         <image name="PLAY" width="512" height="512"/>
         <image name="Rectangle 12 (1)" width="480" height="56"/>
         <image name="ic_fullScreen" width="90" height="90"/>
         <image name="icons8-chromecast-cast-button-49" width="48" height="48"/>
         <image name="icons8-settings-48" width="48" height="48"/>
-        <image name="icons8-share-49" width="48" height="48"/>
     </resources>
 </document>

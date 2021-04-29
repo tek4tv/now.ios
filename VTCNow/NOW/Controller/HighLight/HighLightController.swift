@@ -327,6 +327,10 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                         }
                     }
                 }
+            case "20":
+                news = cate
+                let vc = storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController
+                navigationController?.pushViewController(vc, animated: false)
             default:
                 news = cate
                 let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
@@ -435,6 +439,10 @@ extension HighLightController: CategoryCellDelegate {
                     }
                 }
             }
+        case "20":
+            news = cate
+            let vc = storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController
+            navigationController?.pushViewController(vc, animated: false)
         default:
             news = cate
             let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
@@ -474,7 +482,7 @@ extension HighLightController: Type3CellDelegate{
     }
     
     func didSelectViewShare(_ cell: Type3ItemCell) {
-        guard let url = URL(string: cell.data.path) else {
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.data.privateID).html") else {
             return
         }
         let itemsToShare = [url]
@@ -508,7 +516,7 @@ extension HighLightController: Type5CellDelegate{
     }
     
     func didSelectView2Share(_ cell: Type3ItemCell) {
-        guard let url = URL(string: cell.data.path) else {
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.data.privateID).html") else {
             return
         }
         let itemsToShare = [url]

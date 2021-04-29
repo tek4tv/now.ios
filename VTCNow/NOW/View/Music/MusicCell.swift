@@ -10,7 +10,7 @@ class MusicCell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
-    var delegate: MusicCellDelegate!
+    weak var delegate: MusicCellDelegate?
     var data = CategoryModel(){
         didSet{
             lblTitle.text = data.name
@@ -36,6 +36,9 @@ class MusicCell: UICollectionViewCell {
     override func prepareForReuse() {
         lblTitle.text = ""
     }
+    deinit {
+        print("##############")
+    }
 }
 extension MusicCell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -46,11 +49,9 @@ extension MusicCell: UICollectionViewDelegate, UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MusicItemCell.className, for: indexPath) as! MusicItemCell
         let item = data.media[indexPath.row]
         if let url = URL(string: root.cdn.imageDomain + item.image[0].url.replacingOccurrences(of: "\\", with: "/" )){
-            print()
             cell.thumbImage.loadImage(fromURL: url)
         }
         cell.lblAuthor.text = item.cast
-        print("Cast" + item.cast)
         cell.lblTitle.text = item.name
         return cell
     }
@@ -83,7 +84,7 @@ extension MusicCell: UICollectionViewDelegate, UICollectionViewDataSource{
     }
 }
 
-protocol MusicCellDelegate{
+protocol MusicCellDelegate: class{
     func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel])
     
 }

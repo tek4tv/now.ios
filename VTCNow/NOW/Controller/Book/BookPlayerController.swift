@@ -33,6 +33,7 @@ class BookPlayerController: UIViewController {
     var idPlaying = 0
     var data: MediaModel!
     var listData: [MediaModel] = []
+    var isNovel = false
     let activityIndicatorView1: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .gray)
         aiv.translatesAutoresizingMaskIntoConstraints = false
@@ -75,32 +76,45 @@ class BookPlayerController: UIViewController {
         btnPrevious.addSubview(activityIndicatorView3)
         activityIndicatorView3.centerXAnchor.constraint(equalTo: btnPrevious.centerXAnchor).isActive = true
         activityIndicatorView3.centerYAnchor.constraint(equalTo: btnPrevious.centerYAnchor).isActive = true
-        APIService.shared.getEpisode(privateKey: data.privateID) {[self] (list, error) in
-            if let list = list as? [MediaModel] {
-                listData = list
-                
-                listData = listData.reversed()
-                for (index, book) in listData.enumerated() {
-                    if book.episode == data.episode {
-                        idPlaying = index
+        if isNovel {
+            
+            btnList.isUserInteractionEnabled = true
+            activityIndicatorView1.stopAnimating()
+            activityIndicatorView2.stopAnimating()
+            activityIndicatorView3.stopAnimating()
+        } else{
+            APIService.shared.getEpisode(privateKey: data.privateID) {[weak self] (list, error) in
+                if let list = list as? [MediaModel] {
+                    
+                    self?.listData = list
+                    if let Self1 = self {
+                        Self1.listData = Self1.listData.reversed()
+                        for (index, book) in Self1.listData.enumerated() {
+                            if book.episode == self?.data.episode {
+                                self?.idPlaying = index
+                            }
+                        }
                     }
+                    
+                    
+                    self?.btnList.isUserInteractionEnabled = true
+                    self?.activityIndicatorView1.stopAnimating()
+                    self?.activityIndicatorView2.stopAnimating()
+                    self?.activityIndicatorView3.stopAnimating()
                 }
-                btnList.isUserInteractionEnabled = true
-                activityIndicatorView1.stopAnimating()
-                activityIndicatorView2.stopAnimating()
-                activityIndicatorView3.stopAnimating()
             }
         }
+        
     }
     func animation(){
-        UIView.animate(withDuration: 10, delay: 0, options: .curveLinear) {
-            self.CdImage.transform = CGAffineTransform.identity
-            self.CdImage.transform = CGAffineTransform(rotationAngle: -CGFloat.pi * 0.999)
-        } completion: { (true) in
+        UIView.animate(withDuration: 10, delay: 0, options: .curveLinear) { [weak self] in
+            self?.CdImage.transform = CGAffineTransform.identity
+            self?.CdImage.transform = CGAffineTransform(rotationAngle: -CGFloat.pi * 0.999)
+        } completion: {[weak self] (true) in
             UIView.animate(withDuration: 10, delay: 0, options: .curveLinear) {
-                self.CdImage.transform = CGAffineTransform(rotationAngle: -CGFloat.pi * 0.999 * 2)
-            } completion: { (true) in
-                self.animation()
+                self?.CdImage.transform = CGAffineTransform(rotationAngle: -CGFloat.pi * 0.999 * 2)
+            } completion: { [weak self] (true) in
+                self?.animation()
             }
 
         }
@@ -126,8 +140,6 @@ class BookPlayerController: UIViewController {
             self.isPlaying = false
             self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
         }
-        UIApplication.shared.endReceivingRemoteControlEvents()
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [:]
     }
     @objc func didSelectViewShare(_ sender: Any){
         guard let url = URL(string: data.path) else {
@@ -171,10 +183,10 @@ class BookPlayerController: UIViewController {
             vc.listData = listData
             vc.idPlaying = idPlaying
             present(vc, animated: true, completion: nil)
-            vc.onDississ = {[self] (idPlaying) in
-                self.idPlaying = idPlaying
-                data = listData[idPlaying]
-                playAudio()
+            vc.onDississ = {[weak self] (idPlaying) in
+                self?.idPlaying = idPlaying
+                self?.data = self?.listData[idPlaying]
+                self?.playAudio()
             }
         }
         
@@ -189,19 +201,24 @@ class BookPlayerController: UIViewController {
             }
             player = AVPlayer(url: url)
             player.play()
-            player.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+            //player.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
             NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             isPlaying = true
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE nghe"), for: .normal)
             addTimeObserver()
             if let url = URL(string: root.cdn.imageDomain + data.square.replacingOccurrences(of: "\\", with: "/" )){
-                backImage.kf.setImage(with: url){_ in
-                    self.backImage.image = self.backImage.blurImage(usingImage: self.backImage.image ?? UIImage(), blurAmount: 5.0)
+                backImage.kf.setImage(with: url){[weak self] _ in
+                    self?.backImage.image = self?.backImage.blurImage(usingImage: self?.backImage.image ?? UIImage(), blurAmount: 5.0)
                 }
                 
                 squareImage.loadImage(fromURL: url)
             }
-            lblTitle.text = data.name + " - Phần " + data.episode + "/" + data.totalEpisode + "       "
+            if isNovel{
+                lblTitle.text = data.name + "       "
+            } else{
+                lblTitle.text = data.name + " - Phần " + data.episode + "/" + data.totalEpisode + "       "
+            }
+            lblDuration.text = getTimeString(from: (player.currentItem?.asset.duration)!)
             lblAuthor.text = data.author
         }
         setupNowPlaying()
@@ -286,7 +303,16 @@ class BookPlayerController: UIViewController {
         player.pause()
         isEnded = true
         isPlaying = false
-        
+        let count = listData.count
+        if idPlaying < count - 1 {
+            idPlaying += 1
+            data = listData[idPlaying]
+            playAudio()
+        }else {
+            idPlaying = 0
+            data = listData[idPlaying]
+            playAudio()
+        }
     }
     func getTimeString(from time: CMTime) -> String{
         let totalSeconds = CMTimeGetSeconds(time)
@@ -330,7 +356,7 @@ class BookPlayerController: UIViewController {
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "currentItem.loadedTimeRanges", player != nil, let duration = player.currentItem?.duration.seconds, duration > 0.0{
-            self.lblDuration.text = getTimeString(from: (player.currentItem!.duration))
+            //self.lblDuration.text = getTimeString(from: (player.currentItem!.duration))
         }
     }
     @IBAction func didSelectBtnPlay(_ sender: Any) {

@@ -20,6 +20,7 @@ class Type7Cell: UICollectionViewCell {
             }
         }
     }
+    var row = 0
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -92,9 +93,16 @@ extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        row = indexPath.row
         switch indexPath.row {
         case 0...7:
-            delegate?.didSelectItemAt(self, data.media[indexPath.row])
+            let item = data.media[indexPath.row]
+            if item.episode != "" {
+                delegate?.didSelectItemAt(self, item)
+            } else{
+                delegate?.didSelectNovel(self, item, data.media)
+            }
+            
             
         default:
             delegate?.didSelectViewMore(self)
@@ -103,5 +111,6 @@ extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
 }
 protocol Type7CellDelegate {
     func didSelectItemAt(_ cell: Type7Cell,_ data: MediaModel)
+    func didSelectNovel(_ cell: Type7Cell, _ data: MediaModel, _ list: [MediaModel])
     func didSelectViewMore(_ cell: Type7Cell)
 }

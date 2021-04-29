@@ -94,7 +94,7 @@ class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
         self.navigationController?.popViewController(animated: false)
     }
     @objc func didSelectViewShare(_ sender: Any){
-        guard let url = URL(string: item.path) else {
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(item.privateID).html") else {
             return
         }
         let itemsToShare = [url]

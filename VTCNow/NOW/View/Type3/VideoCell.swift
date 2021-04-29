@@ -75,6 +75,11 @@ class VideoCell: UICollectionViewCell {
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
+        if let timeObserver = timeObserver {
+            viewPlayer.player?.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
+        timer.invalidate()
     }
     @objc func stopVOD(_ sender: Any){
         isPlaying = false
@@ -134,9 +139,9 @@ class VideoCell: UICollectionViewCell {
         viewPlayer.player?.play()
         isPlaying = true
         isSliderChanging = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            if self.isSliderChanging == false{
-                self.hidePlayerController()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {[weak self] in
+            if self?.isSliderChanging == false{
+                self?.hidePlayerController()
             }
         }
     }

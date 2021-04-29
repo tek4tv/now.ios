@@ -38,7 +38,12 @@ extension PopUp5Controller: UITableViewDelegate, UITableViewDataSource{
         let item = listData[indexPath.row]
         
         cell.lblTitle.text = item.name
-        cell.lblAuthor.text = "Phần " + item.episode + "/" + item.totalEpisode
+        if item.episode != "" {
+            cell.lblAuthor.text = "Phần " + item.episode + "/" + item.totalEpisode
+        } else{
+            cell.lblAuthor.text = ""
+        }
+        
         if indexPath.row == idPlaying{
             cell.lblTitle.textColor = .purple
             cell.lblAuthor.textColor = .purple

@@ -14,7 +14,19 @@ class PickUpController: UIViewController {
     @IBOutlet weak var viewDone: UIView!
     var onComplete: ((Int) -> ())!
     var onDelete: (() -> ())!
-    let listData = ["Võ Hoàng Yên", "Chính biến Myanmar", "Manchester", "Sơn Tùng MTP", "Covid 19", "Cuộc sống", "Việt Nam", "Thời sự"]
+    let listData = ["Văn Hóa",
+                    "Chính Trị",
+                    "Kinh tế",
+                    "Xã hội",
+                    "Biển Đông",
+                    "Trung Quốc",
+                    "Mỹ",
+                    "Nga",
+                    "Covid 19",
+                    "Cuộc sống 24h",
+                    "Toàn cầu",
+                    "Thị trường",
+                    "Đời sống"]
     var list5: [String] = []
     var idList = 0
     

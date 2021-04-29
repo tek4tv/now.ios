@@ -11,6 +11,7 @@ class Book3Cell: UICollectionViewCell {
     @IBOutlet weak var collView: UICollectionView!
     var data = CategoryModel()
     var delegate: Book3CellDelegate!
+    var row = 0
     override func awakeFromNib() {
         super.awakeFromNib()
         collView.delegate = self
@@ -40,10 +41,18 @@ extension Book3Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.delegate?.didSelectItemAt(self, self.data.media[indexPath.row])
+        row = indexPath.row
+        let item = self.data.media[indexPath.row]
+        if item.episode != ""{
+            self.delegate?.didSelectItemAt(self, item)
+        } else{
+            self.delegate?.didSelectNovel(self, item, data.media)
+        }
+        
     }
     
 }
 protocol Book3CellDelegate {
     func didSelectItemAt(_ cell: Book3Cell,_ data: MediaModel)
+    func didSelectNovel(_ cell: Book3Cell,_ data: MediaModel, _ list: [MediaModel])
 }

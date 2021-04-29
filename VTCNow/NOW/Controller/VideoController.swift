@@ -78,7 +78,9 @@ class VideoController: UIViewController{
         activityIndicatorView.centerYAnchor.constraint(equalTo: viewPlayer.centerYAnchor).isActive = true
         
         openVideoAudio()
-        heightCollView.constant = CGFloat(listData.count * 130) * scaleW
+        var row = Double(listData.count) / 2.0
+        row = row.rounded(.toNearestOrEven)
+        heightCollView.constant = CGFloat(row * 190) * scaleW
         
         
     }
@@ -104,7 +106,7 @@ class VideoController: UIViewController{
         self.navigationController?.popViewController(animated: false)
     }
     @objc func didSelectViewShare(_ sender: Any){
-        guard let url = URL(string: item.path) else {
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(item.privateID).html") else {
             return
         }
         let itemsToShare = [url]
@@ -298,6 +300,8 @@ class VideoController: UIViewController{
             lblTitle.text = item.name
             if item.country != "" {
                 lblCast.text = "Quốc gia: " + item.country
+            } else if item.episode != "" {
+                lblCast.text = "Tập " + item.episode + "/" + item.totalEpisode
             } else{
                 lblCast.text = item.getTimePass()
             }

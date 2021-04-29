@@ -73,6 +73,7 @@
 		F6507CEB25C3F3CA002E77EC /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6507CE925C3F3CA002E77EC /* WelcomeController.swift */; };
 		F6507CEE25C3F76D002E77EC /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6507CED25C3F76D002E77EC /* CategoryModel.swift */; };
 		F6507CF225C41053002E77EC /* HighLightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6507CF125C41053002E77EC /* HighLightController.swift */; };
+		F650F917263A8FE3007BD7C4 /* MovieSetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F650F916263A8FE3007BD7C4 /* MovieSetController.swift */; };
 		F65557D4261D87E7000E8AEA /* WarmodroidSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65557D3261D87E7000E8AEA /* WarmodroidSwitch.swift */; };
 		F65557D8261D8C01000E8AEA /* VideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65557D7261D8C01000E8AEA /* VideoController.swift */; };
 		F65557DD261DA4ED000E8AEA /* MovieItem2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65557DB261DA4ED000E8AEA /* MovieItem2Cell.swift */; };
@@ -254,6 +255,7 @@
 		F6507CE925C3F3CA002E77EC /* WelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
 		F6507CED25C3F76D002E77EC /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		F6507CF125C41053002E77EC /* HighLightController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighLightController.swift; sourceTree = "<group>"; };
+		F650F916263A8FE3007BD7C4 /* MovieSetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSetController.swift; sourceTree = "<group>"; };
 		F65557D3261D87E7000E8AEA /* WarmodroidSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarmodroidSwitch.swift; sourceTree = "<group>"; };
 		F65557D7261D8C01000E8AEA /* VideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoController.swift; sourceTree = "<group>"; };
 		F65557DB261DA4ED000E8AEA /* MovieItem2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieItem2Cell.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 			children = (
 				F64836BF25F0E9AC00A9E878 /* MovieCategoryController.swift */,
 				F64836A825F0D12000A9E878 /* MovieController.swift */,
+				F650F916263A8FE3007BD7C4 /* MovieSetController.swift */,
 			);
 			path = Movie;
 			sourceTree = "<group>";
@@ -1208,6 +1211,7 @@
 				F649761A25F2149800EAC71D /* MusicItemCell.swift in Sources */,
 				F60E2F8A25EC96F70002E99C /* PopUp5Controller.swift in Sources */,
 				F6176368261AF64A00A9A547 /* Book3Cell.swift in Sources */,
+				F650F917263A8FE3007BD7C4 /* MovieSetController.swift in Sources */,
 				F65EC47A2614669F0088DBC7 /* ViewMoreCell.swift in Sources */,
 				F6332F7625CCFD5600305C2E /* PlayerViewController.swift in Sources */,
 			);

@@ -192,7 +192,7 @@ extension User2Controller: UICollectionViewDelegate, UICollectionViewDataSource,
             cell.item = item
             cell.indexPath = indexPath
             cell.lblTitle.text = item.name + item.episode
-
+            cell.lblTime.text = item.getTimePass()
             
             cell.delegate = self
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
@@ -224,7 +224,7 @@ extension User2Controller: UICollectionViewDelegate, UICollectionViewDataSource,
 }
 extension User2Controller: VideoCellDelegate{
     func didSelectViewShare(_ cell: VideoCell) {
-        guard let url = URL(string: cell.item.path) else {
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
             return
         }
         let itemsToShare = [url]

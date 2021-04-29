@@ -148,9 +148,9 @@ class MediaModel{
                 }
             }else if let second = interval.second, second != 0{
                 if second > 0{
-                    timePass = "\(-second) giây trước"
+                    timePass = "\(second) giây trước"
                 }else{
-                    timePass = "Còn \(second) giây"
+                    timePass = "Còn \(-second) giây"
                 }
             }else {
                 timePass = "Đang phát"
@@ -225,19 +225,19 @@ class MediaModel{
                 if hour > 0{
                     timePass = "\(hour) giờ trước"
                 }else{
-                    timePass = "Còn \(hour) giờ"
+                    timePass = "Còn \(-hour) giờ"
                 }
             }else if let minute = interval.minute, minute != 0{
                 if minute > 0{
                     timePass = "\(minute) phút trước"
                 }else{
-                    timePass = "Còn \(minute) phút"
+                    timePass = "Còn \(-minute) phút"
                 }
             }else if let second = interval.second, second != 0{
                 if second > 0{
                     timePass = "\(second) giây trước"
                 }else{
-                    timePass = "Còn \(second) giây"
+                    timePass = "Còn \(-second) giây"
                 }
             }else {
                 timePass = "Đang phát"
