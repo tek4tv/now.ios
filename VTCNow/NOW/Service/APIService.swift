@@ -82,7 +82,7 @@ class APIService{
         })
     }
     func getSmallBanner(closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
-        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/5e24f01d-447e-4bc5-a1f0-0c6309b68416", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/special", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let data):
                 var category = CategoryModel()
