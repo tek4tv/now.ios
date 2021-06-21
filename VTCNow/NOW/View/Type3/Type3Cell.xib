@@ -91,7 +91,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jBI-K4-gcG">
                         <rect key="frame" x="20" y="330" width="374" height="99"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BANNER_LOP HOC KKC" translatesAutoresizingMaskIntoConstraints="NO" id="sp6-BA-eN8" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sp6-BA-eN8" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="374" height="99"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -211,6 +211,7 @@
             <connections>
                 <outlet property="bottomLine" destination="EEm-eC-BVK" id="aPZ-G2-7er"/>
                 <outlet property="collView" destination="VGv-j8-jDc" id="mIL-FK-JKN"/>
+                <outlet property="imgIcon" destination="sp6-BA-eN8" id="P38-e2-7Fl"/>
                 <outlet property="lblTitle" destination="O2X-Xa-bP8" id="UTf-lj-dNt"/>
                 <outlet property="viewBanner" destination="jBI-K4-gcG" id="Ntc-8L-jnE"/>
                 <outlet property="viewLine" destination="uwX-DP-Btl" id="bMS-Iw-xmF"/>
@@ -219,7 +220,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="BANNER_LOP HOC KKC" width="1700" height="450"/>
         <image name="NEXT" width="512" height="512"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

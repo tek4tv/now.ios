@@ -339,7 +339,12 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                         }
                     }
                 }
-            case "20", "5":
+            case "5":
+                news = cate
+                let vc = storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController
+                vc.isPushByTVShow = true
+                navigationController?.pushViewController(vc, animated: false)
+            case "20":
                 news = cate
                 let vc = storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController
                 navigationController?.pushViewController(vc, animated: false)
@@ -451,7 +456,12 @@ extension HighLightController: CategoryCellDelegate {
                     }
                 }
             }
-        case "20", "5":
+        case "5":
+            news = cate
+            let vc = storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController
+            vc.isPushByTVShow = true
+            navigationController?.pushViewController(vc, animated: false)
+        case "20":
             news = cate
             let vc = storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController
             navigationController?.pushViewController(vc, animated: false)
@@ -516,7 +526,16 @@ extension HighLightController: Type3CellDelegate{
         vc.isLoadMore = false
         self.navigationController?.pushViewController(vc, animated: false)
     }
-    
+    func didSelectBannerClass() {
+        APIService.shared.getPlaylist(privateKey: "7d20527f-5946-4b64-a42b-c33f9a5993aa") { (data, error) in
+            if let data = data as? CategoryModel{
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController
+                news = data
+                vc.isPushByTVShow = true
+                self.navigationController?.pushViewController(vc, animated: false)
+            }
+        }
+    }
     func didSelectViewShare(_ cell: VideoCell) {
         guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
             return

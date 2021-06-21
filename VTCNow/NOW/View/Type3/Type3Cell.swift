@@ -15,6 +15,7 @@ class Type3Cell: UICollectionViewCell {
 //    var delegate: Type3CellDelegate!
 //    var admobNativeAds: GADUnifiedNativeAd?
     @IBOutlet weak var viewBanner: UIView!
+    @IBOutlet weak var imgIcon: LazyImageView!
     @IBOutlet weak var viewLine: UIView!
     @IBOutlet weak var bottomLine: NSLayoutConstraint!
     var data = CategoryModel(){
@@ -39,7 +40,13 @@ class Type3Cell: UICollectionViewCell {
         layout.minimumLineSpacing = 25 * scaleW
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 25 * scaleW, right: 20 * scaleW)
         collView.collectionViewLayout = layout
-        
+        APIService.shared.getPlaylist(privateKey: "7d20527f-5946-4b64-a42b-c33f9a5993aa") { (data, error) in
+            if let data = data as? CategoryModel{
+                if let url = URL(string: data.icon.replacingOccurrences(of: "\\", with: "/" )){
+                    self.imgIcon.loadImage(fromURL: url)
+                }
+            }
+        }
         //
         NotificationCenter.default.addObserver(self, selector: #selector(stopVOD5(_:)), name: NSNotification.Name("StopVOD5"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didScroll(_:)), name: NSNotification.Name("scrollViewDidScroll"), object: nil)
@@ -54,7 +61,7 @@ class Type3Cell: UICollectionViewCell {
         }
     }
     @objc func didSelectBanner(_ sender: Any){
-        
+        delegate?.didSelectBannerClass()
     }
     func refresh(){
         collView.reloadData()
@@ -318,6 +325,7 @@ protocol Type3CellDelegate: class{
     func didSelectViewSetting(_ cell: VideoCell)
     func didSelectViewFullScreen(_ cell: VideoCell, _ newPlayer: AVPlayer)
     func didSelectBanner()
+    func didSelectBannerClass()
     func didSelectOverView()
     func didSelectOverViewLabel()
 }

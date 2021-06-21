@@ -169,7 +169,7 @@ class VideoCell: UICollectionViewCell {
                 viewPlayer.player?.seek(to: CMTime.zero)
                 isEnded = false
             }
-            viewPlayer.player?.playImmediately(atRate: 1.0)
+            viewPlayer.player?.play()
             viewPlayer.player?.rate = Float(speed)
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         }
@@ -248,6 +248,7 @@ class VideoCell: UICollectionViewCell {
         lblTime.text = ""
         lblTime.textColor = .gray
         viewPlayer.player?.pause()
+        viewPlayer.player?.replaceCurrentItem(with: nil)
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
     }
     @objc func countDown(_ notification: Notification){

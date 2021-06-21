@@ -31,15 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure() // gọi hàm để cấu hình 1 app Firebase mặc định
         Messaging.messaging().delegate = self //Nhận các message từ FirebaseMessaging
         configApplePush(application) // đăng ký nhận push.
-        NotificationCenter.default.addObserver(self, selector: #selector(onMessaging(_:)), name: NSNotification.Name("openMessage"), object: nil)
         return true
     }
-    @objc func onMessaging(_ sender: Any){
-        if isMessaging {
-            NotificationCenter.default.post(name: NSNotification.Name("openVideo"), object: nil)
-        }
 
-    }
     func configApplePush(_ application: UIApplication) {
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)

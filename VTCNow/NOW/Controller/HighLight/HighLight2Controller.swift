@@ -189,8 +189,8 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
                     
                     cell.viewPlayer.player = AVPlayer(url: url)
 //                    cell.viewPlayer.player?.automaticallyWaitsToMinimizeStalling = false
-                    cell.viewPlayer.player?.playImmediately(atRate: 1.0)
-                    //cell.viewPlayer.player?.play()
+//                    cell.viewPlayer.player?.playImmediately(atRate: 1.0)
+                    cell.viewPlayer.player?.play()
                     cell.setup()
                 }
                 cell.imgThumb.isHidden = true

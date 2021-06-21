@@ -12,6 +12,7 @@ class MovieSetController: UIViewController {
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var collView: UICollectionView!
     var page = 1
+    var isPushByTVShow = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,7 +21,7 @@ class MovieSetController: UIViewController {
         collView.dataSource = self
         collView.register(UINib(nibName: Type3ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: (414 - 60) / 2.01 * scaleW, height: 200 * scaleW)
+        layout.itemSize = CGSize(width: (414 - 60) / 2.01 * scaleW, height: 180 * scaleW)
         layout.minimumLineSpacing = 20 * scaleW
         layout.sectionInset = UIEdgeInsets(top: 20 * scaleW, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
@@ -58,6 +59,10 @@ extension MovieSetController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.lblTime.text = item.country
         } else {
             cell.lblTime.text = item.getTimePass()
+        }
+        if isPushByTVShow {
+            cell.lblTime.isHidden = true
+            cell.viewShare.isHidden = true
         }
         if item.episode != "" {
             cell.viewEpisode.isHidden = false
