@@ -10,7 +10,6 @@ import MarqueeLabel
 class Book2Cell: UITableViewCell {
     @IBOutlet weak var lblTitle: MarqueeLabel!
     @IBOutlet weak var lblAuthor: UILabel!
-    @IBOutlet weak var imgView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

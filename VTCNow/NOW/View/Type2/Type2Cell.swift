@@ -11,6 +11,7 @@ class Type2Cell: UICollectionViewCell {
 
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var imgBanner: LazyImageView!
     var timer = Timer()
     var delegate: Type2CellDelegate!
     var data = CategoryModel(){
@@ -43,11 +44,19 @@ class Type2Cell: UICollectionViewCell {
         layout.minimumInteritemSpacing = 20 * scaleW
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
+        
+        //
+        imgBanner.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBanner(_:))))
+        if let url = URL(string: root.cdn.imageDomain + smallBanner.icon.replacingOccurrences(of: "\\", with: "/" )) {
+            imgBanner.loadImage(fromURL: url)
+        }
     }
     func stopTimer(){
         timer.invalidate()
     }
-    
+    @objc func didSelectBanner(_ sender: Any) {
+        delegate?.didSelectBanner(self)
+    }
 }
 extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
@@ -121,7 +130,8 @@ extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }
     }
 }
-protocol Type2CellDelegate {
+protocol Type2CellDelegate: class {
     func didSelectItemAt(_ cell: Type2Cell)
     func didSelectViewMore(_ cell: Type2Cell)
+    func didSelectBanner(_ cell: Type2Cell)
 }

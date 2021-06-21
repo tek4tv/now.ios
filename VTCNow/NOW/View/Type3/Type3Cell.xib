@@ -5,25 +5,26 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Regular.ttf">
-            <string>Roboto-Regular</string>
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
         </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="Type3Cell" customModule="NOW" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="460"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="460"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-Or-uve">
-                        <rect key="frame" x="20" y="299" width="374" height="1"/>
+                        <rect key="frame" x="20" y="459" width="374" height="1"/>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="VeU-hg-nmm">
@@ -34,8 +35,8 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tin mới" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2X-Xa-bP8">
-                        <rect key="frame" x="20" y="25" width="60" height="21.5"/>
-                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                        <rect key="frame" x="20" y="25" width="71" height="25"/>
+                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="21"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
@@ -43,7 +44,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NEXT" translatesAutoresizingMaskIntoConstraints="NO" id="PLs-rz-PbK">
-                        <rect key="frame" x="374" y="26" width="20" height="20"/>
+                        <rect key="frame" x="374" y="27.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="PLs-rz-PbK" secondAttribute="height" id="JrZ-i9-tUY">
                                 <userDefinedRuntimeAttributes>
@@ -58,7 +59,7 @@
                         </constraints>
                     </imageView>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="VGv-j8-jDc">
-                        <rect key="frame" x="0.0" y="66.5" width="414" height="203.5"/>
+                        <rect key="frame" x="0.0" y="70" width="414" height="190"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BfS-tT-MgN">
                             <size key="itemSize" width="128" height="128"/>
@@ -68,14 +69,71 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xem thêm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NnH-Ks-JrT">
-                        <rect key="frame" x="338" y="278" width="56" height="15"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.51282179360000002" green="0.1558732092" blue="0.25946056839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <rect key="frame" x="330.5" y="260" width="63.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.50694227219999999" green="0.00087698287099999999" blue="0.2585287094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uwX-DP-Btl">
+                        <rect key="frame" x="20" y="298" width="374" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="8uA-A4-TvL">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jBI-K4-gcG">
+                        <rect key="frame" x="20" y="330" width="374" height="99"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BANNER_LOP HOC KKC" translatesAutoresizingMaskIntoConstraints="NO" id="sp6-BA-eN8" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="99"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sp6-BA-eN8" firstAttribute="top" secondItem="jBI-K4-gcG" secondAttribute="top" id="1X2-vb-17U">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="width" secondItem="jBI-K4-gcG" secondAttribute="height" multiplier="34/9" id="DY2-as-Npx">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="sp6-BA-eN8" firstAttribute="leading" secondItem="jBI-K4-gcG" secondAttribute="leading" id="St4-O7-q2C">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="sp6-BA-eN8" secondAttribute="trailing" id="oG2-hT-4U5">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="bottom" secondItem="sp6-BA-eN8" secondAttribute="bottom" id="rvp-6P-0jD">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -91,16 +149,16 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstItem="jBI-K4-gcG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="9rN-fW-wye"/>
+                <constraint firstItem="uwX-DP-Btl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="CP4-mH-MF2"/>
+                <constraint firstItem="bbO-Or-uve" firstAttribute="top" secondItem="uwX-DP-Btl" secondAttribute="bottom" constant="160" id="EEm-eC-BVK"/>
+                <constraint firstAttribute="trailing" secondItem="jBI-K4-gcG" secondAttribute="trailing" constant="20" id="EfU-fo-m2i"/>
                 <constraint firstAttribute="bottom" secondItem="bbO-Or-uve" secondAttribute="bottom" id="HWx-rf-zBh">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstAttribute="bottom" secondItem="VGv-j8-jDc" secondAttribute="bottom" constant="30" id="Q58-7v-Twx">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </constraint>
+                <constraint firstAttribute="trailing" secondItem="uwX-DP-Btl" secondAttribute="trailing" constant="20" id="OpZ-tQ-Wjj"/>
                 <constraint firstAttribute="trailing" secondItem="NnH-Ks-JrT" secondAttribute="trailing" constant="20" id="XeX-3K-q8X">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -111,11 +169,12 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="NnH-Ks-JrT" firstAttribute="top" secondItem="VGv-j8-jDc" secondAttribute="bottom" constant="8" symbolic="YES" id="eSZ-s8-WjE">
+                <constraint firstItem="NnH-Ks-JrT" firstAttribute="top" secondItem="VGv-j8-jDc" secondAttribute="bottom" id="eSZ-s8-WjE">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstItem="uwX-DP-Btl" firstAttribute="top" secondItem="VGv-j8-jDc" secondAttribute="bottom" constant="38" id="gan-35-p0A"/>
                 <constraint firstItem="PLs-rz-PbK" firstAttribute="centerY" secondItem="O2X-Xa-bP8" secondAttribute="centerY" id="icb-Eh-fTB">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -126,6 +185,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstItem="bbO-Or-uve" firstAttribute="top" secondItem="jBI-K4-gcG" secondAttribute="bottom" constant="30" id="pnS-XV-COl"/>
                 <constraint firstItem="O2X-Xa-bP8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="roh-ea-4X7">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -149,13 +209,20 @@
             </constraints>
             <size key="customSize" width="89" height="87"/>
             <connections>
+                <outlet property="bottomLine" destination="EEm-eC-BVK" id="aPZ-G2-7er"/>
                 <outlet property="collView" destination="VGv-j8-jDc" id="mIL-FK-JKN"/>
                 <outlet property="lblTitle" destination="O2X-Xa-bP8" id="UTf-lj-dNt"/>
+                <outlet property="viewBanner" destination="jBI-K4-gcG" id="Ntc-8L-jnE"/>
+                <outlet property="viewLine" destination="uwX-DP-Btl" id="bMS-Iw-xmF"/>
             </connections>
             <point key="canvasLocation" x="168.11594202898553" y="129.91071428571428"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="BANNER_LOP HOC KKC" width="1700" height="450"/>
         <image name="NEXT" width="512" height="512"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

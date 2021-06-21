@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="Video3Cell" customModule="NOW" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="270"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="270"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NÓNG DƯ LUẬN" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7g-p5-2rx">
+                        <rect key="frame" x="10" y="206.5" width="135" height="15.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wzy-uR-YOx" userLabel="Line">
+                        <rect key="frame" x="10" y="239" width="280" height="1"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ZMS-HO-nW7">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sc5-zG-2dP" customClass="PlayerView" customModule="NOW" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="169"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MK0-nR-drb" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="169"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 12 (1)" translatesAutoresizingMaskIntoConstraints="NO" id="zb2-SH-Szr">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="169"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msr-VC-tET">
+                                <rect key="frame" x="127.5" y="62" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="msr-VC-tET" secondAttribute="height" multiplier="1:1" id="Uol-PY-EkT">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="45" id="k3r-sY-JZC">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                </constraints>
+                                <state key="normal" backgroundImage="PLAY"/>
+                                <connections>
+                                    <action selector="didSelectBtnPlay:" destination="gTV-IL-0wX" eventType="touchUpInside" id="jpT-wL-Flx"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oKR-j8-oGX">
+                                <rect key="frame" x="240" y="0.0" width="60" height="60"/>
+                                <subviews>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-chromecast-cast-button-49" translatesAutoresizingMaskIntoConstraints="NO" id="KuH-Cz-Tms">
+                                        <rect key="frame" x="20" y="10" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="KuH-Cz-Tms" secondAttribute="height" id="0ir-db-GSu">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="20" id="TSp-qg-9x2">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="KuH-Cz-Tms" secondAttribute="trailing" constant="20" id="E85-3o-cFc">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="width" secondItem="oKR-j8-oGX" secondAttribute="height" id="PUa-XX-iKc">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="60" id="aNM-2n-6SY">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstItem="KuH-Cz-Tms" firstAttribute="top" secondItem="oKR-j8-oGX" secondAttribute="top" constant="10" id="t3W-mu-kf6">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lV0-lg-ojq">
+                                <rect key="frame" x="220" y="119" width="80" height="50"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDT-Qc-HVf">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="50"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-settings-48" translatesAutoresizingMaskIntoConstraints="NO" id="xnb-Ge-Rs9">
+                                                <rect key="frame" x="10" y="15" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="MQ1-KB-hIy">
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </constraint>
+                                                    <constraint firstAttribute="width" secondItem="xnb-Ge-Rs9" secondAttribute="height" id="OTG-Pb-qRY">
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </constraint>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="xnb-Ge-Rs9" firstAttribute="centerY" secondItem="YDT-Qc-HVf" secondAttribute="centerY" id="16j-y1-slp">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
+                                            <constraint firstItem="xnb-Ge-Rs9" firstAttribute="centerX" secondItem="YDT-Qc-HVf" secondAttribute="centerX" id="IjI-ip-zTQ">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jGu-e0-YAY">
+                                        <rect key="frame" x="40" y="0.0" width="40" height="50"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_fullScreen" translatesAutoresizingMaskIntoConstraints="NO" id="EOY-B5-aXX">
+                                                <rect key="frame" x="0.0" y="15" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="2jB-78-sph">
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </constraint>
+                                                    <constraint firstAttribute="width" secondItem="EOY-B5-aXX" secondAttribute="height" id="qf9-8Q-0jc">
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </constraint>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="EOY-B5-aXX" firstAttribute="centerY" secondItem="jGu-e0-YAY" secondAttribute="centerY" id="4ep-QC-8Qh">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
+                                            <constraint firstItem="EOY-B5-aXX" firstAttribute="centerX" secondItem="jGu-e0-YAY" secondAttribute="centerX" constant="-10" id="q99-Ir-0OB">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </constraint>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Lv6-YD-FfY">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="50" id="fy1-q5-ORr">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ez1-XH-Ngq">
+                                <rect key="frame" x="195" y="138" width="25" height="12"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tz8-W6-9DY">
+                                <rect key="frame" x="10" y="138" width="25" height="12"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JNO-T9-O5L" customClass="CustomSlider" customModule="NOW" customModuleProvider="target">
+                                <rect key="frame" x="41" y="119" width="144" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="oOw-HA-Ry0">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                </constraints>
+                                <color key="minimumTrackTintColor" red="0.50196078430000002" green="0.01176470588" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="gTV-IL-0wX" eventType="valueChanged" id="egq-op-B7i"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="0.50422731164383561" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="MK0-nR-drb" firstAttribute="top" secondItem="sc5-zG-2dP" secondAttribute="top" id="0vv-dB-DAS">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="Ez1-XH-Ngq" firstAttribute="leading" secondItem="JNO-T9-O5L" secondAttribute="trailing" constant="10" id="49B-Oq-Re1">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="tz8-W6-9DY" firstAttribute="centerY" secondItem="Ez1-XH-Ngq" secondAttribute="centerY" id="4Oo-GR-ltu">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="bottom" secondItem="lV0-lg-ojq" secondAttribute="bottom" id="5et-sS-os4">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="Ez1-XH-Ngq" firstAttribute="centerY" secondItem="xnb-Ge-Rs9" secondAttribute="centerY" id="BLr-Tt-4m8">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="MK0-nR-drb" firstAttribute="leading" secondItem="sc5-zG-2dP" secondAttribute="leading" id="BOS-fy-TwE">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="zb2-SH-Szr" firstAttribute="leading" secondItem="sc5-zG-2dP" secondAttribute="leading" id="BTi-ix-jUk">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="oKR-j8-oGX" secondAttribute="trailing" id="C4R-VV-t6A">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="JNO-T9-O5L" firstAttribute="centerY" secondItem="tz8-W6-9DY" secondAttribute="centerY" id="Dw8-iO-R04">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="zb2-SH-Szr" firstAttribute="top" secondItem="sc5-zG-2dP" secondAttribute="top" id="H2G-wY-qej">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="bottom" secondItem="zb2-SH-Szr" secondAttribute="bottom" id="IDf-R6-lf4">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="msr-VC-tET" firstAttribute="centerY" secondItem="sc5-zG-2dP" secondAttribute="centerY" id="YH9-mq-5sj">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="oKR-j8-oGX" firstAttribute="top" secondItem="sc5-zG-2dP" secondAttribute="top" id="a4o-i4-Quh">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="bottom" secondItem="MK0-nR-drb" secondAttribute="bottom" id="cVJ-mv-5mm">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="width" secondItem="sc5-zG-2dP" secondAttribute="height" multiplier="16/9" id="dWz-DK-EBD">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="lV0-lg-ojq" firstAttribute="leading" secondItem="Ez1-XH-Ngq" secondAttribute="trailing" id="gIU-gS-Dq8">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="tz8-W6-9DY" firstAttribute="leading" secondItem="sc5-zG-2dP" secondAttribute="leading" constant="10" id="gk9-nS-Bic">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="zb2-SH-Szr" secondAttribute="trailing" id="loh-Gs-YmG">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="lV0-lg-ojq" secondAttribute="trailing" id="oqw-hc-FfJ">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="msr-VC-tET" firstAttribute="centerX" secondItem="sc5-zG-2dP" secondAttribute="centerX" id="sbz-Nb-czM">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstItem="JNO-T9-O5L" firstAttribute="leading" secondItem="tz8-W6-9DY" secondAttribute="trailing" constant="10" id="wkJ-aV-ucS">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="MK0-nR-drb" secondAttribute="trailing" id="xhH-iL-SJB">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIVE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hb8-uX-6Ht">
+                        <rect key="frame" x="27" y="181.5" width="29" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.50694227219999999" green="0.00087698287099999999" blue="0.2585287094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qfe-zk-nE0">
+                        <rect key="frame" x="150" y="181.5" width="0.5" height="32.5"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="0.5" id="6mh-nk-7r4"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yur-QH-a2F">
+                        <rect key="frame" x="180" y="181.5" width="110" height="30"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHỌN THEO NGÀY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fw2-i4-8tl">
+                                <rect key="frame" x="9" y="8.5" width="92.5" height="13"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.38725966220000002" green="0.38731974359999999" blue="0.3872465491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="fw2-i4-8tl" firstAttribute="centerX" secondItem="yur-QH-a2F" secondAttribute="centerX" id="ZlY-rn-zbV"/>
+                            <constraint firstAttribute="width" constant="110" id="cLO-pT-BYb"/>
+                            <constraint firstAttribute="height" constant="30" id="cvj-rf-jld"/>
+                            <constraint firstItem="fw2-i4-8tl" firstAttribute="centerY" secondItem="yur-QH-a2F" secondAttribute="centerY" id="hQb-Hl-tm4"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ve6-02-pMX">
+                        <rect key="frame" x="10" y="184" width="12" height="12"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon LIVE" translatesAutoresizingMaskIntoConstraints="NO" id="XzD-eh-wbi">
+                                <rect key="frame" x="0.0" y="0.0" width="12" height="12"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XzD-eh-wbi" firstAttribute="top" secondItem="Ve6-02-pMX" secondAttribute="top" id="Jkl-QK-Ueg"/>
+                            <constraint firstAttribute="width" secondItem="Ve6-02-pMX" secondAttribute="height" multiplier="1:1" id="NdG-fG-UiE"/>
+                            <constraint firstAttribute="bottom" secondItem="XzD-eh-wbi" secondAttribute="bottom" id="OO6-JY-Gzo"/>
+                            <constraint firstItem="XzD-eh-wbi" firstAttribute="leading" secondItem="Ve6-02-pMX" secondAttribute="leading" id="tGr-5R-sed"/>
+                            <constraint firstAttribute="height" constant="12" id="tyt-tO-DdF">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="trailing" secondItem="XzD-eh-wbi" secondAttribute="trailing" id="zhE-Fi-l14"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Qfe-zk-nE0" firstAttribute="leading" secondItem="u7g-p5-2rx" secondAttribute="trailing" constant="5" id="0Ld-4K-NAD"/>
+                <constraint firstItem="sc5-zG-2dP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="2HX-ss-E93">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstAttribute="bottom" secondItem="Wzy-uR-YOx" secondAttribute="bottom" constant="30" id="79h-YN-Tqj">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="Qfe-zk-nE0" firstAttribute="top" secondItem="hb8-uX-6Ht" secondAttribute="top" id="7ct-gB-Bzi"/>
+                <constraint firstItem="Qfe-zk-nE0" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="9FP-IJ-CEP"/>
+                <constraint firstAttribute="trailing" secondItem="sc5-zG-2dP" secondAttribute="trailing" id="AMj-jJ-nXw">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="u7g-p5-2rx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="DpB-qc-nA5">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="Wzy-uR-YOx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="Nne-e2-SPb">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="hb8-uX-6Ht" firstAttribute="leading" secondItem="Ve6-02-pMX" secondAttribute="trailing" constant="5" id="Wux-ql-uZm"/>
+                <constraint firstItem="yur-QH-a2F" firstAttribute="top" secondItem="hb8-uX-6Ht" secondAttribute="top" id="XqP-UH-qeM"/>
+                <constraint firstAttribute="trailing" secondItem="yur-QH-a2F" secondAttribute="trailing" constant="10" id="YKG-iC-pcB"/>
+                <constraint firstItem="hb8-uX-6Ht" firstAttribute="centerY" secondItem="Ve6-02-pMX" secondAttribute="centerY" id="ZNo-rP-bcr"/>
+                <constraint firstItem="u7g-p5-2rx" firstAttribute="top" secondItem="hb8-uX-6Ht" secondAttribute="bottom" constant="8" id="bVO-xl-mvb"/>
+                <constraint firstItem="Wzy-uR-YOx" firstAttribute="top" secondItem="Qfe-zk-nE0" secondAttribute="bottom" constant="25" id="cfu-M3-FXb"/>
+                <constraint firstItem="Ve6-02-pMX" firstAttribute="top" secondItem="sc5-zG-2dP" secondAttribute="bottom" constant="15" id="fAF-XN-8QH"/>
+                <constraint firstItem="sc5-zG-2dP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="mFR-Mw-5G2">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstAttribute="trailing" secondItem="Wzy-uR-YOx" secondAttribute="trailing" constant="10" id="qMD-bW-t2k">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="Ve6-02-pMX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="z88-6M-Uyr"/>
+            </constraints>
+            <connections>
+                <outlet property="btnPlay" destination="msr-VC-tET" id="jgO-Ml-lye"/>
+                <outlet property="imgShadow" destination="zb2-SH-Szr" id="mOb-Gn-QJu"/>
+                <outlet property="imgThumb" destination="MK0-nR-drb" id="1Xa-wX-TGX"/>
+                <outlet property="lblCurrentTime" destination="tz8-W6-9DY" id="abH-fU-GZ8"/>
+                <outlet property="lblDuration" destination="Ez1-XH-Ngq" id="bh8-c9-6Xz"/>
+                <outlet property="lblTitle" destination="u7g-p5-2rx" id="xUB-ei-pYl"/>
+                <outlet property="slider" destination="JNO-T9-O5L" id="4na-4v-vMF"/>
+                <outlet property="viewCast" destination="oKR-j8-oGX" id="poo-pj-gsf"/>
+                <outlet property="viewDatePicker" destination="yur-QH-a2F" id="2Br-Yj-b7Q"/>
+                <outlet property="viewFullScreen" destination="jGu-e0-YAY" id="I6l-id-vdV"/>
+                <outlet property="viewPlayer" destination="sc5-zG-2dP" id="kqf-R2-wus"/>
+                <outlet property="viewSetting" destination="YDT-Qc-HVf" id="m26-8S-dgk"/>
+            </connections>
+            <point key="canvasLocation" x="140.57971014492756" y="126.5625"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="PLAY" width="512" height="512"/>
+        <image name="Rectangle 12 (1)" width="480" height="56"/>
+        <image name="ic_fullScreen" width="90" height="90"/>
+        <image name="icon LIVE" width="512" height="512"/>
+        <image name="icons8-chromecast-cast-button-49" width="48" height="48"/>
+        <image name="icons8-settings-48" width="48" height="48"/>
+    </resources>
+</document>

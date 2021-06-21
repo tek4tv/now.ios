@@ -23,6 +23,6 @@ class SearchCell: UITableViewCell {
     }
     
 }
-protocol SearchCellDelegate {
+protocol SearchCellDelegate: class {
     func didSelectViewFillText(_ text: String)
 }

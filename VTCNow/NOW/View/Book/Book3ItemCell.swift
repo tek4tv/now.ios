@@ -12,7 +12,5 @@ class Book3ItemCell: UICollectionViewCell {
     @IBOutlet weak var imgThumb: LazyImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
 }

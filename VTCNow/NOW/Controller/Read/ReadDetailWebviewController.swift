@@ -13,7 +13,6 @@ class ReadDetailWebviewController: UIViewController {
     @IBOutlet weak var webview: WKWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(url)
         webview.load(NSURLRequest(url: NSURL(string: url)! as URL) as URLRequest)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self

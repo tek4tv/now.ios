@@ -15,19 +15,19 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="Movie2ItemCell" customModule="NOW" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="395" height="222"/>
+            <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="395" height="222"/>
+                <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FyC-nh-L8P">
-                        <rect key="frame" x="0.0" y="0.0" width="395" height="222"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolderImage" translatesAutoresizingMaskIntoConstraints="NO" id="86d-z3-Ru6" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="395" height="222"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="86d-z3-Ru6" secondAttribute="height" multiplier="16/9" id="1ff-xe-wgV">
+                                    <constraint firstAttribute="width" secondItem="86d-z3-Ru6" secondAttribute="height" multiplier="3/2" id="1ff-xe-wgV">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
@@ -35,9 +35,9 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a-1" translatesAutoresizingMaskIntoConstraints="NO" id="FKX-n5-EyV">
-                                <rect key="frame" x="0.0" y="0.0" width="395" height="222"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="FKX-n5-EyV" secondAttribute="height" multiplier="16/9" id="6ZJ-Em-N1V">
+                                    <constraint firstAttribute="width" secondItem="FKX-n5-EyV" secondAttribute="height" multiplier="3/2" id="6ZJ-Em-N1V">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
@@ -45,18 +45,9 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trong 24 giây, tỷ phú Vượng kiếm tiền bằng một người Việt đi làm cả năm" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WaT-EZ-xLe">
-                                <rect key="frame" x="10" y="147" width="380" height="47"/>
+                                <rect key="frame" x="10" y="133" width="285" height="47"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 phút trước" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4K-Nf-81A">
-                                <rect key="frame" x="10" y="202" width="62.5" height="12"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
@@ -70,6 +61,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstAttribute="bottom" secondItem="WaT-EZ-xLe" secondAttribute="bottom" constant="20" id="3SH-dQ-Ul0"/>
                             <constraint firstItem="FKX-n5-EyV" firstAttribute="leading" secondItem="FyC-nh-L8P" secondAttribute="leading" id="4cZ-ga-DQf">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -90,22 +82,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
-                            <constraint firstItem="d4K-Nf-81A" firstAttribute="leading" secondItem="FyC-nh-L8P" secondAttribute="leading" constant="10" id="ZwU-4O-1zv">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstAttribute="bottom" secondItem="d4K-Nf-81A" secondAttribute="bottom" constant="8" id="bLL-3p-TNL">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
                             <constraint firstItem="FKX-n5-EyV" firstAttribute="top" secondItem="FyC-nh-L8P" secondAttribute="top" id="hXE-zj-S6g">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="d4K-Nf-81A" firstAttribute="top" secondItem="WaT-EZ-xLe" secondAttribute="bottom" constant="8" id="jkE-SX-3st">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -158,7 +135,6 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="lblTime" destination="d4K-Nf-81A" id="w2m-17-PDR"/>
                 <outlet property="lblTitle" destination="WaT-EZ-xLe" id="bsJ-bL-m9I"/>
                 <outlet property="thumbImage" destination="86d-z3-Ru6" id="Qy4-gR-itc"/>
             </connections>

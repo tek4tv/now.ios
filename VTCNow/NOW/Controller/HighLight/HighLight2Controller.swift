@@ -10,9 +10,13 @@ import AVFoundation
 class HighLight2Controller: UIViewController {
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var viewBack: UIView!
+    @IBOutlet weak var txfView: UITextField!
+    @IBOutlet weak var lblNotFound: UILabel!
     var timer = Timer()
-    var page = 0
+    var page = 1
     var indexPath = IndexPath(row: 1, section: 0)
+    var isLoadMore = true
+    var isPushByHashTag = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,18 +27,26 @@ class HighLight2Controller: UIViewController {
         collView.register(UINib(nibName: NoCell.className, bundle: nil), forCellWithReuseIdentifier: NoCell.className)
         let layout = UICollectionViewFlowLayout()
 //        layout.itemSize = CGSize(width: 414 * scaleW, height: 320 * scaleW)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumLineSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 5 * scaleW, left: 0, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 10 * scaleW
         layout.minimumInteritemSpacing = 0
         collView.collectionViewLayout = layout
         
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnBack(_:))))
-        if news.name == "Đừng bỏ lỡ"{
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: {(timer) in
+        if news.name == "Đừng bỏ lỡ" || news.name == "Nổi bật"{
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: {[weak self] (timer) in
                 NotificationCenter.default.post(name: NSNotification.Name.init("countDownTimer2"), object: nil)
             })
         }else{
             timer.invalidate()
+        }
+        
+        //
+        if isPushByHashTag{
+            txfView.isHidden = true
+        }
+        if news.media.count == 0 {
+            lblNotFound.isHidden = false
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -42,17 +54,15 @@ class HighLight2Controller: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name("stopVOD"), object: nil)
         if let cell = collView.cellForItem(at: indexPath) as? VideoCell{
             cell.viewPlayer.player?.pause()
+            cell.viewPlayer.player?.replaceCurrentItem(with: nil)
         }
+        NotificationCenter.default.removeObserver(self)
+        timer.invalidate()
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if let cell = collView.cellForItem(at: indexPath) as? VideoCell{
-            cell.viewPlayer.player?.pause()
-        }
-        NotificationCenter.default.post(name: NSNotification.Name("stopVOD"), object: nil)
-    }
+
     @objc func didSelectBtnBack(_ sender: Any){
         self.navigationController?.popViewController(animated: false)
+        isMessaging = false
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -114,16 +124,17 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
         case 0:
             return CGSize(width: 414 * scaleW, height: 1)
         case news.media.count + 1:
-            return CGSize(width: 414 * scaleW, height: 320 * scaleW)
+            return CGSize(width: 414 * scaleW, height: 350 * scaleW)
         default:
-            return CGSize(width: 414 * scaleW, height: 320 * scaleW)
+            return CGSize(width: 414 * scaleW, height: 350 * scaleW)
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return news.media.count + 2
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == news.media.count - 1 {
+        
+        if indexPath.row == news.media.count - 1 && isLoadMore == true{
             if news.name == "Đừng bỏ lỡ"{
                 return
             }
@@ -166,15 +177,20 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
             }
             if indexPath == self.indexPath{
                 var link = ""
-                if item.fileCode != "" {
-                    link = item.fileCode
-                }else{
+                if item.path != "" {
                     link = item.path
+                    if Array(link)[link.count - 1] == "/" {
+                        link = item.fileCode
+                    }
+                }else{
+                    link = item.fileCode
                 }
                 if let url = URL(string: link){
                     
                     cell.viewPlayer.player = AVPlayer(url: url)
-                    cell.viewPlayer.player?.play()
+//                    cell.viewPlayer.player?.automaticallyWaitsToMinimizeStalling = false
+                    cell.viewPlayer.player?.playImmediately(atRate: 1.0)
+                    //cell.viewPlayer.player?.play()
                     cell.setup()
                 }
                 cell.imgThumb.isHidden = true
@@ -189,6 +205,16 @@ extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSo
     
 }
 extension HighLight2Controller: VideoCellDelegate{
+    func scrollToTop(_ cell: VideoCell) {
+        collView.scrollToItem(at: cell.indexPath, at: .top, animated: true)
+    }
+    func didFinish() {
+        if self.indexPath.row < news.media.count - 1 {
+            collView.scrollToItem(at: IndexPath(row: self.indexPath.row + 1, section: 0), at: .top, animated: true)
+        }
+        
+    }
+    
     func didSelectViewShare(_ cell: VideoCell) {
         guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
             return

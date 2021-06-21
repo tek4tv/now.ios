@@ -11,7 +11,7 @@ class BookCategoryController: UIViewController {
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var viewBack: UIView!
     var data = CategoryModel()
-    var page = 0
+    var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         collView.delegate = self
@@ -52,9 +52,22 @@ extension BookCategoryController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
-        vc.data = data.media[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: false)
+        APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
+            if let data = data as? MediaModel {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
+                let item = data
+                if item.episode != "" {
+                    vc.isNovel = false
+                    vc.data = item
+                } else{
+                    vc.isNovel = true
+                    vc.data = item
+                    vc.listData = self.data.media
+                    vc.idPlaying = indexPath.row
+                }
+                self.navigationController?.pushViewController(vc, animated: false)
+            }
+        }
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == data.media.count - 1{

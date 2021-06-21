@@ -27,6 +27,6 @@ class ReadCell: UICollectionViewCell {
         delegate?.didSelectViewShare(self)
     }
 }
-protocol ReadCellDelegate {
+protocol ReadCellDelegate: class {
     func didSelectViewShare(_ cell: ReadCell)
 }

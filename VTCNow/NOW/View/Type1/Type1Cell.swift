@@ -56,11 +56,15 @@ class Type1Cell: UICollectionViewCell {
                 indexPath.row = 0
             }
             collView.isPagingEnabled = false
-            collView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
+            if indexPath.row < 3 {
+                collView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
+            }
             collView.isPagingEnabled = true
         })
-        
-        
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        timer.invalidate()
     }
 }
 extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -162,7 +166,7 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         
     }
 }
-protocol Type1CellDelegate{
+protocol Type1CellDelegate: class{
 //    func didSelectItemAt(_ data: MediaModel,_ list: [MediaModel],_ cell: Type1Cell)
     func didSelectItemAt(_ cell: Type1Cell)
 }

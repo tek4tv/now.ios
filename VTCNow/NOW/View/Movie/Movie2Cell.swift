@@ -88,7 +88,6 @@ extension Movie2Cell: UICollectionViewDelegate, UICollectionViewDataSource{
                 cell.thumbImage.loadImage(fromURL: url)
             }
             cell.lblTitle.text = item.name
-            cell.lblTime.text = item.timePass
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DotCell.className, for: indexPath) as! DotCell
@@ -155,6 +154,6 @@ extension Movie2Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         
     }
 }
-protocol Movie2CellDelegate{
+protocol Movie2CellDelegate: class{
     func didSelectItemAt(_ data: MediaModel,_ list: [MediaModel],_ cell: Movie2Cell)
 }

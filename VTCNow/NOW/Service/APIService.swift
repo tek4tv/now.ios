@@ -39,14 +39,138 @@ class APIService{
             }
         })
     }
+    func getOverView(closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/outlook_home", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var category = CategoryModel()
+                if let data = data as? [String: Any]{
+                    category = category.initLoad(data)
+                }
+                closure(category, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getOverViewVideo(closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/outlook_videos", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var category = CategoryModel()
+                if let data = data as? [String: Any]{
+                    category = category.initLoad(data)
+                }
+                closure(category, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getBanner(closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/app_banner_home", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var category = CategoryModel()
+                if let data = data as? [String: Any]{
+                    category = category.initLoad(data)
+                }
+                closure(category, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getSmallBanner(closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/5e24f01d-447e-4bc5-a1f0-0c6309b68416", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var category = CategoryModel()
+                if let data = data as? [String: Any]{
+                    category = category.initLoad(data)
+                }
+                closure(category, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getVideoHot(privateKey: String = "62aa4db4-9750-439e-baeb-b717685a1e7d" , closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/" + privateKey, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var category = CategoryModel()
+                if let data = data as? [String: Any]{
+                    category = category.initLoad(data)
+                }
+                closure(category, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getKeyWord(closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/vtcnow_keyword", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var list: [KeyWordModel] = []
+                if let data = data as? [[String: Any]]{
+                    for json in data{
+                        var item = KeyWordModel()
+                        item = item.initLoad(json)
+                        list.append(item)
+                    }
+                }
+                closure(list, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getKeySearch(closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/vtcnow_keysearch", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var list: [String] = []
+                if let data = data as? [[String: Any]]{
+                    for json in data{
+                        if let name = json["Name"] as? String {
+                            list.append(name)
+                        }
+                    }
+                }
+                closure(list, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getKeyUser(closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/vtcnow_keyuser", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var list: [String] = []
+                if let data = data as? [[String: Any]]{
+                    for json in data{
+                        if let name = json["KeyWord"] as? String {
+                            list.append(name)
+                        }
+                    }
+                }
+                closure(list, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
     func searchWithTag(privateKey: String, keySearch: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
         let json: [String : Any] = [
             "KeySearch": keySearch,
             "Tag": privateKey,
-            "Page":5,
+            "Page":0,
             "Size":20
         ]
-        AF.request("https://dev.caching.tek4tv.vn/api/Video/Search/tag", method: .post, parameters: json, encoding: URLEncoding.default).responseJSON(completionHandler: { (response) in
+        AF.request("https://dev.caching.tek4tv.vn/api/Video/Search/tag", method: .post, parameters: json, encoding: JSONEncoding.default).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let data):
                 var listMedia: [MediaModel] = []
@@ -192,18 +316,32 @@ class APIService{
             }
         })
     }
+//    func getMoreVideoPlaylist(privateKey: String, page: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+//        AF.request("https://dev.caching.tek4tv.vn/api/Video/\(privateKey)/\(page)/36" + page, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+//            switch response.result {
+//            case .success(let data):
+//                var list: [MediaModel] = []
+//                if let data = data as? [[String: Any]]{
+//                    for json in data{
+//                        let itemAdd = MediaModel().initLoad(json)
+//                        list.append(itemAdd)
+//                    }
+//                }
+//                closure(list, nil)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        })
+//    }
     func getMoreVideoPlaylist(privateKey: String, page: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
-        AF.request("https://dev.caching.tek4tv.vn/api/Video/\(privateKey)/\(page)/36" + page, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+        AF.request("https://ovp.tek4tv.vn/redis/v1/accounts/103e5b3a-3971-4fcb-bf44-5b15c5bbb88e/playlists/\(privateKey)/desc/20/\(page)", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let data):
-                var list: [MediaModel] = []
-                if let data = data as? [[String: Any]]{
-                    for json in data{
-                        let itemAdd = MediaModel().initLoad(json)
-                        list.append(itemAdd)
-                    }
+                var category = CategoryModel()
+                if let data = data as? [String: Any]{
+                    category = category.initLoad(data)
                 }
-                closure(list, nil)
+                closure(category.media, nil)
             case .failure(let error):
                 print(error)
             }
@@ -240,9 +378,150 @@ class APIService{
             }
         })
     }
-
-    func getWeather(_ latitude : String,_ longitude: String, closure: @escaping (_ response: Any?, _ list: Any?, _ error: Error?) -> Void) {
-        AF.request("https://api.darksky.net/forecast/f3ce92e52d7509098b59805b2e280a60/\(latitude),\(longitude)?units=si", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+    func getRelatedEpisode(code: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/Video/related/\(code.replacingOccurrences(of: " ", with: ""))/0/50", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var list: [MediaModel] = []
+                if let data = data as? [[String: Any]]{
+                    for json in data{
+                        let itemAdd = MediaModel().initLoad(json)
+                        list.append(itemAdd)
+                    }
+                }
+                closure(list, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getVideoByDate(privateId: String, date: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/Video/\(privateId)/\(date)/0/15", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var list: [MediaModel] = []
+                if let data = data as? [[String: Any]]{
+                    for json in data{
+                        let itemAdd = MediaModel().initLoad(json)
+                        list.append(itemAdd)
+                    }
+                }
+                closure(list, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getWeatherHN(closure: @escaping (_ response: Any?, _ list: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/weather_hn", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                if let data = data as? [String : Any] {
+                    if let currentData = data["currently"] as? [String: Any]{
+                        var today = TodayModel()
+                        today = today.initLoad(currentData)
+                        if let daily = data["daily"] as? [String: Any]{
+                            if let listData = daily["data"] as? [[String: Any]]{
+                                var listDaily = [DailyModel]()
+                                for day in listData{
+                                    var dayAdd = DailyModel()
+                                    dayAdd = dayAdd.initLoad(day)
+                                    listDaily.append(dayAdd)
+                                }
+                                closure(today, listDaily, nil)
+                            }
+                        }
+                        
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getWeatherHCM(closure: @escaping (_ response: Any?, _ list: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/weather_hcm", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                if let data = data as? [String : Any] {
+                    if let currentData = data["currently"] as? [String: Any]{
+                        var today = TodayModel()
+                        today = today.initLoad(currentData)
+                        if let daily = data["daily"] as? [String: Any]{
+                            if let listData = daily["data"] as? [[String: Any]]{
+                                var listDaily = [DailyModel]()
+                                for day in listData{
+                                    var dayAdd = DailyModel()
+                                    dayAdd = dayAdd.initLoad(day)
+                                    listDaily.append(dayAdd)
+                                }
+                                closure(today, listDaily, nil)
+                            }
+                        }
+                        
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getWeatherHP(closure: @escaping (_ response: Any?, _ list: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/weather_hp", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                if let data = data as? [String : Any] {
+                    if let currentData = data["currently"] as? [String: Any]{
+                        var today = TodayModel()
+                        today = today.initLoad(currentData)
+                        if let daily = data["daily"] as? [String: Any]{
+                            if let listData = daily["data"] as? [[String: Any]]{
+                                var listDaily = [DailyModel]()
+                                for day in listData{
+                                    var dayAdd = DailyModel()
+                                    dayAdd = dayAdd.initLoad(day)
+                                    listDaily.append(dayAdd)
+                                }
+                                closure(today, listDaily, nil)
+                            }
+                        }
+                        
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getWeatherDN(closure: @escaping (_ response: Any?, _ list: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/weather_dn", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                if let data = data as? [String : Any] {
+                    if let currentData = data["currently"] as? [String: Any]{
+                        var today = TodayModel()
+                        today = today.initLoad(currentData)
+                        if let daily = data["daily"] as? [String: Any]{
+                            if let listData = daily["data"] as? [[String: Any]]{
+                                var listDaily = [DailyModel]()
+                                for day in listData{
+                                    var dayAdd = DailyModel()
+                                    dayAdd = dayAdd.initLoad(day)
+                                    listDaily.append(dayAdd)
+                                }
+                                closure(today, listDaily, nil)
+                            }
+                        }
+                        
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getWeatherCT(closure: @escaping (_ response: Any?, _ list: Any?, _ error: Error?) -> Void) {
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/weather_ct", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let data):
                 if let data = data as? [String : Any] {

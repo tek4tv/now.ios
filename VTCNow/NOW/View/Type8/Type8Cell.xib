@@ -8,8 +8,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Regular.ttf">
-            <string>Roboto-Regular</string>
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
         </array>
     </customFonts>
     <objects>
@@ -34,8 +34,8 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Show" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crf-fA-wXT">
-                        <rect key="frame" x="20" y="25" width="71.5" height="21.5"/>
-                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                        <rect key="frame" x="20" y="25" width="84" height="25"/>
+                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="21"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
@@ -43,7 +43,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="aaG-Nw-nV7">
-                        <rect key="frame" x="0.0" y="66.5" width="414" height="322.5"/>
+                        <rect key="frame" x="0.0" y="70" width="414" height="319"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cpz-VA-682">
                             <size key="itemSize" width="128" height="128"/>
@@ -53,8 +53,8 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="xem thêm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyl-06-VXR">
-                        <rect key="frame" x="338" y="394" width="56" height="15"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <rect key="frame" x="330.5" y="382" width="63.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.51282179360000002" green="0.1558732092" blue="0.25946056839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
@@ -62,7 +62,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NEXT" translatesAutoresizingMaskIntoConstraints="NO" id="QZW-82-GXp">
-                        <rect key="frame" x="374" y="26" width="20" height="20"/>
+                        <rect key="frame" x="374" y="27.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="QZW-82-GXp" secondAttribute="height" id="Kyn-AS-OFZ">
                                 <userDefinedRuntimeAttributes>
@@ -111,7 +111,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="NQC-rM-V1k" firstAttribute="top" secondItem="Cyl-06-VXR" secondAttribute="bottom" constant="10" id="Nrj-3i-PZa">
+                <constraint firstItem="NQC-rM-V1k" firstAttribute="top" secondItem="Cyl-06-VXR" secondAttribute="bottom" constant="20" id="Nrj-3i-PZa">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>

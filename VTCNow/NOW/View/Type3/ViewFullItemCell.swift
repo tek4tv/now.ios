@@ -18,7 +18,7 @@ class ViewFullItemCell: UICollectionViewCell {
         // Initialization code
         lblDescription.isHidden = true
         animate()
-        animate2()
+       // animate2()
     }
     func animate(){
         UIView.animate(withDuration: 10.0, delay: 0.0, options: .curveEaseIn) {

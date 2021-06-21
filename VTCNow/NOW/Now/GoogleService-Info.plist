@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1096980621816-1lo2ldh4f0stkrtimhcii1m3r9mg1i9u.apps.googleusercontent.com</string>
+	<string>942359967192-0o3knpir89n5q59l7h2jp3uo1nvbbdju.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1096980621816-1lo2ldh4f0stkrtimhcii1m3r9mg1i9u</string>
+	<string>com.googleusercontent.apps.942359967192-0o3knpir89n5q59l7h2jp3uo1nvbbdju</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDS9CdKk2t9ojTl8UhL2xHC_n3dRG2ClRg</string>
+	<string>AIzaSyBHwqSxZvzm7BYeYv55VaA6J-ks8sSlMjA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1096980621816</string>
+	<string>942359967192</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.tek4tv.NOW3</string>
+	<string>vn.vtc.now</string>
 	<key>PROJECT_ID</key>
-	<string>nowtracking-e52fb</string>
+	<string>vtcnow-app</string>
 	<key>STORAGE_BUCKET</key>
-	<string>nowtracking-e52fb.appspot.com</string>
+	<string>vtcnow-app.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1096980621816:ios:e154b956ff4722792dce0d</string>
+	<string>1:942359967192:ios:2ed8ba91b181220e</string>
 	<key>DATABASE_URL</key>
-	<string>https://nowtracking-e52fb-default-rtdb.firebaseio.com</string>
+	<string>https://vtcnow-app.firebaseio.com</string>
 </dict>
 </plist>

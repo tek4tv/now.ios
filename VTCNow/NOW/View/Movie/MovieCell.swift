@@ -81,6 +81,6 @@ extension MovieCell: UICollectionViewDelegate, UICollectionViewDataSource{
     }
 }
 
-protocol MovieCellDelegate{
+protocol MovieCellDelegate: class{
     func didSelectItemAt(_ data: MediaModel,_ list: [MediaModel])
 }

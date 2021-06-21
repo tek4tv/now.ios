@@ -65,7 +65,12 @@ class Video2Cell: UICollectionViewCell {
     }
     @objc func stopLive(_ notification: Notification){
         isPlaying = false
-        viewPlayer.player?.pause()
+        
+        if viewPlayer.player != nil {
+            viewPlayer.player?.pause()
+            viewPlayer.player?.replaceCurrentItem(with: nil)
+        }
+        
     }
     @objc func playerDidFinishPlaying(note: NSNotification){
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
@@ -168,27 +173,6 @@ class Video2Cell: UICollectionViewCell {
             }
             else if (viewPlayer.player?.timeControlStatus == .paused) {
                 //player is pause
-                if isPlaying{
-                    if item is ChannelModel{
-                        if let item = item as? ChannelModel{
-                            if let url = URL(string: item.url[0].link){
-                                viewPlayer.player  = AVPlayer(url: url)
-                                viewPlayer.player?.play()
-                                activityIndicatorView.stopAnimating()
-                            }
-                        }
-                    } else{
-                        if let item = item as? MediaModel{
-                            if let url = URL(string: item.path){
-                                viewPlayer.player  = AVPlayer(url: url)
-                                viewPlayer.player?.play()
-                                activityIndicatorView.stopAnimating()
-                            }
-                        }
-                    }
-                    
-
-                }
             }
             else if (viewPlayer.player?.timeControlStatus == .waitingToPlayAtSpecifiedRate) {
                 //player is waiting to play
@@ -255,6 +239,9 @@ class Video2Cell: UICollectionViewCell {
                         }
                     }
                     viewPlayer.player  = AVPlayer(url: url)
+                    viewPlayer.player?.play()
+                    viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
+                    viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
                 }
             }
         } else {
@@ -273,16 +260,17 @@ class Video2Cell: UICollectionViewCell {
                         }
                     }
                     viewPlayer.player  = AVPlayer(url: url)
+                    viewPlayer.player?.play()
+                    viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
+                    viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+                    NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+                    addTimeObserver()
                 }
             }
         }
-        
-        viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
-        viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         isPlaying = true
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
-        addTimeObserver()
+        
     }
     
     func setBitRate(){
@@ -327,7 +315,7 @@ class Video2Cell: UICollectionViewCell {
     }
 }
 
-protocol Video2CellDelegate {
+protocol Video2CellDelegate: class {
     func didSelectBookMark(_ cell: Video2Cell)
     func didSelectViewSetting(_ cell: Video2Cell)
     func didSelectViewFullScreen(_ cell: Video2Cell, _ newPlayer: AVPlayer)

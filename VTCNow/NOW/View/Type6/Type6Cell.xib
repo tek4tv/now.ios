@@ -8,8 +8,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Roboto-Regular.ttf">
-            <string>Roboto-Regular</string>
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
         </array>
     </customFonts>
     <objects>
@@ -34,8 +34,8 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phim lẻ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jem-nd-mOI">
-                        <rect key="frame" x="20" y="25" width="60" height="21.5"/>
-                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                        <rect key="frame" x="20" y="25" width="71" height="25"/>
+                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="21"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
@@ -43,7 +43,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8wD-VL-wiL">
-                        <rect key="frame" x="0.0" y="66.5" width="414" height="242.5"/>
+                        <rect key="frame" x="0.0" y="70" width="414" height="239"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gul-8Q-xRE">
                             <size key="itemSize" width="128" height="128"/>
@@ -53,7 +53,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NEXT" translatesAutoresizingMaskIntoConstraints="NO" id="WMC-G8-Dh5">
-                        <rect key="frame" x="374" y="26" width="20" height="20"/>
+                        <rect key="frame" x="374" y="27.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="rHb-dn-afw">
                                 <userDefinedRuntimeAttributes>

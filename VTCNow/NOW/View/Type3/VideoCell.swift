@@ -30,7 +30,16 @@ class VideoCell: UICollectionViewCell {
     var delegate: VideoCellDelegate!
     
     var indexPath: IndexPath!
-    var item: MediaModel!
+    var item: MediaModel!{
+        didSet{
+            if item.fileCode != ""{
+                NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
+               
+            }else{
+                NotificationCenter.default.removeObserver(self)
+            }
+        }
+    }
     var timeObserver: Any?
     var isCare = false
     var isPlaying = false
@@ -64,13 +73,14 @@ class VideoCell: UICollectionViewCell {
         //
         NotificationCenter.default.addObserver(self, selector: #selector(stopVOD(_:)), name: NSNotification.Name("stopVOD"), object: nil)
         //
-        if news.name == "Đừng bỏ lỡ"{
+        if news.name == "Đừng bỏ lỡ" {//|| news.name == "Nổi bật"{
 
             NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
            
         }else{
             NotificationCenter.default.removeObserver(self)
         }
+        
         btnPlay.isHidden = false
     }
     deinit {
@@ -83,7 +93,10 @@ class VideoCell: UICollectionViewCell {
     }
     @objc func stopVOD(_ sender: Any){
         isPlaying = false
-        viewPlayer.player?.pause()
+        if viewPlayer.player != nil {
+            viewPlayer.player?.pause()
+            viewPlayer.player?.replaceCurrentItem(with: nil)
+        }
     }
     @objc func didSelectViewShare(_ sender: Any){
         delegate?.didSelectViewShare(self)
@@ -99,6 +112,7 @@ class VideoCell: UICollectionViewCell {
         isPlaying = false
         UserDefaults.standard.removeObject(forKey: item.privateID)
         UserDefaults.standard.synchronize()
+        delegate?.didFinish()
     }
     var isTapping = false
     
@@ -118,6 +132,7 @@ class VideoCell: UICollectionViewCell {
             })
         }
         isTapping = !isTapping
+        delegate?.scrollToTop(self)
     }
     var isSliderChanging = false
     @IBAction func sliderValueChanged(_ sender: UISlider) {
@@ -154,11 +169,15 @@ class VideoCell: UICollectionViewCell {
                 viewPlayer.player?.seek(to: CMTime.zero)
                 isEnded = false
             }
-            viewPlayer.player?.play()
+            viewPlayer.player?.playImmediately(atRate: 1.0)
             viewPlayer.player?.rate = Float(speed)
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         }
         isPlaying = !isPlaying
+        
+        //
+        imgThumb.isHidden = true
+        delegate?.scrollToTop(self)
     }
     func hidePlayerController(){
         self.imgShadow.isHidden = true
@@ -243,13 +262,13 @@ class VideoCell: UICollectionViewCell {
                     } else{
                         item.timePass = "Đang phát"
                     }
-                    lblTime.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+                    lblTime.textColor = #colorLiteral(red: 0.5069422722, green: 0.000876982871, blue: 0.2585287094, alpha: 1)
                     lblCountDown.isHidden = true
 //                    imgShadow.isHidden = true
                     lblCountDown.text = item.timePass
 //                    imgThumb.isHidden = true
                 } else{
-                    item.timePass = "Còn \(timeStr)"
+                    item.timePass = "\(timeStr)"
                     lblTime.textColor = .gray
                     lblCountDown.isHidden = false
                     imgShadow.isHidden = false
@@ -273,13 +292,16 @@ class VideoCell: UICollectionViewCell {
         activityIndicatorView.startAnimating()
         listResolution = []
         var link = ""
-        if item.fileCode != "" {
-            link = item.fileCode
-        }else{
+        if item.path != "" {
             link = item.path
+            if Array(link)[link.count - 1] == "/" {
+                link = item.fileCode
+            }
+        }else{
+            link = item.fileCode
         }
         if let url = URL(string: link){
-            if item.fileCode != "" || item.path.contains(".m3u8"){
+            if link.contains(".m3u8"){
                 StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
                     switch result {
                     case .success(let playlist):
@@ -345,10 +367,12 @@ class VideoCell: UICollectionViewCell {
     }
 }
 
-protocol VideoCellDelegate {
+protocol VideoCellDelegate: class {
     func didSelectViewSetting(_ cell: VideoCell)
     func didSelectViewFullScreen(_ cell: VideoCell, _ newPlayer: AVPlayer)
     func didSelectViewCast()
     func didSelectViewShare(_ cell: VideoCell)
     func didSelectViewBookmark(_ cell: VideoCell)
+    func didFinish()
+    func scrollToTop(_ cell: VideoCell)
 }

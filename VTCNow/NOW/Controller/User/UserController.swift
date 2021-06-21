@@ -16,11 +16,13 @@ class UserController: UIViewController {
         // Do any additional setup after loading the view.
         collView.delegate = self
         collView.dataSource = self
+        collView.register(UINib(nibName: WeatherCell.className, bundle: nil), forCellWithReuseIdentifier: WeatherCell.className)
         collView.register(UINib(nibName: NewBroadCell.className, bundle: nil), forCellWithReuseIdentifier: NewBroadCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 414 * scaleW, height: 250 * scaleW)
+        //layout.itemSize = CGSize(width: 414 * scaleW, height: 250 * scaleW)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 0, bottom: 10 * scaleW, right: 0)
         collView.collectionViewLayout = layout
         let count = UserDefaults.standard.integer(forKey: "NumberOfList")
         for index in 0..<count{
@@ -72,69 +74,102 @@ class UserController: UIViewController {
 //        }
        
     }
-}
-extension UserController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        listCate.count + 1
+    @objc func didSelectBtnSearch(_ sender: Any){
+        let vc = storyboard?.instantiateViewController(withIdentifier: SearchController.className) as! SearchController
+        self.navigationController?.pushViewController(vc, animated: false)
     }
-    
+}
+extension UserController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return 1
+        default:
+            return listCate.count + 1
+        }
+    }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.section {
+        case 0:
+            return CGSize(width: 414 * scaleW, height: 70 * scaleW)
+        default:
+            return CGSize(width: 414 * scaleW, height: 270 * scaleW)
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.row {
-        case 0..<listCate.count:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.className, for: indexPath) as! NewBroadCell
-            let item = listCate[indexPath.row]
+        switch indexPath.section {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.className, for: indexPath) as! WeatherCell
             cell.delegate = self
-            cell.lblTitle.text = item.name
-            cell.imgAdd.image = #imageLiteral(resourceName: "NEXT")
-            cell.data = item
+            cell.viewSearch.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnSearch(_:))))
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.className, for: indexPath) as! NewBroadCell
-            cell.lblTitle.text = "Chọn theo nhiều chủ đề"
-            cell.data = CategoryModel()
-            return cell
+            switch indexPath.row {
+            case 0..<listCate.count:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.className, for: indexPath) as! NewBroadCell
+                let item = listCate[indexPath.row]
+                cell.delegate = self
+                cell.lblTitle.text = item.name
+                cell.imgAdd.image = #imageLiteral(resourceName: "NEXT")
+                cell.data = item
+                cell.collView.backgroundColor = .white
+                return cell
+            default:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.className, for: indexPath) as! NewBroadCell
+                cell.lblTitle.text = "Chọn nhiều chủ đề"
+                cell.data = CategoryModel()
+                cell.collView.backgroundColor = .clear
+                return cell
+            }
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0..<listCate.count:
-            
-            news = listCate[indexPath.row]
-            let vc = storyboard?.instantiateViewController(withIdentifier: User2Controller.className) as! User2Controller
-            navigationController?.pushViewController(vc, animated: false)
-            vc.onComplete = {[self] in
-                refresh()
-            }
-            vc.onDelete = {[self] in
-                refresh()
-            }
+        switch indexPath.section {
+        case 0:
+            break
         default:
-            let vc = storyboard?.instantiateViewController(withIdentifier: PickUpController.className) as! PickUpController
-            navigationController?.pushViewController(vc, animated: false)
-            vc.onComplete = {[self] (index) in
+            switch indexPath.row {
+            case 0..<listCate.count:
                 
-                let list = UserDefaults.standard.stringArray(forKey: "\(index)")!
-                let cate = CategoryModel()
-                if list.isEmpty {
+                news = listCate[indexPath.row]
+                let vc = storyboard?.instantiateViewController(withIdentifier: User2Controller.className) as! User2Controller
+                navigationController?.pushViewController(vc, animated: false)
+                vc.onComplete = {[self] in
+                    refresh()
+                }
+                vc.onDelete = {[self] in
+                    refresh()
+                }
+            default:
+                let vc = storyboard?.instantiateViewController(withIdentifier: PickUpController.className) as! PickUpController
+                navigationController?.pushViewController(vc, animated: false)
+                vc.onComplete = {[self] (index) in
                     
-                } else {
-                    cate.index = index
-                    var listName = ""
-                    for (index, text) in list.enumerated() {
-                        if index == list.count - 1 {
-                            listName += text
-                        } else{
-                            listName += text + ", "
-                        }
-                        APIService.shared.searchAll(keySearch: text) {[self] (data, error) in
-                            if let data = data as? [MediaModel]{
-                                cate.media += data
-                                if index == list.count - 1 {
-                                    cate.name = listName
-                                    listCate.append(cate)
-                                    collView.reloadData()
+                    let list = UserDefaults.standard.stringArray(forKey: "\(index)")!
+                    let cate = CategoryModel()
+                    if list.isEmpty {
+                        
+                    } else {
+                        cate.index = index
+                        var listName = ""
+                        for (index, text) in list.enumerated() {
+                            if index == list.count - 1 {
+                                listName += text
+                            } else{
+                                listName += text + ", "
+                            }
+                            APIService.shared.searchAll(keySearch: text) {[self] (data, error) in
+                                if let data = data as? [MediaModel]{
+                                    cate.media += data
+                                    if index == list.count - 1 {
+                                        cate.name = listName
+                                        listCate.append(cate)
+                                        collView.reloadData()
+                                    }
                                 }
                             }
                         }
@@ -151,15 +186,15 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource {
             let list = UserDefaults.standard.stringArray(forKey: "\(index)")!
             
             if list.isEmpty {
-                print("empty")
-                print(index.description)
+//                print("empty")
+//                print(index.description)
                 if index == count - 1 {
                     listCate = []
                     collView.reloadData()
                 }
             } else {
-                print("full")
-                print(index.description)
+//                print("full")
+//                print(index.description)
                 cate.index = index
                 var listName = ""
                 listCate = []
@@ -208,4 +243,14 @@ extension UserController: NewBroadCellDelegate{
     }
     
     
+}
+extension UserController: WeatherDelegate{
+    func didSelectViewWeather(_ listW: WeatherModel) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp7Controller.className) as! PopUp7Controller
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.item = listW
+        self.present(vc, animated: true, completion: nil)
+    }
+
 }

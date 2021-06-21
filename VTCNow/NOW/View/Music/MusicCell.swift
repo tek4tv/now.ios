@@ -37,7 +37,7 @@ class MusicCell: UICollectionViewCell {
         lblTitle.text = ""
     }
     deinit {
-        print("##############")
+
     }
 }
 extension MusicCell: UICollectionViewDelegate, UICollectionViewDataSource{

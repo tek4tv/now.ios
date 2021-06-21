@@ -1811,7 +1811,7 @@ fileprivate extension CAMediaTimingFunction {
         }
         
         // Give up - shouldn't ever get here...I hope
-        print("MarqueeLabel: Failed to find t for Y input!")
+//        print("MarqueeLabel: Failed to find t for Y input!")
         return t0
     }
 

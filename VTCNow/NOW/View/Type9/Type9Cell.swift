@@ -140,7 +140,7 @@ extension Type9Cell: Type3ItemCellDelegate{
     
     
 }
-protocol Type9CellDelegate{
+protocol Type9CellDelegate: class{
     func didSelectViewImage(_ data: MediaModel,_ list: [MediaModel],_ cell: Type9Cell)
     func didSelectView2Share(_ cell: Type3ItemCell)
     func didSelectViewMore(_ cell: Type9Cell)

@@ -27,10 +27,14 @@ class RootModel{
 class ComponentModel{
     var privateKey = ""
     var name = ""
+    var icon = ""
+    var descripTion = ""
     var category = CategoryModel()
     func initLoad(_ json: [String: Any]) -> ComponentModel{
         if let temp = json["PrivateKey"] as? String { privateKey = temp}
         if let temp = json["Name"] as? String { name = temp}
+        if let temp = json["Icon"] as? String { icon = temp}
+        if let temp = json["Description"] as? String { descripTion = temp}
         return self
     }
 }

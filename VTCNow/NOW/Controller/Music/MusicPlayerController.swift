@@ -7,13 +7,10 @@
 
 import UIKit
 import AVFoundation
-class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
-    func didTapSwitch(isON: Bool) {
-        UserDefaults.standard.setValue((isON == true ? 0 : 1) , forKey: "switcher")
-    }
-    
+class MusicPlayerController: UIViewController{
     @IBOutlet weak var collView: UICollectionView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imgAudio: LazyImageView!
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -30,7 +27,7 @@ class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
     @IBOutlet weak var viewSetting: UIView!
     @IBOutlet weak var imgShadow: UIImageView!
     @IBOutlet weak var viewCast: UIView!
-    @IBOutlet weak var switcher: WarmodroidSwitch!
+    @IBOutlet weak var switcher: CustomSwitch!
     
     @IBOutlet weak var heightCollView: NSLayoutConstraint!
     
@@ -78,13 +75,28 @@ class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
         openVideoAudio()
         heightCollView.constant = CGFloat(listData.count * 130) * scaleW
         //
-        switcher.delegate = self
+//        switcher.delegate = self
+//        let mode = UserDefaults.standard.integer(forKey: "switcher")
+//        switcher.isOn = (mode == 0) ? true : false
+//        switcher.setState()
+        
         let mode = UserDefaults.standard.integer(forKey: "switcher")
         switcher.isOn = (mode == 0) ? true : false
-        switcher.setState()
+        switcher.onTintColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        switcher.offTintColor = UIColor.lightGray
+        switcher.cornerRadius = 0.5
+        switcher.thumbCornerRadius = 0.5
+        switcher.thumbSize = CGSize(width: 22, height: 22)
+        switcher.thumbTintColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
+        switcher.padding = 0
+        switcher.animationDuration = 0.25
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    @IBAction func switcherValueChange(_ sender: UISwitch) {
+        
+        UserDefaults.standard.setValue((sender.isOn == true ? 0 : 1) , forKey: "switcher")
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -344,22 +356,35 @@ class MusicPlayerController: UIViewController, WarmodroidSwitchDelegate{
         self.isPlaying = false
         let newPlayer = self.viewPlayer.player
         self.viewPlayer.player = nil
-        
-        let vc = PlayerViewController()
-        
-        
-        vc.player = newPlayer
-        vc.onDismiss = {[weak self] in
-            self?.viewPlayer.player = vc.player
-            vc.player = nil
-            self?.viewPlayer.player?.play()
-            self?.isPlaying = true
-            self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+        if #available(iOS 13.0, *) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
+            vc.player = newPlayer
+            vc.listResolution = self.listResolution
+            vc.onDismiss = {[weak self] in
+                self?.viewPlayer.player = vc.player
+                vc.player = nil
+                self?.viewPlayer.player?.play()
+                self?.isPlaying = true
+                self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        } else {
+            let vc = PlayerViewController()
+            vc.player = newPlayer
+            vc.onDismiss = {[weak self] in
+                self?.viewPlayer.player = vc.player
+                vc.player = nil
+                self?.viewPlayer.player?.play()
+                self?.isPlaying = true
+                self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            present(vc, animated: true) {
+                vc.player?.play()
+                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+            }
         }
-        present(vc, animated: true) {
-            vc.player?.play()
-            vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
-        }
+        
     }
 }
 
@@ -404,6 +429,7 @@ extension MusicPlayerController: UICollectionViewDelegate, UICollectionViewDataS
         listData = list
         collView.reloadData()
         openVideoAudio()
+        scrollView.setContentOffset(CGPoint.zero, animated: true)
     }
     
 }

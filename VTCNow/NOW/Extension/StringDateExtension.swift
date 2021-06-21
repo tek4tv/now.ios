@@ -64,6 +64,13 @@ extension String{
         }
         return ""
     }
+    func add0() -> String {
+        if self.count == 1 {
+            return "0" + self
+        } else{
+            return self
+        }
+    }
 }
 extension Date {
 
@@ -76,7 +83,11 @@ extension Date {
 
         return (month: month, day: day, hour: hour, minute: minute, second: second)
     }
-
+    func getTimeString() -> String {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: self)
+        let timeString = components.day!.description.add0() + "-" + components.month!.description.add0() + "-" + components.year!.description
+        return timeString
+    }
 }
 class CustomSlider: UISlider {
 

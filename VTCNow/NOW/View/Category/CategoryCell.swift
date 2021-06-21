@@ -56,7 +56,10 @@ extension CategoryCell: UICollectionViewDelegate, UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCell.className, for: indexPath) as! CategoryItemCell
         let item = listCate[indexPath.row]
         cell.lblTitle.text = item.name
-        cell.thumbImage.image = images[item.name]
+        if let url = URL(string: root.cdn.imageDomain + item.icon.replacingOccurrences(of: "\\", with: "/" )){
+            cell.thumbImage.loadImage(fromURL: url)
+        }
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -64,6 +67,6 @@ extension CategoryCell: UICollectionViewDelegate, UICollectionViewDataSource{
         delegate?.didSelectItem(cate)
     }
 }
-protocol CategoryCellDelegate {
+protocol CategoryCellDelegate: class {
     func didSelectItem(_ cate: CategoryModel)
 }

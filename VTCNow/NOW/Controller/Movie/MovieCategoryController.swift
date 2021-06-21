@@ -11,7 +11,7 @@ class MovieCategoryController: UIViewController {
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var viewBack: UIView!
     var data = CategoryModel()
-    var page = 0
+    var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         collView.delegate = self

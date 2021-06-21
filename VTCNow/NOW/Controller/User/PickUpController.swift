@@ -14,19 +14,7 @@ class PickUpController: UIViewController {
     @IBOutlet weak var viewDone: UIView!
     var onComplete: ((Int) -> ())!
     var onDelete: (() -> ())!
-    let listData = ["Văn Hóa",
-                    "Chính Trị",
-                    "Kinh tế",
-                    "Xã hội",
-                    "Biển Đông",
-                    "Trung Quốc",
-                    "Mỹ",
-                    "Nga",
-                    "Covid 19",
-                    "Cuộc sống 24h",
-                    "Toàn cầu",
-                    "Thị trường",
-                    "Đời sống"]
+    var listData: [String] = []
     var list5: [String] = []
     var idList = 0
     
@@ -61,6 +49,12 @@ class PickUpController: UIViewController {
             viewDelete.isHidden = false
         } else{
             viewDelete.isHidden = true
+        }
+        APIService.shared.getKeyUser {[weak self] (data, error) in
+            if let data = data as? [String] {
+                self?.listData = data
+                self?.collView2.reloadData()
+            }
         }
     }
     @objc func didSelectViewBack(_ sender: Any){
@@ -108,7 +102,7 @@ extension PickUpController: UICollectionViewDelegate, UICollectionViewDataSource
                     return CGSize(width: 0, height: 0)
                 }
                 let label = UILabel(frame: .zero)
-                label.text = "Hãy chọn chủ đề"
+                label.text = "              "
                 label.font = UIFont(name: "Roboto-Medium", size: 13 * scaleW)
                 label.sizeToFit()
                 return CGSize(width: label.frame.width + 20 * scaleW, height: 40 * scaleW)
@@ -135,17 +129,24 @@ extension PickUpController: UICollectionViewDelegate, UICollectionViewDataSource
             case 0..<list5.count:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.className, for: indexPath) as! WordCell
                 cell.lblTitle.text = list5[indexPath.row]
+                cell.viewContain.cornerRadius = 5 * scaleW
+                cell.viewContain.borderColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
+                cell.lblTitle.textColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
                 return cell
             default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.className, for: indexPath) as! WordCell
-                cell.lblTitle.text = "Hãy chọn chủ đề"
-                
+                cell.lblTitle.text = "              "
+                cell.viewContain.cornerRadius = 5 * scaleW
+                cell.lblTitle.textColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
                 return cell
             }
             
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.className, for: indexPath) as! WordCell
             cell.lblTitle.text = listData[indexPath.row]
+            cell.viewContain.cornerRadius = 5 * scaleW
+            cell.viewContain.borderColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
+            cell.lblTitle.textColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
             return cell
         }
     }

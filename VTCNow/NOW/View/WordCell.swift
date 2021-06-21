@@ -10,6 +10,7 @@ import UIKit
 class WordCell: UICollectionViewCell {
 
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var viewContain: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

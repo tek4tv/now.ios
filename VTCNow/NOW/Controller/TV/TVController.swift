@@ -12,7 +12,7 @@ class TVController: UIViewController {
 
     @IBOutlet weak var collView: UICollectionView!
     var indexPath = IndexPath(row: 0, section: 0)
-    
+    var datePicker: Date = Date()
     var images: [String: UIImage] = [
         "VTC1": UIImage(named: "VTC 1")!,
         "VTC2": UIImage(named: "VTC 2")!,
@@ -30,7 +30,7 @@ class TVController: UIViewController {
         "VTC14": UIImage(named: "VTC 14")!,
         "VTC16": UIImage(named: "VTC 16")!,
     ]
-    
+    var isPickDate = false
     override func viewDidLoad() {
         super.viewDidLoad()
         collView.delegate = self
@@ -136,6 +136,12 @@ extension TVController: UICollectionViewDelegate, UICollectionViewDataSource, UI
             cell.imgThumb.image = images[item.name]
             if indexPath == self.indexPath {
                 cell.playLive()
+                if isPickDate == true{
+                    cell.loadVideoByDate(date: datePicker)
+                    isPickDate = false
+                } else{
+                    cell.setup()
+                }
             } else{
                 cell.stopLive()
             }
@@ -145,6 +151,114 @@ extension TVController: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
 }
 extension TVController: TVCellDelegate{
+    func didSelectViewSetting(_ cell: Video4Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.listResolution = cell.listResolution
+        vc.speed = cell.speed
+        vc.onComplete = { list in
+            cell.listResolution = list
+            cell.setBitRate()
+        }
+        vc.onTickedSpeed = { value in
+            cell.speed = value
+            cell.setSpeed()
+        }
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func didSelectViewFullScreen(_ cell: Video4Cell, _ newPlayer: AVPlayer) {
+        if #available(iOS 13.0, *) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
+            vc.player = newPlayer
+            vc.listResolution = cell.listResolution
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.viewPlayer.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        } else {
+            let vc = PlayerViewController()
+            vc.player = newPlayer
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            present(vc, animated: true) {
+                vc.player?.play()
+                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+            }
+        }
+    }
+    
+    func didSelectViewSetting(_ cell: Video3Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.listResolution = cell.listResolution
+        vc.speed = cell.speed
+        vc.onComplete = { list in
+            cell.listResolution = list
+            cell.setBitRate()
+        }
+        vc.onTickedSpeed = { value in
+            cell.speed = value
+            cell.setSpeed()
+        }
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func didSelectViewFullScreen(_ cell: Video3Cell, _ newPlayer: AVPlayer) {
+        if #available(iOS 13.0, *) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
+            vc.player = newPlayer
+            vc.listResolution = cell.listResolution
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.viewPlayer.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        } else {
+            let vc = PlayerViewController()
+            vc.player = newPlayer
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            present(vc, animated: true) {
+                vc.player?.play()
+                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+            }
+        }
+    }
+    
+
+    func didSelectDatePicker() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: DatePickerController.className) as! DatePickerController
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: false, completion: nil)
+        vc.onComplete = {[weak self] (date) in
+//            print(date)
+            self?.isPickDate = true
+            self?.datePicker = date
+            self?.collView.reloadData()
+        }
+    }
     func didSelectBookMark(_ cell: Video2Cell) {
         
     }

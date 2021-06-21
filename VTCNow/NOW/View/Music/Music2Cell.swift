@@ -141,6 +141,6 @@ extension Music2Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         }
     }
 }
-protocol Music2CellDelegate {
+protocol Music2CellDelegate: class {
     func didSelect2ItemAt(_ data: MediaModel, _ list: [MediaModel])
 }

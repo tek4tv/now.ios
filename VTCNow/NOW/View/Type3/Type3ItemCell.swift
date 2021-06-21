@@ -45,7 +45,7 @@ class Type3ItemCell: UICollectionViewCell {
         delegate?.didSelectViewImage(self)
     }
 }
-protocol Type3ItemCellDelegate {
+protocol Type3ItemCellDelegate: class {
     func didSelectViewImage(_ cell: Type3ItemCell)
     func didSelectViewBookmark(_ cell: Type3ItemCell)
     func didSelectViewShare(_ cell: Type3ItemCell)

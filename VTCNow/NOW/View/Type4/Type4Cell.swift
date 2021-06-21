@@ -84,6 +84,6 @@ extension Type4Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         }
     }
 }
-protocol Type4CellDelegate{
+protocol Type4CellDelegate: class{
     func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel], _ cell: Type4Cell)
 }

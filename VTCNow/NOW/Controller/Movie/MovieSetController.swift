@@ -11,7 +11,7 @@ class MovieSetController: UIViewController {
 
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var collView: UICollectionView!
-    var page = 0
+    var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,9 +20,9 @@ class MovieSetController: UIViewController {
         collView.dataSource = self
         collView.register(UINib(nibName: Type3ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.className)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: (414 - 60) / 2.01 * scaleW, height: 220 * scaleW)
-        layout.minimumLineSpacing = 10 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
+        layout.itemSize = CGSize(width: (414 - 60) / 2.01 * scaleW, height: 200 * scaleW)
+        layout.minimumLineSpacing = 20 * scaleW
+        layout.sectionInset = UIEdgeInsets(top: 20 * scaleW, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
         
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnBack(_:))))
@@ -54,7 +54,11 @@ extension MovieSetController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.row = indexPath.row
         cell.delegate = self
         cell.lblTitle.text = item.name
-        cell.lblTime.text = item.getTimePass()
+        if item.country != "" {
+            cell.lblTime.text = item.country
+        } else {
+            cell.lblTime.text = item.getTimePass()
+        }
         if item.episode != "" {
             cell.viewEpisode.isHidden = false
             cell.lblEpisode.text = item.episode
@@ -90,10 +94,21 @@ extension MovieSetController: Type3ItemCellDelegate{
                 list = Array(news.media[cell.row+1...count-1] + news.media[0...cell.row-1])
             }
         }
-        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
-        vc.item = cell.data
-        vc.listData = list
-        navigationController?.pushViewController(vc, animated: false)
+        if cell.data.endTimecode != ""{
+            APIService.shared.getRelatedEpisode(code: cell.data.endTimecode) {[weak self] (list1, error) in
+                if let list1 = list1 as? [MediaModel] {
+                    let vc = self?.storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+                    vc.item = cell.data
+                    vc.listData = list1
+                    self?.navigationController?.pushViewController(vc, animated: false)
+                }
+            }
+        } else{
+            let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+            vc.item = cell.data
+            vc.listData = list
+            navigationController?.pushViewController(vc, animated: false)
+        }
     }
     
     func didSelectViewBookmark(_ cell: Type3ItemCell) {

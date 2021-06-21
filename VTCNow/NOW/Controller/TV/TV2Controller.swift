@@ -14,6 +14,8 @@ class TV2Controller: UIViewController {
     var indexPath = IndexPath(row: 1, section: 0)
     var data = ChannelModel()
     var listVideos: [MediaModel] = []
+    var datePicker: Date = Date()
+    var isPickDate = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +23,8 @@ class TV2Controller: UIViewController {
         collView.delegate = self
         collView.dataSource = self
         collView.register(UINib(nibName: Video2Cell.className, bundle: nil), forCellWithReuseIdentifier: Video2Cell.className)
+        collView.register(UINib(nibName: Video3Cell.className, bundle: nil), forCellWithReuseIdentifier: Video3Cell.className)
+        collView.register(UINib(nibName: Video4Cell.className, bundle: nil), forCellWithReuseIdentifier: Video4Cell.className)
         collView.register(UINib(nibName: NoCell.className, bundle: nil), forCellWithReuseIdentifier: NoCell.className)
         let layout = UICollectionViewFlowLayout()
         //layout.itemSize = CGSize(width: (414 - 40) * scaleW, height: 340 * scaleW)
@@ -31,7 +35,7 @@ class TV2Controller: UIViewController {
         
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnBack(_:))))
         //
-        APIService.shared.getPlaylist(privateKey: "62963352-3d13-4ac3-bb94-d05030baebf8") {[self] (data, error) in
+        APIService.shared.getPlaylist(privateKey: ids[data.name] ?? "") {[self] (data, error) in
             if let data = data as? CategoryModel {
                 listVideos = data.media
                 collView.reloadData()
@@ -119,9 +123,58 @@ extension TV2Controller: UICollectionViewDelegate, UICollectionViewDataSource, U
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
             return cell
         case 1:
-            cell.item = data
-            cell.lblTitle.text = data.name
-            cell.lblTime.text = "Đang phát trực tiếp"
+            if data.name == "VTC1" || data.name == "VTC14"{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video3Cell.className, for: indexPath) as! Video3Cell
+                cell.delegate = self
+                cell.item = data
+                cell.lblTitle.text = ""
+                if indexPath == self.indexPath{
+                    var link = ""
+                    if cell.item is ChannelModel {
+                        link = data.url[0].link
+                    } else {
+                        link = listVideos[indexPath.row - 2].path
+                    }
+                    if let url = URL(string: link){
+                        
+                        cell.viewPlayer.player  = AVPlayer(url: url)
+                        cell.setup()
+                        cell.viewPlayer.player?.play()
+
+                    }
+                    cell.imgThumb.isHidden = true
+                } else{
+                    cell.viewPlayer.player?.pause()
+                    cell.imgThumb.isHidden = false
+                }
+                return cell
+            } else{
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video4Cell.className, for: indexPath) as! Video4Cell
+                cell.delegate = self
+                cell.item = data
+                cell.lblTitle.text = ""
+                if indexPath == self.indexPath{
+                    var link = ""
+                    if cell.item is ChannelModel {
+                        link = data.url[0].link
+                    } else {
+                        link = listVideos[indexPath.row - 2].path
+                    }
+                    if let url = URL(string: link){
+                        
+                        cell.viewPlayer.player  = AVPlayer(url: url)
+                        cell.setup()
+                        cell.viewPlayer.player?.play()
+
+                    }
+                    cell.imgThumb.isHidden = true
+                } else{
+                    cell.viewPlayer.player?.pause()
+                    cell.imgThumb.isHidden = false
+                }
+                return cell
+            }
+            
         case listVideos.count + 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
             return cell
@@ -215,4 +268,133 @@ extension TV2Controller: Video2CellDelegate{
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
     }
+}
+extension TV2Controller: Video3CellDelegate{
+    func didSelectBookMark(_ cell: Video3Cell) {
+        //self.delegate?.didSelectBookMark(cell)
+    }
+    
+    func didSelectViewSetting(_ cell: Video3Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.listResolution = cell.listResolution
+        vc.speed = cell.speed
+        vc.onComplete = { list in
+            cell.listResolution = list
+            cell.setBitRate()
+        }
+        vc.onTickedSpeed = { value in
+            cell.speed = value
+            cell.setSpeed()
+        }
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func didSelectViewFullScreen(_ cell: Video3Cell, _ newPlayer: AVPlayer) {
+        if #available(iOS 13.0, *) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
+            vc.player = newPlayer
+            vc.listResolution = cell.listResolution
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.viewPlayer.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        } else {
+            let vc = PlayerViewController()
+            vc.player = newPlayer
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            present(vc, animated: true) {
+                vc.player?.play()
+                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+            }
+        }
+    }
+    
+    func didSelectDatePicker() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: DatePickerController.className) as! DatePickerController
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: false, completion: nil)
+        vc.onComplete = {[weak self] (date) in
+//            print(date)
+            self?.isPickDate = true
+            self?.datePicker = date
+            APIService.shared.getVideoByDate(privateId: ids[(self?.data.name)!] ?? "", date: date.getTimeString()) {[weak self] (data, error) in
+                if let data = data as? [MediaModel]{
+                    self?.listVideos = data
+                    self?.collView.reloadData()
+                }
+            }
+        }
+    }
+    
+    
+}
+extension TV2Controller: Video4CellDelegate{
+    func didSelectBookMark(_ cell: Video4Cell) {
+        
+    }
+    
+    
+    func didSelectViewSetting(_ cell: Video4Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.listResolution = cell.listResolution
+        vc.speed = cell.speed
+        vc.onComplete = { list in
+            cell.listResolution = list
+            cell.setBitRate()
+        }
+        vc.onTickedSpeed = { value in
+            cell.speed = value
+            cell.setSpeed()
+        }
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func didSelectViewFullScreen(_ cell: Video4Cell, _ newPlayer: AVPlayer) {
+        if #available(iOS 13.0, *) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
+            vc.player = newPlayer
+            vc.listResolution = cell.listResolution
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.viewPlayer.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        } else {
+            let vc = PlayerViewController()
+            vc.player = newPlayer
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            present(vc, animated: true) {
+                vc.player?.play()
+                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+            }
+        }
+    }
+
+    
+    
 }

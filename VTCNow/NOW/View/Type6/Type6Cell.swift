@@ -107,7 +107,7 @@ extension Type6Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         
     }
 }
-protocol Type6CellDelegate{
+protocol Type6CellDelegate: class{
     func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel] , _ cell: Type6Cell)
     func didSelectViewMore(_ cell: Type6Cell)
 }

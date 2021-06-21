@@ -9,14 +9,17 @@ import Foundation
 class CategoryModel{
     var privateKey = ""
     var name = ""
+    var icon = ""
     var cdn = CDNModel()
     var layout = LayoutModel()
     var media: [MediaModel] = []
+    var orderID = 0
     var components: [ComponentModel] = []
     var index = 0
     func initLoad(_ json: [String: Any]) -> CategoryModel{
         if let temp = json["PrivateKey"] as? String { privateKey = temp}
         if let temp = json["Name"] as? String { name = temp}
+        if let temp = json["Icon"] as? String { icon = temp}
         if let temp = json["Media"] as? [[String: Any]] {
             for item in temp {
                 let mediaAdd = MediaModel().initLoad(item)
@@ -29,6 +32,7 @@ class CategoryModel{
         if let temp = json["LayoutType"] as? String {
             layout = LayoutModel().initLoad(temp.toJson())
         }
+        if let temp = json["OrderID"] as? Int { orderID = temp }
         if let temp = json["Components"] as? String {
             for item in temp.toJsonArray(){
                 let componentAdd = ComponentModel().initLoad(item)
@@ -69,6 +73,7 @@ class MediaModel{
     var cast = ""
     var fileCode = ""
     var square = ""
+    var endTimecode = ""
     func initLoad(_ json: [String: Any]) -> MediaModel{
         if let temp = json["PrivateID"] as? String { privateID = temp}
         if let temp = json["Description"] as? String { descripTion = temp}
@@ -181,6 +186,9 @@ class MediaModel{
                 if metaDataAdd.name == "Cast"{
                     cast = metaDataAdd.value
                 }
+                if metaDataAdd.name == "EndTimecode" {
+                    endTimecode = metaDataAdd.value
+                }
                 metaData.append(metaDataAdd)
             }
         }
@@ -203,6 +211,28 @@ class MediaModel{
             if let temp = data["FileCode"] as? String {
                 fileCode = temp
             }
+            if let temp = data["EndTimecode"] as? String { endTimecode = temp}
+        }
+        if let data0 = json["Metadata"] as? String{
+            let data = data0.toJson()
+            if let temp = data["Episode"] as? String {
+                if temp != ""{
+                    episode = temp
+                }
+            }
+            if let temp = data["TotalEpisode"] as? String {
+                if temp != ""{
+                    totalEpisode = temp
+                }
+            }
+            if let temp = data["Country"] as? String { country = temp}
+            if let temp = data["Cast"] as? String { cast = temp}
+            if let temp = data["GenredDescription"] as? String { genred = temp}
+            if let temp = data["Director"] as? String { author = temp}
+            if let temp = data["FileCode"] as? String {
+                fileCode = temp
+            }
+            if let temp = data["EndTimecode"] as? String { endTimecode = temp}
         }
         return self
     }
@@ -273,6 +303,16 @@ class LayoutModel{
     func initLoad(_ json: [String: Any]) -> LayoutModel{
         if let temp = json["Type"] as? String { type = temp}
         if let temp = json["SubType"] as? String { subType = temp}
+        return self
+    }
+}
+
+class KeyWordModel{
+    var privateKey = ""
+    var keyWord = ""
+    func initLoad(_ json: [String: Any]) -> KeyWordModel{
+        if let temp = json["PrivateKey"] as? String { privateKey = temp}
+        if let temp = json["KeyWord"] as? String { keyWord = temp}
         return self
     }
 }

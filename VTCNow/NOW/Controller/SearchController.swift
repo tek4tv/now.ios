@@ -17,7 +17,7 @@ class SearchController: UIViewController {
     @IBOutlet weak var viewSpeech: UIView!
     @IBOutlet weak var collWordView: UICollectionView!
     var indicator =  UIActivityIndicatorView()
-    var listWord = ["Sơn Tùng MTP", "Covid 19", "Cuộc sống 24h", "Hà nội", "Phải chăng em đã yêu?", "Yêu"]
+    var listWord: [String] = []
     var listData : [MediaModel] = []
     var listString: [String] = []
     var filterListString: [String] = []
@@ -38,7 +38,7 @@ class SearchController: UIViewController {
         collView.register(UINib(nibName: NoCell.className, bundle: nil), forCellWithReuseIdentifier: NoCell.className)
         let layout = UICollectionViewFlowLayout()
         //layout.itemSize = CGSize(width: 414 * scaleW, height: 330 * scaleW)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 0, bottom: 0, right: 0)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         collView.collectionViewLayout = layout
@@ -66,7 +66,13 @@ class SearchController: UIViewController {
         }
         lblNotFound.isHidden = true
         self.collView.isHidden = true
-        
+        //
+        APIService.shared.getKeySearch {[weak self] (data, error) in
+            if let data = data as? [String] {
+                self?.listWord = data
+                self?.collWordView.reloadData()
+            }
+        }
         //
         if isPushByHashTag{
             collView.isHidden = false
@@ -74,6 +80,7 @@ class SearchController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        NotificationCenter.default.post(name: NSNotification.Name("stopVOD"), object: nil)
         if let cell = collView.cellForItem(at: indexPath) as? VideoCell{
             cell.viewPlayer.player?.pause()
         }
@@ -95,6 +102,7 @@ class SearchController: UIViewController {
                 if let data = data as? [MediaModel]{
                     self.listData = data
                     self.collView.reloadData()
+                    self.collView.isHidden = false
                     if self.listData.isEmpty {
                         self.lblNotFound.isHidden = false
                     }
@@ -263,7 +271,7 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
             }
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.className, for: indexPath) as! WordCell
-            cell.lblTitle.text = "#" + listWord[indexPath.row]
+            cell.lblTitle.text = listWord[indexPath.row]
             return cell
         }
         
@@ -297,6 +305,13 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
     
 }
 extension SearchController: VideoCellDelegate{
+    func scrollToTop(_ cell: VideoCell) {
+        collView.scrollToItem(at: cell.indexPath, at: .top, animated: true)
+    }
+    func didFinish() {
+        
+    }
+    
     func didSelectViewShare(_ cell: VideoCell) {
         guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
             return

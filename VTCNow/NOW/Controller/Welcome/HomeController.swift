@@ -154,6 +154,10 @@ class HomeController: UITabBarController, UITabBarControllerDelegate{//}, IMAAds
     override func viewDidLoad() {
         //setUpAdsLoader()
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(openVideo(_:)), name: NSNotification.Name("HomeOpenVideo"), object: nil)
+        if isMessaging{
+            NotificationCenter.default.post(name: NSNotification.Name("HomeOpenVideo"), object: nil)
+        }
         //self.setupMiddleButton()
 //        txfView.delegate = self
 //        viewPlayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewPlayer(_:))))
@@ -194,6 +198,14 @@ class HomeController: UITabBarController, UITabBarControllerDelegate{//}, IMAAds
 //        viewPlayer.addSubview(activityIndicatorView)
 //        activityIndicatorView.centerXAnchor.constraint(equalTo: viewPlayer.centerXAnchor).isActive = true
 //        activityIndicatorView.centerYAnchor.constraint(equalTo: viewPlayer.centerYAnchor).isActive = true
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    @objc func openVideo(_ notification: Notification){
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        navigationController?.pushViewController(vc, animated: false)
+        
     }
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)

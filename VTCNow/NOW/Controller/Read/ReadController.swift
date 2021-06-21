@@ -14,46 +14,74 @@ class ReadController: UIViewController {
         super.viewDidLoad()
         collView.delegate = self
         collView.dataSource = self
+        collView.register(UINib(nibName: WeatherCell.className, bundle: nil), forCellWithReuseIdentifier: WeatherCell.className)
         collView.register(UINib(nibName: ReadCell.className, bundle: nil), forCellWithReuseIdentifier: ReadCell.className)
         // Do any additional setup after loading the view.
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 414 * scaleW, height: 414 * scaleW)
+        //layout.itemSize = CGSize(width: 414 * scaleW, height: 434 * scaleW)
         collView.collectionViewLayout = layout
     }
     
 }
 extension ReadController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        reads.count
+        switch section {
+        case 0:
+            return 1
+        default:
+            return reads.count
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.section {
+        case 0:
+            return CGSize(width: 414 * scaleW, height: 70 * scaleW)
+        default:
+            return CGSize(width: 414 * scaleW, height: 434 * scaleW)
+        }
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        if indexPath.row == reads.count - 5{
-            page += 1
-            APIService.shared.getRead (page: page.description) { (data, error) in
-                if let data = data as? [ReadModel]{
-                    reads += data
-                    self.collView.reloadData()
+        switch indexPath.section {
+        case 0:
+            break
+        default:
+            if indexPath.row == reads.count - 5{
+                page += 1
+                APIService.shared.getRead (page: page.description) { (data, error) in
+                    if let data = data as? [ReadModel]{
+                        reads += data
+                        self.collView.reloadData()
+                    }
                 }
             }
         }
+        
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReadCell.className, for: indexPath) as! ReadCell
-        let item = reads[indexPath.row]
-        cell.delegate = self
-        cell.lblTitle.text = item.title
-        cell.lblDescription.text = item.description
-        cell.lblTime.text = "· " + item.getTimePass()
-        if let url = URL(string: item.image344_220){
-            cell.imgThumb.loadImage(fromURL: url)
+        switch indexPath.section {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.className, for: indexPath) as! WeatherCell
+            cell.delegate = self
+            cell.viewSearch.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnSearch(_:))))
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReadCell.className, for: indexPath) as! ReadCell
+            let item = reads[indexPath.row]
+            cell.delegate = self
+            cell.lblTitle.text = item.title
+            cell.lblDescription.text = item.description
+            cell.lblTime.text = "· " + item.getTimePass()
+            if let url = URL(string: item.image344_220){
+                cell.imgThumb.loadImage(fromURL: url)
+            }
+            cell.item = item
+            return cell
         }
-        cell.item = item
-        return cell
+        
         
     }
     @objc func didSelectBtnSearch(_ sender: Any){
@@ -61,14 +89,27 @@ extension ReadController: UICollectionViewDelegate, UICollectionViewDataSource{
         self.navigationController?.pushViewController(vc, animated: false)
     }
 }
+extension ReadController: WeatherDelegate{
+    func didSelectViewWeather(_ listW: WeatherModel) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp7Controller.className) as! PopUp7Controller
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.item = listW
+        self.present(vc, animated: true, completion: nil)
+    }
+
+}
 extension ReadController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let vc = storyboard?.instantiateViewController(withIdentifier: ReadDetailWebviewController.className) as! ReadDetailWebviewController
-        vc.url = reads[indexPath.row].detailUrl
-        navigationController?.pushViewController(vc, animated: false)
-        
+        switch indexPath.section {
+        case 0:
+            break
+        default:
+            let vc = storyboard?.instantiateViewController(withIdentifier: ReadDetailWebviewController.className) as! ReadDetailWebviewController
+            vc.url = reads[indexPath.row].detailUrl
+            navigationController?.pushViewController(vc, animated: false)
+        }
     }
 }
 extension ReadController: ReadCellDelegate{

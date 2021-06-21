@@ -31,43 +31,49 @@ class Type7Cell: UICollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 20 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10 * scaleW, bottom: 0, right: 0 * scaleW)
         collView.collectionViewLayout = layout
     }
 }
 extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if data.media.count < 9{
-            APIService.shared.getMoreVideoPlaylist(privateKey: data.privateKey, page: "0") { (data, error) in
-                if let data = data as? [MediaModel]{
-                    self.data.media += data
-                    self.collView.reloadData()
-                }
-            }
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        if data.media.count < 9{
+//            APIService.shared.getMoreVideoPlaylist(privateKey: data.privateKey, page: "0") { (data, error) in
+//                if let data = data as? [MediaModel]{
+//                    self.data.media += data
+//                    self.collView.reloadData()
+//                }
+//            }
+//        }
+//    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if data.media.count >= 9{
-            return 9
+        switch section {
+        case 0:
+            if data.media.count >= 8{
+                return 8
+            }
+            return data.media.count
+        default:
+            return 1
         }
-        return data.media.count
+        
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
+        2
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.row {
-        case 0...7:
-            return CGSize(width: 110 * scaleW, height: 200 * scaleW)
+        switch indexPath.section {
+        case 0:
+            return CGSize(width: 150 * scaleW, height: 240 * scaleW)
         default:
-            return CGSize(width: 118 * scaleW, height: 200 * scaleW)
+            return CGSize(width: 158 * scaleW, height: 240 * scaleW)
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        switch indexPath.row {
-        case 0...7:
+        switch indexPath.section {
+        case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7ItemCell.className, for: indexPath) as! Type7ItemCell
             let item = data.media[indexPath.row]
             if let url = URL(string: root.cdn.imageDomain + item.square.replacingOccurrences(of: "\\", with: "/" )){
@@ -94,8 +100,8 @@ extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         row = indexPath.row
-        switch indexPath.row {
-        case 0...7:
+        switch indexPath.section {
+        case 0:
             let item = data.media[indexPath.row]
             if item.episode != "" {
                 delegate?.didSelectItemAt(self, item)
@@ -109,7 +115,7 @@ extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }
     }
 }
-protocol Type7CellDelegate {
+protocol Type7CellDelegate: class {
     func didSelectItemAt(_ cell: Type7Cell,_ data: MediaModel)
     func didSelectNovel(_ cell: Type7Cell, _ data: MediaModel, _ list: [MediaModel])
     func didSelectViewMore(_ cell: Type7Cell)

@@ -77,6 +77,6 @@ extension Type8Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         }
     }
 }
-protocol Type8CellDelegate{
+protocol Type8CellDelegate: class{
     func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel], _ cell: Type8Cell)
 }

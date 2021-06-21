@@ -25,7 +25,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBf-N2-vqW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chọn theo nhiều chủ đề" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xN3-pY-L5a">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chọn theo chủ đề" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xN3-pY-L5a">
                                 <rect key="frame" x="20" y="15" width="344" height="20"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -34,7 +34,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-add-50" translatesAutoresizingMaskIntoConstraints="NO" id="aMZ-v2-Hgv">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NEXT" translatesAutoresizingMaskIntoConstraints="NO" id="aMZ-v2-Hgv">
                                 <rect key="frame" x="374" y="15" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aMZ-v2-Hgv" secondAttribute="height" id="9b9-za-363">
@@ -49,6 +49,13 @@
                                     </constraint>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RnY-Kk-Dcf">
+                                <rect key="frame" x="20" y="49" width="374" height="1"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Zm0-xe-gEA"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -62,6 +69,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstItem="RnY-Kk-Dcf" firstAttribute="leading" secondItem="PBf-N2-vqW" secondAttribute="leading" constant="20" id="4FZ-Xl-AgE"/>
                             <constraint firstAttribute="height" constant="50" id="Le6-Xv-L85">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -77,6 +85,8 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstAttribute="bottom" secondItem="RnY-Kk-Dcf" secondAttribute="bottom" id="dcS-Nk-jt2"/>
+                            <constraint firstAttribute="trailing" secondItem="RnY-Kk-Dcf" secondAttribute="trailing" constant="20" id="olM-Yl-TNx"/>
                             <constraint firstItem="aMZ-v2-Hgv" firstAttribute="leading" secondItem="xN3-pY-L5a" secondAttribute="trailing" constant="10" id="v4s-UH-wBq">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -84,85 +94,86 @@
                             </constraint>
                         </constraints>
                     </view>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="rC5-DU-49i">
-                        <rect key="frame" x="0.0" y="50" width="414" height="199"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lựa chọn loạt chủ đề mà bạn quan tâm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lm9-IL-5mN">
+                        <rect key="frame" x="59.5" y="199.5" width="295.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.53414618970000005" green="0.53422611949999999" blue="0.53412872550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="now" translatesAutoresizingMaskIntoConstraints="NO" id="rf8-Mb-RAe">
+                        <rect key="frame" x="167" y="89.5" width="80" height="80"/>
+                        <color key="backgroundColor" red="0.53414618970000005" green="0.53422611949999999" blue="0.53412872550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="rf8-Mb-RAe" secondAttribute="height" id="2gF-I9-BKC">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                            <constraint firstAttribute="height" constant="80" id="FpH-PE-pBM">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </constraint>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="40"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="CVN-W8-mh0">
+                        <rect key="frame" x="0.0" y="50" width="414" height="200"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ApX-iN-X1M">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gvG-ZA-ngz">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RnY-Kk-Dcf">
-                        <rect key="frame" x="20" y="249" width="374" height="1"/>
-                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="O9J-1b-pVz">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                        </constraints>
-                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="RnY-Kk-Dcf" firstAttribute="top" secondItem="rC5-DU-49i" secondAttribute="bottom" id="1TP-LT-BhB">
+                <constraint firstItem="rf8-Mb-RAe" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="1MQ-fG-T2P">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="RnY-Kk-Dcf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="2C0-k2-fAr">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </constraint>
+                <constraint firstAttribute="trailing" secondItem="CVN-W8-mh0" secondAttribute="trailing" id="3RP-Pd-OHK"/>
                 <constraint firstItem="PBf-N2-vqW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5UA-TQ-WNu">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstAttribute="bottom" secondItem="RnY-Kk-Dcf" secondAttribute="bottom" id="Qio-M0-TaC">
+                <constraint firstItem="CVN-W8-mh0" firstAttribute="top" secondItem="PBf-N2-vqW" secondAttribute="bottom" id="Cos-af-UpF"/>
+                <constraint firstItem="Lm9-IL-5mN" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="DNc-0U-FQ1">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstAttribute="bottom" secondItem="Lm9-IL-5mN" secondAttribute="bottom" constant="30" id="Oy2-5M-nbd"/>
                 <constraint firstAttribute="trailing" secondItem="PBf-N2-vqW" secondAttribute="trailing" id="duZ-5g-awR">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="rC5-DU-49i" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gGl-wB-GRv">
+                <constraint firstAttribute="bottom" secondItem="CVN-W8-mh0" secondAttribute="bottom" id="fYI-pD-fA6"/>
+                <constraint firstItem="Lm9-IL-5mN" firstAttribute="top" secondItem="rf8-Mb-RAe" secondAttribute="bottom" constant="30" id="jFQ-jh-rA4">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstAttribute="trailing" secondItem="RnY-Kk-Dcf" secondAttribute="trailing" constant="20" id="sbG-lM-kXg">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </constraint>
+                <constraint firstItem="CVN-W8-mh0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="kzf-gE-F9D"/>
                 <constraint firstItem="PBf-N2-vqW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="spf-GU-VQe">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </constraint>
-                <constraint firstAttribute="trailing" secondItem="rC5-DU-49i" secondAttribute="trailing" id="zKD-C7-PL9">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </constraint>
-                <constraint firstItem="rC5-DU-49i" firstAttribute="top" secondItem="PBf-N2-vqW" secondAttribute="bottom" id="zhz-gQ-ep0">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
             </constraints>
             <connections>
-                <outlet property="collView" destination="rC5-DU-49i" id="Hvv-Xn-O04"/>
+                <outlet property="collView" destination="CVN-W8-mh0" id="8h7-7l-Iry"/>
                 <outlet property="imgAdd" destination="aMZ-v2-Hgv" id="Esd-uj-6lp"/>
                 <outlet property="lblTitle" destination="xN3-pY-L5a" id="Tr0-1y-yGK"/>
             </connections>
@@ -170,6 +181,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="icons8-add-50" width="50" height="50"/>
+        <image name="NEXT" width="512" height="512"/>
+        <image name="now" width="501" height="501"/>
     </resources>
 </document>

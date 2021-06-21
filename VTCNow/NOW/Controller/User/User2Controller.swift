@@ -14,7 +14,7 @@ class User2Controller: UIViewController {
     @IBOutlet weak var viewEdit: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     var timer = Timer()
-    var page = 0
+    var page = 1
     var indexPath = IndexPath(row: 1, section: 0)
     var onComplete: (() -> ())!
     var onDelete: (() -> ())!
@@ -223,6 +223,13 @@ extension User2Controller: UICollectionViewDelegate, UICollectionViewDataSource,
     
 }
 extension User2Controller: VideoCellDelegate{
+    func scrollToTop(_ cell: VideoCell) {
+        collView.scrollToItem(at: cell.indexPath, at: .top, animated: true)
+    }
+    func didFinish() {
+        
+    }
+    
     func didSelectViewShare(_ cell: VideoCell) {
         guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
             return

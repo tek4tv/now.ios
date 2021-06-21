@@ -32,7 +32,7 @@ class NewBroadCell: UICollectionViewCell {
         collView.collectionViewLayout = layout
     }
     override func prepareForReuse() {
-        imgAdd.image = #imageLiteral(resourceName: "icons8-add-50")
+        imgAdd.image = #imageLiteral(resourceName: "NEXT")
     }
 
 }
@@ -61,7 +61,7 @@ extension NewBroadCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
 }
-protocol NewBroadCellDelegate {
+protocol NewBroadCellDelegate: class {
     func didSelectItemAt(_ cell: NewBroadCell)
     func didSelectViewShare(_ cell: Type3ItemCell)
 }

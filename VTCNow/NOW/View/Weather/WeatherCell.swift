@@ -54,7 +54,7 @@ class WeatherCell: UICollectionViewCell {
         delegate?.didSelectViewWeather(listW[index])
     }
     func getWeathers(){
-        APIService.shared.getWeather(listW[0].lat, listW[0].long) { (data, list, error) in
+        APIService.shared.getWeatherHN() { (data, list, error) in
             if let data = data as? TodayModel{
                 self.listW[0].data = data
                 self.count += 1
@@ -63,7 +63,7 @@ class WeatherCell: UICollectionViewCell {
                 self.listW[0].daily = list
             }
         }
-        APIService.shared.getWeather(listW[1].lat, listW[1].long) { (data, list, error) in
+        APIService.shared.getWeatherHCM() { (data, list, error) in
             if let data = data as? TodayModel{
                 self.listW[1].data = data
                 self.count += 1
@@ -72,7 +72,7 @@ class WeatherCell: UICollectionViewCell {
                 self.listW[1].daily = list
             }
         }
-        APIService.shared.getWeather(listW[2].lat, listW[2].long) { (data, list, error) in
+        APIService.shared.getWeatherHP() { (data, list, error) in
             if let data = data as? TodayModel{
                 self.listW[2].data = data
                 self.count += 1
@@ -81,7 +81,7 @@ class WeatherCell: UICollectionViewCell {
                 self.listW[2].daily = list
             }
         }
-        APIService.shared.getWeather(listW[3].lat, listW[3].long) { (data, list, error) in
+        APIService.shared.getWeatherDN() { (data, list, error) in
             if let data = data as? TodayModel{
                 self.listW[3].data = data
                 self.count += 1
@@ -90,7 +90,7 @@ class WeatherCell: UICollectionViewCell {
                 self.listW[3].daily = list
             }
         }
-        APIService.shared.getWeather(listW[4].lat, listW[4].long) { (data, list, error) in
+        APIService.shared.getWeatherCT() { (data, list, error) in
             if let data = data as? TodayModel{
                 self.listW[4].data = data
                 self.count += 1
@@ -101,6 +101,6 @@ class WeatherCell: UICollectionViewCell {
         }
     }
 }
-protocol WeatherDelegate {
+protocol WeatherDelegate: class {
     func didSelectViewWeather(_ listW: WeatherModel)
 }

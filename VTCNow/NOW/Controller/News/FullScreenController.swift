@@ -234,20 +234,7 @@ class FullScreenController: UIViewController {
         btnPlay.isHidden = true
         activityIndicatorView.startAnimating()
         listResolution = []
-//        if let url = URL(string: item.path){
-//            if item.path.contains(".m3u8"){
-//                StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
-//                    switch result {
-//                    case .success(let playlist):
-//                        self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
-//                        self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
-//                        self?.listResolution[0].isTicked = true
-//                    case .failure(let error):
-//                        print(error.localizedDescription)
-//                    }
-//                }
-//            }
-//        }
+
         viewPlayer.player = player
         viewPlayer.player?.play()
         viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)

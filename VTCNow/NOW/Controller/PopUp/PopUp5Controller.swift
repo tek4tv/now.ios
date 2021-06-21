@@ -47,11 +47,6 @@ extension PopUp5Controller: UITableViewDelegate, UITableViewDataSource{
         if indexPath.row == idPlaying{
             cell.lblTitle.textColor = .purple
             cell.lblAuthor.textColor = .purple
-            cell.imgView.image = #imageLiteral(resourceName: "icons8-audio-60")
-            cell.imgView.isHidden = false
-        }
-        else{
-            cell.imgView.isHidden = true
         }
         return cell
     }

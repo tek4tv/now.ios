@@ -52,7 +52,7 @@ extension Book3Cell: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
 }
-protocol Book3CellDelegate {
+protocol Book3CellDelegate: class {
     func didSelectItemAt(_ cell: Book3Cell,_ data: MediaModel)
     func didSelectNovel(_ cell: Book3Cell,_ data: MediaModel, _ list: [MediaModel])
 }

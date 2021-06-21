@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 //import FirebaseDatabase
 class HighLightController: UIViewController {
     @IBOutlet weak var collView: UICollectionView!
@@ -45,6 +46,10 @@ class HighLightController: UIViewController {
 //            NotificationCenter.default.post(name: NSNotification.Name("StopMP3Video"), object: nil)
 //        }
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.post(name: NSNotification.Name("StopVOD5"), object: nil)
+    }
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -65,14 +70,16 @@ class HighLightController: UIViewController {
     
     func load(){
         let item = root.components[countD]
-        
         APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data2, error2) in
             if let data2 = data2 as? CategoryModel{
-                self?.categorys2.append(data2)
-                self?.countD += 1
-                print(data2.name + " " + data2.layout.type + " - " + data2.layout.subType)
-
-                if self?.categorys2.count == root.components.count{
+                if data2.name == "Sách hay"{
+                    bookCate = data2
+                } else{
+                    self?.categorys2.append(data2)
+                    self?.countD += 1
+//                    print(data2.name + " " + data2.layout.type + " - " + data2.layout.subType)
+                }
+                if self?.categorys2.count == root.components.count - 1{
                     DispatchQueue.main.asyncAfter(deadline: .now()) {
                         self?.collView.refreshControl?.endRefreshing()
                         categorys = self!.categorys2
@@ -81,6 +88,7 @@ class HighLightController: UIViewController {
                 } else{
                     self?.load()
                 }
+
             }
         }
         APIService.shared.getRead { (data, error) in
@@ -91,6 +99,7 @@ class HighLightController: UIViewController {
     }
 }
 extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
@@ -99,10 +108,10 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
 //        return categorys.count + 2
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collView.bounds.width
+        let width = 414 * scaleW
         let section = indexPath.section
         if section == 0{
-            return CGSize(width: width, height: 60 * scaleW)
+            return CGSize(width: width, height: 80 * scaleW)
 //        } else if section == 1 {
 //            return CGSize(width: width, height: 232 * scaleW)
 //        } else if section == 2 {
@@ -112,7 +121,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
         } else if section == 2{
             return CGSize(width: width, height: 260 * scaleW)
         } else if section == 3{
-            return CGSize(width: width, height: 95 * scaleW)
+            return CGSize(width: width, height: 115 * scaleW)
         } else {
             let item = categorys[section - 3]
 //            let item = categorys[section - 2]
@@ -120,11 +129,14 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
             case "1":
                 return CGSize(width: width, height: 260 * scaleW)
             case "2":
-                let temp = 70 + 180
+                let temp = 70 + 180 + 160
                 let height: CGFloat = CGFloat(temp)
                 return CGSize(width: width, height: height * scaleW)
             case "3":
-                let temp = 12 * 220 + 70 + 10 * 11 + 20 * 1 + 30
+                var temp = 70 + 12 * 220 + 385 + 210 + 320 + 25 * 8 + 25 * 7 + 30 + 160
+                if isOffClass{
+                    temp = 70 + 12 * 220 + 385 + 210 + 320 + 25 * 8 + 25 * 7 + 30
+                }
                 let height: CGFloat = CGFloat(temp)
                 return CGSize(width: width, height: height * scaleW)
             case "4", "14":
@@ -142,11 +154,11 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                     let height: CGFloat = CGFloat(temp)
                     return CGSize(width: width, height: height * scaleW)
                 }
-                let temp = 70 + 200 + 10
+                let temp = 70 + 210
                 let height: CGFloat = CGFloat(temp)
                 return CGSize(width: width, height: height * scaleW)
             case "6", "7" :
-                let temp = 70 + 260 + 10
+                let temp = 70 + 260 + 15
                 let height: CGFloat = CGFloat(temp)
                 return CGSize(width: width, height: height * scaleW )
             default:
@@ -245,7 +257,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
         } else {
             let cate = categorys[section - 3]
             switch cate.layout.subType {
-            case "1", "2", "5", "12", "13", "14":
+            case "1", "2", "12", "13", "14":
                 if cate.components.isEmpty{
                     news = cate
                     let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
@@ -327,7 +339,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                         }
                     }
                 }
-            case "20":
+            case "20", "5":
                 news = cate
                 let vc = storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController
                 navigationController?.pushViewController(vc, animated: false)
@@ -357,7 +369,7 @@ extension HighLightController: WeatherDelegate{
 extension HighLightController: CategoryCellDelegate {
     func didSelectItem(_ cate: CategoryModel) {
         switch cate.layout.subType {
-        case "1", "2", "5", "12", "13", "14":
+        case "1", "2", "12", "13", "14":
             if cate.components.isEmpty{
                 news = cate
                 let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
@@ -439,7 +451,7 @@ extension HighLightController: CategoryCellDelegate {
                     }
                 }
             }
-        case "20":
+        case "20", "5":
             news = cate
             let vc = storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController
             navigationController?.pushViewController(vc, animated: false)
@@ -465,6 +477,16 @@ extension HighLightController: Type1CellDelegate{
 //    }
 }
 extension HighLightController: Type2CellDelegate{
+    func didSelectBanner(_ cell: Type2Cell) {
+        APIService.shared.getPlaylist(privateKey: smallBanner.privateKey) {[weak self] (data, error) in
+            if let data = data as? CategoryModel {
+                news = data
+                let vc = self?.storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+                self?.navigationController?.pushViewController(vc, animated: false)
+            }
+        }
+    }
+    
     func didSelectItemAt(_ cell: Type2Cell) {
         let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
         self.navigationController?.pushViewController(vc, animated: false)
@@ -476,6 +498,84 @@ extension HighLightController: Type2CellDelegate{
     }
 }
 extension HighLightController: Type3CellDelegate{
+    func didSelectOverViewLabel() {
+        news = overView2
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        vc.isLoadMore = false
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    func didSelectOverView() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        vc.isLoadMore = false
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    func didSelectBanner() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        vc.isLoadMore = false
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    func didSelectViewShare(_ cell: VideoCell) {
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
+            return
+        }
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
+    }
+    
+    func didSelectViewSetting(_ cell: VideoCell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.listResolution = cell.listResolution
+        vc.speed = cell.speed
+        vc.onComplete = { list in
+            cell.listResolution = list
+            cell.setBitRate()
+        }
+        vc.onTickedSpeed = { value in
+            cell.speed = value
+            cell.setSpeed()
+        }
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func didSelectViewFullScreen(_ cell: VideoCell, _ newPlayer: AVPlayer) {
+        if #available(iOS 13.0, *) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
+            vc.player = newPlayer
+            vc.listResolution = cell.listResolution
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.viewPlayer.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        } else {
+            let vc = PlayerViewController()
+            vc.player = newPlayer
+            vc.videoGravity = .resizeAspect
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            present(vc, animated: true) {
+                vc.player?.play()
+                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+            }
+        }
+    }
+    
     func didSelectViewImage(_ cell: Type3ItemCell) {
         let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
         self.navigationController?.pushViewController(vc, animated: false)
@@ -493,10 +593,21 @@ extension HighLightController: Type3CellDelegate{
 }
 extension HighLightController: Type4CellDelegate{
     func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel], _ cell: Type4Cell) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
-        vc.item = data
-        vc.listData = listData
-        navigationController?.pushViewController(vc, animated: false)
+        if data.endTimecode != ""{
+            APIService.shared.getRelatedEpisode(code: data.endTimecode) {[weak self] (list1, error) in
+                if let list1 = list1 as? [MediaModel] {
+                    let vc = self?.storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+                    vc.item = data
+                    vc.listData = list1
+                    self?.navigationController?.pushViewController(vc, animated: false)
+                }
+            }
+        } else{
+            let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+            vc.item = data
+            vc.listData = listData
+            navigationController?.pushViewController(vc, animated: false)
+        }
     }
 }
 extension HighLightController: Type8CellDelegate{
@@ -508,11 +619,9 @@ extension HighLightController: Type8CellDelegate{
     }
 }
 extension HighLightController: Type5CellDelegate{
-    func didSelectViewImage(_ data: MediaModel, _ list: [MediaModel], _ cell: Type5Cell) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
-        vc.item = data
-        vc.listData = list
-        navigationController?.pushViewController(vc, animated: false)
+    func didSelectViewImage() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     
     func didSelectView2Share(_ cell: Type3ItemCell) {
@@ -532,10 +641,22 @@ extension HighLightController: Type5CellDelegate{
 }
 extension HighLightController: Type9CellDelegate{
     func didSelectViewImage(_ data: MediaModel, _ list: [MediaModel], _ cell: Type9Cell) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
-        vc.item = data
-        vc.listData = list
-        navigationController?.pushViewController(vc, animated: false)
+        if data.endTimecode != ""{
+            APIService.shared.getRelatedEpisode(code: data.endTimecode) {[weak self] (list1, error) in
+                if let list1 = list1 as? [MediaModel] {
+                    let vc = self?.storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+                    vc.item = data
+                    vc.listData = list1
+                    self?.navigationController?.pushViewController(vc, animated: false)
+                }
+            }
+        } else{
+            let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+            vc.item = data
+            vc.listData = list
+            navigationController?.pushViewController(vc, animated: false)
+        }
+        
     }
     
 //    func didSelectView2Share(_ cell: Type3ItemCell) {
@@ -577,39 +698,22 @@ extension HighLightController: Type6CellDelegate{
         }
     }
 }
-//extension HighLightController: Type7CellDelegate{
-//    func didSelectItemAt(_ cell: Type7Cell) {
-//        let vc = storyboard?.instantiateViewController(withIdentifier: BookPlayerController.className) as! BookPlayerController
-//        self.navigationController?.pushViewController(vc, animated: true)
-//    }
-//    
-//    func didSelectViewMore(_ cell: Type7Cell) {
-//        var count = 0
-//        news = bookCate
-//        for item in news.components{
-//            APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
-//                if let data = data as? CategoryModel{
-//                    item.category = data
-//                    count += 1
-//                    if count == news.components.count {
-//                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: BookController.className) as! BookController
-//                        self?.navigationController?.pushViewController(vc, animated: true)
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+
 extension HighLightController: HashTagCellDelegate{
     func didSelectItemAt(_ word: String) {
-        APIService.shared.searchAll(keySearch: word) {[self] (data, error) in
+        APIService.shared.searchWithTag(privateKey: word, keySearch: ""){[self] (data, error) in
             if let data = data as? [MediaModel]{
-                let vc = storyboard?.instantiateViewController(withIdentifier: SearchController.className) as! SearchController
-                vc.listData = data
+                let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+                news.media = data
                 vc.isPushByHashTag = true
                 navigationController?.pushViewController(vc, animated: false)
             }
         }
     }
 
+}
+extension HighLightController: UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        NotificationCenter.default.post(name: NSNotification.Name("scrollViewDidScroll"), object: nil)
+    }
 }

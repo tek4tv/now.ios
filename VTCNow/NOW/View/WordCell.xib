@@ -64,6 +64,7 @@
             </constraints>
             <connections>
                 <outlet property="lblTitle" destination="9o5-sX-weC" id="GeQ-RV-dDj"/>
+                <outlet property="viewContain" destination="epa-va-lHK" id="R3R-J2-ooH"/>
             </connections>
             <point key="canvasLocation" x="142" y="132"/>
         </collectionViewCell>

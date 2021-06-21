@@ -15,9 +15,11 @@ class Type7ItemCell: UICollectionViewCell {
     @IBOutlet weak var lblTotalEpisode: UILabel!
     @IBOutlet weak var lblEpisode: UILabel!
     @IBOutlet weak var viewEpisode: UIView!
+    @IBOutlet weak var viewImage: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        viewImage.dropShadow()
     }
     override func prepareForReuse() {
         viewEpisode.isHidden = true

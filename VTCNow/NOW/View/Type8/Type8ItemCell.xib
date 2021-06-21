@@ -23,8 +23,8 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bài hát mộc - số 1 Nguyễn Trần Trung Quân" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvt-dK-0fx">
-                        <rect key="frame" x="0.0" y="122" width="190" height="35.5"/>
-                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                        <rect key="frame" x="0.0" y="122" width="190" height="63.5"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
@@ -59,7 +59,7 @@
                                     </constraint>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zvH-hX-I5d" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zvH-hX-I5d" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="166.5" height="107"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zvH-hX-I5d" secondAttribute="height" multiplier="14/9" id="S9C-xp-fIR">

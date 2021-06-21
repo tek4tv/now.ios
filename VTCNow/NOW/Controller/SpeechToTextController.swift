@@ -42,7 +42,7 @@ class SpeechToTextController: UIViewController, SFSpeechRecognizerDelegate {
             imgMic.isUserInteractionEnabled = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.cancelSpeechRecognization()
-                self.imgMic.image = #imageLiteral(resourceName: "icons8-microphone-96 (2)")
+                self.imgMic.image = #imageLiteral(resourceName: "icons8-microphone-97")
                 self.imgMic.isUserInteractionEnabled = true
                 if self.textView.text == "Bấm nút để bắt đầu" || self.textView.text == "Thử lại lần nữa!"{
                     self.textView.text = "Thử lại lần nữa!"

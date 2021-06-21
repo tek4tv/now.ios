@@ -7,7 +7,6 @@
 
 import UIKit
 import AVFoundation
-import ExpandableLabel
 class VideoController: UIViewController{
     
     override func didReceiveMemoryWarning() {
@@ -17,6 +16,7 @@ class VideoController: UIViewController{
     }
     @IBOutlet weak var collView: UICollectionView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imgAudio: LazyImageView!
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -33,7 +33,7 @@ class VideoController: UIViewController{
     @IBOutlet weak var viewSetting: UIView!
     @IBOutlet weak var imgShadow: UIImageView!
     @IBOutlet weak var viewCast: UIView!
-    @IBOutlet weak var lblDescription: ExpandableLabel!
+    @IBOutlet weak var lblDescription: UILabel!
     
     @IBOutlet weak var heightCollView: NSLayoutConstraint!
     
@@ -45,6 +45,7 @@ class VideoController: UIViewController{
     var timer = Timer()
     var listResolution: [StreamResolution] = []
     var speed: Double = 1.0
+    var isXemThem = true
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +83,42 @@ class VideoController: UIViewController{
         row = row.rounded(.toNearestOrEven)
         heightCollView.constant = CGFloat(row * 190) * scaleW
         
-        
+        //
+        lblDescription.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectLbl(_:))))
+    }
+    @objc func didSelectLbl(_ sender: Any){
+//        lblDescription.text = item.descripTion
+//        if item.descripTion.count > 200 {
+//            lblDescription.text = item.descripTion.prefix(200) + "..."
+//            let partTwo = NSAttributedString(string: "Xem thêm", attributes: [NSAttributedString.Key.font: lblDescription.font!, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.5069422722, green: 0.000876982871, blue: 0.2585287094, alpha: 1) ])
+//            let combination = NSMutableAttributedString()
+//
+//            combination.append(lblDescription.attributedText!)
+//            combination.append(partTwo)
+//            lblDescription.attributedText = combination
+//        }
+        if isXemThem == true {
+            if item.descripTion.count > 200 {
+                lblDescription.text = item.descripTion + "..."
+                let partTwo = NSAttributedString(string: "Ẩn bớt", attributes: [NSAttributedString.Key.font: lblDescription.font!, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.5069422722, green: 0.000876982871, blue: 0.2585287094, alpha: 1) ])
+                let combination = NSMutableAttributedString()
+                
+                combination.append(lblDescription.attributedText!)
+                combination.append(partTwo)
+                lblDescription.attributedText = combination
+            }
+        }else{
+            if item.descripTion.count > 200 {
+                lblDescription.text = item.descripTion.prefix(200) + "..."
+                let partTwo = NSAttributedString(string: "Xem thêm", attributes: [NSAttributedString.Key.font: lblDescription.font!, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.5069422722, green: 0.000876982871, blue: 0.2585287094, alpha: 1) ])
+                let combination = NSMutableAttributedString()
+                
+                combination.append(lblDescription.attributedText!)
+                combination.append(partTwo)
+                lblDescription.attributedText = combination
+            }
+        }
+        isXemThem = !isXemThem
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -95,7 +131,8 @@ class VideoController: UIViewController{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.viewPlayer.player?.pause()
-        self.viewPlayer.player = nil
+        self.viewPlayer.player?.replaceCurrentItem(with: nil)
+        NotificationCenter.default.removeObserver(self)
         timer.invalidate()
         if let timeObserver = timeObserver {
             viewPlayer.player?.removeTimeObserver(timeObserver)
@@ -291,28 +328,34 @@ class VideoController: UIViewController{
             }
             
             viewPlayer.player  = AVPlayer(url: url)
-            viewPlayer.player?.play()
+            //viewPlayer.player?.automaticallyWaitsToMinimizeStalling = false
+            viewPlayer.player?.playImmediately(atRate: 1.0)
+//            viewPlayer.player?.play()
             viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
             viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
             NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             isPlaying = true
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
             lblTitle.text = item.name
-            if item.country != "" {
-                lblCast.text = "Quốc gia: " + item.country
-            } else if item.episode != "" {
+            if item.episode != "" {
                 lblCast.text = "Tập " + item.episode + "/" + item.totalEpisode
+            } else if item.country != "" {
+                lblCast.text = "Quốc gia: " + item.country
             } else{
                 lblCast.text = item.getTimePass()
             }
             
+
             lblDescription.text = item.descripTion
-            lblDescription.numberOfLines = 4
-            lblDescription.collapsedAttributedLink = NSAttributedString(string: "Xem thêm", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)])
-            lblDescription.expandedAttributedLink = NSAttributedString(string: "Ẩn bớt", attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)])
-            lblDescription.shouldCollapse = true
-            lblDescription.textReplacementType = .character
-            lblDescription.collapsed = true
+            if item.descripTion.count > 200 {
+                lblDescription.text = item.descripTion.prefix(200) + "..."
+                let partTwo = NSAttributedString(string: "Xem thêm", attributes: [NSAttributedString.Key.font: lblDescription.font!, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.5069422722, green: 0.000876982871, blue: 0.2585287094, alpha: 1) ])
+                let combination = NSMutableAttributedString()
+
+                combination.append(lblDescription.attributedText!)
+                combination.append(partTwo)
+                lblDescription.attributedText = combination
+            }
             addTimeObserver()
         }
         if item.path.contains("mp3"){
@@ -369,27 +412,43 @@ class VideoController: UIViewController{
         present(vc, animated: true, completion: nil)
     }
     @objc func didSelectBtnFullScreen(_ sender: Any) {
+        
         self.viewPlayer.player?.pause()
         self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         self.isPlaying = false
         let newPlayer = self.viewPlayer.player
         self.viewPlayer.player = nil
-        
-        let vc = PlayerViewController()
-        
-        
-        vc.player = newPlayer
-        vc.onDismiss = {[weak self] in
-            self?.viewPlayer.player = vc.player
-            vc.player = nil
-            self?.viewPlayer.player?.play()
-            self?.isPlaying = true
-            self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+        if #available(iOS 13.0, *) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
+            vc.player = newPlayer
+            vc.listResolution = self.listResolution
+            vc.onDismiss = {[weak self] in
+                self?.viewPlayer.player = vc.player
+                vc.player = nil
+                self?.viewPlayer.player?.play()
+                self?.isPlaying = true
+                self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        } else {
+            let vc = PlayerViewController()
+            
+            
+            vc.player = newPlayer
+            vc.onDismiss = {[weak self] in
+                self?.viewPlayer.player = vc.player
+                vc.player = nil
+                self?.viewPlayer.player?.play()
+                self?.isPlaying = true
+                self?.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            present(vc, animated: true) {
+                vc.player?.play()
+                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+            }
         }
-        present(vc, animated: true) {
-            vc.player?.play()
-            vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
-        }
+        
     }
 }
 
@@ -413,6 +472,8 @@ extension VideoController: UICollectionViewDelegate, UICollectionViewDataSource{
             cell.viewEpisode.isHidden = false
             cell.lblEpisode.text = item.episode
             cell.lblTotalEpisode.text = item.totalEpisode
+            cell.lblCountry.isHidden = false
+            cell.lblCountry.text = item.getTimePass()
         } else {
             cell.viewEpisode.isHidden = true
         }
@@ -445,6 +506,7 @@ extension VideoController: UICollectionViewDelegate, UICollectionViewDataSource{
         listData = list
         collView.reloadData()
         openVideoAudio()
+        scrollView.setContentOffset(CGPoint.zero, animated: true)
     }
     
 }

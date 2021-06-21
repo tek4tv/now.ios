@@ -33,7 +33,7 @@ class Type5Cell: UICollectionViewCell {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 20 * scaleW
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 10 * scaleW, right: 20 * scaleW)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
     }
 
@@ -75,11 +75,8 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
             }
-            if item.country != ""{
-                cell.lblTime.text = item.country
-            }else{
-                cell.lblTime.text = item.timePass
-            }
+            cell.lblTime.isHidden = true
+            cell.viewShare.isHidden = true
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMoreCell.className, for: indexPath) as! ViewMoreCell
@@ -110,30 +107,13 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
 }
 extension Type5Cell: Type3ItemCellDelegate{
     func didSelectViewImage(_ cell: Type3ItemCell) {
-        let count = data.media.count
-        var list: [MediaModel] = []
-        if count == 1{
-            list = []
-        } else if count == 2{
-            if cell.row == 0 {
-                list.append(data.media[1])
-            } else{
-                list.append(data.media[0])
-            }
-        } else if count >= 3 {
-            if cell.row == 0{
-                list = Array(data.media[1...count-1])
-            } else if cell.row == count-1 {
-                list = Array(data.media[0...count - 2])
-            } else{
-                list = Array(data.media[cell.row+1...count-1] + data.media[0...cell.row-1])
-            }
-        }
-        APIService.shared.getDetailVideo(privateKey: data.media[cell.row].privateID) { (data, error) in
-            if let data = data as? MediaModel{
-                self.delegate?.didSelectViewImage(data, list, self)
-            }
-        }
+        let temp = self.data.copy()
+        let item = cell.data
+//        print(cell.row)
+        temp.media.remove(at: cell.row)
+        temp.media.insert(item, at: 0)
+        news = temp
+        delegate?.didSelectViewImage()
     }
     
     func didSelectViewBookmark(_ cell: Type3ItemCell) {
@@ -146,8 +126,8 @@ extension Type5Cell: Type3ItemCellDelegate{
     
     
 }
-protocol Type5CellDelegate{
-    func didSelectViewImage(_ data: MediaModel,_ list: [MediaModel],_ cell: Type5Cell)
+protocol Type5CellDelegate: class{
+    func didSelectViewImage()
     func didSelectView2Share(_ cell: Type3ItemCell)
     func didSelectViewMore(_ cell: Type5Cell)
 }

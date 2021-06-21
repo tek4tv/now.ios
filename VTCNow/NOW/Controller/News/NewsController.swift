@@ -12,7 +12,7 @@ class NewsController: UIViewController {
     @IBOutlet weak var collView: UICollectionView!
     var name = ""
     var category = CategoryModel()
-    var page = 0
+    var page = 1
     var indexPath = IndexPath(row: 0, section: 0)
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +22,9 @@ class NewsController: UIViewController {
         collView.dataSource = self
         collView.register(UINib(nibName: "VideoCell", bundle: nil), forCellWithReuseIdentifier: "VideoCell")
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 414 * scaleW, height: 330 * scaleW)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumLineSpacing = 20 * scaleW
+        layout.itemSize = CGSize(width: 414 * scaleW, height: 350 * scaleW)
+        layout.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 0, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 10 * scaleW
         layout.minimumInteritemSpacing = 0
         collView.collectionViewLayout = layout
         
@@ -122,7 +122,9 @@ extension NewsController: UICollectionViewDelegate, UICollectionViewDataSource, 
             if let url = URL(string: item.path){
                 
                 cell.viewPlayer.player  = AVPlayer(url: url)
-                cell.viewPlayer.player?.play()
+                //cell.viewPlayer.player?.automaticallyWaitsToMinimizeStalling = false
+                cell.viewPlayer.player?.playImmediately(atRate: 1.0)
+//                cell.viewPlayer.player?.play()
                 cell.setup()
                 
             }
@@ -136,6 +138,16 @@ extension NewsController: UICollectionViewDelegate, UICollectionViewDataSource, 
 }
 
 extension NewsController: VideoCellDelegate{
+    func scrollToTop(_ cell: VideoCell) {
+        collView.scrollToItem(at: cell.indexPath, at: .top, animated: true)
+    }
+    
+    func didFinish() {
+        if self.indexPath.row < category.media.count - 1 {
+            collView.scrollToItem(at: IndexPath(row: self.indexPath.row + 1, section: 0), at: .top, animated: true)
+        }
+    }
+    
     func didSelectViewShare(_ cell: VideoCell) {
         guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
             return
