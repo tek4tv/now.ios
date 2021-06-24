@@ -26,7 +26,7 @@ class CellVideo: UITableViewCell {
     @IBOutlet weak var viewCast: UIView!
     
     @IBOutlet weak var viewShare: UIView!
-    
+    var isOn = true
     var delegate: CellVideoDelegate!
     
     var indexPath: IndexPath!
@@ -35,10 +35,20 @@ class CellVideo: UITableViewCell {
             if item.path != "" {
                 
                 if Array(item.path)[item.path.count - 1] == "/" {
-                    NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
+                    if isOnLive(){
+                        
+                    } else{
+                        isOn = false
+                        NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
+                    }
                 }
             }else{
-                NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
+                if isOnLive(){
+                    
+                } else{
+                    isOn = false
+                    NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
+                }
             }
         }
     }
@@ -85,7 +95,7 @@ class CellVideo: UITableViewCell {
 //            NotificationCenter.default.removeObserver(self)
 //        }
         
-        btnPlay.isHidden = false
+        
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -262,29 +272,42 @@ class CellVideo: UITableViewCell {
             if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
                 let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
                 if hour <= 0 && minute <= 0 && second <= 0{
-                    if item.name.contains("Trực tiếp") {
-                        item.timePass = "Trực tiếp"
-                    } else{
-                        item.timePass = "Đang phát"
-                    }
-                    lblTime.textColor = #colorLiteral(red: 0.5069422722, green: 0.000876982871, blue: 0.2585287094, alpha: 1)
-                    lblCountDown.isHidden = true
-                    //                    imgShadow.isHidden = true
-                    lblCountDown.text = item.timePass
-                    //                    imgThumb.isHidden = true
+                    viewPlayer.player?.play()
+                    isOn = true
+                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.init("countDownTimer2"), object: nil)
                 } else{
                     item.timePass = "\(timeStr)"
-                    lblTime.textColor = .gray
                     lblCountDown.isHidden = false
                     imgShadow.isHidden = false
                     lblCountDown.text = timeStr
-                    viewPlayer.player?.pause()
                     activityIndicatorView.stopAnimating()
                     imgThumb.isHidden = false
                 }
             }
             lblTime.text = item.timePass
         }
+    }
+    func isOnLive() -> Bool{
+        if let futureDate = item.schedule.toDate(){
+            let interval = futureDate - Date()
+            if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
+                let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
+                if hour <= 0 && minute <= 0 && second <= 0{
+                    if item.name.contains("Trực tiếp") {
+                        lblTime.text = "Trực tiếp"
+                    } else{
+                        lblTime.text = "Đang phát"
+                    }
+                    lblTime.textColor = #colorLiteral(red: 0.5069422722, green: 0.000876982871, blue: 0.2585287094, alpha: 1)
+                    lblCountDown.isHidden = true
+                    return true
+                } else{
+                    lblTime.text = "\(timeStr)"
+                    return false
+                }
+            }
+        }
+        return false
     }
     func setup(){
         btnPlay.isHidden = true

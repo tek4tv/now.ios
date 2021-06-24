@@ -202,10 +202,6 @@ extension HighLight2Controller: UITableViewDelegate, UITableViewDataSource, UISc
             let cell = tableView.dequeueReusableCell(withIdentifier: CellVideo.className, for: indexPath) as! CellVideo
             
             let item = listSearch[indexPath.row - 1]
-            cell.item = item
-            cell.indexPath = indexPath
-            cell.lblTitle.text = item.name
-            cell.lblDescription.text = item.descripTion
             if news.name == "Đừng bỏ lỡ"{
                 cell.lblTime.text = ""
             } else if item.episode != ""{
@@ -213,7 +209,11 @@ extension HighLight2Controller: UITableViewDelegate, UITableViewDataSource, UISc
             } else{
                 cell.lblTime.text = item.timePass
             }
-            
+            cell.isOn = true
+            cell.item = item
+            cell.indexPath = indexPath
+            cell.lblTitle.text = item.name
+            cell.lblDescription.text = item.descripTion
             cell.delegate = self
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
@@ -231,10 +231,15 @@ extension HighLight2Controller: UITableViewDelegate, UITableViewDataSource, UISc
                 if let url = URL(string: link){
                     
                     cell.viewPlayer.player = AVPlayer(url: url)
-                    cell.viewPlayer.player?.play()
+                    if cell.isOn {
+                        cell.viewPlayer.player?.play()
+                        cell.imgThumb.isHidden = true
+                    } else {
+                        cell.imgThumb.isHidden = false
+                    }
                     cell.setup()
                 }
-                cell.imgThumb.isHidden = true
+//                cell.imgThumb.isHidden = true
             } else{
                 cell.viewPlayer.player?.pause()
                 cell.imgThumb.isHidden = false
