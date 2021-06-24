@@ -11,8 +11,11 @@ class MovieSetController: UIViewController {
 
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var collView: UICollectionView!
+    @IBOutlet weak var txfView: UITextField!
+    var listSearch: [MediaModel] = []
     var page = 1
     var isPushByTVShow = false
+    var isSearching = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,9 +30,38 @@ class MovieSetController: UIViewController {
         collView.collectionViewLayout = layout
         
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnBack(_:))))
+        txfView.addTarget(self, action: #selector(textFieldDidChange(_:)),
+                          for: .editingChanged)
+        txfView.delegate = self
+        listSearch = news.media
     }
     @objc func didSelectBtnBack(_ sender: Any){
         self.navigationController?.popViewController(animated: false)
+    }
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        if textField.text == "" {
+           isSearching = false
+            self.listSearch = news.media
+            self.collView.reloadData()
+        } else {
+            self.listSearch = []
+            isSearching = true
+            APIService.shared.searchByTag(privateKey: news.privateKey, keySearch: textField.text!) {[weak self] (data, error) in
+                if let data = data as? [MediaModel]{
+                    self?.listSearch = data
+                    self?.collView.reloadData()
+                }
+            }
+            
+        }
+        
+    }
+}
+extension MovieSetController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        txfView.endEditing(true)
+        return true
     }
 }
 extension MovieSetController: UICollectionViewDelegate, UICollectionViewDataSource{
@@ -38,6 +70,9 @@ extension MovieSetController: UICollectionViewDelegate, UICollectionViewDataSour
             APIService.shared.getMoreVideoPlaylist(privateKey: news.privateKey, page: page.description) {[weak self] (data, error) in
                 if let data = data as? [MediaModel]{
                     news.media += data
+                    if self?.isSearching == false{
+                        self?.listSearch = news.media
+                    }
                     self?.page += 1
                     self?.collView.reloadData()
                 }
@@ -45,12 +80,12 @@ extension MovieSetController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        news.media.count
+        listSearch.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
-        let item = news.media[indexPath.row]
+        let item = listSearch[indexPath.row]
         cell.data = item
         cell.row = indexPath.row
         cell.delegate = self
@@ -80,23 +115,23 @@ extension MovieSetController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 extension MovieSetController: Type3ItemCellDelegate{
     func didSelectViewImage(_ cell: Type3ItemCell) {
-        let count = news.media.count
+        let count = listSearch.count
         var list: [MediaModel] = []
         if count == 1{
             list = []
         } else if count == 2{
             if cell.row == 0 {
-                list.append(news.media[1])
+                list.append(listSearch[1])
             } else{
-                list.append(news.media[0])
+                list.append(listSearch[0])
             }
         } else if count >= 3 {
             if cell.row == 0{
-                list = Array(news.media[1...count-1])
+                list = Array(listSearch[1...count-1])
             } else if cell.row == count-1 {
-                list = Array(news.media[0...count - 2])
+                list = Array(listSearch[0...count - 2])
             } else{
-                list = Array(news.media[cell.row+1...count-1] + news.media[0...cell.row-1])
+                list = Array(listSearch[cell.row+1...count-1] + listSearch[0...cell.row-1])
             }
         }
         if cell.data.endTimecode != ""{

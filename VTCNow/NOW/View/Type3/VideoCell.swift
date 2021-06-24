@@ -32,11 +32,13 @@ class VideoCell: UICollectionViewCell {
     var indexPath: IndexPath!
     var item: MediaModel!{
         didSet{
-            if item.fileCode != ""{
-                NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
-               
+            if item.path != "" {
+                
+                if Array(item.path)[item.path.count - 1] == "/" {
+                    NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
+                }
             }else{
-                NotificationCenter.default.removeObserver(self)
+                NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
             }
         }
     }
@@ -72,14 +74,16 @@ class VideoCell: UICollectionViewCell {
         activityIndicatorView.centerYAnchor.constraint(equalTo: viewPlayer.centerYAnchor).isActive = true
         //
         NotificationCenter.default.addObserver(self, selector: #selector(stopVOD(_:)), name: NSNotification.Name("stopVOD"), object: nil)
-        //
-        if news.name == "Đừng bỏ lỡ" {//|| news.name == "Nổi bật"{
+        
 
-            NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
-           
-        }else{
-            NotificationCenter.default.removeObserver(self)
-        }
+        //
+//        if news.name == "Đừng bỏ lỡ" {//|| news.name == "Nổi bật"{
+//
+//            NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
+//
+//        }else{
+//            NotificationCenter.default.removeObserver(self)
+//        }
         
         btnPlay.isHidden = false
     }
@@ -97,6 +101,7 @@ class VideoCell: UICollectionViewCell {
             viewPlayer.player?.pause()
             viewPlayer.player?.replaceCurrentItem(with: nil)
         }
+        viewPlayer.player?.replaceCurrentItem(with: nil)
     }
     @objc func didSelectViewShare(_ sender: Any){
         delegate?.didSelectViewShare(self)
@@ -256,7 +261,6 @@ class VideoCell: UICollectionViewCell {
             let interval = futureDate - Date()
             if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
                 let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
-                
                 if hour <= 0 && minute <= 0 && second <= 0{
                     if item.name.contains("Trực tiếp") {
                         item.timePass = "Trực tiếp"
@@ -368,7 +372,7 @@ class VideoCell: UICollectionViewCell {
     }
 }
 
-protocol VideoCellDelegate: class {
+protocol VideoCellDelegate: AnyObject {
     func didSelectViewSetting(_ cell: VideoCell)
     func didSelectViewFullScreen(_ cell: VideoCell, _ newPlayer: AVPlayer)
     func didSelectViewCast()

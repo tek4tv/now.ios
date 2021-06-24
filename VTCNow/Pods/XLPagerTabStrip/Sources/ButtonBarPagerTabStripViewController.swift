@@ -90,7 +90,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         delegate = self
         datasource = self
     }
-
+    open override func scroll() {
+        super.scroll()
+    }
     open override func viewDidLoad() {
         super.viewDidLoad()
         

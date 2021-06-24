@@ -210,6 +210,9 @@ extension TV2Controller: UICollectionViewDelegate, UICollectionViewDataSource, U
     }
 }
 extension TV2Controller: Video2CellDelegate{
+    func scrollToTop(_ cell: Video2Cell) {
+        collView.scrollToItem(at: cell.indexPath, at: .top, animated: true)
+    }
     func didSelectBookMark(_ cell: Video2Cell) {
         
     }

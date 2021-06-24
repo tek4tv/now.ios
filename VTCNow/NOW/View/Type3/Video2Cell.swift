@@ -97,6 +97,7 @@ class Video2Cell: UICollectionViewCell {
             })
         }
         isTapping = !isTapping
+        delegate?.scrollToTop(self)
     }
     var isSliderChanging = false
     @IBAction func sliderValueChanged(_ sender: UISlider) {
@@ -139,7 +140,8 @@ class Video2Cell: UICollectionViewCell {
             viewPlayer.player?.rate = Float(speed)
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         }
-        //isPlaying = !isPlaying
+        isPlaying = !isPlaying
+        delegate?.scrollToTop(self)
     }
     func hidePlayerController(){
         self.imgShadow.isHidden = true
@@ -315,7 +317,8 @@ class Video2Cell: UICollectionViewCell {
     }
 }
 
-protocol Video2CellDelegate: class {
+protocol Video2CellDelegate: AnyObject {
+    func scrollToTop(_ cell: Video2Cell)
     func didSelectBookMark(_ cell: Video2Cell)
     func didSelectViewSetting(_ cell: Video2Cell)
     func didSelectViewFullScreen(_ cell: Video2Cell, _ newPlayer: AVPlayer)

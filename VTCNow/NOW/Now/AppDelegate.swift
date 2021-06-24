@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        Messaging.messaging().subscribe(toTopic: "all") { error in
+          print("Subscribed to weather topic")
+        }
+        NetworkMonitor.shared.startMonitoring()
         SentrySDK.start { options in
             options.dsn = "https://6b04af248940407bba9beac433db93ff@sentry.admon.com.vn/8"
             options.debug = true // Enabled debug when first installing is always helpful

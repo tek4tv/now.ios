@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180CFABC268313C9004C99C2 /* CellVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180CFABA268313C9004C99C2 /* CellVideo.swift */; };
+		180CFABD268313C9004C99C2 /* CellVideo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180CFABB268313C9004C99C2 /* CellVideo.xib */; };
+		180CFAC0268316FA004C99C2 /* CellNo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180CFABE268316FA004C99C2 /* CellNo.swift */; };
+		180CFAC1268316FA004C99C2 /* CellNo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180CFABF268316FA004C99C2 /* CellNo.xib */; };
+		18ACF0812683389500F2595C /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ACF0802683389500F2595C /* NetworkMonitor.swift */; };
 		4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */; };
 		F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2F8425EC8E170002E99C /* CommentCell.swift */; };
 		F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60E2F8525EC8E170002E99C /* CommentCell.xib */; };
@@ -197,6 +202,11 @@
 
 /* Begin PBXFileReference section */
 		11A21EDD954A85CAA9EA38BA /* Pods-NOW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOW.debug.xcconfig"; path = "Target Support Files/Pods-NOW/Pods-NOW.debug.xcconfig"; sourceTree = "<group>"; };
+		180CFABA268313C9004C99C2 /* CellVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellVideo.swift; sourceTree = "<group>"; };
+		180CFABB268313C9004C99C2 /* CellVideo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellVideo.xib; sourceTree = "<group>"; };
+		180CFABE268316FA004C99C2 /* CellNo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellNo.swift; sourceTree = "<group>"; };
+		180CFABF268316FA004C99C2 /* CellNo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellNo.xib; sourceTree = "<group>"; };
+		18ACF0802683389500F2595C /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDetailWebviewController.swift; sourceTree = "<group>"; };
 		E2A11019719C8E8CDE921ED9 /* Pods-NOW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOW.release.xcconfig"; path = "Target Support Files/Pods-NOW/Pods-NOW.release.xcconfig"; sourceTree = "<group>"; };
 		F60E2F8425EC8E170002E99C /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -505,6 +515,8 @@
 				F649FEBE26258B8C0041148E /* ClearCell.xib */,
 				F649521D2626D77900F601F6 /* NoCell.swift */,
 				F649521E2626D77900F601F6 /* NoCell.xib */,
+				180CFABE268316FA004C99C2 /* CellNo.swift */,
+				180CFABF268316FA004C99C2 /* CellNo.xib */,
 			);
 			path = Stuff;
 			sourceTree = "<group>";
@@ -675,6 +687,7 @@
 		F6507CD725C3F034002E77EC /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				18ACF0802683389500F2595C /* NetworkMonitor.swift */,
 				F6507CD825C3F041002E77EC /* Extension.swift */,
 				F6507CDB25C3F045002E77EC /* StringDateExtension.swift */,
 				F64A41DF25ECC42D0011F8B1 /* Config.swift */,
@@ -812,6 +825,8 @@
 				F6BC461326158C4200DDD828 /* ViewFullCell.xib */,
 				F6BC461C2615A8FD00DDD828 /* ViewFullItemCell.swift */,
 				F6BC461D2615A8FD00DDD828 /* ViewFullItemCell.xib */,
+				180CFABA268313C9004C99C2 /* CellVideo.swift */,
+				180CFABB268313C9004C99C2 /* CellVideo.xib */,
 			);
 			path = Type3;
 			sourceTree = "<group>";
@@ -909,7 +924,6 @@
 		F6D0C84B25C799B80097C0EC /* News */ = {
 			isa = PBXGroup;
 			children = (
-				F6560B5525EB824E009996D1 /* BookPlayerController.swift */,
 				F6D0C85325C79C5C0097C0EC /* ParentViewController.swift */,
 				F6D0C84C25C799B80097C0EC /* PopUpController.swift */,
 				F6D0C84D25C799B80097C0EC /* NewsController.swift */,
@@ -954,6 +968,7 @@
 				F64B02E025ECF0BD00AAE865 /* ListenController.swift */,
 				F64E27CB2644EA44001418A3 /* BookController.swift */,
 				F645AC5625E8E113005F3C57 /* BookCategoryController.swift */,
+				F6560B5525EB824E009996D1 /* BookPlayerController.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -969,8 +984,8 @@
 				F6507CB025C3EEFF002E77EC /* Sources */,
 				F6507CB125C3EEFF002E77EC /* Frameworks */,
 				F6507CB225C3EEFF002E77EC /* Resources */,
-				7902E69256A1A9E9D69FBE91 /* [CP] Embed Pods Frameworks */,
 				F6D04803265268F000978E0E /* ShellScript */,
+				755FB849275ED6D05B888466 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1021,6 +1036,7 @@
 				F6BC461F2615A8FD00DDD828 /* ViewFullItemCell.xib in Resources */,
 				F65FD99025C68BEC007F8D0F /* Type2ItemCell.xib in Resources */,
 				F641344026284CD100BCB777 /* Type8ItemCell.xib in Resources */,
+				180CFABD268313C9004C99C2 /* CellVideo.xib in Resources */,
 				F666BEEB25E35C950000990E /* PopUpItemCell.xib in Resources */,
 				F65FD9A725C694E2007F8D0F /* Type3ItemCell.xib in Resources */,
 				F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */,
@@ -1029,6 +1045,7 @@
 				F6CA872F25F5C07E004DF132 /* Music3Cell.xib in Resources */,
 				F6F7C4E625E8B3C9008F7A45 /* BookCell.xib in Resources */,
 				F65FD9AA25C694E2007F8D0F /* Type3Cell.xib in Resources */,
+				180CFAC1268316FA004C99C2 /* CellNo.xib in Resources */,
 				F65FD97725C672F0007F8D0F /* Type1ItemCell.xib in Resources */,
 				F69F7A19263155A8001494A9 /* NewBroadCell.xib in Resources */,
 				F655707825F883AD00E3A062 /* DailyCell.xib in Resources */,
@@ -1092,7 +1109,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7902E69256A1A9E9D69FBE91 /* [CP] Embed Pods Frameworks */ = {
+		755FB849275ED6D05B888466 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1184,6 +1201,7 @@
 				F6CB90BE25F720A70071D0BB /* UserController.swift in Sources */,
 				F649521F2626D77900F601F6 /* NoCell.swift in Sources */,
 				F65FAECB2678460E0056584D /* Video4Cell.swift in Sources */,
+				180CFAC0268316FA004C99C2 /* CellNo.swift in Sources */,
 				F6507CE025C3F2CB002E77EC /* APIService.swift in Sources */,
 				4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */,
 				F6E0586A2653C09900832382 /* PopUp3Controller.swift in Sources */,
@@ -1243,6 +1261,7 @@
 				F64E6ADA26049C22000F2A22 /* ReportModel.swift in Sources */,
 				F6BC461E2615A8FD00DDD828 /* ViewFullItemCell.swift in Sources */,
 				F64A41E025ECC42D0011F8B1 /* Config.swift in Sources */,
+				180CFABC268313C9004C99C2 /* CellVideo.swift in Sources */,
 				F65FD99325C68BEC007F8D0F /* Type2ItemCell.swift in Sources */,
 				F698933225F5FC9E00EA960A /* WatchController.swift in Sources */,
 				F6F7C4E525E8B3C9008F7A45 /* BookCell.swift in Sources */,
@@ -1251,6 +1270,7 @@
 				F6D5068E25C6A84B002BEA99 /* Type6ItemCell.swift in Sources */,
 				F674649A2616D1F4003A5593 /* ViewMore3Cell.swift in Sources */,
 				F6B82C7525F2315D009FF801 /* Music2Cell.swift in Sources */,
+				18ACF0812683389500F2595C /* NetworkMonitor.swift in Sources */,
 				F6D9B5412670BBA00070A7AA /* DatePickerController.swift in Sources */,
 				F64836B125F0D5BC00A9E878 /* MovieCell.swift in Sources */,
 				F666BEE425E35A1D0000990E /* PopUp3Controller.swift in Sources */,
@@ -1415,7 +1435,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VTC Now.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.7;
+				CURRENT_PROJECT_VERSION = 2.8;
 				DEVELOPMENT_TEAM = J3Q9S3Z487;
 				INFOPLIST_FILE = "$(SRCROOT)/NOW/Now/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1423,7 +1443,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.vtc.now;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1441,7 +1461,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VTC Now.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.7;
+				CURRENT_PROJECT_VERSION = 2.8;
 				DEVELOPMENT_TEAM = J3Q9S3Z487;
 				INFOPLIST_FILE = "$(SRCROOT)/NOW/Now/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1449,7 +1469,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.vtc.now;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -187,6 +187,30 @@ class APIService{
             }
         })
     }
+    func searchByTag(privateKey: String, keySearch: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        let json: [String : Any] = [
+            "KeySearch": keySearch,
+            "Tag": privateKey,
+            "Page":1,
+            "Size":20
+        ]
+        AF.request("https://dev.caching.tek4tv.vn/api/Video/Search", method: .post, parameters: json, encoding: JSONEncoding.default).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var listMedia: [MediaModel] = []
+                if let data = data as? [[String: Any]]{
+                    for item in data{
+                        var mediaAdd = MediaModel()
+                        mediaAdd = mediaAdd.initLoad(item)
+                        listMedia.append(mediaAdd)
+                    }
+                }
+                closure(listMedia, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
     func searchAll(keySearch: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
         let json: [String : Any] = [
             "KeySearch": keySearch
@@ -334,14 +358,18 @@ class APIService{
 //        })
 //    }
     func getMoreVideoPlaylist(privateKey: String, page: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
-        AF.request("https://ovp.tek4tv.vn/redis/v1/accounts/103e5b3a-3971-4fcb-bf44-5b15c5bbb88e/playlists/\(privateKey)/desc/20/\(page)", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+//        print("https://dev.caching.tek4tv.vn/api/Video/\(privateKey)/\(page)/20")
+        AF.request("https://dev.caching.tek4tv.vn/api/Video/\(privateKey)/\(page)/20", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let data):
-                var category = CategoryModel()
-                if let data = data as? [String: Any]{
-                    category = category.initLoad(data)
+                var list = [MediaModel]()
+                if let data = data as? [[String: Any]]{
+                    for json in data {
+                        let item = MediaModel().initLoad(json)
+                        list.append(item)
+                    }
                 }
-                closure(category.media, nil)
+                closure(list, nil)
             case .failure(let error):
                 print(error)
             }

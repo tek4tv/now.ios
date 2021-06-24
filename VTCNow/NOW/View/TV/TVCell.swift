@@ -202,6 +202,7 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
             let item = listVideos[indexPath.row - 2]
             cell.item = item
             cell.lblTitle.text = item.name
+            cell.indexPath = indexPath
             cell.lblTime.text = item.getTimePass()
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
@@ -220,6 +221,9 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
     }
 }
 extension TVCell: Video2CellDelegate{
+    func scrollToTop(_ cell: Video2Cell) {
+        collView.scrollToItem(at: cell.indexPath, at: .top, animated: true)
+    }
     func didSelectBookMark(_ cell: Video2Cell) {
         self.delegate?.didSelectBookMark(cell)
     }

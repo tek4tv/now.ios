@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (5.4.3)
-  - ExpandableLabel (0.5.2)
   - Firebase/Analytics (8.1.1):
     - Firebase/Core
   - Firebase/Core (8.1.1):
@@ -118,7 +117,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - ExpandableLabel
   - Firebase/Analytics
   - Firebase/Database
   - Firebase/Messaging
@@ -131,7 +129,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
-    - ExpandableLabel
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -162,7 +159,6 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
-  ExpandableLabel: c2fab6d27860c572d67134b30522a5917746171d
   Firebase: 4bb49ae87756034cef870fa3c4006235eb46f475
   FirebaseAnalytics: d6dd061b26a04744cb988c66e29697181152b2a3
   FirebaseCore: 389c4ce9a7cce4a7e25eb22326b4bee0050557b2
@@ -182,6 +178,6 @@ SPEC CHECKSUMS:
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 1ba98372cd85f8205249db0a1b4a72a83a47446d
+PODFILE CHECKSUM: d68a04efc49fa355911d637a3505e1e22322dd84
 
 COCOAPODS: 1.10.1

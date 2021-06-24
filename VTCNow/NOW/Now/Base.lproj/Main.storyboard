@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o6B-DR-mrs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19115.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o6B-DR-mrs">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.4"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -343,7 +343,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UUs-8h-9MW">
-                                        <rect key="frame" x="70" y="15.5" width="264" height="19.5"/>
+                                        <rect key="frame" x="70" y="0.0" width="264" height="49"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -380,6 +380,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
+                                    <constraint firstItem="ORf-Ix-QaJ" firstAttribute="top" secondItem="UUs-8h-9MW" secondAttribute="bottom" id="KFE-9n-NAK"/>
                                     <constraint firstItem="BM2-wK-qvb" firstAttribute="top" secondItem="3Nn-eR-o1o" secondAttribute="top" id="NPo-gC-Afj">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -396,11 +397,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
-                                    <constraint firstItem="UUs-8h-9MW" firstAttribute="centerY" secondItem="3Nn-eR-o1o" secondAttribute="centerY" id="qrW-wM-ami">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
+                                    <constraint firstItem="UUs-8h-9MW" firstAttribute="top" secondItem="3Nn-eR-o1o" secondAttribute="top" id="u2A-ie-w9Y"/>
                                     <constraint firstAttribute="height" constant="50" id="xNx-cT-8E2">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -745,55 +742,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6uc-es-KCb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MIv-t9-Iqb">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wH0-Wu-65J">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0Mq-Ep-G5l">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ifi-qs-CQ4">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oNV-Nv-KEh"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6uc-es-KCb" firstAttribute="top" secondItem="oNV-Nv-KEh" secondAttribute="top" id="CWh-Pz-ZWd">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="oNV-Nv-KEh" firstAttribute="bottom" secondItem="6uc-es-KCb" secondAttribute="bottom" id="Tc6-H5-HrN">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="6uc-es-KCb" firstAttribute="leading" secondItem="oNV-Nv-KEh" secondAttribute="leading" id="Z9t-DI-pm6">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="oNV-Nv-KEh" firstAttribute="trailing" secondItem="6uc-es-KCb" secondAttribute="trailing" id="eTI-mC-KHe">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
+                            <constraint firstItem="oNV-Nv-KEh" firstAttribute="bottom" secondItem="MIv-t9-Iqb" secondAttribute="bottom" id="5wI-kV-Ph6"/>
+                            <constraint firstItem="oNV-Nv-KEh" firstAttribute="trailing" secondItem="MIv-t9-Iqb" secondAttribute="trailing" id="Qjh-0x-46T"/>
+                            <constraint firstItem="MIv-t9-Iqb" firstAttribute="leading" secondItem="oNV-Nv-KEh" secondAttribute="leading" id="ave-GZ-u0A"/>
+                            <constraint firstItem="MIv-t9-Iqb" firstAttribute="top" secondItem="oNV-Nv-KEh" secondAttribute="top" id="rn9-OA-ZdP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="svT-7c-sZo"/>
                     <connections>
-                        <outlet property="collView" destination="6uc-es-KCb" id="eYa-Qo-pTq"/>
+                        <outlet property="tblView" destination="MIv-t9-Iqb" id="oTD-Xh-gl3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OPP-to-YGo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -875,8 +840,8 @@
                                             <constraint firstAttribute="height" constant="1" id="OVz-5a-ng0"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Paf-1L-bMN">
-                                        <rect key="frame" x="70" y="16" width="145" height="18.5"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Paf-1L-bMN">
+                                        <rect key="frame" x="70" y="0.0" width="324" height="49"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -890,6 +855,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="Paf-1L-bMN" firstAttribute="top" secondItem="L1P-1x-VLO" secondAttribute="top" id="30s-up-Uas"/>
+                                    <constraint firstAttribute="trailing" secondItem="Paf-1L-bMN" secondAttribute="trailing" constant="20" id="4JB-u7-stf"/>
                                     <constraint firstItem="Paf-1L-bMN" firstAttribute="leading" secondItem="PgK-lE-Mbo" secondAttribute="trailing" id="5K7-5t-fX6">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -912,12 +879,8 @@
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                     <constraint firstAttribute="bottom" secondItem="Jmi-SA-MHL" secondAttribute="bottom" id="XOu-8B-DUO"/>
+                                    <constraint firstItem="Jmi-SA-MHL" firstAttribute="top" secondItem="Paf-1L-bMN" secondAttribute="bottom" id="dCu-wb-OXc"/>
                                     <constraint firstAttribute="trailing" secondItem="Jmi-SA-MHL" secondAttribute="trailing" id="ee4-5O-9Rj"/>
-                                    <constraint firstItem="Paf-1L-bMN" firstAttribute="centerY" secondItem="L1P-1x-VLO" secondAttribute="centerY" id="gT8-re-hwV">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
                                     <constraint firstAttribute="bottom" secondItem="PgK-lE-Mbo" secondAttribute="bottom" id="w3s-1p-jZz">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -939,6 +902,10 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXX-8Y-mRk">
                                 <rect key="frame" x="0.0" y="145" width="414" height="717"/>
                             </scrollView>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8bV-42-2XR">
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="j3j-YB-fGc"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -983,11 +950,13 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstItem="8bV-42-2XR" firstAttribute="top" secondItem="L1P-1x-VLO" secondAttribute="bottom" id="e0U-st-uhl"/>
                             <constraint firstItem="BXX-8Y-mRk" firstAttribute="top" secondItem="vSi-1O-eWt" secondAttribute="bottom" id="heN-qo-sFj">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstItem="8bV-42-2XR" firstAttribute="leading" secondItem="j3j-YB-fGc" secondAttribute="leading" id="lTc-Ze-21Q"/>
                             <constraint firstItem="vSi-1O-eWt" firstAttribute="leading" secondItem="j3j-YB-fGc" secondAttribute="leading" id="pxb-9H-veL">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -998,6 +967,8 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstItem="j3j-YB-fGc" firstAttribute="bottom" secondItem="8bV-42-2XR" secondAttribute="bottom" id="tka-1J-Zxh"/>
+                            <constraint firstItem="j3j-YB-fGc" firstAttribute="trailing" secondItem="8bV-42-2XR" secondAttribute="trailing" id="u5I-48-fM4"/>
                             <constraint firstItem="Ikt-PD-Stz" firstAttribute="leading" secondItem="j3j-YB-fGc" secondAttribute="leading" id="ve1-e9-Z2T">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -1013,6 +984,8 @@
                     <connections>
                         <outlet property="buttonBarView" destination="Ikt-PD-Stz" id="WOa-Kd-Pcs"/>
                         <outlet property="containerView" destination="BXX-8Y-mRk" id="kca-am-SiW"/>
+                        <outlet property="tblSearchView" destination="8bV-42-2XR" id="UmQ-qS-Hli"/>
+                        <outlet property="txfView" destination="Paf-1L-bMN" id="THU-S9-kEQ"/>
                         <outlet property="viewBack" destination="PgK-lE-Mbo" id="0Zr-20-juA"/>
                     </connections>
                 </viewController>
@@ -1275,7 +1248,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dJb-rh-EQZ">
-                                        <rect key="frame" x="20" y="16" width="374" height="18.5"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="49"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1296,11 +1269,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
-                                    <constraint firstItem="dJb-rh-EQZ" firstAttribute="centerY" secondItem="68A-AO-Jmk" secondAttribute="centerY" id="RQ0-Kj-g09">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
+                                    <constraint firstItem="KEy-BU-c8c" firstAttribute="top" secondItem="dJb-rh-EQZ" secondAttribute="bottom" id="Rrd-fY-U3X"/>
                                     <constraint firstItem="KEy-BU-c8c" firstAttribute="leading" secondItem="68A-AO-Jmk" secondAttribute="leading" id="Tmc-8p-MqD"/>
                                     <constraint firstAttribute="trailing" secondItem="dJb-rh-EQZ" secondAttribute="trailing" constant="20" id="VCM-hz-HKl"/>
                                     <constraint firstAttribute="height" constant="50" id="WOs-ly-o1e">
@@ -1308,6 +1277,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
+                                    <constraint firstItem="dJb-rh-EQZ" firstAttribute="top" secondItem="68A-AO-Jmk" secondAttribute="top" id="dDr-fW-Ybj"/>
                                 </constraints>
                             </view>
                             <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WY3-jt-mSd">
@@ -2596,26 +2566,6 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hWs-ol-1DE">
-                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DAk-PT-wD2">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="f5B-ka-lQE">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hTN-90-W6J">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AfS-tu-jAx">
                                 <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                 <subviews>
@@ -2665,8 +2615,8 @@
                                             <constraint firstAttribute="height" constant="1" id="WUC-u2-Geu"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tkd-F1-hlt">
-                                        <rect key="frame" x="70" y="16" width="145" height="18.5"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tkd-F1-hlt">
+                                        <rect key="frame" x="70" y="0.0" width="324" height="49"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -2690,6 +2640,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
+                                    <constraint firstItem="tkd-F1-hlt" firstAttribute="top" secondItem="AfS-tu-jAx" secondAttribute="top" id="Dcu-Qi-XCz"/>
+                                    <constraint firstItem="l2z-PO-4o1" firstAttribute="top" secondItem="tkd-F1-hlt" secondAttribute="bottom" id="G7h-bC-BP4"/>
                                     <constraint firstItem="ozp-TC-CYr" firstAttribute="leading" secondItem="AfS-tu-jAx" secondAttribute="leading" id="JGy-uN-6Uv">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -2702,11 +2654,7 @@
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="l2z-PO-4o1" secondAttribute="trailing" id="SB5-RA-Fxp"/>
                                     <constraint firstAttribute="bottom" secondItem="l2z-PO-4o1" secondAttribute="bottom" id="fo5-av-cEK"/>
-                                    <constraint firstItem="tkd-F1-hlt" firstAttribute="centerY" secondItem="AfS-tu-jAx" secondAttribute="centerY" id="jLM-9R-Dl0">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="tkd-F1-hlt" secondAttribute="trailing" constant="20" id="hjj-3v-7tM"/>
                                     <constraint firstItem="l2z-PO-4o1" firstAttribute="leading" secondItem="AfS-tu-jAx" secondAttribute="leading" id="mMy-qZ-E3U"/>
                                     <constraint firstItem="ozp-TC-CYr" firstAttribute="top" secondItem="AfS-tu-jAx" secondAttribute="top" id="nia-YE-wZj">
                                         <userDefinedRuntimeAttributes>
@@ -2715,6 +2663,10 @@
                                     </constraint>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SmB-7o-JN3">
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9Aw-8S-bjy"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2725,43 +2677,27 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
-                            <constraint firstItem="9Aw-8S-bjy" firstAttribute="bottom" secondItem="hWs-ol-1DE" secondAttribute="bottom" id="RNJ-g7-iNF">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
+                            <constraint firstItem="9Aw-8S-bjy" firstAttribute="bottom" secondItem="SmB-7o-JN3" secondAttribute="bottom" id="Iaa-0o-zH0"/>
                             <constraint firstItem="AfS-tu-jAx" firstAttribute="top" secondItem="9Aw-8S-bjy" secondAttribute="top" id="SIM-c9-bGd">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstItem="9Aw-8S-bjy" firstAttribute="trailing" secondItem="SmB-7o-JN3" secondAttribute="trailing" id="SZA-xa-GzT"/>
                             <constraint firstItem="AfS-tu-jAx" firstAttribute="leading" secondItem="Vq2-IF-euq" secondAttribute="leading" id="WS9-YE-Co1">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                             <constraint firstItem="iQ5-XS-YMp" firstAttribute="centerX" secondItem="Vq2-IF-euq" secondAttribute="centerX" id="WTZ-sw-Tt4"/>
-                            <constraint firstItem="hWs-ol-1DE" firstAttribute="top" secondItem="AfS-tu-jAx" secondAttribute="bottom" id="YEK-gt-2CQ">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="hWs-ol-1DE" firstAttribute="leading" secondItem="9Aw-8S-bjy" secondAttribute="leading" id="mDQ-rx-CRB">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="9Aw-8S-bjy" firstAttribute="trailing" secondItem="hWs-ol-1DE" secondAttribute="trailing" id="nqV-0H-8l5">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
+                            <constraint firstItem="SmB-7o-JN3" firstAttribute="leading" secondItem="9Aw-8S-bjy" secondAttribute="leading" id="Zlr-vG-TIS"/>
+                            <constraint firstItem="SmB-7o-JN3" firstAttribute="top" secondItem="AfS-tu-jAx" secondAttribute="bottom" id="hof-XW-s7f"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Idk-pe-6fT"/>
                     <connections>
-                        <outlet property="collView" destination="hWs-ol-1DE" id="GWX-h4-xDR"/>
                         <outlet property="lblNotFound" destination="iQ5-XS-YMp" id="bE7-Qx-kpC"/>
+                        <outlet property="tblView" destination="SmB-7o-JN3" id="Zvg-qb-b7r"/>
                         <outlet property="txfView" destination="tkd-F1-hlt" id="uqi-4N-hMu"/>
                         <outlet property="viewBack" destination="ozp-TC-CYr" id="4nx-cs-51a"/>
                     </connections>
@@ -3851,7 +3787,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qiz-3D-3OH">
-                                        <rect key="frame" x="70" y="16" width="145" height="18.5"/>
+                                        <rect key="frame" x="70" y="0.0" width="324" height="49"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -3859,11 +3795,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="qiz-3D-3OH" firstAttribute="centerY" secondItem="nXW-hc-Ih6" secondAttribute="centerY" id="1Pg-2W-pvH">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
+                                    <constraint firstItem="A0R-mc-beP" firstAttribute="top" secondItem="qiz-3D-3OH" secondAttribute="bottom" id="0Hy-DD-ltb"/>
                                     <constraint firstItem="0zE-e4-gS1" firstAttribute="top" secondItem="nXW-hc-Ih6" secondAttribute="top" id="5XF-Vm-pfg">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -3882,6 +3814,8 @@
                                     </constraint>
                                     <constraint firstAttribute="bottom" secondItem="A0R-mc-beP" secondAttribute="bottom" id="RR6-cG-A68"/>
                                     <constraint firstItem="A0R-mc-beP" firstAttribute="leading" secondItem="nXW-hc-Ih6" secondAttribute="leading" id="SpN-LP-DWK"/>
+                                    <constraint firstAttribute="trailing" secondItem="qiz-3D-3OH" secondAttribute="trailing" constant="20" id="VUF-p3-i0h"/>
+                                    <constraint firstItem="qiz-3D-3OH" firstAttribute="top" secondItem="nXW-hc-Ih6" secondAttribute="top" id="Y58-ZA-Q7Q"/>
                                     <constraint firstItem="0zE-e4-gS1" firstAttribute="leading" secondItem="nXW-hc-Ih6" secondAttribute="leading" id="YZO-gO-IdG">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -4021,8 +3955,8 @@
                                             <constraint firstAttribute="height" constant="1" id="1ag-Yc-JYO"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EoN-Yq-Pwb">
-                                        <rect key="frame" x="70" y="16" width="145" height="18.5"/>
+                                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EoN-Yq-Pwb">
+                                        <rect key="frame" x="70" y="0.0" width="324" height="49"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -4053,12 +3987,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
+                                    <constraint firstItem="EoN-Yq-Pwb" firstAttribute="top" secondItem="BRz-FC-jqS" secondAttribute="top" id="du4-nk-feK"/>
                                     <constraint firstItem="i13-sY-fDv" firstAttribute="top" secondItem="BRz-FC-jqS" secondAttribute="top" id="hkG-zw-woz">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
-                                    <constraint firstItem="EoN-Yq-Pwb" firstAttribute="centerY" secondItem="BRz-FC-jqS" secondAttribute="centerY" id="jnh-7y-b6D">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
@@ -4068,6 +3998,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
+                                    <constraint firstItem="sy8-At-gKj" firstAttribute="top" secondItem="EoN-Yq-Pwb" secondAttribute="bottom" id="pTR-4q-BRr"/>
+                                    <constraint firstAttribute="trailing" secondItem="EoN-Yq-Pwb" secondAttribute="trailing" constant="20" id="pfG-wm-mIG"/>
                                     <constraint firstAttribute="trailing" secondItem="sy8-At-gKj" secondAttribute="trailing" id="smf-B5-cQn"/>
                                 </constraints>
                             </view>
@@ -5013,7 +4945,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9y1-Gd-I0r">
-                                        <rect key="frame" x="70" y="16" width="324" height="18.5"/>
+                                        <rect key="frame" x="70" y="0.0" width="324" height="49"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -5028,13 +4960,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="eGe-24-sVR" secondAttribute="bottom" id="Cum-Dg-DNj"/>
+                                    <constraint firstItem="9y1-Gd-I0r" firstAttribute="top" secondItem="zpU-ta-z8w" secondAttribute="top" id="FF5-lg-Kql"/>
                                     <constraint firstItem="eGe-24-sVR" firstAttribute="leading" secondItem="zpU-ta-z8w" secondAttribute="leading" id="HQG-u9-uEu"/>
+                                    <constraint firstItem="eGe-24-sVR" firstAttribute="top" secondItem="9y1-Gd-I0r" secondAttribute="bottom" id="JIa-fK-9mG"/>
                                     <constraint firstItem="OTc-FA-l5n" firstAttribute="top" secondItem="zpU-ta-z8w" secondAttribute="top" id="Mh2-Os-MEE">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
-                                    <constraint firstItem="9y1-Gd-I0r" firstAttribute="centerY" secondItem="zpU-ta-z8w" secondAttribute="centerY" id="PCi-ML-Imc">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
@@ -5176,8 +5105,8 @@
                                             <constraint firstAttribute="height" constant="1" id="6IH-ZT-lwQ"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EVf-ns-sup">
-                                        <rect key="frame" x="70" y="16" width="145" height="18.5"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EVf-ns-sup">
+                                        <rect key="frame" x="70" y="0.0" width="324" height="49"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -5197,17 +5126,14 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
+                                    <constraint firstItem="EVf-ns-sup" firstAttribute="top" secondItem="96f-0b-g0u" secondAttribute="top" id="8lD-Vh-ney"/>
                                     <constraint firstItem="skj-dQ-gvP" firstAttribute="leading" secondItem="96f-0b-g0u" secondAttribute="leading" id="J2s-ld-c1F"/>
-                                    <constraint firstItem="EVf-ns-sup" firstAttribute="centerY" secondItem="96f-0b-g0u" secondAttribute="centerY" id="SWk-9t-hH3">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
                                     <constraint firstItem="M4c-wm-VUt" firstAttribute="top" secondItem="96f-0b-g0u" secondAttribute="top" id="VyB-UD-V3a">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
+                                    <constraint firstItem="skj-dQ-gvP" firstAttribute="top" secondItem="EVf-ns-sup" secondAttribute="bottom" id="Wzd-gF-xuO"/>
                                     <constraint firstAttribute="height" constant="50" id="a9B-qV-1rH">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -5218,6 +5144,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="EVf-ns-sup" secondAttribute="trailing" constant="20" id="lPX-Z3-NTo"/>
                                     <constraint firstAttribute="bottom" secondItem="skj-dQ-gvP" secondAttribute="bottom" id="nqy-8q-36D"/>
                                     <constraint firstItem="M4c-wm-VUt" firstAttribute="leading" secondItem="96f-0b-g0u" secondAttribute="leading" id="p2v-Tn-MJt">
                                         <userDefinedRuntimeAttributes>
@@ -5261,6 +5188,7 @@
                     </view>
                     <connections>
                         <outlet property="collView" destination="jFi-3L-cVq" id="Ahc-CY-3Ll"/>
+                        <outlet property="txfView" destination="EVf-ns-sup" id="y1b-XC-STE"/>
                         <outlet property="viewBack" destination="M4c-wm-VUt" id="LaW-Bp-e2O"/>
                     </connections>
                 </viewController>
@@ -5345,8 +5273,8 @@
                                             <constraint firstAttribute="height" constant="1" id="lVo-vD-f94"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hgW-Fj-k6H">
-                                        <rect key="frame" x="70" y="16" width="145" height="18.5"/>
+                                    <textField hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hgW-Fj-k6H">
+                                        <rect key="frame" x="70" y="0.0" width="324" height="49"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -5381,16 +5309,14 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
-                                    <constraint firstItem="hgW-Fj-k6H" firstAttribute="centerY" secondItem="cUG-pp-kBc" secondAttribute="centerY" id="fC9-QL-wKm">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
+                                    <constraint firstItem="pBJ-qz-rg2" firstAttribute="top" secondItem="hgW-Fj-k6H" secondAttribute="bottom" id="bSf-Yn-ztx"/>
                                     <constraint firstItem="hgW-Fj-k6H" firstAttribute="leading" secondItem="eTV-F8-27B" secondAttribute="trailing" id="fyW-LF-Toj">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="hgW-Fj-k6H" secondAttribute="trailing" constant="20" id="gHZ-w0-GIB"/>
+                                    <constraint firstItem="hgW-Fj-k6H" firstAttribute="top" secondItem="cUG-pp-kBc" secondAttribute="top" id="mcC-3s-NzQ"/>
                                     <constraint firstItem="pBJ-qz-rg2" firstAttribute="leading" secondItem="cUG-pp-kBc" secondAttribute="leading" id="rnO-aX-HAy"/>
                                     <constraint firstAttribute="trailing" secondItem="pBJ-qz-rg2" secondAttribute="trailing" id="u3R-B7-nFc"/>
                                 </constraints>
@@ -6408,7 +6334,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yUc-ar-CTD">
-                                        <rect key="frame" x="70" y="16" width="145" height="18.5"/>
+                                        <rect key="frame" x="70" y="0.0" width="324" height="49"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -6433,17 +6359,15 @@
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="cKK-hv-i2C" secondAttribute="trailing" id="Ux7-mi-IDx"/>
+                                    <constraint firstItem="cKK-hv-i2C" firstAttribute="top" secondItem="yUc-ar-CTD" secondAttribute="bottom" id="YD9-kg-mvF"/>
+                                    <constraint firstAttribute="trailing" secondItem="yUc-ar-CTD" secondAttribute="trailing" constant="20" id="b26-Tx-tgs"/>
                                     <constraint firstItem="cKK-hv-i2C" firstAttribute="leading" secondItem="c5V-ty-Wwj" secondAttribute="leading" id="eh3-cT-ETZ"/>
-                                    <constraint firstItem="yUc-ar-CTD" firstAttribute="centerY" secondItem="c5V-ty-Wwj" secondAttribute="centerY" id="erH-xX-RuB">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
                                     <constraint firstItem="yUc-ar-CTD" firstAttribute="leading" secondItem="QnD-WV-iDD" secondAttribute="trailing" id="fzn-Nf-zUh">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
+                                    <constraint firstItem="yUc-ar-CTD" firstAttribute="top" secondItem="c5V-ty-Wwj" secondAttribute="top" id="ive-5I-gsR"/>
                                     <constraint firstItem="QnD-WV-iDD" firstAttribute="leading" secondItem="c5V-ty-Wwj" secondAttribute="leading" id="jrP-P5-jwr">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -6605,7 +6529,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập từ khoá tìm kiếm" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Gpl-gW-Q7n">
-                                        <rect key="frame" x="70" y="16" width="324" height="18.5"/>
+                                        <rect key="frame" x="70" y="0.0" width="324" height="49"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -6635,14 +6559,11 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
+                                    <constraint firstItem="kfq-VF-ACD" firstAttribute="top" secondItem="Gpl-gW-Q7n" secondAttribute="bottom" id="BnD-Uo-eXa"/>
+                                    <constraint firstItem="Gpl-gW-Q7n" firstAttribute="top" secondItem="xcX-Ab-Jms" secondAttribute="top" id="BsA-ao-FeQ"/>
                                     <constraint firstAttribute="trailing" secondItem="Gpl-gW-Q7n" secondAttribute="trailing" constant="20" id="FMd-ny-VXe"/>
                                     <constraint firstAttribute="trailing" secondItem="kfq-VF-ACD" secondAttribute="trailing" id="QDS-HY-1UM"/>
                                     <constraint firstAttribute="height" constant="50" id="Sqb-ON-YVF">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
-                                    <constraint firstItem="Gpl-gW-Q7n" firstAttribute="centerY" secondItem="xcX-Ab-Jms" secondAttribute="centerY" id="d56-Hn-Gvu">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                         </userDefinedRuntimeAttributes>

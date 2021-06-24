@@ -42,7 +42,7 @@ class Type3Cell: UICollectionViewCell {
         collView.collectionViewLayout = layout
         APIService.shared.getPlaylist(privateKey: "7d20527f-5946-4b64-a42b-c33f9a5993aa") { (data, error) in
             if let data = data as? CategoryModel{
-                if let url = URL(string: data.icon.replacingOccurrences(of: "\\", with: "/" )){
+                if let url = URL(string: data.cdn.imageDomain + data.icon.replacingOccurrences(of: "\\", with: "/" )){
                     self.imgIcon.loadImage(fromURL: url)
                 }
             }

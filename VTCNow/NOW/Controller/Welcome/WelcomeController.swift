@@ -11,27 +11,113 @@ var isOffClass = false
 class WelcomeController: UIViewController {
     @IBOutlet weak var heightLogo: NSLayoutConstraint!
     var count = 0
+    var isClickUpdate = false
+    var versionAppstore = ""
+    var versionApp = ""
+    func isUpdateAvailable() throws -> Bool {
+        guard let info = Bundle.main.infoDictionary,
+              let currentVersion = info["CFBundleShortVersionString"] as? String,
+              let identifier = info["CFBundleIdentifier"] as? String,
+              let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(identifier)") else {
+            throw VersionError.invalidBundleInfo
+        }
+        let data = try Data(contentsOf: url)
+        guard let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any] else {
+            throw VersionError.invalidResponse
+        }
+        if let result = (json["results"] as? [Any])?.first as? [String: Any], let version = result["version"] as? String {
+            print("Version: \(version)")
+            print("CurrenVersion: \(currentVersion)")
+            self.versionApp = currentVersion
+            self.versionAppstore = version
+            return version != currentVersion
+        }
+        throw VersionError.invalidResponse
+    }
+    
+    enum VersionError: Error {
+        case invalidResponse, invalidBundleInfo
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
         //heightLogo.constant = 0
-        
+    }
+    @objc func willResignActive(_ notification: Notification) {
+        if isClickUpdate {
+            APIService.shared.getRootPlaylist {[weak self] (data, error) in
+                if let data = data as? RootModel{
+                    root = data
+                    self?.load()
+                }
+            }
+        }
+    }
+    @available(iOS 12.0, *)
+    func checkNetwork(){
+        if NetworkMonitor.shared.isConnected {
+            DispatchQueue.global().async {
+                do {
+                    _ = try self.isUpdateAvailable()
+                    DispatchQueue.main.async {
+                        if self.versionApp != self.versionAppstore {
+                            let alert = UIAlertController(title: "Phiên bản VTC NOW mới", message: "Chúng tôi vừa cập nhật phiên bản mới trên Store với những cải tiến đáng kể. Bạn có muốn cập nhật phiên bản mới không", preferredStyle: UIAlertController.Style.alert)
+                            alert.addAction(UIAlertAction(title: "Cập nhật", style: .cancel, handler: { action in
+                                self.isClickUpdate = true
+                                if let url = URL(string: "itms-apps://itunes.apple.com/app/1355778168"),
+                                   UIApplication.shared.canOpenURL(url){
+                                    UIApplication.shared.open(url)
+                                }
+                            }))
+                            alert.addAction(UIAlertAction(title: "Bỏ qua", style: .destructive, handler: { action in
+                                APIService.shared.getRootPlaylist {[weak self] (data, error) in
+                                    if let data = data as? RootModel{
+                                        root = data
+                                        self?.load()
+                                    }
+                                }
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        } else {
+                            APIService.shared.getRootPlaylist {[weak self] (data, error) in
+                                if let data = data as? RootModel{
+                                    root = data
+                                    self?.load()
+                                }
+                            }
+                        }
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+                
+        } else{
+            let alert = UIAlertController(title: "Không có kết nối mạng", message: "Hãy kiểm tra lại kết nối mạng của bạn trong cài đặt", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Thử lại", style: UIAlertAction.Style.default, handler: { action in
+                self.checkNetwork()
+            }
+            ))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        // self.heightLogo.constant = 128 * scaleW
-        UIView.animate(withDuration: 0.5,
-                       delay: 0,
-                       options: [],
-                       animations: { [weak self] in
-                        self?.view.layoutIfNeeded()
-                        APIService.shared.getRootPlaylist {[weak self] (data, error) in
-                            if let data = data as? RootModel{
-                                root = data
-                                self?.load()
-                            }
-                        }
-          }, completion: nil)
-
+        if #available(iOS 12.0, *) {
+            checkNetwork()
+        } else {
+            // Fallback on earlier versions
+            UIView.animate(withDuration: 0.5,delay: 0, options: [],animations: { [weak self] in
+                self?.view.layoutIfNeeded()
+                APIService.shared.getRootPlaylist {[weak self] (data, error) in
+                    if let data = data as? RootModel{
+                        root = data
+                        self?.load()
+                    }
+                }
+            }, completion: nil)
+        }
     }
     func load(){
         let item = root.components[count]
