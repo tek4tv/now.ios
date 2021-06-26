@@ -11,6 +11,9 @@
 		180CFABD268313C9004C99C2 /* CellVideo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180CFABB268313C9004C99C2 /* CellVideo.xib */; };
 		180CFAC0268316FA004C99C2 /* CellNo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180CFABE268316FA004C99C2 /* CellNo.swift */; };
 		180CFAC1268316FA004C99C2 /* CellNo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180CFABF268316FA004C99C2 /* CellNo.xib */; };
+		1836BF5626858DC600C9591A /* SpeechToTextVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1836BF5426858DC500C9591A /* SpeechToTextVC.xib */; };
+		1836BF5726858DC600C9591A /* SpeechToTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836BF5526858DC600C9591A /* SpeechToTextVC.swift */; };
+		1892B43326847079001081A9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1892B43226847079001081A9 /* WebKit.framework */; };
 		18ACF0812683389500F2595C /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ACF0802683389500F2595C /* NetworkMonitor.swift */; };
 		4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */; };
 		F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2F8425EC8E170002E99C /* CommentCell.swift */; };
@@ -206,6 +209,9 @@
 		180CFABB268313C9004C99C2 /* CellVideo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellVideo.xib; sourceTree = "<group>"; };
 		180CFABE268316FA004C99C2 /* CellNo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellNo.swift; sourceTree = "<group>"; };
 		180CFABF268316FA004C99C2 /* CellNo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellNo.xib; sourceTree = "<group>"; };
+		1836BF5426858DC500C9591A /* SpeechToTextVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeechToTextVC.xib; sourceTree = "<group>"; };
+		1836BF5526858DC600C9591A /* SpeechToTextVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextVC.swift; sourceTree = "<group>"; };
+		1892B43226847079001081A9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		18ACF0802683389500F2595C /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDetailWebviewController.swift; sourceTree = "<group>"; };
 		E2A11019719C8E8CDE921ED9 /* Pods-NOW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOW.release.xcconfig"; path = "Target Support Files/Pods-NOW/Pods-NOW.release.xcconfig"; sourceTree = "<group>"; };
@@ -404,6 +410,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1892B43326847079001081A9 /* WebKit.framework in Frameworks */,
 				F651E74C26624DC700F6F89A /* Pods_NOW.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +421,7 @@
 		4B27C33C5FC1FD33E7C40BF2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1892B43226847079001081A9 /* WebKit.framework */,
 				FD9211FC4BEF65B0CC5B1DBD /* Pods_NOW.framework */,
 			);
 			name = Frameworks;
@@ -621,6 +629,8 @@
 				F649FECA2625981E0041148E /* TV */,
 				F69EDA87263127CF00E7122C /* User */,
 				F64BF59F25E64E7900752E80 /* SearchController.swift */,
+				1836BF5526858DC600C9591A /* SpeechToTextVC.swift */,
+				1836BF5426858DC500C9591A /* SpeechToTextVC.xib */,
 				F64CFFBB25F8AB0F002F7F6F /* SpeechToTextController.swift */,
 				F65557D7261D8C01000E8AEA /* VideoController.swift */,
 				F6D9B5402670BBA00070A7AA /* DatePickerController.swift */,
@@ -985,7 +995,7 @@
 				F6507CB125C3EEFF002E77EC /* Frameworks */,
 				F6507CB225C3EEFF002E77EC /* Resources */,
 				F6D04803265268F000978E0E /* ShellScript */,
-				755FB849275ED6D05B888466 /* [CP] Embed Pods Frameworks */,
+				4AB4FE11820842D5ADF30D64 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1060,6 +1070,7 @@
 				F65557DE261DA4ED000E8AEA /* MovieItem2Cell.xib in Resources */,
 				F698933825F5FD6D00EA960A /* WatchCell.xib in Resources */,
 				F66330732671C92600068D1C /* Banner2Cell.xib in Resources */,
+				1836BF5626858DC600C9591A /* SpeechToTextVC.xib in Resources */,
 				F649FEC026258B8C0041148E /* ClearCell.xib in Resources */,
 				F6A1885426380CD4001D2A04 /* Type9Cell.xib in Resources */,
 				F67464902616CA44003A5593 /* Type7Cell.xib in Resources */,
@@ -1109,7 +1120,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		755FB849275ED6D05B888466 /* [CP] Embed Pods Frameworks */ = {
+		4AB4FE11820842D5ADF30D64 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1182,6 +1193,7 @@
 				F67464892616C118003A5593 /* ViewMore2Cell.swift in Sources */,
 				F65FD97625C672F0007F8D0F /* Type1ItemCell.swift in Sources */,
 				F65FD97425C672F0007F8D0F /* LazyImageView.swift in Sources */,
+				1836BF5726858DC600C9591A /* SpeechToTextVC.swift in Sources */,
 				F68D46D625CA43460097B9F4 /* PlayerView.swift in Sources */,
 				F65FD97D25C674CA007F8D0F /* WeatherCell.swift in Sources */,
 				F6614707261EB0BF00FD9469 /* TVController.swift in Sources */,
@@ -1435,7 +1447,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VTC Now.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.8;
+				CURRENT_PROJECT_VERSION = 2.9;
 				DEVELOPMENT_TEAM = J3Q9S3Z487;
 				INFOPLIST_FILE = "$(SRCROOT)/NOW/Now/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1443,7 +1455,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.vtc.now;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1461,7 +1473,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VTC Now.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.8;
+				CURRENT_PROJECT_VERSION = 2.9;
 				DEVELOPMENT_TEAM = J3Q9S3Z487;
 				INFOPLIST_FILE = "$(SRCROOT)/NOW/Now/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1469,7 +1481,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.vtc.now;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

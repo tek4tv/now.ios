@@ -15,3 +15,5 @@ ${BUILT_PRODUCTS_DIR}/UPCarouselFlowLayout/UPCarouselFlowLayout.framework
 ${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework
 ${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework
 ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
+${PODS_XCFRAMEWORKS_BUILD_DIR}/MUXSDKStats/MUXSDKStats.framework/MUXSDKStats
+${PODS_XCFRAMEWORKS_BUILD_DIR}/MuxCore/MuxCore.framework/MuxCore

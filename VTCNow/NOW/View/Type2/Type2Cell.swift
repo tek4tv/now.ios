@@ -81,27 +81,27 @@ extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type2ItemCell.className, for: indexPath) as! Type2ItemCell
             cell.lblTitle.text = item.name
             cell.item = item
-            if item.timePass == "Đang phát"{
-                cell.lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
-                cell.lblTime.text = "Đang phát"
-            } else{
-                if let futureDate = item.schedule.toDate(){
-                    let interval = futureDate - Date()
-                    if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
-                        let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
-                        
-                        if hour <= 0 && minute <= 0 && second <= 0{
-                            item.timePass = "Đang phát"
-                            cell.lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
-                        } else{
-                            item.timePass = "\(timeStr)"
-                            cell.lblTime.textColor = .white
-                        }
-                    }
-                    cell.lblTime.text = item.timePass
-                    
-                }
-            }
+//            if item.timePass == "Đang phát"{
+//                cell.lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
+//                cell.lblTime.text = "Đang phát"
+//            } else{
+//                if let futureDate = item.schedule.toDate(){
+//                    let interval = futureDate - Date()
+//                    if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
+//                        let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
+//
+//                        if hour <= 0 && minute <= 0 && second <= 0{
+//                            item.timePass = "Đang phát"
+//                            cell.lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
+//                        } else{
+//                            item.timePass = "\(timeStr)"
+//                            cell.lblTime.textColor = .white
+//                        }
+//                    }
+//                    cell.lblTime.text = item.timePass
+//
+//                }
+//            }
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
             }

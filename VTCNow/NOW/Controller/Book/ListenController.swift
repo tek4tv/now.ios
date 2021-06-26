@@ -31,7 +31,7 @@ class ListenController: UIViewController {
         collSearchView.register(UINib(nibName: BookItemCell.className, bundle: nil), forCellWithReuseIdentifier: BookItemCell.className)
         
         let layout2 = UICollectionViewFlowLayout()
-        layout2.itemSize = CGSize(width: (414 - 80) / 3.01 * scaleW, height: 260 * scaleW)
+        //layout2.itemSize = CGSize(width: (414 - 80) / 3.01 * scaleW, height: 260 * scaleW)
         layout2.minimumLineSpacing = 20 * scaleW
         layout2.minimumInteritemSpacing = 0
         layout2.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)

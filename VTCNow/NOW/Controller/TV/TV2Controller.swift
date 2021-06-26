@@ -104,7 +104,7 @@ extension TV2Controller: UICollectionViewDelegate, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.row {
         case 0:
-            return CGSize(width: collView.bounds.width * scaleW, height: 0)
+            return CGSize(width: 414 * scaleW, height: 0)
         case listVideos.count + 2:
             return CGSize(width: 414 * scaleW, height: 350 * scaleW)
         default:
@@ -183,6 +183,7 @@ extension TV2Controller: UICollectionViewDelegate, UICollectionViewDataSource, U
             cell.item = item
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.getTimePass()
+            cell.indexPath = indexPath
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
             }
@@ -238,6 +239,7 @@ extension TV2Controller: Video2CellDelegate{
         if #available(iOS 13.0, *) {
             let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
             vc.player = newPlayer
+            vc.item = cell.item
             vc.listResolution = cell.listResolution
             vc.onDismiss = { () in
                 cell.viewPlayer.player = vc.viewPlayer.player

@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import MediaPlayer
+import MUXSDKStats
 @available(iOS 13.0, *)
 class FullScreenController: UIViewController {
     @IBOutlet weak var tblVolume: UITableView!
@@ -32,6 +33,7 @@ class FullScreenController: UIViewController {
     var isEnded = false
     var listResolution: [StreamResolution] = []
     var speed: Double = 1.0
+    var item = MediaModel()
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
@@ -136,11 +138,11 @@ class FullScreenController: UIViewController {
         viewPlayer.player?.play()
         isPlaying = true
         isSliderChanging = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            if self.isSliderChanging == false{
-                self.hidePlayerController()
+        _ = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false, block: {[weak self] timer in
+            if self?.isSliderChanging == false{
+                self?.hidePlayerController()
             }
-        }
+        })
     }
     @IBAction func didSelectBtnPlay(_ sender: Any) {
         if isPlaying{
@@ -236,6 +238,7 @@ class FullScreenController: UIViewController {
         listResolution = []
 
         viewPlayer.player = player
+        monitor(item)
         viewPlayer.player?.play()
         viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
@@ -245,7 +248,17 @@ class FullScreenController: UIViewController {
         addTimeObserver()
         
     }
-    
+    let playName = "iOS AVPlayer"
+    func monitor(_ item: MediaModel){
+        if item.name != "" {
+            let playerData = MUXSDKCustomerPlayerData(environmentKey: "ef1jbl3moqi50oae85po7mt05")
+            playerData?.playerName = "AVPlayer"
+            let videoData = MUXSDKCustomerVideoData()
+            videoData.videoId = item.privateID
+            videoData.videoTitle = item.name
+            MUXSDKStats.monitorAVPlayerLayer(viewPlayer.layer as! AVPlayerLayer, withPlayerName: playName, playerData: playerData!, videoData: videoData)
+        }
+    }
     func setBitRate(){
         for (index, temp) in listResolution.enumerated(){
             if index == 0, temp.isTicked {

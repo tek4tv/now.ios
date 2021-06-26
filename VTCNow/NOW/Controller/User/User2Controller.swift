@@ -267,6 +267,7 @@ extension User2Controller: VideoCellDelegate{
         if #available(iOS 13.0, *) {
             let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
             vc.player = newPlayer
+            vc.item = cell.item
             vc.listResolution = cell.listResolution
             vc.onDismiss = { () in
                 cell.viewPlayer.player = vc.viewPlayer.player

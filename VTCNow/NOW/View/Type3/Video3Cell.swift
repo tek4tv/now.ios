@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MUXSDKStats
 import AVFoundation
 
 class Video3Cell: UICollectionViewCell {
@@ -27,7 +28,7 @@ class Video3Cell: UICollectionViewCell {
     var delegate: Video3CellDelegate!
     
     var indexPath: IndexPath!
-    var item: Any!
+    var item: ChannelModel!
     var timeObserver: Any?
     var isCare = false
     var isPlaying = true
@@ -76,8 +77,19 @@ class Video3Cell: UICollectionViewCell {
             viewPlayer.player?.pause()
             viewPlayer.player?.replaceCurrentItem(with: nil)
         }
-        
     }
+    let playName = "iOS AVPlayer"
+    func monitor(_ item: ChannelModel,_ avPlayerLayer: AVPlayerLayer){
+        if item.name != "" {
+            let playerData = MUXSDKCustomerPlayerData(environmentKey: "ef1jbl3moqi50oae85po7mt05")
+            playerData?.playerName = "AVPlayer"
+            let videoData = MUXSDKCustomerVideoData()
+            videoData.videoId = ids[item.name]
+            videoData.videoTitle = item.name
+            MUXSDKStats.monitorAVPlayerLayer(avPlayerLayer, withPlayerName: playName, playerData: playerData!, videoData: videoData)
+        }
+    }
+
     @objc func playerDidFinishPlaying(note: NSNotification){
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         isPlaying = false
@@ -124,11 +136,11 @@ class Video3Cell: UICollectionViewCell {
         viewPlayer.player?.play()
         isPlaying = true
         isSliderChanging = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            if self.isSliderChanging == false{
-                self.hidePlayerController()
+        _ = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false, block: {[weak self] timer in
+            if self?.isSliderChanging == false{
+                self?.hidePlayerController()
             }
-        }
+        })
     }
     @IBAction func didSelectBtnPlay(_ sender: Any) {
         if isPlaying{
@@ -145,7 +157,6 @@ class Video3Cell: UICollectionViewCell {
             viewPlayer.player?.rate = Float(speed)
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         }
-        //isPlaying = !isPlaying
     }
     func hidePlayerController(){
         self.imgShadow.isHidden = true
@@ -229,49 +240,50 @@ class Video3Cell: UICollectionViewCell {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
         listResolution = []
-        if item is ChannelModel{
-            if let item = item as? ChannelModel {
-                if let url = URL(string: item.url[0].link){
-                    StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
-                        switch result {
-                        case .success(let playlist):
-                            self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
-                            self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
-                            self?.listResolution[0].isTicked = true
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        }
-                    }
-                    viewPlayer.player  = AVPlayer(url: url)
-                    viewPlayer.player?.play()
-                    viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-                    viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+//        if item is ChannelModel{
+//            if let item = item as? ChannelModel {
+        if let url = URL(string: item.url[0].link){
+            StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
+                switch result {
+                case .success(let playlist):
+                    self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
+                    self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
+                    self?.listResolution[0].isTicked = true
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
-        } else {
-            if let item = item as? MediaModel {
-                if let url = URL(string: item.path){
-                    if item.fileCode != "" || item.path.contains(".m3u8"){
-                        StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
-                            switch result {
-                            case .success(let playlist):
-                                self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
-                                self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
-                                self?.listResolution[0].isTicked = true
-                            case .failure(let error):
-                                print(error.localizedDescription)
-                            }
-                        }
-                    }
-                    viewPlayer.player  = AVPlayer(url: url)
-                    viewPlayer.player?.play()
-                    viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-                    viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
-                    NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-                    addTimeObserver()
-                }
-            }
+            viewPlayer.player  = AVPlayer(url: url)
+            monitor(item, viewPlayer.layer as! AVPlayerLayer)
+            viewPlayer.player?.play()
+            viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
+            viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         }
+//            }
+//        } else {
+//            if let item = item as? MediaModel {
+//                if let url = URL(string: item.path){
+//                    if item.fileCode != "" || item.path.contains(".m3u8"){
+//                        StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
+//                            switch result {
+//                            case .success(let playlist):
+//                                self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
+//                                self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
+//                                self?.listResolution[0].isTicked = true
+//                            case .failure(let error):
+//                                print(error.localizedDescription)
+//                            }
+//                        }
+//                    }
+//                    viewPlayer.player  = AVPlayer(url: url)
+//                    viewPlayer.player?.play()
+//                    viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
+//                    viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+//                    NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+//                    addTimeObserver()
+//                }
+//            }
+//        }
         isPlaying = true
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         
@@ -319,7 +331,7 @@ class Video3Cell: UICollectionViewCell {
     }
 }
 
-protocol Video3CellDelegate: class {
+protocol Video3CellDelegate: AnyObject {
     func didSelectBookMark(_ cell: Video3Cell)
     func didSelectViewSetting(_ cell: Video3Cell)
     func didSelectViewFullScreen(_ cell: Video3Cell, _ newPlayer: AVPlayer)

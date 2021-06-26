@@ -168,11 +168,11 @@ class MusicPlayerController: UIViewController{
         viewPlayer.player?.play()
         isPlaying = true
         isSliderChanging = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            if self.isSliderChanging == false{
-                self.hidePlayerController()
+        _ = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false, block: {[weak self] timer in
+            if self?.isSliderChanging == false{
+                self?.hidePlayerController()
             }
-        }
+        })
     }
     @IBAction func didSelectBtnPlay(_ sender: Any) {
         if isPlaying{

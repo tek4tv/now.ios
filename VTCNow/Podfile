@@ -6,15 +6,16 @@ target 'NOW' do
   use_frameworks!
 
   # Pods for NOW
-	pod 'Alamofire'
+  pod 'Alamofire'
   pod 'XLPagerTabStrip'
   pod 'Kingfisher', '~> 6.0'
   pod 'MarqueeLabel'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
   pod 'Firebase/Messaging'
-#  pod 'Google-Mobile-Ads-SDK', '~> 7.69'
-#  pod 'GoogleAds-IMA-iOS-SDK', '~> 3.11.4'
+  #  pod 'Google-Mobile-Ads-SDK', '~> 7.69'
+  #  pod 'GoogleAds-IMA-iOS-SDK', '~> 3.11.4'
   pod "UPCarouselFlowLayout"
   pod 'Sentry', :git => 'https://github.com/getsentry/sentry-cocoa.git', :tag => '6.2.1'
+  pod 'Mux-Stats-AVPlayer', '~>2.0' 
 end

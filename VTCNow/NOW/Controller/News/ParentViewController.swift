@@ -109,7 +109,8 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             cell.viewPlayer.player?.replaceCurrentItem(with: nil)
         }
     }
-    override func scroll() {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
         let count = tblSearchView.visibleCells.count
         if count == 2{
             let id0 = tblSearchView.indexPath(for: tblSearchView.visibleCells[0])!
@@ -156,6 +157,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         }
 
     }
+
 }
 extension ParentViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
@@ -260,6 +262,7 @@ extension ParentViewController: CellVideoDelegate{
         if #available(iOS 13.0, *) {
             let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
             vc.player = newPlayer
+            vc.item = cell.item
             vc.listResolution = cell.listResolution
             vc.onDismiss = { () in
                 cell.viewPlayer.player = vc.viewPlayer.player

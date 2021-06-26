@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import MUXSDKStats
 class CellVideo: UITableViewCell {
     
     @IBOutlet weak var imgThumb: LazyImageView!
@@ -169,11 +170,11 @@ class CellVideo: UITableViewCell {
         viewPlayer.player?.play()
         isPlaying = true
         isSliderChanging = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {[weak self] in
+        _ = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false, block: {[weak self] timer in
             if self?.isSliderChanging == false{
                 self?.hidePlayerController()
             }
-        }
+        })
     }
     @IBAction func didSelectBtnPlay(_ sender: Any) {
         if isPlaying{
@@ -261,6 +262,7 @@ class CellVideo: UITableViewCell {
     override func prepareForReuse() {
         imgThumb.image = nil
         lblTime.text = ""
+        lblCountDown.text = ""
         lblTime.textColor = .lightGray
         viewPlayer.player?.pause()
         viewPlayer.player?.replaceCurrentItem(with: nil)
@@ -274,6 +276,9 @@ class CellVideo: UITableViewCell {
                 if hour <= 0 && minute <= 0 && second <= 0{
                     viewPlayer.player?.play()
                     isOn = true
+                    lblCountDown.isHidden = true
+                    imgShadow.isHidden = true
+                    imgThumb.isHidden = true
                     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.init("countDownTimer2"), object: nil)
                 } else{
                     item.timePass = "\(timeStr)"
@@ -288,6 +293,7 @@ class CellVideo: UITableViewCell {
         }
     }
     func isOnLive() -> Bool{
+        print(item.name)
         if let futureDate = item.schedule.toDate(){
             let interval = futureDate - Date()
             if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
@@ -317,7 +323,7 @@ class CellVideo: UITableViewCell {
         catch {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
-        activityIndicatorView.startAnimating()
+        //activityIndicatorView.startAnimating()
         listResolution = []
         var link = ""
         if item.path != "" {
@@ -343,6 +349,7 @@ class CellVideo: UITableViewCell {
             }
             
         }
+        viewPlayer.player?.automaticallyWaitsToMinimizeStalling = true
         viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
@@ -354,7 +361,15 @@ class CellVideo: UITableViewCell {
             viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: .zero)
         }
     }
-    
+    let playName = "iOS AVPlayer"
+    func monitor(_ item: MediaModel){ 
+        let playerData = MUXSDKCustomerPlayerData(environmentKey: "ef1jbl3moqi50oae85po7mt05")
+        playerData?.playerName = "AVPlayer"
+        let videoData = MUXSDKCustomerVideoData()
+        videoData.videoId = item.privateID
+        videoData.videoTitle = item.name
+        MUXSDKStats.monitorAVPlayerLayer(viewPlayer.layer as! AVPlayerLayer, withPlayerName: playName, playerData: playerData!, videoData: videoData)
+    }
     func setBitRate(){
         for (index, temp) in listResolution.enumerated(){
             if index == 0, temp.isTicked {

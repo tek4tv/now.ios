@@ -79,20 +79,23 @@ class HighLight2Controller: UIViewController {
             
             self.listSearch = news.media
             isSearching = false
+            tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+            tblView.reloadData()
+
         } else {
             self.listSearch = []
             isSearching = true
             APIService.shared.searchByTag(privateKey: news.privateKey, keySearch: textField.text!) {[weak self] (data, error) in
                 if let data = data as? [MediaModel]{
                     self?.listSearch = data
-                    self?.tblView.reloadData()
                     self?.tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                    self?.tblView.reloadData()
                 }
             }
             
         }
-        
     }
+
 }
 extension HighLight2Controller: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
@@ -101,90 +104,6 @@ extension HighLight2Controller: UITextFieldDelegate {
     }
 }
 
-extension HighLight2Controller: CellVideoDelegate{
-    func didSelectViewCast() {
-        
-    }
-    
-    func didSelectViewSetting(_ cell: CellVideo) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
-        vc.modalPresentationStyle = .custom
-        vc.modalTransitionStyle = .crossDissolve
-        vc.listResolution = cell.listResolution
-        vc.speed = cell.speed
-        vc.onComplete = { list in
-            cell.listResolution = list
-            cell.setBitRate()
-        }
-        vc.onTickedSpeed = { value in
-            cell.speed = value
-            cell.setSpeed()
-        }
-        present(vc, animated: true, completion: nil)
-    }
-    
-    func didSelectViewFullScreen(_ cell: CellVideo, _ newPlayer: AVPlayer) {
-        if #available(iOS 13.0, *) {
-            let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
-            vc.player = newPlayer
-            vc.listResolution = cell.listResolution
-            vc.onDismiss = { () in
-                cell.viewPlayer.player = vc.viewPlayer.player
-                vc.player = nil
-                cell.viewPlayer.player?.play()
-                cell.isPlaying = true
-                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
-            }
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
-        } else {
-            let vc = PlayerViewController()
-            vc.player = newPlayer
-            vc.videoGravity = .resizeAspect
-            vc.onDismiss = { () in
-                cell.viewPlayer.player = vc.player
-                vc.player = nil
-                cell.viewPlayer.player?.play()
-                cell.isPlaying = true
-                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
-            }
-            present(vc, animated: true) {
-                vc.player?.play()
-                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
-            }
-        }
-    }
-    
-    func didSelectViewShare(_ cell: CellVideo) {
-        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
-            return
-        }
-        let itemsToShare = [url]
-        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-        ac.popoverPresentationController?.sourceView = self.view
-        self.present(ac, animated: true)
-    }
-    
-    func didSelectViewBookmark(_ cell: CellVideo) {
-        
-    }
-    
-    func didFinish() {
-        if self.indexPath.row < news.media.count - 1 {
-            tblView.scrollToRow(at: IndexPath(row: self.indexPath.row + 1, section: 0), at: .top, animated: true)
-        }
-        
-    }
-    
-    func scrollToTop(_ cell: CellVideo) {
-        tblView.scrollToRow(at: cell.indexPath, at: .top, animated: true)
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-    }
-    
-}
 extension HighLight2Controller: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listSearch.count + 2
@@ -232,6 +151,7 @@ extension HighLight2Controller: UITableViewDelegate, UITableViewDataSource, UISc
                     
                     cell.viewPlayer.player = AVPlayer(url: url)
                     if cell.isOn {
+                        cell.monitor(item)
                         cell.viewPlayer.player?.play()
                         cell.imgThumb.isHidden = true
                     } else {
@@ -267,7 +187,7 @@ extension HighLight2Controller: UITableViewDelegate, UITableViewDataSource, UISc
             APIService.shared.getMoreVideoPlaylist(privateKey: news.privateKey, page: page.description) {[weak self] (data, error) in
                 if let data = data as? [MediaModel]{
                     news.media += data
-                    if self?.isSearching == true {
+                    if self?.isSearching == false {
                         self?.listSearch = news.media
                     }
                     self?.page += 1
@@ -325,7 +245,92 @@ extension HighLight2Controller: UITableViewDelegate, UITableViewDataSource, UISc
         
     }
 }
-
+extension HighLight2Controller: CellVideoDelegate{
+    func didSelectViewCast() {
+        
+    }
+    
+    func didSelectViewSetting(_ cell: CellVideo) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp2Controller.className) as! PopUp2Controller
+        vc.modalPresentationStyle = .custom
+        vc.modalTransitionStyle = .crossDissolve
+        vc.listResolution = cell.listResolution
+        vc.speed = cell.speed
+        vc.onComplete = { list in
+            cell.listResolution = list
+            cell.setBitRate()
+        }
+        vc.onTickedSpeed = { value in
+            cell.speed = value
+            cell.setSpeed()
+        }
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func didSelectViewFullScreen(_ cell: CellVideo, _ newPlayer: AVPlayer) {
+        if #available(iOS 13.0, *) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
+            vc.player = newPlayer
+            vc.item = cell.item
+            vc.listResolution = cell.listResolution
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.viewPlayer.player
+                vc.player = nil
+                cell.monitor(cell.item)
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        } else {
+            let vc = PlayerViewController()
+            vc.player = newPlayer
+            vc.videoGravity = .resizeAspect
+            vc.onDismiss = { () in
+                cell.viewPlayer.player = vc.player
+                vc.player = nil
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+            present(vc, animated: true) {
+                vc.player?.play()
+                vc.addObserver(self, forKeyPath: #keyPath(UIViewController.view.frame), options: [.old, .new], context: nil)
+            }
+        }
+    }
+    
+    func didSelectViewShare(_ cell: CellVideo) {
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
+            return
+        }
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
+    }
+    
+    func didSelectViewBookmark(_ cell: CellVideo) {
+        
+    }
+    
+    func didFinish() {
+        if self.indexPath.row < news.media.count - 1 {
+            tblView.scrollToRow(at: IndexPath(row: self.indexPath.row + 1, section: 0), at: .top, animated: true)
+        }
+        
+    }
+    
+    func scrollToTop(_ cell: CellVideo) {
+        tblView.scrollToRow(at: cell.indexPath, at: .top, animated: true)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+    }
+    
+}
 //extension HighLight2Controller: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout{
 //
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {

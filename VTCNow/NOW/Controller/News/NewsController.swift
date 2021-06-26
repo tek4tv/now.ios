@@ -168,9 +168,8 @@ extension NewsController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
             if let url = URL(string: item.path){
                 
                 cell.viewPlayer.player  = AVPlayer(url: url)
-                //cell.viewPlayer.player?.automaticallyWaitsToMinimizeStalling = false
-                cell.viewPlayer.player?.playImmediately(atRate: 1.0)
-                //                cell.viewPlayer.player?.play()
+                cell.monitor(item)
+                cell.viewPlayer.player?.play()
                 cell.setup()
                 
             }
@@ -264,6 +263,7 @@ extension NewsController: CellVideoDelegate{
         if #available(iOS 13.0, *) {
             let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
             vc.player = newPlayer
+            vc.item = cell.item
             vc.listResolution = cell.listResolution
             vc.onDismiss = { () in
                 cell.viewPlayer.player = vc.viewPlayer.player
