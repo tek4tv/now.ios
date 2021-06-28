@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import MUXSDKStats
 class VideoController: UIViewController{
     
     override func didReceiveMemoryWarning() {
@@ -206,6 +207,14 @@ class VideoController: UIViewController{
             }
         })
     }
+    func monitor(_ item: MediaModel){
+        let playerData = MUXSDKCustomerPlayerData(environmentKey: environmentKey)
+        playerData?.playerName = "AVPlayer"
+        let videoData = MUXSDKCustomerVideoData()
+        videoData.videoId = item.privateID
+        videoData.videoTitle = item.name
+        MUXSDKStats.monitorAVPlayerLayer(viewPlayer.layer as! AVPlayerLayer, withPlayerName: "iOS AVPlayer", playerData: playerData!, videoData: videoData)
+    }
     @IBAction func didSelectBtnPlay(_ sender: Any) {
         if isPlaying{
             viewPlayer.player?.pause()
@@ -328,9 +337,8 @@ class VideoController: UIViewController{
             }
             
             viewPlayer.player  = AVPlayer(url: url)
-            //viewPlayer.player?.automaticallyWaitsToMinimizeStalling = false
-            viewPlayer.player?.playImmediately(atRate: 1.0)
-//            viewPlayer.player?.play()
+            monitor(item)
+            viewPlayer.player?.play()
             viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
             viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
             NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
@@ -421,6 +429,7 @@ class VideoController: UIViewController{
         if #available(iOS 13.0, *) {
             let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
             vc.player = newPlayer
+            vc.item = item
             vc.listResolution = self.listResolution
             vc.onDismiss = {[weak self] in
                 self?.viewPlayer.player = vc.player

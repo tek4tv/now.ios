@@ -29,3 +29,6 @@ var numberToShowAd = 6
 let DEVICE_WIDTH = UIScreen.main.bounds.width
 let DEVICE_HEIGHT = UIScreen.main.bounds.height
 let IS_IPAD = UIDevice.current.userInterfaceIdiom == .pad
+
+// MUX Stats
+let environmentKey = "ef1jbl3moqi50oae85po7mt05"

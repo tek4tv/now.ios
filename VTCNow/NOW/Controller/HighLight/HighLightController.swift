@@ -726,6 +726,7 @@ extension HighLightController: HashTagCellDelegate{
                 let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
                 news.media = data
                 vc.isPushByHashTag = true
+                vc.isLoadMore = false
                 navigationController?.pushViewController(vc, animated: false)
             }
         }

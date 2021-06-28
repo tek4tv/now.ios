@@ -41,7 +41,7 @@ extension HashTagCell: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let label = UILabel(frame: .zero)
         label.text = listData[indexPath.row].keyWord
-        label.font = UIFont(name: "Roboto-Medium", size: 18 * scaleW)
+        label.font = UIFont(name: "Roboto-Regular", size: 18 * scaleW)
         label.sizeToFit()
         return CGSize(width: label.frame.width + 10 * scaleW, height: 35 * scaleW)
     }
@@ -57,6 +57,6 @@ extension HashTagCell: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
 }
-protocol HashTagCellDelegate: class {
+protocol HashTagCellDelegate: AnyObject {
     func didSelectItemAt(_ word: String)
 }

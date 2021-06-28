@@ -78,15 +78,14 @@ class Video3Cell: UICollectionViewCell {
             viewPlayer.player?.replaceCurrentItem(with: nil)
         }
     }
-    let playName = "iOS AVPlayer"
-    func monitor(_ item: ChannelModel,_ avPlayerLayer: AVPlayerLayer){
+    func monitor(_ item: ChannelModel){
         if item.name != "" {
-            let playerData = MUXSDKCustomerPlayerData(environmentKey: "ef1jbl3moqi50oae85po7mt05")
+            let playerData = MUXSDKCustomerPlayerData(environmentKey: environmentKey)
             playerData?.playerName = "AVPlayer"
             let videoData = MUXSDKCustomerVideoData()
             videoData.videoId = ids[item.name]
             videoData.videoTitle = item.name
-            MUXSDKStats.monitorAVPlayerLayer(avPlayerLayer, withPlayerName: playName, playerData: playerData!, videoData: videoData)
+            MUXSDKStats.monitorAVPlayerLayer(viewPlayer.layer as! AVPlayerLayer, withPlayerName: "iOS AVPlayer", playerData: playerData!, videoData: videoData)
         }
     }
 
@@ -254,7 +253,7 @@ class Video3Cell: UICollectionViewCell {
                 }
             }
             viewPlayer.player  = AVPlayer(url: url)
-            monitor(item, viewPlayer.layer as! AVPlayerLayer)
+            monitor(item)
             viewPlayer.player?.play()
             viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
             viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)

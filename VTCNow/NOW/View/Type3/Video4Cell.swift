@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import MUXSDKStats
 
 class Video4Cell: UICollectionViewCell {
 
@@ -26,7 +27,7 @@ class Video4Cell: UICollectionViewCell {
     var delegate: Video4CellDelegate!
     
     var indexPath: IndexPath!
-    var item: Any!
+    var item: ChannelModel!
     var timeObserver: Any?
     var isCare = false
     var isPlaying = true
@@ -70,6 +71,16 @@ class Video4Cell: UICollectionViewCell {
             viewPlayer.player?.replaceCurrentItem(with: nil)
         }
         
+    }
+    func monitor(_ item: ChannelModel){
+        if item.name != "" {
+            let playerData = MUXSDKCustomerPlayerData(environmentKey: environmentKey)
+            playerData?.playerName = "AVPlayer"
+            let videoData = MUXSDKCustomerVideoData()
+            videoData.videoId = ids[item.name]
+            videoData.videoTitle = item.name
+            MUXSDKStats.monitorAVPlayerLayer(viewPlayer.layer as! AVPlayerLayer, withPlayerName: "iOS AVPlayer", playerData: playerData!, videoData: videoData)
+        }
     }
     @objc func playerDidFinishPlaying(note: NSNotification){
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
@@ -222,49 +233,50 @@ class Video4Cell: UICollectionViewCell {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
         listResolution = []
-        if item is ChannelModel{
-            if let item = item as? ChannelModel {
-                if let url = URL(string: item.url[0].link){
-                    StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
-                        switch result {
-                        case .success(let playlist):
-                            self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
-                            self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
-                            self?.listResolution[0].isTicked = true
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        }
-                    }
-                    viewPlayer.player  = AVPlayer(url: url)
-                    viewPlayer.player?.play()
-                    viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-                    viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+//        if item is ChannelModel{
+//            if let item = item as? ChannelModel {
+        if let url = URL(string: item.url[0].link){
+            StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
+                switch result {
+                case .success(let playlist):
+                    self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
+                    self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
+                    self?.listResolution[0].isTicked = true
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
-        } else {
-            if let item = item as? MediaModel {
-                if let url = URL(string: item.path){
-                    if item.fileCode != "" || item.path.contains(".m3u8"){
-                        StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
-                            switch result {
-                            case .success(let playlist):
-                                self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
-                                self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
-                                self?.listResolution[0].isTicked = true
-                            case .failure(let error):
-                                print(error.localizedDescription)
-                            }
-                        }
-                    }
-                    viewPlayer.player  = AVPlayer(url: url)
-                    viewPlayer.player?.play()
-                    viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-                    viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
-                    NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
-                    addTimeObserver()
-                }
-            }
+            viewPlayer.player  = AVPlayer(url: url)
+            monitor(item)
+            viewPlayer.player?.play()
+            viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
+            viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         }
+//            }
+//        } else {
+//            if let item = item as? MediaModel {
+//                if let url = URL(string: item.path){
+//                    if item.fileCode != "" || item.path.contains(".m3u8"){
+//                        StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
+//                            switch result {
+//                            case .success(let playlist):
+//                                self?.listResolution = StreamHelper.shared.getStreamResolutions(from: playlist)
+//                                self?.listResolution.insert(StreamResolution(maxBandwidth: 0, averageBandwidth: 0, resolution: CGSize(width: 854.0, height: 480.0)), at: 0)
+//                                self?.listResolution[0].isTicked = true
+//                            case .failure(let error):
+//                                print(error.localizedDescription)
+//                            }
+//                        }
+//                    }
+//                    viewPlayer.player  = AVPlayer(url: url)
+//                    viewPlayer.player?.play()
+//                    viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
+//                    viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+//                    NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+//                    addTimeObserver()
+//                }
+//            }
+//        }
         isPlaying = true
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         
@@ -312,7 +324,7 @@ class Video4Cell: UICollectionViewCell {
     }
 }
 
-protocol Video4CellDelegate: class {
+protocol Video4CellDelegate: AnyObject {
     func didSelectBookMark(_ cell: Video4Cell)
     func didSelectViewSetting(_ cell: Video4Cell)
     func didSelectViewFullScreen(_ cell: Video4Cell, _ newPlayer: AVPlayer)

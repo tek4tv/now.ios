@@ -300,6 +300,7 @@ extension TV2Controller: Video3CellDelegate{
         if #available(iOS 13.0, *) {
             let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
             vc.player = newPlayer
+            vc.item1 = cell.item
             vc.listResolution = cell.listResolution
             vc.onDismiss = { () in
                 cell.viewPlayer.player = vc.viewPlayer.player
@@ -373,6 +374,7 @@ extension TV2Controller: Video4CellDelegate{
         if #available(iOS 13.0, *) {
             let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
             vc.player = newPlayer
+            vc.item1 = cell.item
             vc.listResolution = cell.listResolution
             vc.onDismiss = { () in
                 cell.viewPlayer.player = vc.viewPlayer.player

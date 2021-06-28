@@ -1962,45 +1962,18 @@
                                     </constraint>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6Md-xo-rnB">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JyL-1g-ccx">
                                 <rect key="frame" x="0.0" y="94" width="414" height="768"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UlL-Pz-U4v">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bdN-Qe-xIa">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="pcJ-j9-7Vf">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="e8v-cU-a5t"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="e8v-cU-a5t" firstAttribute="trailing" secondItem="6Md-xo-rnB" secondAttribute="trailing" id="NcT-Kt-DCI">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="6Md-xo-rnB" firstAttribute="top" secondItem="Z7a-DF-zGp" secondAttribute="bottom" id="Zcg-Lm-WIF">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
-                            <constraint firstItem="e8v-cU-a5t" firstAttribute="bottom" secondItem="6Md-xo-rnB" secondAttribute="bottom" id="pmR-6F-ERd">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
+                            <constraint firstItem="JyL-1g-ccx" firstAttribute="top" secondItem="Z7a-DF-zGp" secondAttribute="bottom" id="EtV-1U-Xhb"/>
+                            <constraint firstItem="e8v-cU-a5t" firstAttribute="bottom" secondItem="JyL-1g-ccx" secondAttribute="bottom" id="OAi-LU-Ngj"/>
+                            <constraint firstItem="e8v-cU-a5t" firstAttribute="trailing" secondItem="JyL-1g-ccx" secondAttribute="trailing" id="b7B-DA-qBM"/>
+                            <constraint firstItem="JyL-1g-ccx" firstAttribute="leading" secondItem="e8v-cU-a5t" secondAttribute="leading" id="pi8-1L-5nC"/>
                             <constraint firstItem="Z7a-DF-zGp" firstAttribute="top" secondItem="e8v-cU-a5t" secondAttribute="top" id="sGr-lb-1O9">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -2016,16 +1989,11 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
-                            <constraint firstItem="6Md-xo-rnB" firstAttribute="leading" secondItem="e8v-cU-a5t" secondAttribute="leading" id="yzM-Lb-cE0">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </constraint>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collView" destination="6Md-xo-rnB" id="ch7-CF-egC"/>
                         <outlet property="lblTitle" destination="OfH-H5-r4W" id="8XE-Wv-KXD"/>
+                        <outlet property="tblView" destination="JyL-1g-ccx" id="Y4E-QQ-JlI"/>
                         <outlet property="viewBack" destination="fNz-FF-i6V" id="wLE-jF-YYa"/>
                         <outlet property="viewEdit" destination="dyD-6F-oVU" id="TQW-H3-ooA"/>
                     </connections>

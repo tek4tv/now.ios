@@ -61,7 +61,7 @@ class WelcomeController: UIViewController {
                     _ = try self.isUpdateAvailable()
                     DispatchQueue.main.async {
                         if self.versionApp != self.versionAppstore {
-                            let alert = UIAlertController(title: "Phiên bản VTC NOW mới", message: "Hãy cập nhật ứng dựng để có trải nghiệm tốt nhất", preferredStyle: UIAlertController.Style.alert)
+                            let alert = UIAlertController(title: "Phiên bản VTC NOW mới", message: "Hãy cập nhật ứng dụng để có trải nghiệm tốt nhất", preferredStyle: UIAlertController.Style.alert)
                             alert.addAction(UIAlertAction(title: "Cập nhật", style: .cancel, handler: { action in
                                 self.isClickUpdate = true
                                 if let url = URL(string: "itms-apps://itunes.apple.com/app/1355778168"),

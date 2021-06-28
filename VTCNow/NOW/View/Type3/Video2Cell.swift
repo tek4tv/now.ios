@@ -7,7 +7,7 @@
 
 import UIKit
 import AVFoundation
-
+import MUXSDKStats
 class Video2Cell: UICollectionViewCell {
 
     @IBOutlet weak var imgThumb: LazyImageView!
@@ -240,6 +240,7 @@ class Video2Cell: UICollectionViewCell {
                 }
             }
             viewPlayer.player  = AVPlayer(url: url)
+            monitor(item)
             viewPlayer.player?.play()
             viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
             viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
@@ -250,7 +251,14 @@ class Video2Cell: UICollectionViewCell {
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         
     }
-    
+    func monitor(_ item: MediaModel){
+        let playerData = MUXSDKCustomerPlayerData(environmentKey: environmentKey)
+        playerData?.playerName = "AVPlayer"
+        let videoData = MUXSDKCustomerVideoData()
+        videoData.videoId = item.privateID
+        videoData.videoTitle = item.name
+        MUXSDKStats.monitorAVPlayerLayer(viewPlayer.layer as! AVPlayerLayer, withPlayerName: "iOS AVPlayer", playerData: playerData!, videoData: videoData)
+    }
     func setBitRate(){
         for (index, temp) in listResolution.enumerated(){
             if index == 0, temp.isTicked {

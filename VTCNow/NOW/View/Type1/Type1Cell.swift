@@ -92,8 +92,9 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
             }
+            cell.item = item
             cell.lblTitle.text = item.name
-            cell.lblTime.text = item.timePass
+            //cell.lblTime.text = item.timePass
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DotCell.className, for: indexPath) as! DotCell

@@ -34,6 +34,7 @@ class FullScreenController: UIViewController {
     var listResolution: [StreamResolution] = []
     var speed: Double = 1.0
     var item = MediaModel()
+    var item1 = ChannelModel()
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
@@ -238,7 +239,11 @@ class FullScreenController: UIViewController {
         listResolution = []
 
         viewPlayer.player = player
-        monitor(item)
+        if item.name != ""{
+            monitor(item)
+        } else{
+            monitor(item1)
+        }
         viewPlayer.player?.play()
         viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
@@ -251,10 +256,20 @@ class FullScreenController: UIViewController {
     let playName = "iOS AVPlayer"
     func monitor(_ item: MediaModel){
         if item.name != "" {
-            let playerData = MUXSDKCustomerPlayerData(environmentKey: "ef1jbl3moqi50oae85po7mt05")
+            let playerData = MUXSDKCustomerPlayerData(environmentKey: environmentKey)
             playerData?.playerName = "AVPlayer"
             let videoData = MUXSDKCustomerVideoData()
             videoData.videoId = item.privateID
+            videoData.videoTitle = item.name
+            MUXSDKStats.monitorAVPlayerLayer(viewPlayer.layer as! AVPlayerLayer, withPlayerName: playName, playerData: playerData!, videoData: videoData)
+        }
+    }
+    func monitor(_ item: ChannelModel){
+        if item1.name != "" {
+            let playerData = MUXSDKCustomerPlayerData(environmentKey: environmentKey)
+            playerData?.playerName = "AVPlayer"
+            let videoData = MUXSDKCustomerVideoData()
+            videoData.videoId = ids[item.name]
             videoData.videoTitle = item.name
             MUXSDKStats.monitorAVPlayerLayer(viewPlayer.layer as! AVPlayerLayer, withPlayerName: playName, playerData: playerData!, videoData: videoData)
         }

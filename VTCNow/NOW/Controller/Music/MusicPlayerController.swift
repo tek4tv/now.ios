@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import MUXSDKStats
 class MusicPlayerController: UIViewController{
     @IBOutlet weak var collView: UICollectionView!
     
@@ -189,6 +190,14 @@ class MusicPlayerController: UIViewController{
         }
         isPlaying = !isPlaying
     }
+    func monitor(_ item: MediaModel){
+        let playerData = MUXSDKCustomerPlayerData(environmentKey: environmentKey)
+        playerData?.playerName = "AVPlayer"
+        let videoData = MUXSDKCustomerVideoData()
+        videoData.videoId = item.privateID
+        videoData.videoTitle = item.name
+        MUXSDKStats.monitorAVPlayerLayer(viewPlayer.layer as! AVPlayerLayer, withPlayerName: "iOS AVPlayer", playerData: playerData!, videoData: videoData)
+    }
     @IBAction func didSelectBtnNext(_ sender: Any) {
         listData.append(item)
         item = listData[0]
@@ -284,6 +293,7 @@ class MusicPlayerController: UIViewController{
             }
             
             viewPlayer.player  = AVPlayer(url: url)
+            monitor(item)
             viewPlayer.player?.play()
             viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
             viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
@@ -359,6 +369,7 @@ class MusicPlayerController: UIViewController{
         if #available(iOS 13.0, *) {
             let vc = storyboard?.instantiateViewController(withIdentifier: FullScreenController.className) as! FullScreenController
             vc.player = newPlayer
+            vc.item = item
             vc.listResolution = self.listResolution
             vc.onDismiss = {[weak self] in
                 self?.viewPlayer.player = vc.player

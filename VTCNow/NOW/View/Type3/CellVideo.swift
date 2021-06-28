@@ -361,14 +361,13 @@ class CellVideo: UITableViewCell {
             viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: .zero)
         }
     }
-    let playName = "iOS AVPlayer"
     func monitor(_ item: MediaModel){ 
-        let playerData = MUXSDKCustomerPlayerData(environmentKey: "ef1jbl3moqi50oae85po7mt05")
+        let playerData = MUXSDKCustomerPlayerData(environmentKey: environmentKey)
         playerData?.playerName = "AVPlayer"
         let videoData = MUXSDKCustomerVideoData()
         videoData.videoId = item.privateID
         videoData.videoTitle = item.name
-        MUXSDKStats.monitorAVPlayerLayer(viewPlayer.layer as! AVPlayerLayer, withPlayerName: playName, playerData: playerData!, videoData: videoData)
+        MUXSDKStats.monitorAVPlayerLayer(viewPlayer.layer as! AVPlayerLayer, withPlayerName: "iOS AVPlayer", playerData: playerData!, videoData: videoData)
     }
     func setBitRate(){
         for (index, temp) in listResolution.enumerated(){
