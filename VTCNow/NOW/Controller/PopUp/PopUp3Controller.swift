@@ -20,7 +20,7 @@ class PopUp3Controller: UIViewController {
         super.viewDidLoad()
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: PopUpItemCell.className, bundle: nil), forCellWithReuseIdentifier: PopUpItemCell.className)
+        collView.register(UINib(nibName: PopUpItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: PopUpItemCell.reuseIdentifier)
         // Do any additional setup after loading the view.
         let layout = UICollectionViewFlowLayout()
         
@@ -48,7 +48,7 @@ extension PopUp3Controller: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopUpItemCell.className, for: indexPath) as! PopUpItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopUpItemCell.reuseIdentifier, for: indexPath) as! PopUpItemCell
         let item = listResolution[indexPath.row]
         cell.lblTitle.text = Int(item.resolution.height).description + "p"
         if indexPath.row == 0{

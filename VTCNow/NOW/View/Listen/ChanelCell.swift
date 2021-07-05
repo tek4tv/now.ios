@@ -8,7 +8,7 @@
 import UIKit
 
 class ChanelCell: UITableViewCell {
-
+    static let reuseIdentifier = "ChanelCell"
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
     override func awakeFromNib() {

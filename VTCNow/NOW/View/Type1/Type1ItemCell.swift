@@ -7,7 +7,7 @@
 
 import UIKit
 class Type1ItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Type1ItemCell"
     @IBOutlet weak var thumbImage: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
@@ -30,6 +30,7 @@ class Type1ItemCell: UICollectionViewCell {
     override func prepareForReuse() {
         thumbImage.image = #imageLiteral(resourceName: "placeHolderImage")
         lblTime.text = ""
+        lblTime.textColor = .lightGray
     }
     func isOnLive() -> Bool{
         if let futureDate = item.schedule.toDate(){

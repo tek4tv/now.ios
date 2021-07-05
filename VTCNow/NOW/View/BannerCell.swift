@@ -8,7 +8,7 @@
 import UIKit
 
 class BannerCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "BannerCell"
     @IBOutlet weak var imgThumb: LazyImageView!
     var delegate: BannerCellDelegate!
     override func awakeFromNib() {
@@ -21,6 +21,6 @@ class BannerCell: UICollectionViewCell {
         delegate?.didSelectImage()
     }
 }
-protocol BannerCellDelegate: class{
+protocol BannerCellDelegate: Type3Cell{
     func didSelectImage()
 }

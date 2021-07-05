@@ -25,8 +25,8 @@ class User2Controller: UIViewController {
         // Initialization code
         tblView.delegate = self
         tblView.dataSource = self
-        tblView.register(UINib(nibName: CellVideo.className, bundle: nil), forCellReuseIdentifier: CellVideo.className)
-        tblView.register(UINib(nibName: CellNo.className, bundle: nil), forCellReuseIdentifier: CellNo.className)
+        tblView.register(UINib(nibName: CellVideo.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CellVideo.reuseIdentifier)
+        tblView.register(UINib(nibName: CellNo.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CellNo.reuseIdentifier)
         tblView.estimatedRowHeight = 370 * scaleW
         tblView.rowHeight = UITableView.automaticDimension
         
@@ -45,7 +45,7 @@ class User2Controller: UIViewController {
     }
     func cellForRow(_ indexPath: IndexPath) -> CellVideo? {
         guard let cell = tblView.cellForRow(at: indexPath) as? CellVideo else{
-            return tblView.dequeueReusableCell(withIdentifier: CellVideo.className, for: indexPath) as? CellVideo
+            return tblView.dequeueReusableCell(withIdentifier: CellVideo.reuseIdentifier, for: indexPath) as? CellVideo
         }
         return cell
     }
@@ -112,13 +112,13 @@ extension User2Controller: UITableViewDelegate, UITableViewDataSource, UIScrollV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellNo.className, for: indexPath) as! CellNo
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellNo.reuseIdentifier, for: indexPath) as! CellNo
             return cell
         case news.media.count + 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellNo.className, for: indexPath) as! CellNo
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellNo.reuseIdentifier, for: indexPath) as! CellNo
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellVideo.className, for: indexPath) as! CellVideo
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellVideo.reuseIdentifier, for: indexPath) as! CellVideo
             
             let item = news.media[indexPath.row - 1]
             if news.name == "Đừng bỏ lỡ"{
@@ -153,7 +153,7 @@ extension User2Controller: UITableViewDelegate, UITableViewDataSource, UIScrollV
                     if cell.isOn {
                         cell.monitor(item)
                         cell.viewPlayer.player?.play()
-                        cell.imgThumb.isHidden = true
+//                        cell.imgThumb.isHidden = true
                     } else {
                         cell.imgThumb.isHidden = false
                     }

@@ -7,9 +7,10 @@
 
 import UIKit
 class MovieItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "MovieItemCell"
     @IBOutlet weak var thumbImage: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var lblCountry: UILabel!
     @IBOutlet weak var viewImage: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -17,5 +18,6 @@ class MovieItemCell: UICollectionViewCell {
     }
     override func prepareForReuse() {
         thumbImage.image = #imageLiteral(resourceName: "placeHolderImage")
+        lblCountry.text = ""
     }
 }

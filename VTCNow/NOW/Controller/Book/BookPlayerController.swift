@@ -35,19 +35,22 @@ class BookPlayerController: UIViewController {
     var listData: [MediaModel] = []
     var isNovel = false
     let activityIndicatorView1: UIActivityIndicatorView = {
-        let aiv = UIActivityIndicatorView(style: .gray)
+        let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
         aiv.startAnimating()
         return aiv
     }()
     let activityIndicatorView2: UIActivityIndicatorView = {
-        let aiv = UIActivityIndicatorView(style: .gray)
+        let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
         aiv.startAnimating()
         return aiv
     }()
     let activityIndicatorView3: UIActivityIndicatorView = {
-        let aiv = UIActivityIndicatorView(style: .gray)
+        let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
         aiv.translatesAutoresizingMaskIntoConstraints = false
         aiv.startAnimating()
         return aiv
@@ -58,13 +61,14 @@ class BookPlayerController: UIViewController {
         slider.setThumbImage(UIImage(named: "ic_circle2"), for: .highlighted)
         playAudio()
         
-        
+        lblTitle.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectTitle(_:))))
+        lblAuthor.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectTitle(_:))))
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnBack(_:))))
         viewShare.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewShare(_:))))
         //
         NotificationCenter.default.post(name: NSNotification.Name("StopPlayVideo"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didStopBook(_:)), name: NSNotification.Name("StopPlayBook"), object: nil)
-        setupRemoteTransportControls()
+//        setupRemoteTransportControls()
         animation()
         btnList.isUserInteractionEnabled = false
         btnList.addSubview(activityIndicatorView1)
@@ -103,25 +107,31 @@ class BookPlayerController: UIViewController {
 //                    self?.activityIndicatorView3.stopAnimating()
 //                }
 //            }
-            APIService.shared.getRelatedEpisode(code: data.endTimecode) {[weak self]  (data, error) in
-                if let list = data as? [MediaModel]{
-                    self?.listData = list
-                    if let Self1 = self {
-                        Self1.listData = Self1.listData.reversed()
-                        for (index, book) in Self1.listData.enumerated() {
-                            if book.episode == self?.data.episode {
-                                self?.idPlaying = index
+            if data.endTimecode == "" {
+                btnList.isUserInteractionEnabled = true
+                activityIndicatorView1.stopAnimating()
+                activityIndicatorView2.stopAnimating()
+                activityIndicatorView3.stopAnimating()
+            }else {
+                APIService.shared.getRelatedEpisode(code: data.endTimecode) {[weak self]  (data, error) in
+                    if let list = data as? [MediaModel]{
+                        self?.listData = list
+                        if let Self1 = self {
+                            Self1.listData = Self1.listData.reversed()
+                            for (index, book) in Self1.listData.enumerated() {
+                                if book.episode == self?.data.episode {
+                                    self?.idPlaying = index
+                                }
                             }
                         }
                     }
-
-
                     self?.btnList.isUserInteractionEnabled = true
                     self?.activityIndicatorView1.stopAnimating()
                     self?.activityIndicatorView2.stopAnimating()
                     self?.activityIndicatorView3.stopAnimating()
                 }
             }
+            
         }
         
     }
@@ -139,25 +149,41 @@ class BookPlayerController: UIViewController {
         }
     }
     @objc func didStopBook(_ notification: Notification){
+        NotificationCenter.default.removeObserver(self)
         if let player = player{
             player.pause()
+            player.replaceCurrentItem(with: nil)
+            if let timeObserver = timeObserver {
+                player.removeTimeObserver(timeObserver)
+                self.timeObserver = nil
+            }
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
             isPlaying = false
         }
-        UIApplication.shared.endReceivingRemoteControlEvents()
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [:]
+//        UIApplication.shared.endReceivingRemoteControlEvents()
+//        MPNowPlayingInfoCenter.default().nowPlayingInfo = [:]
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.shared.endReceivingRemoteControlEvents()
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [:]
+//        UIApplication.shared.endReceivingRemoteControlEvents()
+//        MPNowPlayingInfoCenter.default().nowPlayingInfo = [:]
+    }
+    @objc func didSelectTitle(_ sender: Any){
+        didSelectList(Any.self)
     }
     @objc func didSelectBtnBack(_ sender: Any) {
+        NotificationCenter.default.removeObserver(self)
         navigationController?.popViewController(animated: false)
         if self.isPlaying {
-            self.pause()
+//            self.pause()
             self.isPlaying = false
             self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
+        }
+        player.pause()
+        player.replaceCurrentItem(with: nil)
+        if let timeObserver = timeObserver {
+            player.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
         }
     }
     @objc func didSelectViewShare(_ sender: Any){
@@ -211,7 +237,7 @@ class BookPlayerController: UIViewController {
         
     }
     func playAudio(){
-        if let url = URL(string: data.path){
+        if let url = URL(string: data.path.replacingOccurrences(of: "\\", with: "/")){
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [])
             }
@@ -240,83 +266,83 @@ class BookPlayerController: UIViewController {
             lblDuration.text = getTimeString(from: (player.currentItem?.asset.duration)!)
             lblAuthor.text = data.author
         }
-        setupNowPlaying()
+//        setupNowPlaying()
     }
-    func setupRemoteTransportControls() {
-        // Get the shared MPRemoteCommandCenter
-        let commandCenter = MPRemoteCommandCenter.shared()
-        
-        // Add handler for Play Command
-        commandCenter.playCommand.addTarget { [unowned self] event in
-            
-            if !self.isPlaying {
-                self.play()
-                self.isPlaying = true
-                self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE nghe"), for: .normal)
-                return .success
-            }
-            return .commandFailed
-        }
+//    func setupRemoteTransportControls() {
+//        // Get the shared MPRemoteCommandCenter
+//        let commandCenter = MPRemoteCommandCenter.shared()
+//
+//        // Add handler for Play Command
+//        commandCenter.playCommand.addTarget { [unowned self] event in
+//
+//            if !self.isPlaying {
+//                self.play()
+//                self.isPlaying = true
+//                self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE nghe"), for: .normal)
+//                return .success
+//            }
+//            return .commandFailed
+//        }
+//
+//        // Add handler for Pause Command
+//        commandCenter.pauseCommand.addTarget { [unowned self] event in
+//
+//            if self.isPlaying {
+//                self.pause()
+//                self.isPlaying = false
+//                self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
+//                return .success
+//            }
+//            return .commandFailed
+//        }
+//        commandCenter.previousTrackCommand.addTarget{ [unowned self] event in
+//            self.didSelectBtnPrevious(Any.self)
+//            self.setupNowPlaying()
+//            return .success
+//        }
+//        commandCenter.nextTrackCommand.addTarget{ [unowned self] event in
+//            self.didSelectBtnNext(Any.self)
+//            self.setupNowPlaying()
+//            return .success
+//        }
+//    }
+//    func setupNowPlaying() {
+//        // Define Now Playing Info
+//        guard let player = player else {
+//            return
+//        }
+//        var nowPlayingInfo = [String : Any]()
+//        nowPlayingInfo[MPMediaItemPropertyTitle] = data.name
+//        nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: self.squareImage.image!.size) { size in
+//            return #imageLiteral(resourceName: "logo")
+//        }
+//        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentTime
+//        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = player.currentItem?.duration
+//        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player.rate
+//
+//        // Set the metadata
+//        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+//    }
+//    func play() {
+//        player.play()
+//        updateNowPlaying(isPause: false)
+//    }
+//
+//    func pause() {
+//        player.pause()
+//        updateNowPlaying(isPause: true)
+//    }
 
-        // Add handler for Pause Command
-        commandCenter.pauseCommand.addTarget { [unowned self] event in
-        
-            if self.isPlaying {
-                self.pause()
-                self.isPlaying = false
-                self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
-                return .success
-            }
-            return .commandFailed
-        }
-        commandCenter.previousTrackCommand.addTarget{ [unowned self] event in
-            self.didSelectBtnPrevious(Any.self)
-            self.setupNowPlaying()
-            return .success
-        }
-        commandCenter.nextTrackCommand.addTarget{ [unowned self] event in
-            self.didSelectBtnNext(Any.self)
-            self.setupNowPlaying()
-            return .success
-        }
-    }
-    func setupNowPlaying() {
-        // Define Now Playing Info
-        guard let player = player else {
-            return
-        }
-        var nowPlayingInfo = [String : Any]()
-        nowPlayingInfo[MPMediaItemPropertyTitle] = data.name
-        nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: self.squareImage.image!.size) { size in
-            return #imageLiteral(resourceName: "logo")
-        }
-        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentTime
-        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = player.currentItem?.duration
-        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player.rate
-
-        // Set the metadata
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-    }
-    func play() {
-        player.play()
-        updateNowPlaying(isPause: false)
-    }
-
-    func pause() {
-        player.pause()
-        updateNowPlaying(isPause: true)
-    }
-
-    func updateNowPlaying(isPause: Bool) {
-        // Define Now Playing Info
-        var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo!
-
-        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentTime
-        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = isPause ? 0 : 1
-
-        // Set the metadata
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
-    }
+//    func updateNowPlaying(isPause: Bool) {
+//        // Define Now Playing Info
+//        var nowPlayingInfo = MPNowPlayingInfoCenter.default().nowPlayingInfo!
+//
+//        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentTime
+//        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = isPause ? 0 : 1
+//
+//        // Set the metadata
+//        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+//    }
     @objc func playerDidFinishPlaying(note: NSNotification){
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
         player.pause()

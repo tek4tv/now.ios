@@ -7,17 +7,17 @@
 
 import UIKit
 import AVFoundation
-//import GoogleMobileAds
-class Type3Cell: UICollectionViewCell {
 
+class Type3Cell: UICollectionViewCell {
+    static let reuseIdentifier = "Type3Cell"
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
-//    var delegate: Type3CellDelegate!
-//    var admobNativeAds: GADUnifiedNativeAd?
     @IBOutlet weak var viewBanner: UIView!
     @IBOutlet weak var imgIcon: LazyImageView!
     @IBOutlet weak var viewLine: UIView!
     @IBOutlet weak var bottomLine: NSLayoutConstraint!
+    fileprivate var player: AVPlayer? = nil
+    fileprivate var isSetPlayer = false
     var data = CategoryModel(){
         didSet{
             lblTitle.text = data.name
@@ -32,10 +32,10 @@ class Type3Cell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type3ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.className)
-        collView.register(UINib(nibName: BannerCell.className, bundle: nil), forCellWithReuseIdentifier: BannerCell.className)
-        collView.register(UINib(nibName: ViewFullCell.className, bundle: nil), forCellWithReuseIdentifier: ViewFullCell.className)
-        collView.register(UINib(nibName: VideoCell.className, bundle: nil), forCellWithReuseIdentifier: VideoCell.className)
+        collView.register(UINib(nibName: Type3ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.reuseIdentifier)
+        collView.register(UINib(nibName: BannerCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: BannerCell.reuseIdentifier)
+        collView.register(UINib(nibName: ViewFullCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: ViewFullCell.reuseIdentifier)
+        collView.register(UINib(nibName: VideoCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: VideoCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 25 * scaleW
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 25 * scaleW, right: 20 * scaleW)
@@ -59,6 +59,14 @@ class Type3Cell: UICollectionViewCell {
         } else{
             
         }
+        //
+        if videoHot.media.count >= 1 {
+            let item = videoHot.media[0]
+            if let url = URL(string: item.path.replacingOccurrences(of: "\\", with: "/")){
+                player = AVPlayer(url: url)
+            }
+        }
+        
     }
     @objc func didSelectBanner(_ sender: Any){
         delegate?.didSelectBannerClass()
@@ -105,7 +113,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.reuseIdentifier, for: indexPath) as! Type3ItemCell
             let item = data.media[indexPath.row]
             cell.data = item
             cell.row = indexPath.row
@@ -118,12 +126,12 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             }
             return cell
         case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewFullCell.className, for: indexPath) as! ViewFullCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewFullCell.reuseIdentifier, for: indexPath) as! ViewFullCell
             
             cell.delegate = self
             return cell
         case 2:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.reuseIdentifier, for: indexPath) as! Type3ItemCell
             let item = data.media[indexPath.row + 6]
             cell.data = item
             cell.row = indexPath.row + 6
@@ -136,7 +144,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             }
             return cell
         case 3:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCell.className, for: indexPath) as! BannerCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCell.reuseIdentifier, for: indexPath) as! BannerCell
             cell.delegate = self
             if let url = URL(string: banner.icon.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
@@ -145,7 +153,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             return cell
             
         case 4:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.reuseIdentifier, for: indexPath) as! Type3ItemCell
             let item = data.media[indexPath.row + 12]
             cell.data = item
             cell.row = indexPath.row + 12
@@ -158,7 +166,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             }
             return cell
         case 5:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.className, for: indexPath) as! VideoCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.reuseIdentifier, for: indexPath) as! VideoCell
             cell.lblTitle.font = UIFont(name: "Roboto-Regular", size: 17 * scaleW)
             cell.lblTime.font = UIFont(name: "Roboto-Regular", size: 14 * scaleW)
             if videoHot.media.count >= 1 {
@@ -167,13 +175,27 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
                 cell.delegate = self
                 cell.lblTitle.text = item.name
                 cell.lblTime.text = item.timePass
+                if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                    cell.imgThumb.loadImage(fromURL: url)
+                }
+                if let temp = UserDefaults.standard.value(forKey: item.privateID) as? Double, temp > 0.0{
+                    let time: CMTime = CMTimeMake(value: Int64(temp * 1000), timescale: 1000)
+                    player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: .zero)
+                }
+                
+                if let _ = URL(string: item.path.replacingOccurrences(of: "\\", with: "/")){
+     
+//                        cell.viewPlayer.player?.replaceCurrentItem(with: nil)
+                        cell.viewPlayer.player = player
+                        isSetPlayer = true
+                        cell.setup()
+      
 
-                if let url = URL(string: item.path){
-                    
-                    cell.viewPlayer.player = AVPlayer(url: url)
-                    cell.setup()
+
+
                     cell.activityIndicatorView.stopAnimating()
                 }
+                
             }else{
                 cell.lblTime.text = ""
                 cell.lblTitle.text = ""
@@ -182,7 +204,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.reuseIdentifier, for: indexPath) as! Type3ItemCell
             let item = data.media[indexPath.row + 18]
             cell.data = item
             cell.row = indexPath.row + 18
@@ -318,7 +340,7 @@ extension Type3Cell: VideoCellDelegate{
     }
 }
 
-protocol Type3CellDelegate: class{
+protocol Type3CellDelegate: HighLightController{
     func didSelectViewShare(_ cell: Type3ItemCell)
     func didSelectViewImage(_ cell: Type3ItemCell)
     func didSelectViewShare(_ cell: VideoCell)

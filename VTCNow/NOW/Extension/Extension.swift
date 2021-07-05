@@ -10,7 +10,7 @@ import AVKit
 
 let scaleH = UIScreen.main.bounds.height / 896
 let scaleW = UIScreen.main.bounds.width / 414
-
+let scaleFont = (UIScreen.main.bounds.width * UIScreen.main.bounds.height) / (414 * 896)
 extension NSObject {
     var className: String {
         return String(describing: type(of: self))
@@ -187,7 +187,7 @@ extension UITextView{
     @IBInspectable var myAutoFontSize: Bool{
         get{ true }
         set {
-            self.font = self.font?.withSize(self.font!.pointSize * scaleH)
+            self.font = self.font?.withSize(self.font!.pointSize * scaleFont)
         }
     }
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 class Music3Cell: UICollectionViewCell {
+    static let reuseIdentifier = "Music3Cell"
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     

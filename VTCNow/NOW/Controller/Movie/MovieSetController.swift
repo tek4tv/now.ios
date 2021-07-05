@@ -22,7 +22,7 @@ class MovieSetController: UIViewController {
         // Do any additional setup after loading the view.
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type3ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.className)
+        collView.register(UINib(nibName: Type3ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: (414 - 60) / 2.01 * scaleW, height: 180 * scaleW)
         layout.minimumLineSpacing = 20 * scaleW
@@ -84,7 +84,7 @@ extension MovieSetController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.reuseIdentifier, for: indexPath) as! Type3ItemCell
         let item = listSearch[indexPath.row]
         cell.data = item
         cell.row = indexPath.row
@@ -137,10 +137,17 @@ extension MovieSetController: Type3ItemCellDelegate{
         if cell.data.endTimecode != ""{
             APIService.shared.getRelatedEpisode(code: cell.data.endTimecode) {[weak self] (list1, error) in
                 if let list1 = list1 as? [MediaModel] {
-                    let vc = self?.storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
-                    vc.item = cell.data
-                    vc.listData = list1
-                    self?.navigationController?.pushViewController(vc, animated: false)
+                    if list1.isEmpty{
+                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+                        vc.item = cell.data
+                        vc.listData = list
+                        self?.navigationController?.pushViewController(vc, animated: false)
+                    } else{
+                        let vc = self?.storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+                        vc.item = cell.data
+                        vc.listData = list1
+                        self?.navigationController?.pushViewController(vc, animated: false)
+                    }
                 }
             }
         } else{

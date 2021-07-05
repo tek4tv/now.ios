@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19115.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,14 +16,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="Type7Cell" customModule="NOW" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="310"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="310"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sách hay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSg-8L-nwj">
-                        <rect key="frame" x="20" y="25" width="81" height="22"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sách hay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSg-8L-nwj">
+                        <rect key="frame" x="20" y="25" width="85.5" height="25"/>
                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="21"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -32,7 +32,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="TTL-p2-bsc">
-                        <rect key="frame" x="0.0" y="70" width="414" height="129"/>
+                        <rect key="frame" x="0.0" y="69" width="414" height="240"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QkL-Wd-hyv">
                             <size key="itemSize" width="128" height="128"/>
@@ -42,7 +42,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cii-ZY-12L">
-                        <rect key="frame" x="20" y="199" width="374" height="1"/>
+                        <rect key="frame" x="20" y="309" width="374" height="1"/>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="Mor-V9-y0K">
@@ -77,27 +77,22 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
+                <constraint firstItem="TTL-p2-bsc" firstAttribute="top" secondItem="aSg-8L-nwj" secondAttribute="bottom" constant="19" id="5Tt-Az-MSy">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
                 <constraint firstAttribute="bottom" secondItem="Cii-ZY-12L" secondAttribute="bottom" id="6mS-L7-JDb">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="aSg-8L-nwj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="25" id="CEM-aK-o7X">
+                <constraint firstItem="aSg-8L-nwj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="IBQ-w9-rcG">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstItem="TTL-p2-bsc" firstAttribute="top" secondItem="aSg-8L-nwj" secondAttribute="bottom" constant="20" id="CHf-f9-ys4">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </constraint>
-                <constraint firstItem="aSg-8L-nwj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="He7-Jk-nf5">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </constraint>
-                <constraint firstItem="ded-zT-1p0" firstAttribute="centerY" secondItem="aSg-8L-nwj" secondAttribute="centerY" id="XC8-zJ-Bv0">
+                <constraint firstItem="ded-zT-1p0" firstAttribute="centerY" secondItem="aSg-8L-nwj" secondAttribute="centerY" id="Kqu-FO-1b1">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -113,6 +108,11 @@
                     </userDefinedRuntimeAttributes>
                 </constraint>
                 <constraint firstAttribute="trailing" secondItem="TTL-p2-bsc" secondAttribute="trailing" id="kE9-mi-UhH">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </constraint>
+                <constraint firstItem="aSg-8L-nwj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="25" id="mB9-b1-7fW">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>

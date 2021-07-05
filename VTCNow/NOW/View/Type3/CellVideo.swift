@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 import MUXSDKStats
 class CellVideo: UITableViewCell {
-    
+    static let reuseIdentifier = "CellVideo"
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
@@ -62,7 +62,8 @@ class CellVideo: UITableViewCell {
     var speed: Double = 1.0
     
     let activityIndicatorView: UIActivityIndicatorView = {
-        let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        let aiv = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
         aiv.translatesAutoresizingMaskIntoConstraints = false
         //aiv.startAnimating()
         return aiv
@@ -222,7 +223,9 @@ class CellVideo: UITableViewCell {
         }
         if keyPath == "timeControlStatus"{
             if (viewPlayer.player?.timeControlStatus == .playing) {
+                
                 activityIndicatorView.stopAnimating()
+                imgThumb.isHidden = true
                 //player is playing
             }
             else if (viewPlayer.player?.timeControlStatus == .paused) {
@@ -334,7 +337,7 @@ class CellVideo: UITableViewCell {
         }else{
             link = item.fileCode
         }
-        if let url = URL(string: link){
+        if let url = URL(string: link.replacingOccurrences(of: "\\", with: "/")){
             if link.contains(".m3u8"){
                 StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
                     switch result {

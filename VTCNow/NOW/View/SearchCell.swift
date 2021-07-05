@@ -8,7 +8,7 @@
 import UIKit
 
 class SearchCell: UITableViewCell {
-
+    static let reuseIdentifier = "SearchCell"
     @IBOutlet weak var viewFillText: UIView!
     @IBOutlet weak var lblName: UILabel!
     var delegate: SearchCellDelegate!
@@ -23,6 +23,6 @@ class SearchCell: UITableViewCell {
     }
     
 }
-protocol SearchCellDelegate: class {
+protocol SearchCellDelegate: SearchController {
     func didSelectViewFillText(_ text: String)
 }

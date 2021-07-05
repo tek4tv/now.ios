@@ -35,12 +35,12 @@ class TVController: UIViewController {
         super.viewDidLoad()
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: TVCell.className, bundle: nil), forCellWithReuseIdentifier: TVCell.className)
-        collView.register(UINib(nibName: NoCell.className, bundle: nil), forCellWithReuseIdentifier: NoCell.className)
+        collView.register(UINib(nibName: TVCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: TVCell.reuseIdentifier)
+        collView.register(UINib(nibName: NoCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: NoCell.reuseIdentifier)
         let layout = UPCarouselFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 300 * scaleW, height: 800 * scaleH)
-        layout.spacingMode = .fixed(spacing: 10.0)
+        layout.itemSize = CGSize(width: 330 * scaleW, height: 800 * scaleH)
+        layout.spacingMode = .fixed(spacing: 20.0)
         layout.sideItemScale = 0.8
         layout.sideItemAlpha = 1.0
         collView.collectionViewLayout = layout
@@ -92,6 +92,9 @@ extension TVController: UICollectionViewDelegate, UICollectionViewDataSource, UI
                     collView.reloadData()
                 }
             }
+            if id0.row == lives.count || id1.row == lives.count {
+                collView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: true)
+            }
         }
         if count == 3{
             var list: [IndexPath] = []
@@ -122,10 +125,10 @@ extension TVController: UICollectionViewDelegate, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.row {
         case lives.count:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.reuseIdentifier, for: indexPath) as! NoCell
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVCell.className, for: indexPath) as! TVCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVCell.reuseIdentifier, for: indexPath) as! TVCell
             let item = lives[indexPath.row]
             cell.data = item
             cell.collView.reloadData()

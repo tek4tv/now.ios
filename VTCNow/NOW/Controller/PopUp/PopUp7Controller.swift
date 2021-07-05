@@ -28,7 +28,7 @@ class PopUp7Controller: UIViewController {
         super.viewDidLoad()
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: DailyCell.className, bundle: nil), forCellWithReuseIdentifier: DailyCell.className)
+        collView.register(UINib(nibName: DailyCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: DailyCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: (369 * scaleW) / 6.0, height: 100 * scaleW)
         layout.scrollDirection = .horizontal
@@ -50,7 +50,7 @@ extension PopUp7Controller: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyCell.className, for: indexPath) as! DailyCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyCell.reuseIdentifier, for: indexPath) as! DailyCell
         let data = item.daily[indexPath.row + 1]
         cell.lblHigh.text = Int(data.temperatureHigh.rounded(.toNearestOrEven)).description + "°"
         cell.lblLow.text = Int(data.temperatureLow.rounded(.toNearestOrEven)).description + "°"

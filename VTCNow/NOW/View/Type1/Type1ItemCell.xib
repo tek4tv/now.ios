@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19115.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.4"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -15,37 +16,25 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="Type1ItemCell" customModule="NOW" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="395" height="263"/>
+            <rect key="frame" x="0.0" y="0.0" width="374" height="249"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="395" height="263"/>
+                <rect key="frame" x="0.0" y="0.0" width="374" height="249"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FyC-nh-L8P">
-                        <rect key="frame" x="0.0" y="0.0" width="395" height="263"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="249"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolderImage" translatesAutoresizingMaskIntoConstraints="NO" id="86d-z3-Ru6" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="395" height="263.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="86d-z3-Ru6" secondAttribute="height" multiplier="3/2" id="1ff-xe-wgV">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="249"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a-1" translatesAutoresizingMaskIntoConstraints="NO" id="FKX-n5-EyV">
-                                <rect key="frame" x="0.0" y="0.0" width="395" height="263.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="FKX-n5-EyV" secondAttribute="height" multiplier="3/2" id="6ZJ-Em-N1V">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="FKX-n5-EyV">
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="249"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <imageReference key="image" image="a-1"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trong 24 giây, tỷ phú Vượng kiếm tiền bằng một người Việt đi làm cả năm" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WaT-EZ-xLe">
-                                <rect key="frame" x="10" y="183.5" width="380" height="47"/>
+                                <rect key="frame" x="10" y="162.5" width="359" height="47"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -54,8 +43,8 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 phút trước" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4K-Nf-81A">
-                                <rect key="frame" x="10" y="238.5" width="87.5" height="16.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <rect key="frame" x="10" y="224.5" width="84" height="16.5"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -90,6 +79,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstAttribute="bottom" secondItem="86d-z3-Ru6" secondAttribute="bottom" id="Zua-Au-1eI"/>
                             <constraint firstItem="d4K-Nf-81A" firstAttribute="leading" secondItem="FyC-nh-L8P" secondAttribute="leading" constant="10" id="ZwU-4O-1zv">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -105,11 +95,12 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
-                            <constraint firstItem="d4K-Nf-81A" firstAttribute="top" secondItem="WaT-EZ-xLe" secondAttribute="bottom" constant="8" id="jkE-SX-3st">
+                            <constraint firstItem="d4K-Nf-81A" firstAttribute="top" secondItem="WaT-EZ-xLe" secondAttribute="bottom" constant="15" id="jkE-SX-3st">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstAttribute="bottom" secondItem="FKX-n5-EyV" secondAttribute="bottom" id="tja-Si-xCQ"/>
                             <constraint firstAttribute="trailing" secondItem="86d-z3-Ru6" secondAttribute="trailing" id="xo3-IR-I75">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>

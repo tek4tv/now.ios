@@ -8,7 +8,7 @@
 import UIKit
 
 class WatchCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "WatchCell"
     @IBOutlet weak var imgThumb: LazyImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

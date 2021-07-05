@@ -16,7 +16,7 @@ class BookCategoryController: UIViewController {
         super.viewDidLoad()
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: BookItemCell.className, bundle: nil), forCellWithReuseIdentifier: BookItemCell.className)
+        collView.register(UINib(nibName: BookItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: BookItemCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: (414 - 80) / 3.01 * scaleW, height: 260 * scaleW)
         layout.minimumLineSpacing = 20 * scaleW
@@ -36,7 +36,7 @@ extension BookCategoryController: UICollectionViewDelegate, UICollectionViewData
         return data.media.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookItemCell.className, for: indexPath) as! BookItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookItemCell.reuseIdentifier, for: indexPath) as! BookItemCell
         let item = data.media[indexPath.row]
         if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
             cell.thumbImage.loadImage(fromURL: url)

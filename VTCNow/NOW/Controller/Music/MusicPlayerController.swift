@@ -44,6 +44,7 @@ class MusicPlayerController: UIViewController{
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
         //aiv.startAnimating()
         return aiv
     }()
@@ -53,7 +54,7 @@ class MusicPlayerController: UIViewController{
         //
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Music3Cell.className, bundle: nil), forCellWithReuseIdentifier: Music3Cell.className)
+        collView.register(UINib(nibName: Music3Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Music3Cell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 414 * scaleW, height: 130 * scaleW)
         layout.minimumLineSpacing = 0

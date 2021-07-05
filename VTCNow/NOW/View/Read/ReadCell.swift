@@ -8,7 +8,7 @@
 import UIKit
 
 class ReadCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "ReadCell"
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -27,6 +27,6 @@ class ReadCell: UICollectionViewCell {
         delegate?.didSelectViewShare(self)
     }
 }
-protocol ReadCellDelegate: class {
+protocol ReadCellDelegate: ReadController {
     func didSelectViewShare(_ cell: ReadCell)
 }

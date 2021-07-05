@@ -19,8 +19,7 @@ class SearchController: UIViewController {
     var indicator =  UIActivityIndicatorView()
     var listWord: [String] = []
     var listData : [MediaModel] = []
-    var listString: [String] = []
-    var filterListString: [String] = []
+    var filterListString: [KeySearchModel] = []
     var indexPath = IndexPath(row: 1, section: 0)
 
     override func viewDidLoad() {
@@ -35,7 +34,7 @@ class SearchController: UIViewController {
         // Do any additional setup after loading the view.
         collWordView.delegate = self
         collWordView.dataSource = self
-        collWordView.register(UINib(nibName: WordCell.className, bundle: nil), forCellWithReuseIdentifier: WordCell.className)
+        collWordView.register(UINib(nibName: WordCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: WordCell.reuseIdentifier)
         let layout2 = LeftAlignedCellsCustomFlowLayout()
         layout2.estimatedItemSize = CGSize(width: 1, height: 40 * scaleW)
         layout2.minimumLineSpacing = 5
@@ -44,14 +43,14 @@ class SearchController: UIViewController {
         //
         tblView.delegate = self
         tblView.dataSource = self
-        tblView.register(UINib(nibName: SearchCell.className, bundle: nil), forCellReuseIdentifier: SearchCell.className)
-        APIService.shared.getSuggestion(keySearch: "") { (data, error) in
-            if let data = data as? [String]{
-                self.listString = data
-                self.filterListString = data
-            }
-            self.tblView.reloadData()
-        }
+        tblView.register(UINib(nibName: SearchCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: SearchCell.reuseIdentifier)
+//        APIService.shared.getSuggestion(keySearch: "") { (data, error) in
+//            if let data = data as? [String]{
+//                self.listString = data
+//                self.filterListString = data
+//            }
+//            self.tblView.reloadData()
+//        }
 
         APIService.shared.getKeySearch {[weak self] (data, error) in
             if let data = data as? [String] {
@@ -92,18 +91,26 @@ class SearchController: UIViewController {
         
         if textField.text == "" {
            
-            self.filterListString = listString
+            self.filterListString = []
+            self.tblView.isHidden = true
         } else {
             self.filterListString = []
-
-            for item in listString{
-                if item.lowercased().contains((textField.text!.lowercased())){
-                    self.filterListString.append(item)
+            APIService.shared.getSuggestion(keySearch: textField.text!) { (data, error) in
+                if let data = data as? [KeySearchModel]{
+                    self.filterListString = data
                 }
+                self.tblView.reloadData()
+                self.tblView.isHidden = false
             }
+
+//            for item in listString{
+//                if item.lowercased().contains((textField.text!.lowercased())){
+//                    self.filterListString.append(item)
+//                }
+//            }
         }
-        self.tblView.reloadData()
-        tblView.isHidden = false
+        //self.tblView.reloadData()
+        
     }
     
     @objc func didSelectViewBack(_ sender: Any){
@@ -121,7 +128,7 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.className, for: indexPath) as! WordCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.reuseIdentifier, for: indexPath) as! WordCell
         cell.lblTitle.text = listWord[indexPath.row]
         return cell
     }
@@ -164,8 +171,8 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchCell.className, for: indexPath) as! SearchCell
-        cell.lblName.text = filterListString[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchCell.reuseIdentifier, for: indexPath) as! SearchCell
+        cell.lblName.text = filterListString[indexPath.row].string
         cell.delegate = self
         return cell
     }
@@ -174,18 +181,25 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         txfView.endEditing(true)
-        txfView.text = filterListString[indexPath.row]
+        txfView.text = filterListString[indexPath.row].string
         tblView.isHidden = true
-
-        APIService.shared.searchAll(keySearch: filterListString[indexPath.row]) { (data, error) in
-            if let data = data as? [MediaModel]{
-                self.listData = data
-                news = CategoryModel()
-                news.media = data
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        APIService.shared.getDetailVideo(privateKey: filterListString[indexPath.row].privateKey) { data, error in
+            if let data = data as? MediaModel {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
+                vc.item = data
+//                vc.listData = 
                 self.navigationController?.pushViewController(vc, animated: false)
             }
         }
+//        APIService.shared.searchAll(keySearch: filterListString[indexPath.row]) { (data, error) in
+//            if let data = data as? [MediaModel]{
+//                self.listData = data
+//                news = CategoryModel()
+//                news.media = data
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+//                self.navigationController?.pushViewController(vc, animated: false)
+//            }
+//        }
         
     }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 class MusicItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "MusicItemCell"
     @IBOutlet weak var thumbImage: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblAuthor: UILabel!

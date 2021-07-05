@@ -12,11 +12,14 @@ class DatePickerController: UIViewController {
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var viewDone: UIView!
+    @IBOutlet weak var viewExit: UIView!
     var onComplete: ((Date) -> Void)!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let loc = Locale(identifier: "vi")
+        self.datePicker.locale = loc
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
+        viewExit.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
         viewDone.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewDone(_:))))
     }
     @objc func didSelectViewBack(_ sender: Any){

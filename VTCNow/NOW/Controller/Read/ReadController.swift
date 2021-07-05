@@ -14,14 +14,26 @@ class ReadController: UIViewController {
         super.viewDidLoad()
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: WeatherCell.className, bundle: nil), forCellWithReuseIdentifier: WeatherCell.className)
-        collView.register(UINib(nibName: ReadCell.className, bundle: nil), forCellWithReuseIdentifier: ReadCell.className)
+        collView.register(UINib(nibName: WeatherCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: WeatherCell.reuseIdentifier)
+        collView.register(UINib(nibName: ReadCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: ReadCell.reuseIdentifier)
         // Do any additional setup after loading the view.
         let layout = UICollectionViewFlowLayout()
         //layout.itemSize = CGSize(width: 414 * scaleW, height: 434 * scaleW)
         collView.collectionViewLayout = layout
+        collView.refreshControl = UIRefreshControl()
+        collView.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
     }
-    
+    @objc func pullToRefresh(_ sender: Any){
+        reads = []
+        page = 1
+        APIService.shared.getRead { (data, error) in
+            if let data = data as? [ReadModel]{
+                reads = data
+                self.collView.refreshControl?.endRefreshing()
+                self.collView.reloadData()
+            }
+        }
+    }
 }
 extension ReadController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -64,12 +76,12 @@ extension ReadController: UICollectionViewDelegate, UICollectionViewDataSource{
         
         switch indexPath.section {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.className, for: indexPath) as! WeatherCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.reuseIdentifier, for: indexPath) as! WeatherCell
             cell.delegate = self
             cell.viewSearch.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnSearch(_:))))
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReadCell.className, for: indexPath) as! ReadCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReadCell.reuseIdentifier, for: indexPath) as! ReadCell
             let item = reads[indexPath.row]
             cell.delegate = self
             cell.lblTitle.text = item.title

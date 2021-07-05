@@ -18,18 +18,18 @@ class HighLightController: UIViewController {
         // Do any additional setup after loading the view.
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: WeatherCell.className, bundle: nil), forCellWithReuseIdentifier: WeatherCell.className)
-        collView.register(UINib(nibName: HashTagCell.className, bundle: nil), forCellWithReuseIdentifier: HashTagCell.className)
-        collView.register(UINib(nibName: CategoryCell.className, bundle: nil), forCellWithReuseIdentifier: CategoryCell.className)
-        collView.register(UINib(nibName: Type1Cell.className, bundle: nil), forCellWithReuseIdentifier: Type1Cell.className)
-        collView.register(UINib(nibName: Type2Cell.className, bundle: nil), forCellWithReuseIdentifier: Type2Cell.className)
-        collView.register(UINib(nibName: Type3Cell.className, bundle: nil), forCellWithReuseIdentifier: Type3Cell.className)
-        collView.register(UINib(nibName: Type4Cell.className, bundle: nil), forCellWithReuseIdentifier: Type4Cell.className)
-        collView.register(UINib(nibName: Type5Cell.className, bundle: nil), forCellWithReuseIdentifier: Type5Cell.className)
-        collView.register(UINib(nibName: Type6Cell.className, bundle: nil), forCellWithReuseIdentifier: Type6Cell.className)
-        collView.register(UINib(nibName: Type7Cell.className, bundle: nil), forCellWithReuseIdentifier: Type7Cell.className)
-        collView.register(UINib(nibName: Type8Cell.className, bundle: nil), forCellWithReuseIdentifier: Type8Cell.className)
-        collView.register(UINib(nibName: Type9Cell.className, bundle: nil), forCellWithReuseIdentifier: Type9Cell.className)
+        collView.register(UINib(nibName: WeatherCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: WeatherCell.reuseIdentifier)
+        collView.register(UINib(nibName: HashTagCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: HashTagCell.reuseIdentifier)
+        collView.register(UINib(nibName: CategoryCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: CategoryCell.reuseIdentifier)
+        collView.register(UINib(nibName: Type1Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type1Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Type2Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type2Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Type3Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type3Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Type4Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type4Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Type5Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type5Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Type6Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type6Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Type7Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type7Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Type8Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type8Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Type9Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type9Cell.reuseIdentifier)
         collView.refreshControl = UIRefreshControl()
         collView.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(didSelectBookItem(_:)), name: NSNotification.Name("openBookPlayer"), object: nil)
@@ -169,74 +169,73 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let section = indexPath.section
         if section == 0{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.className, for: indexPath) as! WeatherCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.reuseIdentifier, for: indexPath) as! WeatherCell
             cell.delegate = self
             cell.viewSearch.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnSearch(_:))))
             return cell
         } else if section == 1{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashTagCell.className, for: indexPath) as! HashTagCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashTagCell.reuseIdentifier, for: indexPath) as! HashTagCell
             cell.delegate = self
             return cell
         } else if section == 2{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.reuseIdentifier, for: indexPath) as! Type1Cell
             if categorys.count > 0{
                 cell.delegate = self
                 cell.data = categorys[0]
-                cell.collView.reloadData()
             }
             return cell
         }else if section == 3{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.className, for: indexPath) as! CategoryCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.reuseIdentifier, for: indexPath) as! CategoryCell
             cell.delegate = self
             return cell
         }else {
             let item = categorys[section - 3]
             switch item.layout.type {
             case "1":
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.className, for: indexPath) as! Type1Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type1Cell.reuseIdentifier, for: indexPath) as! Type1Cell
                 cell.delegate = self
                 cell.data = item
                 return cell
             case "2":
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type2Cell.className, for: indexPath) as! Type2Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type2Cell.reuseIdentifier, for: indexPath) as! Type2Cell
                 cell.delegate = self
                 cell.data = item
                 return cell
             case "3":
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3Cell.className, for: indexPath) as! Type3Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3Cell.reuseIdentifier, for: indexPath) as! Type3Cell
                 cell.delegate = self
                 cell.data = item
                 cell.refresh()
                 return cell
             case "4", "14":
                 if item.name == "Phim bộ"{
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type9Cell.className, for: indexPath) as! Type9Cell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type9Cell.reuseIdentifier, for: indexPath) as! Type9Cell
                     cell.delegate = self
                     cell.data = item
                     return cell
                 }
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4Cell.className, for: indexPath) as! Type4Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4Cell.reuseIdentifier, for: indexPath) as! Type4Cell
                 cell.delegate = self
                 cell.data = item
                 return cell
             case "5", "8":
                 if item.name == "Âm nhạc"{
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type8Cell.className, for: indexPath) as! Type8Cell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type8Cell.reuseIdentifier, for: indexPath) as! Type8Cell
                     cell.delegate = self
                     cell.data = item
                     return cell
                 }
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type5Cell.className, for: indexPath) as! Type5Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type5Cell.reuseIdentifier, for: indexPath) as! Type5Cell
                 cell.delegate = self
                 cell.data = item
                 return cell
             case "6", "7":
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type6Cell.className, for: indexPath) as! Type6Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type6Cell.reuseIdentifier, for: indexPath) as! Type6Cell
                 cell.delegate = self
                 cell.data = item
                 return cell
             default:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type6Cell.className, for: indexPath) as! Type6Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type6Cell.reuseIdentifier, for: indexPath) as! Type6Cell
                 cell.data = item
                 return cell
             }
@@ -324,21 +323,21 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
                         }
                     }
                 }
-            case "8":
-                var count = 0
-                news = cate
-                for item in news.components{
-                    APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
-                        if let data = data as? CategoryModel{
-                            item.category = data
-                            count += 1
-                            if count == news.components.count {
-                                let vc = self?.storyboard?.instantiateViewController(withIdentifier: BookController.className) as! BookController
-                                self?.navigationController?.pushViewController(vc, animated: false)
-                            }
-                        }
-                    }
-                }
+//            case "8":
+//                var count = 0
+//                news = cate
+//                for item in news.components{
+//                    APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
+//                        if let data = data as? CategoryModel{
+//                            item.category = data
+//                            count += 1
+//                            if count == news.components.count {
+//                                let vc = self?.storyboard?.instantiateViewController(withIdentifier: BookController.className) as! BookController
+//                                self?.navigationController?.pushViewController(vc, animated: false)
+//                            }
+//                        }
+//                    }
+//                }
             case "5":
                 news = cate
                 let vc = storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController
@@ -441,21 +440,21 @@ extension HighLightController: CategoryCellDelegate {
                     }
                 }
             }
-        case "8":
-            var count = 0
-            news = cate
-            for item in news.components{
-                APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
-                    if let data = data as? CategoryModel{
-                        item.category = data
-                        count += 1
-                        if count == news.components.count {
-                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: BookController.className) as! BookController
-                            self?.navigationController?.pushViewController(vc, animated: false)
-                        }
-                    }
-                }
-            }
+//        case "8":
+//            var count = 0
+//            news = cate
+//            for item in news.components{
+//                APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
+//                    if let data = data as? CategoryModel{
+//                        item.category = data
+//                        count += 1
+//                        if count == news.components.count {
+//                            let vc = self?.storyboard?.instantiateViewController(withIdentifier: BookController.className) as! BookController
+//                            self?.navigationController?.pushViewController(vc, animated: false)
+//                        }
+//                    }
+//                }
+//            }
         case "5":
             news = cate
             let vc = storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController

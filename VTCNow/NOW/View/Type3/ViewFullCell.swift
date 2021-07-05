@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewFullCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "ViewFullCell"
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var collDotView: UICollectionView!
@@ -25,11 +25,8 @@ class ViewFullCell: UICollectionViewCell {
         collView.delegate = self
         collView.dataSource = self
         collView.register(UINib(nibName: ViewFullItemCell.className, bundle: nil), forCellWithReuseIdentifier: ViewFullItemCell.className)
-        let layout = UICollectionViewFlowLayout()
+        let layout = PagedFlowLayout()
         layout.itemSize = CGSize(width: collView.bounds.width * scaleW, height: collView.bounds.height * scaleW)
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
         collView.collectionViewLayout = layout
         collView.isPagingEnabled = true
         
@@ -86,7 +83,7 @@ extension ViewFullCell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView.tag {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewFullItemCell.className, for: indexPath) as! ViewFullItemCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewFullItemCell.reuseIdentifier, for: indexPath) as! ViewFullItemCell
             let item = overView.media[indexPath.row]
             cell.lblTitle.text = item.name
             cell.lblTime.text = " "
@@ -97,7 +94,7 @@ extension ViewFullCell: UICollectionViewDelegate, UICollectionViewDataSource{
             }
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LongDotCell.className, for: indexPath) as! LongDotCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LongDotCell.reuseIdentifier, for: indexPath) as! LongDotCell
             if indexPath == self.indexPath{
                 cell.viewDot.backgroundColor = #colorLiteral(red: 0.5019607843, green: 0.01176470588, blue: 0.2588235294, alpha: 1)
             }else{
@@ -134,7 +131,7 @@ extension ViewFullCell: UICollectionViewDelegate, UICollectionViewDataSource{
         delegate?.didSelectItemAt()
     }
 }
-protocol ViewFullCellDelegate: class {
+protocol ViewFullCellDelegate: Type3Cell {
     func didSelectItemAt()
     func didSelectXemToanCanh()
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class ClearCell: UITableViewCell {
-
+    static let reuseIdentifier = "ClearCell"
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

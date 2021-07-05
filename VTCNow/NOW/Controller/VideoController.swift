@@ -49,6 +49,7 @@ class VideoController: UIViewController{
     var isXemThem = true
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
         aiv.translatesAutoresizingMaskIntoConstraints = false
         //aiv.startAnimating()
         return aiv
@@ -59,7 +60,7 @@ class VideoController: UIViewController{
         //
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type4ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type4ItemCell.className)
+        collView.register(UINib(nibName: Type4ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type4ItemCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: (414 - 60) / 2.01 * scaleW, height: 190 * scaleW)
         layout.minimumLineSpacing = 0
@@ -86,6 +87,11 @@ class VideoController: UIViewController{
         
         //
         lblDescription.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectLbl(_:))))
+        //
+        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            imgAudio.loadImage(fromURL: url)
+            imgAudio.isHidden = false
+        }
     }
     @objc func didSelectLbl(_ sender: Any){
 //        lblDescription.text = item.descripTion
@@ -231,19 +237,35 @@ class VideoController: UIViewController{
         isPlaying = !isPlaying
     }
     @IBAction func didSelectBtnNext(_ sender: Any) {
-        listData.append(item)
-        item = listData[0]
-        listData.remove(at: 0)
-        collView.reloadData()
-        openVideoAudio()
+//        listData.append(item)
+//        item = listData[0]
+//        listData.remove(at: 0)
+//        collView.reloadData()
+//        openVideoAudio()
+        guard let duration = viewPlayer.player?.currentItem?.duration else { return }
+        let currentTime = CMTimeGetSeconds(viewPlayer.player!.currentTime())
+        let newTime = currentTime + 5.0
+        
+        if newTime < (CMTimeGetSeconds(duration) - 5.0) {
+            let time: CMTime = CMTimeMake(value: Int64(newTime * 1000), timescale: 1000)
+            viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+        }
     }
     @IBAction func didSelectBtnPrevious(_ sender: Any) {
-        listData.insert(item, at: 0)
-        let count = listData.count
-        item = listData[count - 1]
-        listData.remove(at: count - 1)
-        collView.reloadData()
-        openVideoAudio()
+//        listData.insert(item, at: 0)
+//        let count = listData.count
+//        item = listData[count - 1]
+//        listData.remove(at: count - 1)
+//        collView.reloadData()
+//        openVideoAudio()
+        let currentTime = CMTimeGetSeconds(viewPlayer.player!.currentTime())
+        var newTime = currentTime - 5.0
+        
+        if newTime < 0 {
+            newTime = 0
+        }
+        let time: CMTime = CMTimeMake(value: Int64(newTime * 1000), timescale: 1000)
+        viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
     }
     func hidePlayerController(){
         self.imgShadow.isHidden = true
@@ -276,6 +298,7 @@ class VideoController: UIViewController{
         }
         if keyPath == "timeControlStatus"{
             if (viewPlayer.player?.timeControlStatus == .playing) {
+                imgAudio.isHidden = true
                 activityIndicatorView.stopAnimating()
                 //player is playing
             }
@@ -315,7 +338,7 @@ class VideoController: UIViewController{
     }
     func openVideoAudio(){
         
-        if let url = URL(string: item.path){
+        if let url = URL(string: item.path.replacingOccurrences(of: "\\", with: "/")){
             listResolution = []
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [])
@@ -467,7 +490,7 @@ extension VideoController: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4ItemCell.className, for: indexPath) as! Type4ItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4ItemCell.reuseIdentifier, for: indexPath) as! Type4ItemCell
         let item = listData[indexPath.row]
         if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
             cell.thumbImage.loadImage(fromURL: url)
@@ -514,6 +537,10 @@ extension VideoController: UICollectionViewDelegate, UICollectionViewDataSource{
         item = listData[indexPath.row]
         listData = list
         collView.reloadData()
+        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            imgAudio.loadImage(fromURL: url)
+            imgAudio.isHidden = false
+        }
         openVideoAudio()
         scrollView.setContentOffset(CGPoint.zero, animated: true)
     }

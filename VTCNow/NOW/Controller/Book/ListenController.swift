@@ -14,6 +14,7 @@ class ListenController: UIViewController {
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var collSearchView: UICollectionView!
     var listSearch: [MediaModel] = []
+    var tag = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         txfView.addTarget(self, action: #selector(textFieldDidChange(_:)),
@@ -21,14 +22,14 @@ class ListenController: UIViewController {
         txfView.delegate = self
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type7Cell.className, bundle: nil), forCellWithReuseIdentifier: Type7Cell.className)
-        collView.register(UINib(nibName: Book3Cell.className, bundle: nil), forCellWithReuseIdentifier: Book3Cell.className)
+        collView.register(UINib(nibName: Type7Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type7Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Book3Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Book3Cell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         collView.collectionViewLayout = layout
         
         collSearchView.delegate = self
         collSearchView.dataSource = self
-        collSearchView.register(UINib(nibName: BookItemCell.className, bundle: nil), forCellWithReuseIdentifier: BookItemCell.className)
+        collSearchView.register(UINib(nibName: BookItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: BookItemCell.reuseIdentifier)
         
         let layout2 = UICollectionViewFlowLayout()
         //layout2.itemSize = CGSize(width: (414 - 80) / 3.01 * scaleW, height: 260 * scaleW)
@@ -50,6 +51,10 @@ class ListenController: UIViewController {
                 }
             }
         }
+        tag = bookCate.privateKey
+        for item in bookCate.components{
+            tag += " | " + item.privateKey
+        }
     }
     @objc func didSelectViewBack(_ sender: Any){
         navigationController?.popViewController(animated: false)
@@ -63,7 +68,7 @@ class ListenController: UIViewController {
         } else {
             self.listSearch = []
             self.collSearchView.isHidden = false
-            APIService.shared.searchWithTag(privateKey: bookCate.privateKey, keySearch: textField.text!) {[weak self] (data, error) in
+            APIService.shared.searchByTag(privateKey: tag, keySearch: textField.text!) {[weak self] (data, error) in
                 if let data = data as? [MediaModel]{
                     self?.listSearch = data
                     self?.collSearchView.reloadData()
@@ -112,12 +117,12 @@ extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource
         case collView:
             switch indexPath.row {
             case 0:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Book3Cell.className, for: indexPath) as! Book3Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Book3Cell.reuseIdentifier, for: indexPath) as! Book3Cell
                 cell.delegate = self
                 cell.data = bookCate
                 return cell
             default:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7Cell.className, for: indexPath) as! Type7Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7Cell.reuseIdentifier, for: indexPath) as! Type7Cell
                 cell.delegate = self
                 let item = news.components[indexPath.row - 1]
                 cell.lblTitle.text = item.name
@@ -125,7 +130,7 @@ extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource
                 return cell
             }
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookItemCell.className, for: indexPath) as! BookItemCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookItemCell.reuseIdentifier, for: indexPath) as! BookItemCell
             let item = listSearch[indexPath.row]
             if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)

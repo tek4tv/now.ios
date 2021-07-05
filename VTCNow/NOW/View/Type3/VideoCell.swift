@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 
 class VideoCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "VideoCell"
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
@@ -52,6 +52,7 @@ class VideoCell: UICollectionViewCell {
     
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
         aiv.translatesAutoresizingMaskIntoConstraints = false
         //aiv.startAnimating()
         return aiv
@@ -211,6 +212,7 @@ class VideoCell: UICollectionViewCell {
         }
         if keyPath == "timeControlStatus"{
             if (viewPlayer.player?.timeControlStatus == .playing) {
+                imgThumb.isHidden = true
                 activityIndicatorView.stopAnimating()
                 //player is playing
             }
@@ -279,7 +281,7 @@ class VideoCell: UICollectionViewCell {
                     imgShadow.isHidden = false
                     lblCountDown.text = timeStr
                     viewPlayer.player?.pause()
-                    activityIndicatorView.stopAnimating()
+                    //activityIndicatorView.stopAnimating()
                     imgThumb.isHidden = false
                 }
             }
@@ -288,6 +290,7 @@ class VideoCell: UICollectionViewCell {
     }
     func setup(){
         btnPlay.isHidden = true
+        imgThumb.isHidden = false
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [])
         }
@@ -305,7 +308,7 @@ class VideoCell: UICollectionViewCell {
         }else{
             link = item.fileCode
         }
-        if let url = URL(string: link){
+        if let url = URL(string: link.replacingOccurrences(of: "\\", with: "/")){
             if link.contains(".m3u8"){
                 StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
                     switch result {

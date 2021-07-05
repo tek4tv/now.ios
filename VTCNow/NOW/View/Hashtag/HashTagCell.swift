@@ -8,7 +8,7 @@
 import UIKit
 
 class HashTagCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "HashTagCell"
     @IBOutlet weak var collView: UICollectionView!
     var listData: [KeyWordModel] = []
     var delegate: HashTagCellDelegate!
@@ -17,7 +17,7 @@ class HashTagCell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: HashTagItemCell.className, bundle: nil), forCellWithReuseIdentifier: HashTagItemCell.className)
+        collView.register(UINib(nibName: HashTagItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: HashTagItemCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
@@ -47,7 +47,7 @@ extension HashTagCell: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashTagItemCell.className, for: indexPath) as! HashTagItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashTagItemCell.reuseIdentifier, for: indexPath) as! HashTagItemCell
         cell.lblTitle.text = listData[indexPath.row].keyWord
         return cell
     }
@@ -57,6 +57,6 @@ extension HashTagCell: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
 }
-protocol HashTagCellDelegate: AnyObject {
+protocol HashTagCellDelegate: HighLightController {
     func didSelectItemAt(_ word: String)
 }

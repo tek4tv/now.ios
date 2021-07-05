@@ -8,7 +8,7 @@
 import UIKit
 
 class Type7Cell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Type7Cell"
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
     var delegate: Type7CellDelegate!
@@ -26,8 +26,8 @@ class Type7Cell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type7ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type7ItemCell.className)
-        collView.register(UINib(nibName: ViewMore3Cell.className, bundle: nil), forCellWithReuseIdentifier: ViewMore3Cell.className)
+        collView.register(UINib(nibName: Type7ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type7ItemCell.reuseIdentifier)
+        collView.register(UINib(nibName: ViewMore3Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: ViewMore3Cell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
@@ -48,23 +48,15 @@ extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
 //        }
 //    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            if data.media.count >= 8{
-                return 8
-            }
-            return data.media.count
-        default:
-            return 1
-        }
-        
+//        if data.media.count >= 8{
+//            return 8
+//        }
+        return data.media.count
     }
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
-    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.section {
-        case 0:
+        switch indexPath.row {
+        case 0...data.media.count-2:
             return CGSize(width: 150 * scaleW, height: 240 * scaleW)
         default:
             return CGSize(width: 158 * scaleW, height: 240 * scaleW)
@@ -72,9 +64,9 @@ extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        switch indexPath.section {
-        case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7ItemCell.className, for: indexPath) as! Type7ItemCell
+        switch indexPath.row {
+        case 0...data.media.count-2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7ItemCell.reuseIdentifier, for: indexPath) as! Type7ItemCell
             let item = data.media[indexPath.row]
             if let url = URL(string: root.cdn.imageDomain + item.square.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
@@ -88,7 +80,7 @@ extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             cell.lblAuthor.text = item.author
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMore3Cell.className, for: indexPath) as! ViewMore3Cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMore3Cell.reuseIdentifier, for: indexPath) as! ViewMore3Cell
             let item = data.media[indexPath.row]
             if let url = URL(string: root.cdn.imageDomain + item.square.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
@@ -99,23 +91,20 @@ extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        row = indexPath.row
-        switch indexPath.section {
-        case 0:
+        switch indexPath.row {
+        case 0...data.media.count-2:
             let item = data.media[indexPath.row]
             if item.episode != "" {
                 delegate?.didSelectItemAt(self, item)
             } else{
                 delegate?.didSelectNovel(self, item, data.media)
             }
-            
-            
         default:
             delegate?.didSelectViewMore(self)
         }
     }
 }
-protocol Type7CellDelegate: class {
+protocol Type7CellDelegate: ListenController {
     func didSelectItemAt(_ cell: Type7Cell,_ data: MediaModel)
     func didSelectNovel(_ cell: Type7Cell, _ data: MediaModel, _ list: [MediaModel])
     func didSelectViewMore(_ cell: Type7Cell)

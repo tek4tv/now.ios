@@ -10,7 +10,7 @@ import UIKit
 var news = CategoryModel()
 
 class CategoryCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "CategoryCell"
     @IBOutlet weak var collView: UICollectionView!
     var delegate: CategoryCellDelegate!
     var listCate: [CategoryModel] = []
@@ -29,7 +29,7 @@ class CategoryCell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: "CategoryItemCell", bundle: nil), forCellWithReuseIdentifier: "CategoryItemCell")
+        collView.register(UINib(nibName: CategoryItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: CategoryItemCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 93 * scaleW, height: 95 * scaleW)
         layout.scrollDirection = .horizontal
@@ -53,7 +53,7 @@ extension CategoryCell: UICollectionViewDelegate, UICollectionViewDataSource{
         return listCate.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCell.className, for: indexPath) as! CategoryItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryItemCell.reuseIdentifier, for: indexPath) as! CategoryItemCell
         let item = listCate[indexPath.row]
         cell.lblTitle.text = item.name
         if let url = URL(string: root.cdn.imageDomain + item.icon.replacingOccurrences(of: "\\", with: "/" )){
@@ -67,6 +67,6 @@ extension CategoryCell: UICollectionViewDelegate, UICollectionViewDataSource{
         delegate?.didSelectItem(cate)
     }
 }
-protocol CategoryCellDelegate: class {
+protocol CategoryCellDelegate: HighLightController {
     func didSelectItem(_ cate: CategoryModel)
 }

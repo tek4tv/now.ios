@@ -8,7 +8,7 @@
 import UIKit
 
 class Type2Cell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Type2Cell"
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgBanner: LazyImageView!
@@ -36,8 +36,8 @@ class Type2Cell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type2ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type2ItemCell.className)
-        collView.register(UINib(nibName: ViewMoreCell.className, bundle: nil), forCellWithReuseIdentifier: ViewMoreCell.className)
+        collView.register(UINib(nibName: Type2ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type2ItemCell.reuseIdentifier)
+        collView.register(UINib(nibName: ViewMoreCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: ViewMoreCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
@@ -61,14 +61,14 @@ class Type2Cell: UICollectionViewCell {
 extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if data.media.count >= 8{
-            return 8
+        if data.media.count >= 10{
+            return 10
         }
         return data.media.count
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.row {
-        case 0...6:
+        case 0...8:
             return CGSize(width: 160 * scaleW, height: 180 * scaleW)
         default:
             return CGSize(width: 168 * scaleW, height: 180 * scaleW)
@@ -77,8 +77,8 @@ extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = data.media[indexPath.row]
         switch indexPath.row {
-        case 0...6:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type2ItemCell.className, for: indexPath) as! Type2ItemCell
+        case 0...8:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type2ItemCell.reuseIdentifier, for: indexPath) as! Type2ItemCell
             cell.lblTitle.text = item.name
             cell.item = item
 //            if item.timePass == "Đang phát"{
@@ -107,7 +107,7 @@ extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             }
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMoreCell.className, for: indexPath) as! ViewMoreCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMoreCell.reuseIdentifier, for: indexPath) as! ViewMoreCell
             
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
@@ -118,7 +118,7 @@ extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0...6:
+        case 0...8:
             let temp = self.data.copy()
             let item = data.media[indexPath.row]
             temp.media.remove(at: indexPath.row)
@@ -130,7 +130,7 @@ extension Type2Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }
     }
 }
-protocol Type2CellDelegate: class {
+protocol Type2CellDelegate: HighLightController {
     func didSelectItemAt(_ cell: Type2Cell)
     func didSelectViewMore(_ cell: Type2Cell)
     func didSelectBanner(_ cell: Type2Cell)

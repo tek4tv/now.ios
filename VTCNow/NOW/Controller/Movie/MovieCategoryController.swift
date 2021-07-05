@@ -16,7 +16,7 @@ class MovieCategoryController: UIViewController {
         super.viewDidLoad()
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: MovieItem2Cell.className, bundle: nil), forCellWithReuseIdentifier: MovieItem2Cell.className)
+        collView.register(UINib(nibName: MovieItem2Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: MovieItem2Cell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: (414 - 80) / 3.01 * scaleW, height: 250 * scaleW)
         layout.minimumLineSpacing = 20 * scaleW
@@ -36,7 +36,7 @@ extension MovieCategoryController: UICollectionViewDelegate, UICollectionViewDat
         return data.media.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieItem2Cell.className, for: indexPath) as! MovieItem2Cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieItem2Cell.reuseIdentifier, for: indexPath) as! MovieItem2Cell
         let item = data.media[indexPath.row]
         if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
             cell.imgThumb.loadImage(fromURL: url)

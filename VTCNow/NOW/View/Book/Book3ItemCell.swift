@@ -8,7 +8,7 @@
 import UIKit
 
 class Book3ItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Book3ItemCell"
     @IBOutlet weak var imgThumb: LazyImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

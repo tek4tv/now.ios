@@ -12,14 +12,15 @@ class MovieController: UIViewController {
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var collSearchView: UICollectionView!
     @IBOutlet weak var txfView: UITextField!
+    var tag = ""
     var listSearch: [MediaModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: MovieCell.className, bundle: nil), forCellWithReuseIdentifier: MovieCell.className)
-        collView.register(UINib(nibName: Movie2Cell.className, bundle: nil), forCellWithReuseIdentifier: Movie2Cell.className)
+        collView.register(UINib(nibName: Movie3Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Movie3Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Movie2Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Movie2Cell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         collView.collectionViewLayout = layout
@@ -27,7 +28,7 @@ class MovieController: UIViewController {
         //
         collSearchView.delegate = self
         collSearchView.dataSource = self
-        collSearchView.register(UINib(nibName: MovieItem2Cell.className, bundle: nil), forCellWithReuseIdentifier: MovieItem2Cell.className)
+        collSearchView.register(UINib(nibName: MovieItem2Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: MovieItem2Cell.reuseIdentifier)
         
         let layout2 = UICollectionViewFlowLayout()
         layout2.itemSize = CGSize(width: (414 - 80) / 3.01 * scaleW, height: 250 * scaleW)
@@ -42,6 +43,11 @@ class MovieController: UIViewController {
         txfView.delegate = self
         //
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
+        //
+        tag = news.privateKey
+        for item in news.components{
+            tag += " | " + item.privateKey
+        }
     }
     @objc func didSelectViewBack(_ sender: Any){
         navigationController?.popViewController(animated: false)
@@ -55,7 +61,8 @@ class MovieController: UIViewController {
         } else {
             self.listSearch = []
             self.collSearchView.isHidden = false
-            APIService.shared.searchWithTag(privateKey: news.privateKey, keySearch: textField.text!) {[weak self] (data, error) in
+            
+            APIService.shared.searchByTag(privateKey: tag, keySearch: textField.text!) {[weak self] (data, error) in
                 if let data = data as? [MediaModel]{
                     self?.listSearch = data
                     self?.collSearchView.reloadData()
@@ -98,7 +105,7 @@ extension MovieController: UICollectionViewDelegate, UICollectionViewDataSource,
             case 0:
                 return CGSize(width: 414 * scaleW, height: 260 * scaleW)
             default:
-                return CGSize(width: 414 * scaleW, height: 290 * scaleW)
+                return CGSize(width: 414 * scaleW, height: 370 * scaleW)
             }
         default:
             return CGSize(width: (414 - 80) / 3.01 * scaleW, height: 250 * scaleW)
@@ -110,12 +117,12 @@ extension MovieController: UICollectionViewDelegate, UICollectionViewDataSource,
         case collView:
             switch indexPath.section {
             case 0:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Movie2Cell.className, for: indexPath) as! Movie2Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Movie2Cell.reuseIdentifier, for: indexPath) as! Movie2Cell
                 cell.delegate = self
                 cell.data = news
                 return cell
             default:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.className, for: indexPath) as! MovieCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Movie3Cell.reuseIdentifier, for: indexPath) as! Movie3Cell
                 cell.delegate = self
                 let item = news.components[indexPath.section - 1]
                 cell.lblTitle.text = item.name
@@ -123,7 +130,7 @@ extension MovieController: UICollectionViewDelegate, UICollectionViewDataSource,
                 return cell
             }
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieItem2Cell.className, for: indexPath) as! MovieItem2Cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieItem2Cell.reuseIdentifier, for: indexPath) as! MovieItem2Cell
             let item = listSearch[indexPath.row]
             if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
@@ -174,7 +181,7 @@ extension MovieController: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
 }
-extension MovieController: MovieCellDelegate{
+extension MovieController: Movie3CellDelegate{
     func didSelectItemAt(_ data: MediaModel, _ list: [MediaModel]) {
         let vc = storyboard?.instantiateViewController(withIdentifier: VideoController.className) as! VideoController
         vc.item = data

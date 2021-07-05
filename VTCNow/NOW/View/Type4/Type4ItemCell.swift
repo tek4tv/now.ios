@@ -8,7 +8,7 @@
 import UIKit
 
 class Type4ItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Type4ItemCell"
     @IBOutlet weak var thumbImage: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblEpisode: UILabel!

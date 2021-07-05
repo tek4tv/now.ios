@@ -8,7 +8,7 @@
 import UIKit
 
 class LongDotCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "LongDotCell"
     @IBOutlet weak var viewDot: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()

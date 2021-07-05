@@ -7,7 +7,7 @@
 
 import UIKit
 class Type6ItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Type6ItemCell"
     @IBOutlet weak var lblCountry: UILabel!
     @IBOutlet weak var thumbImage: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!

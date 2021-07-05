@@ -8,7 +8,7 @@
 import UIKit
 
 class PopUpItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "PopUpItemCell"
     @IBOutlet weak var imgTick: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     override func awakeFromNib() {

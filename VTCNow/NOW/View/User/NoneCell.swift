@@ -8,7 +8,7 @@
 import UIKit
 
 class NoneCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "NoneCell"
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

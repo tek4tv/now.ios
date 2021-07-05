@@ -25,7 +25,7 @@ let ids: [String: String] = [
     "VTC16" : "fa839854-5dc8-4eb3-983f-9e57ec329f38"
 ]
 class TVCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "TVCell"
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var collView: UICollectionView!
     var indexPath = IndexPath(row: 1, section: 0)
@@ -39,10 +39,10 @@ class TVCell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Video2Cell.className, bundle: nil), forCellWithReuseIdentifier: Video2Cell.className)
-        collView.register(UINib(nibName: Video3Cell.className, bundle: nil), forCellWithReuseIdentifier: Video3Cell.className)
-        collView.register(UINib(nibName: Video4Cell.className, bundle: nil), forCellWithReuseIdentifier: Video4Cell.className)
-        collView.register(UINib(nibName: NoCell.className, bundle: nil), forCellWithReuseIdentifier: NoCell.className)
+        collView.register(UINib(nibName: Video2Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Video2Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Video3Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Video3Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Video4Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Video4Cell.reuseIdentifier)
+        collView.register(UINib(nibName: NoCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: NoCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
 //        layout.itemSize = CGSize(width: collView.bounds.width * scaleW, height: 300 * scaleW)
         layout.minimumLineSpacing = 0
@@ -143,13 +143,13 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.row {
         case 0:
-            return CGSize(width: 300 * scaleW, height: 0)
+            return CGSize(width: 330 * scaleW, height: 0)
         case 1 :
-            return CGSize(width: 300 * scaleW, height: 270 * scaleW)
+            return CGSize(width: 330 * scaleW, height: 300 * scaleW)
         case listVideos.count + 2:
-            return CGSize(width: 300 * scaleW, height: 300 * scaleW)
+            return CGSize(width: 330 * scaleW, height: 300 * scaleW)
         default:
-            return CGSize(width: 300 * scaleW, height: 300 * scaleW)
+            return CGSize(width: 330 * scaleW, height: 300 * scaleW)
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -160,11 +160,11 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
         
         switch indexPath.row {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.reuseIdentifier, for: indexPath) as! NoCell
             return cell
         case 1:
             if data.name == "VTC1" || data.name == "VTC14"{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video3Cell.className, for: indexPath) as! Video3Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video3Cell.reuseIdentifier, for: indexPath) as! Video3Cell
                 cell.delegate = self
                 cell.item = data
                 cell.lblTitle.text = ""
@@ -178,7 +178,7 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
                 }
                 return cell
             } else{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video4Cell.className, for: indexPath) as! Video4Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video4Cell.reuseIdentifier, for: indexPath) as! Video4Cell
                 cell.delegate = self
                 cell.item = data
                 cell.lblTitle.text = " "
@@ -194,10 +194,10 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
             }
             
         case listVideos.count + 2:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.reuseIdentifier, for: indexPath) as! NoCell
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video2Cell.className, for: indexPath) as! Video2Cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video2Cell.reuseIdentifier, for: indexPath) as! Video2Cell
             cell.delegate = self
             let item = listVideos[indexPath.row - 2]
             cell.item = item
@@ -211,7 +211,7 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
                 if isPlaying == true{
                     cell.setup()
                 }
-                cell.imgThumb.isHidden = true
+//                cell.imgThumb.isHidden = true
             } else{
                 cell.imgThumb.isHidden = false
             }
@@ -275,7 +275,7 @@ extension TVCell: Video4CellDelegate{
     }
     
 }
-protocol TVCellDelegate: class {
+protocol TVCellDelegate: TVController {
     func didSelectBookMark(_ cell: Video2Cell)
     func didSelectViewSetting(_ cell: Video2Cell)
     func didSelectViewFullScreen(_ cell: Video2Cell, _ newPlayer: AVPlayer)

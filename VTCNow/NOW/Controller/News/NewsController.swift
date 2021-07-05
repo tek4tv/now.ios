@@ -20,7 +20,7 @@ class NewsController: UIViewController {
         // Initialization code
         tblView.delegate = self
         tblView.dataSource = self
-        tblView.register(UINib(nibName: CellVideo.className, bundle: nil), forCellReuseIdentifier: CellVideo.className)
+        tblView.register(UINib(nibName: CellVideo.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CellVideo.reuseIdentifier)
         
         tblView.estimatedRowHeight = 370 * scaleW
         tblView.rowHeight = UITableView.automaticDimension
@@ -49,7 +49,7 @@ class NewsController: UIViewController {
     }
     func cellForRow(_ indexPath: IndexPath) -> CellVideo? {
         guard let cell = tblView.cellForRow(at: indexPath) as? CellVideo else{
-            return tblView.dequeueReusableCell(withIdentifier: CellVideo.className, for: indexPath) as? CellVideo
+            return tblView.dequeueReusableCell(withIdentifier: CellVideo.reuseIdentifier, for: indexPath) as? CellVideo
         }
         return cell
     }
@@ -152,7 +152,7 @@ extension NewsController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellVideo.className, for: indexPath) as! CellVideo
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellVideo.reuseIdentifier, for: indexPath) as! CellVideo
         
         let item = category.media[indexPath.row]
         cell.item = item
@@ -165,7 +165,7 @@ extension NewsController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
             cell.imgThumb.loadImage(fromURL: url)
         }
         if indexPath == self.indexPath{
-            if let url = URL(string: item.path){
+            if let url = URL(string: item.path.replacingOccurrences(of: "\\", with: "/")){
                 
                 cell.viewPlayer.player  = AVPlayer(url: url)
                 cell.monitor(item)
@@ -173,7 +173,7 @@ extension NewsController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
                 cell.setup()
                 
             }
-            cell.imgThumb.isHidden = true
+//            cell.imgThumb.isHidden = true
         } else{
             cell.viewPlayer.player?.pause()
             cell.imgThumb.isHidden = false

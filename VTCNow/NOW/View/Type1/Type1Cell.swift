@@ -7,7 +7,7 @@
 
 import UIKit
 class Type1Cell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Type1Cell"
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var collViewDot: UICollectionView!
     @IBOutlet weak var widthCollDot: NSLayoutConstraint!
@@ -31,11 +31,8 @@ class Type1Cell: UICollectionViewCell {
         collView.delegate = self
         collView.dataSource = self
         collView.register(UINib(nibName: Type1ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type1ItemCell.className)
-        let layout = UICollectionViewFlowLayout()
+        let layout = PagedFlowLayout()
         layout.itemSize = CGSize(width: collView.bounds.width * scaleW, height: collView.bounds.height * scaleW)
-        layout.minimumLineSpacing = 0
-        layout.minimumLineSpacing = 0
-        layout.scrollDirection = .horizontal
         collView.collectionViewLayout = layout
         collView.isPagingEnabled = true
         //
@@ -57,7 +54,7 @@ class Type1Cell: UICollectionViewCell {
             }
             collView.isPagingEnabled = false
             if indexPath.row < 3 {
-                collView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
+                collView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
             }
             collView.isPagingEnabled = true
         })
@@ -67,7 +64,36 @@ class Type1Cell: UICollectionViewCell {
         timer.invalidate()
     }
 }
-extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
+extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate{
+
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let count = collView.visibleCells.count
+//        if count == 2 {
+//            let id0 = collView.indexPath(for: collView.visibleCells[0])!
+//            let id1 = collView.indexPath(for: collView.visibleCells[1])!
+//            if id0.row < id1.row {
+//                if self.indexPath != id0{
+//                    self.indexPath = id0
+//                    print("scrolldidScroll")
+//                    collViewDot.reloadData()
+//                }
+//            }else{
+//                if self.indexPath != id1{
+//                    self.indexPath = id1
+//                    print("scrolldidScroll")
+//                    collViewDot.reloadData()
+//                }
+//            }
+//        } else{
+//            let id0 = collView.indexPath(for: collView.visibleCells[0])!
+//            if self.indexPath != id0{
+//                self.indexPath = id0
+//                print("scrolldidScroll")
+//                collViewDot.reloadData()
+//            }
+//        }
+//    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView.tag {
         case 0:
@@ -170,4 +196,58 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource{
 protocol Type1CellDelegate: class{
 //    func didSelectItemAt(_ data: MediaModel,_ list: [MediaModel],_ cell: Type1Cell)
     func didSelectItemAt(_ cell: Type1Cell)
+}
+class PagedFlowLayout: UICollectionViewFlowLayout {
+
+  override init() {
+    super.init()
+    self.scrollDirection = .horizontal
+    self.minimumLineSpacing = 0 // line spacing is the horizontal spacing in horizontal scrollDirection
+    self.minimumInteritemSpacing = 0
+    if #available(iOS 11.0, *) {
+      self.sectionInsetReference = .fromSafeArea // for iPhone X
+    }
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("not implemented")
+  }
+
+  // Note: Setting `minimumInteritemSpacing` here will be too late. Don't do it here.
+  override func prepare() {
+    super.prepare()
+    guard let collectionView = collectionView else { return }
+      collectionView.decelerationRate = UIScrollView.DecelerationRate.fast // mostly you want it fast!
+
+      let insetedBounds = collectionView.bounds.inset(by: self.sectionInset)
+    self.itemSize = insetedBounds.size
+  }
+  override func targetContentOffset( //swiftlint:disable:this cyclomatic_complexity
+    forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+
+    guard let collectionView = collectionView else { return proposedContentOffset }
+
+    let pageWidth = itemSize.width + minimumLineSpacing
+    let currentPage: CGFloat = collectionView.contentOffset.x / pageWidth
+    let nearestPage: CGFloat = round(currentPage)
+    let isNearPreviousPage = nearestPage < currentPage
+
+    var pageDiff: CGFloat = 0
+    let velocityThreshold: CGFloat = 0.5 // can customize this threshold
+    if isNearPreviousPage {
+      if velocity.x > velocityThreshold {
+        pageDiff = 1
+      }
+    } else {
+      if velocity.x < -velocityThreshold {
+        pageDiff = -1
+      }
+    }
+
+    let x = (nearestPage + pageDiff) * pageWidth
+    let cappedX = max(0, x) // cap to avoid targeting beyond content
+    //print("x:", x, "velocity:", velocity)
+    return CGPoint(x: cappedX, y: proposedContentOffset.y)
+  }
+
 }

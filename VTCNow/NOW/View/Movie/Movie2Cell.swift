@@ -7,13 +7,13 @@
 
 import UIKit
 class Movie2Cell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Movie2Cell"
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var collViewDot: UICollectionView!
     @IBOutlet weak var widthCollDot: NSLayoutConstraint!
     var delegate: Movie2CellDelegate!
-    var timer = Timer()
-    var indexPath = IndexPath(row: 0, section: 0)
+    fileprivate var timer = Timer()
+    fileprivate var indexPath = IndexPath(row: 0, section: 0)
     var data = CategoryModel(){
         didSet{
             if data.media.count >= 3 {
@@ -30,11 +30,9 @@ class Movie2Cell: UICollectionViewCell {
         collView.tag = 0
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Movie2ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Movie2ItemCell.className)
-        let layout = UICollectionViewFlowLayout()
+        collView.register(UINib(nibName: Movie2ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Movie2ItemCell.reuseIdentifier)
+        let layout = PagedFlowLayout()
         layout.itemSize = CGSize(width: collView.bounds.width * scaleW, height: collView.bounds.height * scaleW)
-        layout.minimumLineSpacing = 0
-        layout.scrollDirection = .horizontal
         collView.collectionViewLayout = layout
         collView.isPagingEnabled = true
         //
@@ -82,7 +80,7 @@ extension Movie2Cell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView.tag {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Movie2ItemCell.className, for: indexPath) as! Movie2ItemCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Movie2ItemCell.reuseIdentifier, for: indexPath) as! Movie2ItemCell
             let item = data.media[indexPath.row]
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
@@ -90,7 +88,7 @@ extension Movie2Cell: UICollectionViewDelegate, UICollectionViewDataSource{
             cell.lblTitle.text = item.name
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DotCell.className, for: indexPath) as! DotCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DotCell.reuseIdentifier, for: indexPath) as! DotCell
             if indexPath == self.indexPath{
                 cell.viewDot.backgroundColor = #colorLiteral(red: 0.5019607843, green: 0.01176470588, blue: 0.2588235294, alpha: 1)
             }else{
@@ -154,6 +152,6 @@ extension Movie2Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         
     }
 }
-protocol Movie2CellDelegate: class{
+protocol Movie2CellDelegate: MovieController{
     func didSelectItemAt(_ data: MediaModel,_ list: [MediaModel],_ cell: Movie2Cell)
 }

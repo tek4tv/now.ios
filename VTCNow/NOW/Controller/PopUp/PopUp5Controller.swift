@@ -20,7 +20,7 @@ class PopUp5Controller: UIViewController {
     override func viewDidLoad() {
         tblView.delegate = self
         tblView.dataSource = self
-        tblView.register(UINib(nibName: Book2Cell.className, bundle: nil), forCellReuseIdentifier: Book2Cell.className)
+        tblView.register(UINib(nibName: Book2Cell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: Book2Cell.reuseIdentifier)
         super.viewDidLoad()
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
     }
@@ -34,7 +34,7 @@ extension PopUp5Controller: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Book2Cell.className, for: indexPath) as! Book2Cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Book2Cell.reuseIdentifier, for: indexPath) as! Book2Cell
         let item = listData[indexPath.row]
         
         cell.lblTitle.text = item.name

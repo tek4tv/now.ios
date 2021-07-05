@@ -22,17 +22,19 @@ class TV2Controller: UIViewController {
         // Do any additional setup after loading the view.
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Video2Cell.className, bundle: nil), forCellWithReuseIdentifier: Video2Cell.className)
-        collView.register(UINib(nibName: Video3Cell.className, bundle: nil), forCellWithReuseIdentifier: Video3Cell.className)
-        collView.register(UINib(nibName: Video4Cell.className, bundle: nil), forCellWithReuseIdentifier: Video4Cell.className)
-        collView.register(UINib(nibName: NoCell.className, bundle: nil), forCellWithReuseIdentifier: NoCell.className)
+        collView.register(UINib(nibName: Video2Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Video2Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Video3Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Video3Cell.reuseIdentifier)
+        collView.register(UINib(nibName: Video4Cell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Video4Cell.reuseIdentifier)
+        collView.register(UINib(nibName: NoCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: NoCell.className)
         let layout = UICollectionViewFlowLayout()
         //layout.itemSize = CGSize(width: (414 - 40) * scaleW, height: 340 * scaleW)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         collView.collectionViewLayout = layout
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapTwoTime(_:)))
+        tap.numberOfTapsRequired = 2
+        collView.addGestureRecognizer(tap)
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnBack(_:))))
         //
         APIService.shared.getPlaylist(privateKey: ids[data.name] ?? "") {[self] (data, error) in
@@ -41,6 +43,9 @@ class TV2Controller: UIViewController {
                 collView.reloadData()
             }
         }
+    }
+    @objc func didTapTwoTime(_ sender: Any){
+        navigationController?.popViewController(animated: false)
     }
     @objc func didSelectBtnBack(_ sender: Any){
         self.navigationController?.popViewController(animated: false)
@@ -116,26 +121,26 @@ extension TV2Controller: UICollectionViewDelegate, UICollectionViewDataSource, U
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video2Cell.className, for: indexPath) as! Video2Cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video2Cell.reuseIdentifier, for: indexPath) as! Video2Cell
         cell.delegate = self
         switch indexPath.row {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.className, for: indexPath) as! NoCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCell.reuseIdentifier, for: indexPath) as! NoCell
             return cell
         case 1:
             if data.name == "VTC1" || data.name == "VTC14"{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video3Cell.className, for: indexPath) as! Video3Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video3Cell.reuseIdentifier, for: indexPath) as! Video3Cell
                 cell.delegate = self
                 cell.item = data
                 cell.lblTitle.text = ""
                 if indexPath == self.indexPath{
-                    var link = ""
-                    if cell.item is ChannelModel {
-                        link = data.url[0].link
-                    } else {
-                        link = listVideos[indexPath.row - 2].path
-                    }
-                    if let url = URL(string: link){
+                    let link = data.url[0].link
+//                    if cell.item is ChannelModel {
+//                        link = data.url[0].link
+//                    } else {
+//                        link = listVideos[indexPath.row - 2].path
+//                    }
+                    if let url = URL(string: link.replacingOccurrences(of: "\\", with: "/" )){
                         
                         cell.viewPlayer.player  = AVPlayer(url: url)
                         cell.setup()
@@ -149,18 +154,18 @@ extension TV2Controller: UICollectionViewDelegate, UICollectionViewDataSource, U
                 }
                 return cell
             } else{
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video4Cell.className, for: indexPath) as! Video4Cell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Video4Cell.reuseIdentifier, for: indexPath) as! Video4Cell
                 cell.delegate = self
                 cell.item = data
                 cell.lblTitle.text = ""
                 if indexPath == self.indexPath{
-                    var link = ""
-                    if cell.item is ChannelModel {
-                        link = data.url[0].link
-                    } else {
-                        link = listVideos[indexPath.row - 2].path
-                    }
-                    if let url = URL(string: link){
+                    let link = data.url[0].link
+//                    if cell.item is ChannelModel {
+//                        link = data.url[0].link
+//                    } else {
+//                        link = listVideos[indexPath.row - 2].path
+//                    }
+                    if let url = URL(string: link.replacingOccurrences(of: "\\", with: "/" )){
                         
                         cell.viewPlayer.player  = AVPlayer(url: url)
                         cell.setup()
@@ -189,20 +194,20 @@ extension TV2Controller: UICollectionViewDelegate, UICollectionViewDataSource, U
             }
         }
         if indexPath == self.indexPath{
-            var link = ""
-            if cell.item is ChannelModel {
-                link = data.url[0].link
-            } else {
-                link = listVideos[indexPath.row - 2].path
-            }
-            if let url = URL(string: link){
+            let link = listVideos[indexPath.row - 2].path
+//            if cell.item is ChannelModel {
+//                link = data.url[0].link
+//            } else {
+//                link = listVideos[indexPath.row - 2].path
+//            }
+            if let url = URL(string: link.replacingOccurrences(of: "\\", with: "/" )){
                 
                 cell.viewPlayer.player  = AVPlayer(url: url)
                 cell.setup()
                 cell.viewPlayer.player?.play()
 
             }
-            cell.imgThumb.isHidden = true
+//            cell.imgThumb.isHidden = true
         } else{
             cell.viewPlayer.player?.pause()
             cell.imgThumb.isHidden = false

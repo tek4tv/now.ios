@@ -82,11 +82,12 @@ class MediaModel{
                 let imageAdd = ImageModel().initLoad(item)
                 if imageAdd.type == "Thumbnail"{
                     //let str = imageAdd.url.split(separator: ".")
-                    let str = imageAdd.url
-                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
-                    let last4 = str.suffix(4)
-                    let path = prefix + "_800_450" + last4
-                    thumnail = String(path)
+//                    let str = imageAdd.url
+//                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
+//                    let last4 = str.suffix(4)
+//                    let path = prefix + "_800_450" + last4
+//                    thumnail = String(path)
+                    thumnail = imageAdd.url
                 }
                 if imageAdd.type == "Portrait"{
                     portrait = imageAdd.url
@@ -102,11 +103,12 @@ class MediaModel{
                 let imageAdd = ImageModel().initLoad(item)
                 if imageAdd.type == "Thumbnail"{
                     //let str = imageAdd.url.split(separator: ".")
-                    let str = imageAdd.url
-                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
-                    let last4 = str.suffix(4)
-                    let path = prefix + "_800_450" + last4
-                    thumnail = String(path)
+//                    let str = imageAdd.url
+//                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
+//                    let last4 = str.suffix(4)
+//                    let path = prefix + "_800_450" + last4
+//                    thumnail = String(path)
+                    thumnail = imageAdd.url
                 }
                 if imageAdd.type == "Portrait"{
                     portrait = imageAdd.url
@@ -313,6 +315,15 @@ class KeyWordModel{
     func initLoad(_ json: [String: Any]) -> KeyWordModel{
         if let temp = json["PrivateKey"] as? String { privateKey = temp}
         if let temp = json["KeyWord"] as? String { keyWord = temp}
+        return self
+    }
+}
+class KeySearchModel{
+    var privateKey = ""
+    var string = ""
+    func initLoad(_ json: [String: Any]) -> KeySearchModel{
+        if let temp = json["string"] as? String { string = temp}
+        if let temp = json["payload"] as? String { privateKey = temp}
         return self
     }
 }

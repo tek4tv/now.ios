@@ -7,7 +7,7 @@
 
 import UIKit
 class MovieCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "MovieCell"
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var viewLine: UIView!
@@ -25,7 +25,7 @@ class MovieCell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: MovieItemCell.className, bundle: nil), forCellWithReuseIdentifier: MovieItemCell.className)
+        collView.register(UINib(nibName: MovieItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: MovieItemCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 110 * scaleW, height: 230 * scaleW)
         layout.scrollDirection = .horizontal
@@ -44,7 +44,7 @@ extension MovieCell: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieItemCell.className, for: indexPath) as! MovieItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieItemCell.reuseIdentifier, for: indexPath) as! MovieItemCell
         let item = data.media[indexPath.row]
         if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
             cell.thumbImage.loadImage(fromURL: url)
@@ -81,6 +81,6 @@ extension MovieCell: UICollectionViewDelegate, UICollectionViewDataSource{
     }
 }
 
-protocol MovieCellDelegate: class{
+protocol MovieCellDelegate: MovieController{
     func didSelectItemAt(_ data: MediaModel,_ list: [MediaModel])
 }

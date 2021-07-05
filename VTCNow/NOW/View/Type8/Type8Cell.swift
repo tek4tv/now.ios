@@ -8,7 +8,7 @@
 import UIKit
 
 class Type8Cell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Type8Cell"
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
     
@@ -42,7 +42,7 @@ extension Type8Cell: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type8ItemCell.className, for: indexPath) as! Type8ItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type8ItemCell.reuseIdentifier, for: indexPath) as! Type8ItemCell
         let item = data.media[indexPath.row]
         if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
             cell.thumbImage.loadImage(fromURL: url)
@@ -77,6 +77,6 @@ extension Type8Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         }
     }
 }
-protocol Type8CellDelegate: class{
+protocol Type8CellDelegate: HighLightController{
     func didSelectItemAt(_ data: MediaModel, _ listData: [MediaModel], _ cell: Type8Cell)
 }

@@ -1,0 +1,87 @@
+//
+//  PhimCell.swift
+//  VTCNow
+//
+//  Created by dovietduy on 1/27/21.
+//
+
+import UIKit
+class Movie3Cell: UICollectionViewCell {
+    static let reuseIdentifier = "Movie3Cell"
+    @IBOutlet weak var collView: UICollectionView!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var viewLine: UIView!
+    var delegate: Movie3CellDelegate!
+    var data = CategoryModel(){
+        didSet{
+            lblTitle.text = data.name
+            if data.name != oldValue.name{
+                collView.reloadData()
+            }
+        }
+    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        collView.delegate = self
+        collView.dataSource = self
+        collView.register(UINib(nibName: MovieItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: MovieItemCell.reuseIdentifier)
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 140 * scaleW, height: 300 * scaleW)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 20 * scaleW
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 10 * scaleW, right: 20 * scaleW)
+        collView.collectionViewLayout = layout
+    }
+    override func prepareForReuse() {
+        lblTitle.text = ""
+    }
+}
+extension Movie3Cell: UICollectionViewDelegate, UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data.media.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieItemCell.reuseIdentifier, for: indexPath) as! MovieItemCell
+        let item = data.media[indexPath.row]
+        if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
+            cell.thumbImage.loadImage(fromURL: url)
+        }
+        cell.lblTitle.text = item.name
+        cell.lblCountry.text = item.country
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let count = data.media.count
+        
+        var list: [MediaModel] = []
+        if count == 1{
+            list = []
+        } else if count == 2{
+            if indexPath.row == 0 {
+                list.append(data.media[1])
+            } else{
+                list.append(data.media[0])
+            }
+        } else if count >= 3 {
+            if indexPath.row == 0{
+                list = Array(data.media[1...count-1])
+            } else if indexPath.row == count-1 {
+                list = Array(data.media[0...count - 2])
+            } else{
+                list = Array(data.media[indexPath.row+1...count-1] + data.media[0...indexPath.row-1])
+            }
+        }
+        APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
+            if let data = data as? MediaModel{
+                self.delegate?.didSelectItemAt(data, list)
+            }
+        }
+    }
+}
+
+protocol Movie3CellDelegate: MovieController{
+    func didSelectItemAt(_ data: MediaModel,_ list: [MediaModel])
+}

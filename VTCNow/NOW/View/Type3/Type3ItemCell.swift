@@ -7,7 +7,7 @@
 
 import UIKit
 class Type3ItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Type3ItemCell"
     @IBOutlet weak var thumbImage: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
@@ -45,7 +45,7 @@ class Type3ItemCell: UICollectionViewCell {
         delegate?.didSelectViewImage(self)
     }
 }
-protocol Type3ItemCellDelegate: class {
+protocol Type3ItemCellDelegate: AnyObject {
     func didSelectViewImage(_ cell: Type3ItemCell)
     func didSelectViewBookmark(_ cell: Type3ItemCell)
     func didSelectViewShare(_ cell: Type3ItemCell)

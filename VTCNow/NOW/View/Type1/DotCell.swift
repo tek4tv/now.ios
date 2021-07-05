@@ -8,7 +8,7 @@
 import UIKit
 
 class DotCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "DotCell"
     @IBOutlet weak var viewDot: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()

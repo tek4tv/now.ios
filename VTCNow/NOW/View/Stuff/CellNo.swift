@@ -8,7 +8,7 @@
 import UIKit
 
 class CellNo: UITableViewCell {
-
+    static let reuseIdentifier = "CellNo"
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

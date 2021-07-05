@@ -16,8 +16,8 @@ class UserController: UIViewController {
         // Do any additional setup after loading the view.
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: WeatherCell.className, bundle: nil), forCellWithReuseIdentifier: WeatherCell.className)
-        collView.register(UINib(nibName: NewBroadCell.className, bundle: nil), forCellWithReuseIdentifier: NewBroadCell.className)
+        collView.register(UINib(nibName: WeatherCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: WeatherCell.reuseIdentifier)
+        collView.register(UINib(nibName: NewBroadCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: NewBroadCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         //layout.itemSize = CGSize(width: 414 * scaleW, height: 250 * scaleW)
         layout.minimumLineSpacing = 0
@@ -102,14 +102,14 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.className, for: indexPath) as! WeatherCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.reuseIdentifier, for: indexPath) as! WeatherCell
             cell.delegate = self
             cell.viewSearch.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBtnSearch(_:))))
             return cell
         default:
             switch indexPath.row {
             case 0..<listCate.count:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.className, for: indexPath) as! NewBroadCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.reuseIdentifier, for: indexPath) as! NewBroadCell
                 let item = listCate[indexPath.row]
                 cell.delegate = self
                 cell.lblTitle.text = item.name
@@ -118,7 +118,7 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 cell.collView.backgroundColor = .white
                 return cell
             default:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.className, for: indexPath) as! NewBroadCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.reuseIdentifier, for: indexPath) as! NewBroadCell
                 cell.lblTitle.text = "Chọn nhiều chủ đề"
                 cell.data = CategoryModel()
                 cell.collView.backgroundColor = .clear

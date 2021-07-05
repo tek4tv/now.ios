@@ -10,7 +10,7 @@ import MUXSDKStats
 import AVFoundation
 
 class Video3Cell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Video3Cell"
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     
@@ -39,6 +39,7 @@ class Video3Cell: UICollectionViewCell {
     
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
         aiv.translatesAutoresizingMaskIntoConstraints = false
         //aiv.startAnimating()
         return aiv

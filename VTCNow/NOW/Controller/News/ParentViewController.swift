@@ -16,6 +16,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     @IBOutlet weak var tblSearchView: UITableView!
     var listSearch: [MediaModel] = []
     var indexPath = IndexPath(row: 1, section: 0)
+    var tag = ""
     override func viewDidLoad() {
         
         
@@ -24,7 +25,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
-        settings.style.buttonBarItemFont = .systemFont(ofSize: 14 * scaleW)
+        settings.style.buttonBarItemFont = .systemFont(ofSize: 18 * scaleW)
         settings.style.selectedBarHeight = 2.0
         settings.style.buttonBarMinimumLineSpacing = 15 * scaleW
         settings.style.buttonBarItemTitleColor = .black
@@ -40,13 +41,18 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
         //
         tblSearchView.delegate = self
         tblSearchView.dataSource = self
-        tblSearchView.register(UINib(nibName: CellVideo.className, bundle: nil), forCellReuseIdentifier: CellVideo.className)
-        tblSearchView.register(UINib(nibName: CellNo.className, bundle: nil), forCellReuseIdentifier: CellNo.className)
+        tblSearchView.register(UINib(nibName: CellVideo.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CellVideo.reuseIdentifier)
+        tblSearchView.register(UINib(nibName: CellNo.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CellNo.reuseIdentifier)
         tblSearchView.estimatedRowHeight = 350 * scaleW
         tblSearchView.rowHeight = UITableView.automaticDimension
         txfView.addTarget(self, action: #selector(textFieldDidChange(_:)),
                           for: .editingChanged)
         txfView.delegate = self
+        //
+        tag = news.privateKey
+        for item in news.components{
+            tag += " | " + item.privateKey
+        }
     }
     
     @objc func didSelectViewBack(_ sender: Any){
@@ -85,7 +91,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
             self.listSearch = []
             self.tblSearchView.isHidden = false
             self.indexPath = IndexPath(row: 1, section: 0)
-            APIService.shared.searchByTag(privateKey: news.privateKey, keySearch: textField.text!) {[weak self] (data, error) in
+            APIService.shared.searchByTag(privateKey: tag, keySearch: textField.text!) {[weak self] (data, error) in
                 if let data = data as? [MediaModel]{
                     self?.listSearch = data
                     self?.tblSearchView.reloadData()
@@ -97,7 +103,7 @@ class ParentViewController: ButtonBarPagerTabStripViewController {
     }
     func cellForRow(_ indexPath: IndexPath) -> CellVideo?{
         guard let cell = tblSearchView.cellForRow(at: indexPath) as? CellVideo else {
-            return tblSearchView.dequeueReusableCell(withIdentifier: CellVideo.className, for: indexPath) as? CellVideo
+            return tblSearchView.dequeueReusableCell(withIdentifier: CellVideo.reuseIdentifier, for: indexPath) as? CellVideo
         }
         return cell
     }
@@ -174,13 +180,13 @@ extension ParentViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellNo.className, for: indexPath) as! CellNo
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellNo.reuseIdentifier, for: indexPath) as! CellNo
             return cell
         case listSearch.count + 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellNo.className, for: indexPath) as! CellNo
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellNo.reuseIdentifier, for: indexPath) as! CellNo
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellVideo.className, for: indexPath) as! CellVideo
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellVideo.reuseIdentifier, for: indexPath) as! CellVideo
             
             let item = listSearch[indexPath.row - 1]
             cell.item = item
@@ -217,7 +223,7 @@ extension ParentViewController: UITableViewDelegate, UITableViewDataSource{
                     cell.viewPlayer.player?.play()
                     cell.setup()
                 }
-                cell.imgThumb.isHidden = true
+//                cell.imgThumb.isHidden = true
             } else{
                 cell.viewPlayer.player?.pause()
                 cell.imgThumb.isHidden = false

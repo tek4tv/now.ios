@@ -8,6 +8,7 @@
 import UIKit
 import MarqueeLabel
 class Book2Cell: UITableViewCell {
+    static let reuseIdentifier = "Book2Cell"
     @IBOutlet weak var lblTitle: MarqueeLabel!
     @IBOutlet weak var lblAuthor: UILabel!
     override func awakeFromNib() {

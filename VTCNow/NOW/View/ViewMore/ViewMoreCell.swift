@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewMoreCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "ViewMoreCell"
     @IBOutlet weak var imgThumb: LazyImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

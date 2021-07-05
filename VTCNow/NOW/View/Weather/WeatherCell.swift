@@ -8,7 +8,7 @@
 import UIKit
 
 class WeatherCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "WeatherCell"
     @IBOutlet weak var viewSearch: UIView!
     @IBOutlet weak var viewWeather: UIView!
     @IBOutlet weak var lblCity: UILabel!
@@ -101,6 +101,6 @@ class WeatherCell: UICollectionViewCell {
         }
     }
 }
-protocol WeatherDelegate: class {
+protocol WeatherDelegate: AnyObject {
     func didSelectViewWeather(_ listW: WeatherModel)
 }

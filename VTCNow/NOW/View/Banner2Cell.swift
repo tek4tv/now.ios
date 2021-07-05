@@ -8,7 +8,7 @@
 import UIKit
 
 class Banner2Cell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Banner2Cell"
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

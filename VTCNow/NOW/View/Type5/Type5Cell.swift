@@ -9,17 +9,24 @@ import UIKit
 //import GoogleMobileAds
 
 class Type5Cell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Type5Cell"
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
     var delegate: Type5CellDelegate!
 //    var admobNativeAds: GADUnifiedNativeAd?
+    var numberOfItem = 0
     var data = CategoryModel(){
         didSet{
             lblTitle.text = data.name
             if data.name != oldValue.name{
                 collView.reloadData()
             }
+            if data.media.count >= 10 {
+                numberOfItem = 10
+            } else {
+                numberOfItem = data.media.count
+            }
+            
         }
     }
     override func awakeFromNib() {
@@ -27,8 +34,8 @@ class Type5Cell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type3ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.className)
-        collView.register(UINib(nibName: ViewMoreCell.className, bundle: nil), forCellWithReuseIdentifier: ViewMoreCell.className)
+        collView.register(UINib(nibName: Type3ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.reuseIdentifier)
+        collView.register(UINib(nibName: ViewMoreCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: ViewMoreCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
@@ -39,30 +46,28 @@ class Type5Cell: UICollectionViewCell {
 
 }
 extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if data.media.count < 7 {
-            APIService.shared.getMoreVideoPlaylist(privateKey: data.privateKey, page: "0") { (data, error) in
-                if let data = data as? [MediaModel]{
-                    self.data.media += data
-                    self.collView.reloadData()
-                }
-            }
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        if data.media.count < 7 {
+//            APIService.shared.getMoreVideoPlaylist(privateKey: data.privateKey, page: "0") { (data, error) in
+//                if let data = data as? [MediaModel]{
+//                    self.data.media += data
+//                    self.collView.reloadData()
+//                }
+//            }
+//        }
+//    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if data.media.count >= 7 {
-            return 7
-        }
-        return data.media.count
-    }
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+//        if data.media.count >= 10 {
+//            return 10
+//        }
+//        return data.media.count
+        return numberOfItem
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = data.media[indexPath.row]
         switch indexPath.row {
-        case 0...5:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+        case 0...numberOfItem-2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.reuseIdentifier, for: indexPath) as! Type3ItemCell
             cell.lblTitle.text = item.name
             if item.episode != "" {
                 cell.viewEpisode.isHidden = false
@@ -79,7 +84,7 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             cell.viewShare.isHidden = true
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMoreCell.className, for: indexPath) as! ViewMoreCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMoreCell.reuseIdentifier, for: indexPath) as! ViewMoreCell
             
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
@@ -89,7 +94,7 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0...5:
+        case 0...numberOfItem-2:
             break
         default:
             delegate?.didSelectViewMore(self)
@@ -98,7 +103,7 @@ extension Type5Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.row {
-        case 0...5:
+        case 0...numberOfItem-2:
             return CGSize(width: 160 * scaleW, height: 200 * scaleW)
         default:
             return CGSize(width: 168 * scaleW, height: 200 * scaleW)
@@ -126,7 +131,7 @@ extension Type5Cell: Type3ItemCellDelegate{
     
     
 }
-protocol Type5CellDelegate: class{
+protocol Type5CellDelegate: HighLightController{
     func didSelectViewImage()
     func didSelectView2Share(_ cell: Type3ItemCell)
     func didSelectViewMore(_ cell: Type5Cell)

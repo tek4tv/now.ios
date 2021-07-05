@@ -8,7 +8,7 @@
 import UIKit
 
 class CommentCell: UITableViewCell {
-
+    static let reuseIdentifier = "CommentCell"
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

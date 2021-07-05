@@ -52,6 +52,7 @@ class WatchController: UIViewController {//}, IMAAdsLoaderDelegate , IMAAdsManag
     @IBOutlet weak var collView: UICollectionView!
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
         aiv.translatesAutoresizingMaskIntoConstraints = false
         aiv.startAnimating()
         return aiv
@@ -118,7 +119,7 @@ class WatchController: UIViewController {//}, IMAAdsLoaderDelegate , IMAAdsManag
         super.viewDidLoad()
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: WatchCell.className, bundle: nil), forCellWithReuseIdentifier: WatchCell.className)
+        collView.register(UINib(nibName: WatchCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: WatchCell.reuseIdentifier)
         viewPlayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewPlayer(_:))))
         let layout = UICollectionViewFlowLayout()
         let width = (UIScreen.main.bounds.width - 30 * scaleW) / 4.5
@@ -349,7 +350,7 @@ extension WatchController: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WatchCell.className, for: indexPath) as! WatchCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WatchCell.reuseIdentifier, for: indexPath) as! WatchCell
         let item = listData[indexPath.row]
         if let url = URL(string: root.cdn.imageDomain + item.image[0].url.replacingOccurrences(of: "\\", with: "/" )){
             cell.imgThumb.loadImage(fromURL: url)

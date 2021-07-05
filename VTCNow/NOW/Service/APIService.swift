@@ -96,7 +96,7 @@ class APIService{
         })
     }
     func getVideoHot(privateKey: String = "62aa4db4-9750-439e-baeb-b717685a1e7d" , closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
-        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/" + privateKey, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/62aa4db4-9750-439e-baeb-b717685a1e7d", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let data):
                 var category = CategoryModel()
@@ -191,7 +191,7 @@ class APIService{
         let json: [String : Any] = [
             "KeySearch": keySearch,
             "Tag": privateKey,
-            "Page":1,
+            "Page":0,
             "Size":20
         ]
         AF.request("https://dev.caching.tek4tv.vn/api/Video/Search", method: .post, parameters: json, encoding: JSONEncoding.default).responseJSON(completionHandler: { (response) in
@@ -240,15 +240,32 @@ class APIService{
         AF.request("https://dev.caching.tek4tv.vn/api/Video/suggestion/search", method: .post, parameters: json, encoding: JSONEncoding.default).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let data):
-                var listString : [String] = []
+                var listString : [KeySearchModel] = []
                 if let data = data as? [[String: Any]]{
                     for json in data{
-                        if let temp = json["string"] as? String{
-                            listString.append(temp)
-                        }
+                        let item = KeySearchModel().initLoad(json)
+                        listString.append(item)
                     }
                 }
                 closure(listString, nil)
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    func getSchedule(day: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://caching.mediahub.vn/api/playlist/json/vnews_epg_" + day, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                var list: [ScheduleModel] = []
+                if let data = data as? [[String: Any]]{
+                    for json in data {
+                        var item = ScheduleModel()
+                        item = item.initLoad(json)
+                        list.append(item)
+                    }
+                }
+                closure(list, nil)
             case .failure(let error):
                 print(error)
             }

@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewFullItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "ViewFullItemCell"
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!

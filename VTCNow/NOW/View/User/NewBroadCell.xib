@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19115.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.4"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -95,29 +96,33 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lựa chọn loạt chủ đề mà bạn quan tâm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lm9-IL-5mN">
-                        <rect key="frame" x="59.5" y="199.5" width="295.5" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="60" y="155" width="294.5" height="20"/>
+                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                         <color key="textColor" red="0.53414618970000005" green="0.53422611949999999" blue="0.53412872550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="myAutoFontSize" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="now" translatesAutoresizingMaskIntoConstraints="NO" id="rf8-Mb-RAe">
-                        <rect key="frame" x="167" y="89.5" width="80" height="80"/>
-                        <color key="backgroundColor" red="0.53414618970000005" green="0.53422611949999999" blue="0.53412872550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rf8-Mb-RAe">
+                        <rect key="frame" x="172" y="65" width="70" height="70"/>
+                        <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="rf8-Mb-RAe" secondAttribute="height" id="2gF-I9-BKC">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
-                            <constraint firstAttribute="height" constant="80" id="FpH-PE-pBM">
+                            <constraint firstAttribute="height" constant="70" id="FpH-PE-pBM">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
                         </constraints>
+                        <imageReference key="image" image="ic_now_nocolor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="40"/>
+                                <real key="value" value="35"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
@@ -153,14 +158,14 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
-                <constraint firstAttribute="bottom" secondItem="Lm9-IL-5mN" secondAttribute="bottom" constant="30" id="Oy2-5M-nbd"/>
+                <constraint firstAttribute="bottom" secondItem="Lm9-IL-5mN" secondAttribute="bottom" constant="75" id="Oy2-5M-nbd"/>
                 <constraint firstAttribute="trailing" secondItem="PBf-N2-vqW" secondAttribute="trailing" id="duZ-5g-awR">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </constraint>
                 <constraint firstAttribute="bottom" secondItem="CVN-W8-mh0" secondAttribute="bottom" id="fYI-pD-fA6"/>
-                <constraint firstItem="Lm9-IL-5mN" firstAttribute="top" secondItem="rf8-Mb-RAe" secondAttribute="bottom" constant="30" id="jFQ-jh-rA4">
+                <constraint firstItem="Lm9-IL-5mN" firstAttribute="top" secondItem="rf8-Mb-RAe" secondAttribute="bottom" constant="20" id="jFQ-jh-rA4">
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -182,6 +187,6 @@
     </objects>
     <resources>
         <image name="NEXT" width="512" height="512"/>
-        <image name="now" width="501" height="501"/>
+        <image name="ic_now_nocolor" width="232" height="232"/>
     </resources>
 </document>

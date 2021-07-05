@@ -8,7 +8,7 @@
 import UIKit
 
 class Type8ItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Type8ItemCell"
     @IBOutlet weak var thumbImage: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     override func awakeFromNib() {

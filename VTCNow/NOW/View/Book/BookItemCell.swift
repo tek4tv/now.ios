@@ -7,7 +7,7 @@
 
 import UIKit
 class BookItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "BookItemCell"
     @IBOutlet weak var thumbImage: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblAuthor: UILabel!

@@ -9,7 +9,7 @@ import UIKit
 //import GoogleMobileAds
 
 class Type9Cell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Type9Cell"
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var lblTitle: UILabel!
     var delegate: Type9CellDelegate!
@@ -27,11 +27,11 @@ class Type9Cell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type3ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.className)
-        collView.register(UINib(nibName: ViewMoreCell.className, bundle: nil), forCellWithReuseIdentifier: ViewMoreCell.className)
+        collView.register(UINib(nibName: Type3ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.reuseIdentifier)
+        collView.register(UINib(nibName: ViewMoreCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: ViewMoreCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 20 * scaleW
+        layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 20 * scaleW
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 10 * scaleW, right: 20 * scaleW)
         collView.collectionViewLayout = layout
@@ -41,21 +41,21 @@ class Type9Cell: UICollectionViewCell {
 extension Type9Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
+//        switch section {
+//        case 0:
             return data.media.count
-        default:
-            return 1
-        }
+//        default:
+//            return 1
+//        }
     }
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 2
+//    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        switch indexPath.section {
-        case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+        switch indexPath.row {
+        case 0...data.media.count-2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.reuseIdentifier, for: indexPath) as! Type3ItemCell
             let item = data.media[indexPath.row]
             cell.lblTitle.text = item.name
             if item.episode != "" {
@@ -76,7 +76,7 @@ extension Type9Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             }
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMoreCell.className, for: indexPath) as! ViewMoreCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMoreCell.reuseIdentifier, for: indexPath) as! ViewMoreCell
             let item = data.media[indexPath.row]
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
@@ -85,8 +85,8 @@ extension Type9Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
+        switch indexPath.row {
+        case 0...data.media.count-2:
             break
         default:
             delegate?.didSelectViewMore(self)
@@ -94,11 +94,11 @@ extension Type9Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.section {
-        case 0:
-            return CGSize(width: 160 * scaleW, height: 200 * scaleW)
+        switch indexPath.row {
+        case 0...data.media.count-2:
+            return CGSize(width: 160 * scaleW, height: 180 * scaleW)
         default:
-            return CGSize(width: 168 * scaleW, height: 200 * scaleW)
+            return CGSize(width: 168 * scaleW, height: 180 * scaleW)
         }
     }
 }
@@ -140,7 +140,7 @@ extension Type9Cell: Type3ItemCellDelegate{
     
     
 }
-protocol Type9CellDelegate: class{
+protocol Type9CellDelegate: HighLightController{
     func didSelectViewImage(_ data: MediaModel,_ list: [MediaModel],_ cell: Type9Cell)
     func didSelectView2Share(_ cell: Type3ItemCell)
     func didSelectViewMore(_ cell: Type9Cell)

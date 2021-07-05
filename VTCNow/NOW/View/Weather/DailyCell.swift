@@ -8,7 +8,7 @@
 import UIKit
 
 class DailyCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "DailyCell"
     @IBOutlet weak var imgIcon: UIImageView!
     @IBOutlet weak var lblThu: UILabel!
     @IBOutlet weak var lblHigh: UILabel!

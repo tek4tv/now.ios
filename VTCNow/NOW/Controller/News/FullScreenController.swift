@@ -38,6 +38,7 @@ class FullScreenController: UIViewController {
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
         //aiv.startAnimating()
         return aiv
     }()
@@ -46,8 +47,8 @@ class FullScreenController: UIViewController {
         super.viewDidLoad()
         self.rotateToLandsScapeRightDevice()
         //
-        tblVolume.register(UINib(nibName: ClearCell.className, bundle: nil), forCellReuseIdentifier: ClearCell.className)
-        tblBrightness.register(UINib(nibName: ClearCell.className, bundle: nil), forCellReuseIdentifier: ClearCell.className)
+        tblVolume.register(UINib(nibName: ClearCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: ClearCell.reuseIdentifier)
+        tblBrightness.register(UINib(nibName: ClearCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: ClearCell.reuseIdentifier)
         //
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
         viewBack2.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
@@ -353,7 +354,7 @@ extension FullScreenController: UITableViewDelegate, UITableViewDataSource, UISc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ClearCell.className, for: indexPath) as! ClearCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ClearCell.reuseIdentifier, for: indexPath) as! ClearCell
         return cell
     }
     

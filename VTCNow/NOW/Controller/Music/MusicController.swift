@@ -19,7 +19,7 @@ class MusicController: UIViewController {
 
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type8ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type8ItemCell.className)
+        collView.register(UINib(nibName: Type8ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type8ItemCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.itemSize = CGSize(width: (414 - 60) / 2.001 * scaleW, height: 180 * scaleW)
@@ -32,7 +32,7 @@ class MusicController: UIViewController {
         txfView.delegate = self
         collSearchView.delegate = self
         collSearchView.dataSource = self
-        collSearchView.register(UINib(nibName: Type8ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type8ItemCell.className)
+        collSearchView.register(UINib(nibName: Type8ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type8ItemCell.reuseIdentifier)
         let layout2 = UICollectionViewFlowLayout()
         layout2.minimumLineSpacing = 0
         layout2.itemSize = CGSize(width: (414 - 60) / 2.001 * scaleW, height: 180 * scaleW)
@@ -103,7 +103,7 @@ extension MusicController: UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
         case collView:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type8ItemCell.className, for: indexPath) as! Type8ItemCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type8ItemCell.reuseIdentifier, for: indexPath) as! Type8ItemCell
             let item = news.media[indexPath.row]
             cell.lblTitle.text = item.name
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
@@ -111,7 +111,7 @@ extension MusicController: UICollectionViewDelegate, UICollectionViewDataSource,
             }
             return cell
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type8ItemCell.className, for: indexPath) as! Type8ItemCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type8ItemCell.reuseIdentifier, for: indexPath) as! Type8ItemCell
             let item = listSearch[indexPath.row]
             cell.lblTitle.text = item.name
             if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){

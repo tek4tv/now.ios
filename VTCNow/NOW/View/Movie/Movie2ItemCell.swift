@@ -7,7 +7,7 @@
 
 import UIKit
 class Movie2ItemCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Movie2ItemCell"
     @IBOutlet weak var thumbImage: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     override func awakeFromNib() {

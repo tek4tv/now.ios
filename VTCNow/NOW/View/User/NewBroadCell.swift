@@ -8,6 +8,7 @@
 import UIKit
 
 class NewBroadCell: UICollectionViewCell {
+    static let reuseIdentifier = "NewBroadCell"
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var imgAdd: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
@@ -22,7 +23,7 @@ class NewBroadCell: UICollectionViewCell {
         // Initialization code
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type3ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.className)
+        collView.register(UINib(nibName: Type3ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type3ItemCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 160 * scaleW, height: 200 * scaleW)
@@ -42,7 +43,7 @@ extension NewBroadCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.className, for: indexPath) as! Type3ItemCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.reuseIdentifier, for: indexPath) as! Type3ItemCell
         let item = data.media[indexPath.row]
         cell.delegate = self
         cell.data = item
@@ -61,7 +62,7 @@ extension NewBroadCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
 }
-protocol NewBroadCellDelegate: class {
+protocol NewBroadCellDelegate: UserController {
     func didSelectItemAt(_ cell: NewBroadCell)
     func didSelectViewShare(_ cell: Type3ItemCell)
 }

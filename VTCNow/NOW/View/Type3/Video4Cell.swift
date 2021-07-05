@@ -10,7 +10,7 @@ import AVFoundation
 import MUXSDKStats
 
 class Video4Cell: UICollectionViewCell {
-
+    static let reuseIdentifier = "Video4Cell"
     @IBOutlet weak var imgThumb: LazyImageView!
     @IBOutlet weak var lblTitle: UILabel!
     
@@ -38,6 +38,7 @@ class Video4Cell: UICollectionViewCell {
     
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
         aiv.translatesAutoresizingMaskIntoConstraints = false
         //aiv.startAnimating()
         return aiv
@@ -235,7 +236,7 @@ class Video4Cell: UICollectionViewCell {
         listResolution = []
 //        if item is ChannelModel{
 //            if let item = item as? ChannelModel {
-        if let url = URL(string: item.url[0].link){
+        if let url = URL(string: item.url[0].link.replacingOccurrences(of: "\\", with: "/")){
             StreamHelper.shared.getPlaylist(from: url) { [weak self] (result) in
                 switch result {
                 case .success(let playlist):

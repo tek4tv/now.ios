@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18038166268F0F520025994A /* Movie3Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18038164268F0F520025994A /* Movie3Cell.swift */; };
+		18038167268F0F520025994A /* Movie3Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18038165268F0F520025994A /* Movie3Cell.xib */; };
 		180CFABC268313C9004C99C2 /* CellVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180CFABA268313C9004C99C2 /* CellVideo.swift */; };
 		180CFABD268313C9004C99C2 /* CellVideo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180CFABB268313C9004C99C2 /* CellVideo.xib */; };
 		180CFAC0268316FA004C99C2 /* CellNo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180CFABE268316FA004C99C2 /* CellNo.swift */; };
 		180CFAC1268316FA004C99C2 /* CellNo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180CFABF268316FA004C99C2 /* CellNo.xib */; };
 		1836BF5626858DC600C9591A /* SpeechToTextVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1836BF5426858DC500C9591A /* SpeechToTextVC.xib */; };
 		1836BF5726858DC600C9591A /* SpeechToTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836BF5526858DC600C9591A /* SpeechToTextVC.swift */; };
+		18737CA2268B20B400BC11D8 /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18737CA1268B20B400BC11D8 /* ScheduleModel.swift */; };
 		1892B43326847079001081A9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1892B43226847079001081A9 /* WebKit.framework */; };
 		18ACF0812683389500F2595C /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ACF0802683389500F2595C /* NetworkMonitor.swift */; };
+		18C2980D2692E3C500AB95E3 /* PopUp8VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2980C2692E3C500AB95E3 /* PopUp8VC.swift */; };
 		4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */; };
 		F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2F8425EC8E170002E99C /* CommentCell.swift */; };
 		F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60E2F8525EC8E170002E99C /* CommentCell.xib */; };
@@ -66,7 +70,6 @@
 		F64C602025F22753008D44A0 /* MusicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64C601E25F22753008D44A0 /* MusicController.swift */; };
 		F64CFFBC25F8AB0F002F7F6F /* SpeechToTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64CFFBB25F8AB0F002F7F6F /* SpeechToTextController.swift */; };
 		F64DAC5026083A5900A2C688 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F64DAC4F26083A5900A2C688 /* LaunchScreen.storyboard */; };
-		F64E27CC2644EA44001418A3 /* BookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64E27CB2644EA44001418A3 /* BookController.swift */; };
 		F64E6ADA26049C22000F2A22 /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64E6AD926049C22000F2A22 /* ReportModel.swift */; };
 		F6507CB825C3EEFF002E77EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6507CB725C3EEFF002E77EC /* AppDelegate.swift */; };
 		F6507CBA25C3EEFF002E77EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6507CB925C3EEFF002E77EC /* SceneDelegate.swift */; };
@@ -205,14 +208,18 @@
 
 /* Begin PBXFileReference section */
 		11A21EDD954A85CAA9EA38BA /* Pods-NOW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOW.debug.xcconfig"; path = "Target Support Files/Pods-NOW/Pods-NOW.debug.xcconfig"; sourceTree = "<group>"; };
+		18038164268F0F520025994A /* Movie3Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie3Cell.swift; sourceTree = "<group>"; };
+		18038165268F0F520025994A /* Movie3Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Movie3Cell.xib; sourceTree = "<group>"; };
 		180CFABA268313C9004C99C2 /* CellVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellVideo.swift; sourceTree = "<group>"; };
 		180CFABB268313C9004C99C2 /* CellVideo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellVideo.xib; sourceTree = "<group>"; };
 		180CFABE268316FA004C99C2 /* CellNo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellNo.swift; sourceTree = "<group>"; };
 		180CFABF268316FA004C99C2 /* CellNo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellNo.xib; sourceTree = "<group>"; };
 		1836BF5426858DC500C9591A /* SpeechToTextVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeechToTextVC.xib; sourceTree = "<group>"; };
 		1836BF5526858DC600C9591A /* SpeechToTextVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextVC.swift; sourceTree = "<group>"; };
+		18737CA1268B20B400BC11D8 /* ScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		1892B43226847079001081A9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		18ACF0802683389500F2595C /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		18C2980C2692E3C500AB95E3 /* PopUp8VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp8VC.swift; sourceTree = "<group>"; };
 		4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDetailWebviewController.swift; sourceTree = "<group>"; };
 		E2A11019719C8E8CDE921ED9 /* Pods-NOW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOW.release.xcconfig"; path = "Target Support Files/Pods-NOW/Pods-NOW.release.xcconfig"; sourceTree = "<group>"; };
 		F60E2F8425EC8E170002E99C /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -265,7 +272,6 @@
 		F64C601E25F22753008D44A0 /* MusicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicController.swift; sourceTree = "<group>"; };
 		F64CFFBB25F8AB0F002F7F6F /* SpeechToTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextController.swift; sourceTree = "<group>"; };
 		F64DAC4F26083A5900A2C688 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F64E27CB2644EA44001418A3 /* BookController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookController.swift; sourceTree = "<group>"; };
 		F64E6AD926049C22000F2A22 /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
 		F6507CB425C3EEFF002E77EC /* NOW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NOW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6507CB725C3EEFF002E77EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -500,6 +506,7 @@
 				F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */,
 				F611070A25EE963100B049C3 /* PopUp6Controller.swift */,
 				F655707A25F8868E00E3A062 /* PopUp7Controller.swift */,
+				18C2980C2692E3C500AB95E3 /* PopUp8VC.swift */,
 			);
 			path = PopUp;
 			sourceTree = "<group>";
@@ -554,6 +561,8 @@
 		F64C116325EF9417001C3A7C /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				18038164268F0F520025994A /* Movie3Cell.swift */,
+				18038165268F0F520025994A /* Movie3Cell.xib */,
 				F610E0E2262EAEB800089FD8 /* Movie2Cell.swift */,
 				F610E0E3262EAEB900089FD8 /* Movie2Cell.xib */,
 				F610E0E4262EAEB900089FD8 /* Movie2ItemCell.swift */,
@@ -645,6 +654,7 @@
 				F6507CED25C3F76D002E77EC /* CategoryModel.swift */,
 				F6AA30E525EDDBD6007E3477 /* ReadModel.swift */,
 				F64B02EA25ECF30400AAE865 /* ChannelModel.swift */,
+				18737CA1268B20B400BC11D8 /* ScheduleModel.swift */,
 				F6CB90C025F72D9D0071D0BB /* NewsVideoModel.swift */,
 				F64E6AD926049C22000F2A22 /* ReportModel.swift */,
 				F64AB6DB26296E1100ABB691 /* TodayModel.swift */,
@@ -976,7 +986,6 @@
 			isa = PBXGroup;
 			children = (
 				F64B02E025ECF0BD00AAE865 /* ListenController.swift */,
-				F64E27CB2644EA44001418A3 /* BookController.swift */,
 				F645AC5625E8E113005F3C57 /* BookCategoryController.swift */,
 				F6560B5525EB824E009996D1 /* BookPlayerController.swift */,
 			);
@@ -1093,6 +1102,7 @@
 				F674649B2616D1F4003A5593 /* ViewMore3Cell.xib in Resources */,
 				F64DAC5026083A5900A2C688 /* LaunchScreen.storyboard in Resources */,
 				F65FD97825C672F0007F8D0F /* Type1Cell.xib in Resources */,
+				18038167268F0F520025994A /* Movie3Cell.xib in Resources */,
 				F6488D8325ECA80200058D1D /* Book2Cell.xib in Resources */,
 				F6D5068C25C6A84B002BEA99 /* Type6Cell.xib in Resources */,
 				F6B82C7625F2315D009FF801 /* Music2Cell.xib in Resources */,
@@ -1216,6 +1226,7 @@
 				180CFAC0268316FA004C99C2 /* CellNo.swift in Sources */,
 				F6507CE025C3F2CB002E77EC /* APIService.swift in Sources */,
 				4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */,
+				18737CA2268B20B400BC11D8 /* ScheduleModel.swift in Sources */,
 				F6E0586A2653C09900832382 /* PopUp3Controller.swift in Sources */,
 				F69EDA892631292F00E7122C /* PickUpController.swift in Sources */,
 				F65FD97525C672F0007F8D0F /* Type1Cell.swift in Sources */,
@@ -1232,7 +1243,9 @@
 				F65FD9B925C69775007F8D0F /* Type4ItemCell.swift in Sources */,
 				F65FD98825C6794F007F8D0F /* CategoryItemCell.swift in Sources */,
 				F66330722671C92600068D1C /* Banner2Cell.swift in Sources */,
+				18C2980D2692E3C500AB95E3 /* PopUp8VC.swift in Sources */,
 				F6D0C84E25C799B80097C0EC /* PopUpController.swift in Sources */,
+				18038166268F0F520025994A /* Movie3Cell.swift in Sources */,
 				F6176371261B152700A9A547 /* MusicPlayerController.swift in Sources */,
 				F64BF5A025E64E7900752E80 /* SearchController.swift in Sources */,
 				F6AB006E2660ECDD004543AB /* BannerCell.swift in Sources */,
@@ -1249,7 +1262,6 @@
 				F6507CEA25C3F3CA002E77EC /* HomeController.swift in Sources */,
 				F6CB90C125F72D9D0071D0BB /* NewsVideoModel.swift in Sources */,
 				F6488D8225ECA80200058D1D /* Book2Cell.swift in Sources */,
-				F64E27CC2644EA44001418A3 /* BookController.swift in Sources */,
 				F64836A925F0D12000A9E878 /* MovieController.swift in Sources */,
 				F65FD9B725C69775007F8D0F /* Type4Cell.swift in Sources */,
 				F6614735261EC0D700FD9469 /* Video2Cell.swift in Sources */,
@@ -1447,7 +1459,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VTC Now.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3.5;
+				CURRENT_PROJECT_VERSION = 1.3.6;
 				DEVELOPMENT_TEAM = J3Q9S3Z487;
 				INFOPLIST_FILE = "$(SRCROOT)/NOW/Now/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1455,7 +1467,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.5;
+				MARKETING_VERSION = 1.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.vtc.now;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1473,7 +1485,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VTC Now.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3.5;
+				CURRENT_PROJECT_VERSION = 1.3.6;
 				DEVELOPMENT_TEAM = J3Q9S3Z487;
 				INFOPLIST_FILE = "$(SRCROOT)/NOW/Now/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1481,7 +1493,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.5;
+				MARKETING_VERSION = 1.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.vtc.now;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

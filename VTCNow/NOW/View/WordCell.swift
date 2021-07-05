@@ -8,7 +8,7 @@
 import UIKit
 
 class WordCell: UICollectionViewCell {
-
+    static let reuseIdentifier = "WordCell"
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var viewContain: UIView!
     override func awakeFromNib() {
