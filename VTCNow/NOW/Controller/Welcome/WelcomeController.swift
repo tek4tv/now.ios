@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import Kingfisher
 var isOffClass = false
 
 class WelcomeController: UIViewController {
    // @IBOutlet weak var heightLogo: NSLayoutConstraint!
+    @IBOutlet weak var viewAlert: UIView!
+    @IBOutlet weak var viewShadow: UIView!
     @IBOutlet weak var imgThumb: UIImageView!
     @IBOutlet weak var lbl3: UILabel!
     @IBOutlet weak var lbl4: UILabel!
@@ -39,6 +42,21 @@ class WelcomeController: UIViewController {
         throw VersionError.invalidResponse
     }
     
+    @IBAction func didSelectViewCapNhat(_ sender: Any) {
+        self.isClickUpdate = true
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/1355778168"),
+           UIApplication.shared.canOpenURL(url){
+            UIApplication.shared.open(url)
+        }
+    }
+    @IBAction func didSelectViewDeSau(_ sender: UIButton) {
+        APIService.shared.getRootPlaylist {[weak self] (data, error) in
+            if let data = data as? RootModel{
+                root = data
+                self?.load()
+            }
+        }
+    }
     enum VersionError: Error {
         case invalidResponse, invalidBundleInfo
     }
@@ -57,26 +75,26 @@ class WelcomeController: UIViewController {
             }
         }
     }
-    @objc func didSelectViewDeSau(_ sender: Any){
-        APIService.shared.getRootPlaylist {[weak self] (data, error) in
-            if let data = data as? RootModel{
-                root = data
-                self?.load()
-            }
-        }
-    }
-    @objc func didSelectViewCapNhat(_ sender: Any){
-        self.isClickUpdate = true
-        if let url = URL(string: "itms-apps://itunes.apple.com/app/1355778168"),
-           UIApplication.shared.canOpenURL(url){
-            UIApplication.shared.open(url)
-        }
-    }
+//    @objc func didSelectViewDeSau(_ sender: Any){
+//        APIService.shared.getRootPlaylist {[weak self] (data, error) in
+//            if let data = data as? RootModel{
+//                root = data
+//                self?.load()
+//            }
+//        }
+//    }
+//    @objc func didSelectViewCapNhat(_ sender: Any){
+//        self.isClickUpdate = true
+//        if let url = URL(string: "itms-apps://itunes.apple.com/app/1355778168"),
+//           UIApplication.shared.canOpenURL(url){
+//            UIApplication.shared.open(url)
+//        }
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewContainer(_:))))
         NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
-        //heightLogo.constant = 0
+        viewShadow.alpha = 0.5
     }
     deinit{
         NotificationCenter.default.removeObserver(self)
@@ -121,13 +139,14 @@ class WelcomeController: UIViewController {
                             self.lbl3.isHidden = true
                             self.lbl4.isHidden = true
                             self.imgThumb.isHidden = true
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: PopUp8VC.className) as! PopUp8VC
-                            vc.modalPresentationStyle = .overFullScreen
-                            self.present(vc, animated: false, completion: nil)
+                            self.viewShadow.isHidden = false
+                            self.viewAlert.isHidden = false
                         } else {
                             self.lbl3.isHidden = true
                             self.lbl4.isHidden = true
                             self.imgThumb.isHidden = true
+                            self.viewShadow.isHidden = true
+                            self.viewAlert.isHidden = true
                             APIService.shared.getRootPlaylist {[weak self] (data, error) in
                                 if let data = data as? RootModel{
                                     root = data
@@ -152,11 +171,13 @@ class WelcomeController: UIViewController {
             self.lbl3.isHidden = false
             self.lbl4.isHidden = false
             self.imgThumb.isHidden = false
+            self.viewShadow.isHidden = true
+            self.viewAlert.isHidden = true
         }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       // self.heightLogo.constant = 128 * scaleW
+        ImageCache.default.diskStorage.config.expiration = .days(2)
         if #available(iOS 12.0, *) {
             checkNetwork()
         } else {
@@ -182,7 +203,7 @@ class WelcomeController: UIViewController {
                 if let data2 = data2 as? CategoryModel{
                     categorys.append(data2)
                     self?.count += 1
-//                    print(data2.name + " " + data2.layout.type + " - " + data2.layout.subType)
+                    print(data2.name + " " + data2.layout.type + " - " + data2.layout.subType)
                     if categorys.count == root.components.count{
                         APIService.shared.getLive { (data, error) in
                             if let data = data as? [ChannelModel]{
@@ -244,5 +265,18 @@ class WelcomeController: UIViewController {
         }
         
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }
 
+extension WelcomeController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+            if #available(iOS 13.0, *) {
+                return .darkContent
+            } else {
+                // Fallback on earlier versions
+                return .default
+            }
+        }
+}

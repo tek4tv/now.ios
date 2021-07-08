@@ -61,7 +61,7 @@ class Video4Cell: UICollectionViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(stopLive), name: NSNotification.Name("stopLive"), object: nil)
         btnPlay.isHidden = false
     }
-    deinit {
+    deinit{
         NotificationCenter.default.removeObserver(self)
     }
     @objc func stopLive(_ notification: Notification){
@@ -71,7 +71,7 @@ class Video4Cell: UICollectionViewCell {
             viewPlayer.player?.pause()
             viewPlayer.player?.replaceCurrentItem(with: nil)
         }
-        
+        viewPlayer.player?.replaceCurrentItem(with: nil)
     }
     func monitor(_ item: ChannelModel){
         if item.name != "" {

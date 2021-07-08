@@ -8,9 +8,20 @@
 import UIKit
 import AVFoundation
 import MUXSDKStats
+extension VideoController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+}
 class VideoController: UIViewController{
     
     override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
         URLCache.shared.removeAllCachedResponses()
         URLCache.shared.diskCapacity = 0
         URLCache.shared.memoryCapacity = 0
@@ -54,7 +65,16 @@ class VideoController: UIViewController{
         //aiv.startAnimating()
         return aiv
     }()
-    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        viewPlayer.player?.removeObserver(self, forKeyPath: "currentItem.loadedTimeRanges", context: nil)
+        viewPlayer.player?.removeObserver(self, forKeyPath: "timeControlStatus", context: nil)
+        timer.invalidate()
+        if let timeObserver = timeObserver {
+            viewPlayer.player?.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         //
@@ -94,18 +114,8 @@ class VideoController: UIViewController{
         }
     }
     @objc func didSelectLbl(_ sender: Any){
-//        lblDescription.text = item.descripTion
-//        if item.descripTion.count > 200 {
-//            lblDescription.text = item.descripTion.prefix(200) + "..."
-//            let partTwo = NSAttributedString(string: "Xem thêm", attributes: [NSAttributedString.Key.font: lblDescription.font!, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.5069422722, green: 0.000876982871, blue: 0.2585287094, alpha: 1) ])
-//            let combination = NSMutableAttributedString()
-//
-//            combination.append(lblDescription.attributedText!)
-//            combination.append(partTwo)
-//            lblDescription.attributedText = combination
-//        }
         if isXemThem == true {
-            if item.descripTion.count > 200 {
+            if item.descripTion.count > 150 {
                 lblDescription.text = item.descripTion + "..."
                 let partTwo = NSAttributedString(string: "Ẩn bớt", attributes: [NSAttributedString.Key.font: lblDescription.font!, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.5069422722, green: 0.000876982871, blue: 0.2585287094, alpha: 1) ])
                 let combination = NSMutableAttributedString()
@@ -115,8 +125,8 @@ class VideoController: UIViewController{
                 lblDescription.attributedText = combination
             }
         }else{
-            if item.descripTion.count > 200 {
-                lblDescription.text = item.descripTion.prefix(200) + "..."
+            if item.descripTion.count > 150 {
+                lblDescription.text = item.descripTion.prefix(150) + "..."
                 let partTwo = NSAttributedString(string: "Xem thêm", attributes: [NSAttributedString.Key.font: lblDescription.font!, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.5069422722, green: 0.000876982871, blue: 0.2585287094, alpha: 1) ])
                 let combination = NSMutableAttributedString()
                 
@@ -127,14 +137,7 @@ class VideoController: UIViewController{
         }
         isXemThem = !isXemThem
     }
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-        timer.invalidate()
-        if let timeObserver = timeObserver {
-            viewPlayer.player?.removeTimeObserver(timeObserver)
-            self.timeObserver = nil
-        }
-    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.viewPlayer.player?.pause()
@@ -378,8 +381,8 @@ class VideoController: UIViewController{
             
 
             lblDescription.text = item.descripTion
-            if item.descripTion.count > 200 {
-                lblDescription.text = item.descripTion.prefix(200) + "..."
+            if item.descripTion.count > 150 {
+                lblDescription.text = item.descripTion.prefix(150) + "..."
                 let partTwo = NSAttributedString(string: "Xem thêm", attributes: [NSAttributedString.Key.font: lblDescription.font!, NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.5069422722, green: 0.000876982871, blue: 0.2585287094, alpha: 1) ])
                 let combination = NSMutableAttributedString()
 
@@ -513,30 +516,64 @@ extension VideoController: UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let count = listData.count
-        
-        var list: [MediaModel] = []
-        if count == 1{
-            list = []
-        } else if count == 2{
-            if indexPath.row == 0 {
-                list.append(listData[1])
-            } else{
-                list.append(listData[0])
+//        let count = listData.count
+//        
+//        var list: [MediaModel] = []
+//        if count == 1{
+//            list = []
+//        } else if count == 2{
+//            if indexPath.row == 0 {
+//                list.append(listData[1])
+//            } else{
+//                list.append(listData[0])
+//            }
+//        } else if count >= 3 {
+//            if indexPath.row == 0{
+//                list = Array(listData[1...count-1])
+//            } else if indexPath.row == count-1 {
+//                list = Array(listData[0...count - 2])
+//            } else{
+//                if item.episode != "" {
+//                    list = Array(listData[0...indexPath.row-1]).reversed() + Array(listData[indexPath.row+1...count-1])
+//                    
+//                }else{
+//                    list = Array(listData[indexPath.row+1...count-1] + listData[0...indexPath.row-1])
+//                }
+//                
+//            }
+//        }
+//        list.append(item)
+//        item = listData[indexPath.row]
+//        listData = list
+//        collView.reloadData()
+        if item.episode == "" {
+            let count = listData.count
+            
+            var list: [MediaModel] = []
+            if count == 1{
+                list = []
+            } else if count == 2{
+                if indexPath.row == 0 {
+                    list.append(listData[1])
+                } else{
+                    list.append(listData[0])
+                }
+            } else if count >= 3 {
+                if indexPath.row == 0{
+                    list = Array(listData[1...count-1])
+                } else if indexPath.row == count-1 {
+                    list = Array(listData[0...count - 2])
+                } else{
+                    list = Array(listData[indexPath.row+1...count-1] + listData[0...indexPath.row-1])
+                }
             }
-        } else if count >= 3 {
-            if indexPath.row == 0{
-                list = Array(listData[1...count-1])
-            } else if indexPath.row == count-1 {
-                list = Array(listData[0...count - 2])
-            } else{
-                list = Array(listData[indexPath.row+1...count-1] + listData[0...indexPath.row-1])
-            }
+            list.append(item)
+            item = listData[indexPath.row]
+            listData = list
+            collView.reloadData()
+        } else {
+            
         }
-        list.append(item)
-        item = listData[indexPath.row]
-        listData = list
-        collView.reloadData()
         if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
             imgAudio.loadImage(fromURL: url)
             imgAudio.isHidden = false

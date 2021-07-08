@@ -6,7 +6,19 @@
 //
 
 import UIKit
-
+extension ReadController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class ReadController: UIViewController {
     @IBOutlet weak var collView: UICollectionView!
     var page = 1
@@ -82,15 +94,18 @@ extension ReadController: UICollectionViewDelegate, UICollectionViewDataSource{
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReadCell.reuseIdentifier, for: indexPath) as! ReadCell
-            let item = reads[indexPath.row]
-            cell.delegate = self
-            cell.lblTitle.text = item.title
-            cell.lblDescription.text = item.description
-            cell.lblTime.text = "· " + item.getTimePass()
-            if let url = URL(string: item.image344_220){
-                cell.imgThumb.loadImage(fromURL: url)
+            if indexPath.row < reads.count{
+                let item = reads[indexPath.row]
+                cell.delegate = self
+                cell.lblTitle.text = item.title
+                cell.lblDescription.text = item.description
+                cell.lblTime.text = "· " + item.getTimePass()
+                if let url = URL(string: item.image344_220){
+                    cell.imgThumb.loadImage(fromURL: url)
+                }
+                cell.item = item
             }
-            cell.item = item
+            
             return cell
         }
         

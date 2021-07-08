@@ -7,7 +7,19 @@
 
 import UIKit
 import AVFoundation
-
+extension NewsController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class NewsController: UIViewController {
     @IBOutlet weak var tblView: UITableView!
     var name = ""

@@ -8,6 +8,19 @@
 import UIKit
 import AVFoundation
 import MUXSDKStats
+extension MusicPlayerController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class MusicPlayerController: UIViewController{
     @IBOutlet weak var collView: UICollectionView!
     
@@ -95,6 +108,11 @@ class MusicPlayerController: UIViewController{
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
+        viewPlayer.player?.removeObserver(self, forKeyPath: "timeControlStatus", context: nil)
+        if let timeObserver = timeObserver {
+            viewPlayer.player?.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
     }
     @IBAction func switcherValueChange(_ sender: UISwitch) {
         
@@ -103,6 +121,8 @@ class MusicPlayerController: UIViewController{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.viewPlayer.player?.pause()
+        self.viewPlayer.player = nil
+        self.viewPlayer.player?.replaceCurrentItem(with: nil)
     }
     @objc func didSelectViewBack(_ sender: Any){
         self.navigationController?.popViewController(animated: false)
@@ -239,10 +259,10 @@ class MusicPlayerController: UIViewController{
         self.viewCast.isHidden = false
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "currentItem.loadedTimeRanges", viewPlayer != nil, let duration = viewPlayer.player?.currentItem?.duration.seconds, duration > 0.0{
-            self.lblDuration.text = getTimeString(from: (viewPlayer.player?.currentItem!.duration)!)
-            activityIndicatorView.stopAnimating()
-        }
+//        if keyPath == "currentItem.loadedTimeRanges", viewPlayer != nil, let duration = viewPlayer.player?.currentItem?.duration.seconds, duration > 0.0{
+//            self.lblDuration.text = getTimeString(from: (viewPlayer.player?.currentItem!.duration)!)
+//            activityIndicatorView.stopAnimating()
+//        }
         if keyPath == "timeControlStatus"{
             if (viewPlayer.player?.timeControlStatus == .playing) {
                 activityIndicatorView.stopAnimating()
@@ -296,7 +316,7 @@ class MusicPlayerController: UIViewController{
             viewPlayer.player  = AVPlayer(url: url)
             monitor(item)
             viewPlayer.player?.play()
-            viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+            //viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
             viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
             NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             isPlaying = true
@@ -313,6 +333,7 @@ class MusicPlayerController: UIViewController{
         }else {
             imgAudio.isHidden = true
         }
+        lblDuration.text = getTimeString(from: (viewPlayer.player?.currentItem?.asset.duration)!)
 //        if let temp = UserDefaults.standard.value(forKey: item.privateID) as? Double, temp > 0.0{
 //            let time: CMTime = CMTimeMake(value: Int64(temp * 1000), timescale: 1000)
 //            viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: .zero)

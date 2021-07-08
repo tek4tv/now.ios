@@ -17,6 +17,7 @@ class Type3Cell: UICollectionViewCell {
     @IBOutlet weak var viewLine: UIView!
     @IBOutlet weak var bottomLine: NSLayoutConstraint!
     fileprivate var player: AVPlayer? = nil
+    fileprivate var isPlaying = false
     fileprivate var isSetPlayer = false
     var data = CategoryModel(){
         didSet{
@@ -49,7 +50,9 @@ class Type3Cell: UICollectionViewCell {
         }
         //
         NotificationCenter.default.addObserver(self, selector: #selector(stopVOD5(_:)), name: NSNotification.Name("StopVOD5"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playVOD5(_:)), name: NSNotification.Name("PlayVOD5"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didScroll(_:)), name: NSNotification.Name("scrollViewDidScroll"), object: nil)
+        
         //
         viewBanner.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectBanner(_:))))
         if isOffClass == true{
@@ -60,12 +63,12 @@ class Type3Cell: UICollectionViewCell {
             
         }
         //
-        if videoHot.media.count >= 1 {
-            let item = videoHot.media[0]
-            if let url = URL(string: item.path.replacingOccurrences(of: "\\", with: "/")){
-                player = AVPlayer(url: url)
-            }
-        }
+//        if videoHot.media.count >= 1 {
+//            let item = videoHot.media[0]
+//            if let url = URL(string: item.path.replacingOccurrences(of: "\\", with: "/")){
+//                player = AVPlayer(url: url)
+//            }
+//        }
         
     }
     @objc func didSelectBanner(_ sender: Any){
@@ -81,6 +84,18 @@ class Type3Cell: UICollectionViewCell {
             cell.btnPlay.isHidden = true
             cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         }
+    }
+    @objc func playVOD5(_ notification: Notification){
+        if isPlaying == true {
+            if let cell = collView.cellForItem(at: IndexPath(row: 0, section: 5)) as? VideoCell{
+                cell.setup()
+                cell.viewPlayer.player?.play()
+                cell.isPlaying = true
+                cell.btnPlay.isHidden = true
+                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+            }
+        }
+        
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -169,31 +184,15 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.reuseIdentifier, for: indexPath) as! VideoCell
             cell.lblTitle.font = UIFont(name: "Roboto-Regular", size: 17 * scaleW)
             cell.lblTime.font = UIFont(name: "Roboto-Regular", size: 14 * scaleW)
+            NotificationCenter.default.post(name: NSNotification.Name("cell.loadVideo"), object: nil)
             if videoHot.media.count >= 1 {
                 let item = videoHot.media[0]
-                cell.item = item
+                //cell.item = item
                 cell.delegate = self
                 cell.lblTitle.text = item.name
                 cell.lblTime.text = item.timePass
                 if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
                     cell.imgThumb.loadImage(fromURL: url)
-                }
-                if let temp = UserDefaults.standard.value(forKey: item.privateID) as? Double, temp > 0.0{
-                    let time: CMTime = CMTimeMake(value: Int64(temp * 1000), timescale: 1000)
-                    player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: .zero)
-                }
-                
-                if let _ = URL(string: item.path.replacingOccurrences(of: "\\", with: "/")){
-     
-//                        cell.viewPlayer.player?.replaceCurrentItem(with: nil)
-                        cell.viewPlayer.player = player
-                        isSetPlayer = true
-                        cell.setup()
-      
-
-
-
-                    cell.activityIndicatorView.stopAnimating()
                 }
                 
             }else{
@@ -224,13 +223,17 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
     @objc func didScroll(_ notification: Notification){
         if let cell = collView.cellForItem(at: IndexPath(row: 0, section: 5)) as? VideoCell {
             if cell.isVisibleToUser {
-                cell.viewPlayer.player?.play()
-                cell.isPlaying = true
-                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+                NotificationCenter.default.post(name: NSNotification.Name("cell.playVideo"), object: nil)
+                isPlaying = true
+//                cell.viewPlayer.player?.play()
+//                cell.isPlaying = true
+//                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
             } else{
-                cell.viewPlayer.player?.pause()
-                cell.isPlaying = false
-                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
+                NotificationCenter.default.post(name: NSNotification.Name("cell.pauseVideo"), object: nil)
+                isPlaying = false
+//                cell.viewPlayer.player?.pause()
+//                cell.isPlaying = false
+//                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
             }
         }
     }

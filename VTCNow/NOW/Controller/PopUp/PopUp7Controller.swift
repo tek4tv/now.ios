@@ -43,6 +43,9 @@ class PopUp7Controller: UIViewController {
     @objc func didSelectViewBack(_ sender: Any){
         dismiss(animated: true, completion: nil)
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }
 extension PopUp7Controller: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -37,6 +37,8 @@ class PopUp6Controller: UIViewController {
         ac.popoverPresentationController?.sourceView = self.view
         self.present(ac, animated: true)
     }
-
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 
 }

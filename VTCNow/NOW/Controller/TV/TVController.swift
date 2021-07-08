@@ -8,6 +8,19 @@
 import UIKit
 import AVFoundation
 import UPCarouselFlowLayout
+extension TVController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class TVController: UIViewController {
 
     @IBOutlet weak var collView: UICollectionView!
@@ -49,10 +62,12 @@ class TVController: UIViewController {
         //
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapTwoTime(_:)))
         tap.numberOfTapsRequired = 2
+        tap.delaysTouchesBegan = true
         collView.addGestureRecognizer(tap)
     }
     
     @objc func didTapTwoTime(_ sender: Any){
+        NotificationCenter.default.post(name: NSNotification.Name("TVController.cell.pauseVideo"), object: nil)
         let vc = storyboard?.instantiateViewController(withIdentifier: TV2Controller.className) as! TV2Controller
         vc.data = lives[indexPath.row]
         navigationController?.pushViewController(vc, animated: false)
@@ -68,7 +83,7 @@ class TVController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)
+        
     }
 }
 extension TVController: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate{

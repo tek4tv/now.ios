@@ -8,10 +8,24 @@
 import UIKit
 import AVFoundation
 //import FirebaseDatabase
+extension HighLightController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class HighLightController: UIViewController {
     @IBOutlet weak var collView: UICollectionView!
     var categorys2: [CategoryModel] = []
     var countD = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +48,6 @@ class HighLightController: UIViewController {
         collView.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(didSelectBookItem(_:)), name: NSNotification.Name("openBookPlayer"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
-        
 //        var ref: DatabaseReference!
 //        ref = Database.database().reference()
 //        ref.child(UIDevice.current.identifierForVendor!.uuidString).setValue(["day": Date().description, "version": UIDevice.current.systemVersion, "model": UIDevice.modelName])
@@ -49,6 +62,10 @@ class HighLightController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.post(name: NSNotification.Name("StopVOD5"), object: nil)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.post(name: NSNotification.Name("PlayVOD5"), object: nil)
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -84,6 +101,7 @@ class HighLightController: UIViewController {
                         self?.collView.refreshControl?.endRefreshing()
                         categorys = self!.categorys2
                         self?.collView.reloadData()
+                        self?.collView.layoutIfNeeded()
                     }
                 } else{
                     self?.load()
@@ -723,6 +741,7 @@ extension HighLightController: HashTagCellDelegate{
         APIService.shared.searchWithTag(privateKey: word, keySearch: ""){[self] (data, error) in
             if let data = data as? [MediaModel]{
                 let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+                news = CategoryModel()
                 news.media = data
                 vc.isPushByHashTag = true
                 vc.isLoadMore = false

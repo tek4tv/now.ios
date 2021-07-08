@@ -25,7 +25,8 @@ class CellVideo: UITableViewCell {
     @IBOutlet weak var viewSetting: UIView!
     @IBOutlet weak var imgShadow: UIImageView!
     @IBOutlet weak var viewCast: UIView!
-    
+    @IBOutlet weak var btnForward: UIButton!
+    @IBOutlet weak var btnReplay: UIButton!
     @IBOutlet weak var viewShare: UIView!
     var isOn = true
     var delegate: CellVideoDelegate!
@@ -86,18 +87,19 @@ class CellVideo: UITableViewCell {
         activityIndicatorView.centerYAnchor.constraint(equalTo: viewPlayer.centerYAnchor).isActive = true
         //
         NotificationCenter.default.addObserver(self, selector: #selector(stopVOD(_:)), name: NSNotification.Name("stopVOD"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(release(_:)), name: NSNotification.Name("tableView.cell.removeObserver"), object: nil)
         
         
-        //
-//        if news.name == "Đừng bỏ lỡ" {//|| news.name == "Nổi bật"{
-//
-//            NotificationCenter.default.addObserver(self, selector: #selector(countDown(_:)), name: NSNotification.Name.init("countDownTimer2"), object: nil)
-//
-//        }else{
-//            NotificationCenter.default.removeObserver(self)
-//        }
-        
-        
+    }
+    @objc func release(_ noti: Notification){
+        NotificationCenter.default.removeObserver(self)
+        viewPlayer.player?.removeObserver(self, forKeyPath: "currentItem.loadedTimeRanges", context: nil)
+        viewPlayer.player?.removeObserver(self, forKeyPath: "timeControlStatus", context: nil)
+        timer.invalidate()
+        if let timeObserver = timeObserver {
+            viewPlayer.player?.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -196,6 +198,26 @@ class CellVideo: UITableViewCell {
         imgThumb.isHidden = true
         delegate?.scrollToTop(self)
     }
+    @IBAction func didSelectBtnForward(_ sender: Any) {
+        guard let duration = viewPlayer.player?.currentItem?.duration else { return }
+        let currentTime = CMTimeGetSeconds(viewPlayer.player!.currentTime())
+        let newTime = currentTime + 5.0
+        
+        if newTime < (CMTimeGetSeconds(duration) - 5.0) {
+            let time: CMTime = CMTimeMake(value: Int64(newTime * 1000), timescale: 1000)
+            viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+        }
+    }
+    @IBAction func didSelectBtnReplay(_ sender: Any) {
+        let currentTime = CMTimeGetSeconds(viewPlayer.player!.currentTime())
+        var newTime = currentTime - 5.0
+        
+        if newTime < 0 {
+            newTime = 0
+        }
+        let time: CMTime = CMTimeMake(value: Int64(newTime * 1000), timescale: 1000)
+        viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+    }
     func hidePlayerController(){
         self.imgShadow.isHidden = true
         self.viewFullScreen.isHidden = true
@@ -205,6 +227,8 @@ class CellVideo: UITableViewCell {
         self.slider.isHidden = true
         self.btnPlay.isHidden = true
         self.viewCast.isHidden = true
+        self.btnReplay.isHidden = true
+        self.btnForward.isHidden = true
     }
     func showPlayerController(){
         self.imgShadow.isHidden = false
@@ -215,6 +239,8 @@ class CellVideo: UITableViewCell {
         self.slider.isHidden = false
         self.btnPlay.isHidden = false
         self.viewCast.isHidden = false
+        self.btnReplay.isHidden = false
+        self.btnForward.isHidden = false
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "currentItem.loadedTimeRanges", viewPlayer != nil, let duration = viewPlayer.player?.currentItem?.duration.seconds, duration > 0.0{

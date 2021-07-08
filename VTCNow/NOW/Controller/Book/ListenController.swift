@@ -8,7 +8,19 @@
 import UIKit
 import AVFoundation
 var count = 0
-
+extension ListenController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class ListenController: UIViewController {
     @IBOutlet weak var txfView: UITextField!
     @IBOutlet weak var collView: UICollectionView!
@@ -47,6 +59,7 @@ class ListenController: UIViewController {
                     if count == bookCate.components.count {
                         news = bookCate
                         self?.collView.reloadData()
+                        self?.collView.layoutIfNeeded()
                     }
                 }
             }
@@ -72,6 +85,7 @@ class ListenController: UIViewController {
                 if let data = data as? [MediaModel]{
                     self?.listSearch = data
                     self?.collSearchView.reloadData()
+                    self?.collSearchView.layoutIfNeeded()
                 }
             }
             

@@ -70,4 +70,7 @@ extension PopUp3Controller: UICollectionViewDelegate, UICollectionViewDataSource
         item.isTicked = true
         collView.reloadData()
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }

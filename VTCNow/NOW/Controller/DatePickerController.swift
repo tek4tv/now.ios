@@ -29,4 +29,7 @@ class DatePickerController: UIViewController {
         onComplete?(datePicker.date)
         dismiss(animated: false, completion: nil)
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }

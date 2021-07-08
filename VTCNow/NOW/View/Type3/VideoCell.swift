@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import SwiftUI
 
 class VideoCell: UICollectionViewCell {
     static let reuseIdentifier = "VideoCell"
@@ -24,7 +25,8 @@ class VideoCell: UICollectionViewCell {
     @IBOutlet weak var viewSetting: UIView!
     @IBOutlet weak var imgShadow: UIImageView!
     @IBOutlet weak var viewCast: UIView!
-    
+    @IBOutlet weak var btnForward: UIButton!
+    @IBOutlet weak var btnReplay: UIButton!
     @IBOutlet weak var viewShare: UIView!
 
     var delegate: VideoCellDelegate!
@@ -75,8 +77,9 @@ class VideoCell: UICollectionViewCell {
         activityIndicatorView.centerYAnchor.constraint(equalTo: viewPlayer.centerYAnchor).isActive = true
         //
         NotificationCenter.default.addObserver(self, selector: #selector(stopVOD(_:)), name: NSNotification.Name("stopVOD"), object: nil)
-        
-
+        NotificationCenter.default.addObserver(self, selector: #selector(loadVideo(_:)), name: NSNotification.Name("cell.loadVideo"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playVideo(_:)), name: NSNotification.Name("cell.playVideo"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pauseVideo(_:)), name: NSNotification.Name("cell.pauseVideo"), object: nil)
         //
 //        if news.name == "Đừng bỏ lỡ" {//|| news.name == "Nổi bật"{
 //
@@ -87,6 +90,26 @@ class VideoCell: UICollectionViewCell {
 //        }
         
         btnPlay.isHidden = false
+    }
+    @objc func loadVideo(_ noti: Notification){
+        if videoHot.media.count >= 1 {
+            item = videoHot.media[0]
+            if let url = URL(string: item.path.replacingOccurrences(of: "\\", with: "/")){
+                viewPlayer.player = AVPlayer(url: url)
+                setup()
+            }
+        }
+    }
+    @objc func playVideo(_ noti: Notification){
+        isPlaying = true
+        viewPlayer.player?.play()
+        viewPlayer.player?.rate = Float(speed)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+    }
+    @objc func pauseVideo(_ noti: Notification){
+        isPlaying = false
+        viewPlayer.player?.pause()
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -185,6 +208,26 @@ class VideoCell: UICollectionViewCell {
         imgThumb.isHidden = true
         delegate?.scrollToTop(self)
     }
+    @IBAction func didSelectBtnForward(_ sender: Any) {
+        guard let duration = viewPlayer.player?.currentItem?.duration else { return }
+        let currentTime = CMTimeGetSeconds(viewPlayer.player!.currentTime())
+        let newTime = currentTime + 5.0
+        
+        if newTime < (CMTimeGetSeconds(duration) - 5.0) {
+            let time: CMTime = CMTimeMake(value: Int64(newTime * 1000), timescale: 1000)
+            viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+        }
+    }
+    @IBAction func didSelectBtnReplay(_ sender: Any) {
+        let currentTime = CMTimeGetSeconds(viewPlayer.player!.currentTime())
+        var newTime = currentTime - 5.0
+        
+        if newTime < 0 {
+            newTime = 0
+        }
+        let time: CMTime = CMTimeMake(value: Int64(newTime * 1000), timescale: 1000)
+        viewPlayer.player?.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+    }
     func hidePlayerController(){
         self.imgShadow.isHidden = true
         self.viewFullScreen.isHidden = true
@@ -194,6 +237,8 @@ class VideoCell: UICollectionViewCell {
         self.slider.isHidden = true
         self.btnPlay.isHidden = true
         self.viewCast.isHidden = true
+        self.btnReplay.isHidden = true
+        self.btnForward.isHidden = true
     }
     func showPlayerController(){
         self.imgShadow.isHidden = false
@@ -204,6 +249,8 @@ class VideoCell: UICollectionViewCell {
         self.slider.isHidden = false
         self.btnPlay.isHidden = false
         self.viewCast.isHidden = false
+        self.btnReplay.isHidden = false
+        self.btnForward.isHidden = false
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "currentItem.loadedTimeRanges", viewPlayer != nil, let duration = viewPlayer.player?.currentItem?.duration.seconds, duration > 0.0{

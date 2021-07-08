@@ -202,4 +202,7 @@ class PopUp4Controller: UIViewController {
             }
         }
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }

@@ -6,6 +6,19 @@
 //
 
 import UIKit
+extension PickUpController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class PickUpController: UIViewController {
     @IBOutlet weak var collView1: UICollectionView!
     @IBOutlet weak var collView2: UICollectionView!

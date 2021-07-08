@@ -9,6 +9,19 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 import MarqueeLabel
+extension BookPlayerController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class BookPlayerController: UIViewController {
 
     @IBOutlet weak var CdImage: UIImageView!
@@ -55,6 +68,14 @@ class BookPlayerController: UIViewController {
         aiv.startAnimating()
         return aiv
     }()
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        player.removeObserver(self, forKeyPath: "currentItem.loadedTimeRanges", context: nil)
+        if let timeObserver = timeObserver {
+            player.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
@@ -87,26 +108,6 @@ class BookPlayerController: UIViewController {
             activityIndicatorView2.stopAnimating()
             activityIndicatorView3.stopAnimating()
         } else{
-//            APIService.shared.getEpisode(privateKey: data.privateID) {[weak self] (list, error) in
-//                if let list = list as? [MediaModel] {
-//
-//                    self?.listData = list
-//                    if let Self1 = self {
-//                        Self1.listData = Self1.listData.reversed()
-//                        for (index, book) in Self1.listData.enumerated() {
-//                            if book.episode == self?.data.episode {
-//                                self?.idPlaying = index
-//                            }
-//                        }
-//                    }
-//
-//
-//                    self?.btnList.isUserInteractionEnabled = true
-//                    self?.activityIndicatorView1.stopAnimating()
-//                    self?.activityIndicatorView2.stopAnimating()
-//                    self?.activityIndicatorView3.stopAnimating()
-//                }
-//            }
             if data.endTimecode == "" {
                 btnList.isUserInteractionEnabled = true
                 activityIndicatorView1.stopAnimating()
@@ -117,7 +118,7 @@ class BookPlayerController: UIViewController {
                     if let list = data as? [MediaModel]{
                         self?.listData = list
                         if let Self1 = self {
-                            Self1.listData = Self1.listData.reversed()
+//                            Self1.listData = Self1.listData.reversed()
                             for (index, book) in Self1.listData.enumerated() {
                                 if book.episode == self?.data.episode {
                                     self?.idPlaying = index
@@ -175,7 +176,6 @@ class BookPlayerController: UIViewController {
         NotificationCenter.default.removeObserver(self)
         navigationController?.popViewController(animated: false)
         if self.isPlaying {
-//            self.pause()
             self.isPlaying = false
             self.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY nghe"), for: .normal)
         }
@@ -195,9 +195,7 @@ class BookPlayerController: UIViewController {
         ac.popoverPresentationController?.sourceView = self.view
         self.present(ac, animated: true)
     }
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+
 
     @IBAction func didSelectBtnReplay5s(_ sender: Any) {
         let currentTime = CMTimeGetSeconds(player.currentTime())
@@ -246,7 +244,7 @@ class BookPlayerController: UIViewController {
             }
             player = AVPlayer(url: url)
             player.play()
-            //player.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+            player.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
             NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
             isPlaying = true
             btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE nghe"), for: .normal)
@@ -267,6 +265,11 @@ class BookPlayerController: UIViewController {
             lblAuthor.text = data.author
         }
 //        setupNowPlaying()
+    }
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "currentItem.loadedTimeRanges", let duration = player.currentItem?.duration.seconds, duration > 0.0{
+            self.lblDuration.text = getTimeString(from: player.currentItem!.duration)
+        }
     }
 //    func setupRemoteTransportControls() {
 //        // Get the shared MPRemoteCommandCenter
@@ -399,11 +402,7 @@ class BookPlayerController: UIViewController {
         player.play()
         isPlaying = true
     }
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "currentItem.loadedTimeRanges", player != nil, let duration = player.currentItem?.duration.seconds, duration > 0.0{
-            //self.lblDuration.text = getTimeString(from: (player.currentItem!.duration))
-        }
-    }
+
     @IBAction func didSelectBtnPlay(_ sender: Any) {
         if isPlaying{
             player.pause()

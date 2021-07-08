@@ -6,7 +6,19 @@
 //
 
 import UIKit
-
+extension BookCategoryController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class BookCategoryController: UIViewController {
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var viewBack: UIView!

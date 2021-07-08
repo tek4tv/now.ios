@@ -6,7 +6,19 @@
 //
 
 import UIKit
-
+extension MusicController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class MusicController: UIViewController {
     @IBOutlet weak var txfView: UITextField!
     @IBOutlet weak var collView: UICollectionView!

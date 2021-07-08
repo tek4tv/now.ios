@@ -86,5 +86,7 @@ class PopUp2Controller: UIViewController {
         }
         present(vc, animated: true, completion: nil)
     }
-
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }

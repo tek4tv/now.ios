@@ -324,5 +324,7 @@ extension ParentViewController: CellVideoDelegate{
     func scrollToTop(_ cell: CellVideo) {
         tblSearchView.scrollToRow(at: cell.indexPath, at: .top, animated: true)
     }
-
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }

@@ -7,6 +7,19 @@
 
 import UIKit
 import AVFoundation
+extension HighLight2Controller{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class HighLight2Controller: UIViewController {
 //    @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var tblView: UITableView!
@@ -58,6 +71,7 @@ class HighLight2Controller: UIViewController {
         }
         NotificationCenter.default.removeObserver(self)
         timer.invalidate()
+       // news.media = []
     }
     func cellForRow(_ indexPath: IndexPath) -> CellVideo? {
         guard let cell = tblView.cellForRow(at: indexPath) as? CellVideo else{
@@ -67,6 +81,7 @@ class HighLight2Controller: UIViewController {
     }
     @objc func didSelectBtnBack(_ sender: Any){
         self.navigationController?.popViewController(animated: false)
+        NotificationCenter.default.post(name: NSNotification.Name("tableView.cell.removeObserver"), object: nil)
         isMessaging = false
     }
     deinit {

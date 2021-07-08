@@ -7,6 +7,19 @@
 
 import UIKit
 import AVFoundation
+extension SearchController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class SearchController: UIViewController {
 
     //@IBOutlet weak var collView: UICollectionView!
@@ -44,13 +57,12 @@ class SearchController: UIViewController {
         tblView.delegate = self
         tblView.dataSource = self
         tblView.register(UINib(nibName: SearchCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: SearchCell.reuseIdentifier)
-//        APIService.shared.getSuggestion(keySearch: "") { (data, error) in
-//            if let data = data as? [String]{
-//                self.listString = data
-//                self.filterListString = data
-//            }
-//            self.tblView.reloadData()
-//        }
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+            
+        } else {
+            
+        }
 
         APIService.shared.getKeySearch {[weak self] (data, error) in
             if let data = data as? [String] {

@@ -6,6 +6,19 @@
 //
 
 import UIKit
+extension UserController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class UserController: UIViewController {
     @IBOutlet weak var collView: UICollectionView!
 //    var listName = "Chọn theo nhiều chủ đề"

@@ -18,10 +18,7 @@
 		18737CA2268B20B400BC11D8 /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18737CA1268B20B400BC11D8 /* ScheduleModel.swift */; };
 		1892B43326847079001081A9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1892B43226847079001081A9 /* WebKit.framework */; };
 		18ACF0812683389500F2595C /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ACF0802683389500F2595C /* NetworkMonitor.swift */; };
-		18C2980D2692E3C500AB95E3 /* PopUp8VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2980C2692E3C500AB95E3 /* PopUp8VC.swift */; };
 		4F30DCCE26146C9A006D1FC4 /* ReadDetailWebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */; };
-		F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2F8425EC8E170002E99C /* CommentCell.swift */; };
-		F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F60E2F8525EC8E170002E99C /* CommentCell.xib */; };
 		F60E2F8A25EC96F70002E99C /* PopUp5Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */; };
 		F610E0E5262EAEB900089FD8 /* Movie2ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F610E0E1262EAEB800089FD8 /* Movie2ItemCell.xib */; };
 		F610E0E6262EAEB900089FD8 /* Movie2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F610E0E2262EAEB800089FD8 /* Movie2Cell.swift */; };
@@ -63,8 +60,6 @@
 		F64A41E025ECC42D0011F8B1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64A41DF25ECC42D0011F8B1 /* Config.swift */; };
 		F64AB6DC26296E1100ABB691 /* TodayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64AB6DB26296E1100ABB691 /* TodayModel.swift */; };
 		F64B02E125ECF0BD00AAE865 /* ListenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64B02E025ECF0BD00AAE865 /* ListenController.swift */; };
-		F64B02E625ECF18900AAE865 /* ChanelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64B02E425ECF18900AAE865 /* ChanelCell.swift */; };
-		F64B02E725ECF18900AAE865 /* ChanelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F64B02E525ECF18900AAE865 /* ChanelCell.xib */; };
 		F64B02EB25ECF30400AAE865 /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64B02EA25ECF30400AAE865 /* ChannelModel.swift */; };
 		F64BF5A025E64E7900752E80 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64BF59F25E64E7900752E80 /* SearchController.swift */; };
 		F64C602025F22753008D44A0 /* MusicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64C601E25F22753008D44A0 /* MusicController.swift */; };
@@ -162,8 +157,6 @@
 		F678289525E4AFAE00D96790 /* StreamHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F678289425E4AFAE00D96790 /* StreamHelper.swift */; };
 		F68D46D625CA43460097B9F4 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68D46D525CA43460097B9F4 /* PlayerView.swift */; };
 		F698933225F5FC9E00EA960A /* WatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698933125F5FC9E00EA960A /* WatchController.swift */; };
-		F698933725F5FD6D00EA960A /* WatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F698933525F5FD6D00EA960A /* WatchCell.swift */; };
-		F698933825F5FD6D00EA960A /* WatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F698933625F5FD6D00EA960A /* WatchCell.xib */; };
 		F69EDA892631292F00E7122C /* PickUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69EDA882631292F00E7122C /* PickUpController.swift */; };
 		F69EDA8E26312B9400E7122C /* NoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69EDA8C26312B9400E7122C /* NoneCell.swift */; };
 		F69EDA8F26312B9400E7122C /* NoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F69EDA8D26312B9400E7122C /* NoneCell.xib */; };
@@ -219,11 +212,8 @@
 		18737CA1268B20B400BC11D8 /* ScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		1892B43226847079001081A9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		18ACF0802683389500F2595C /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
-		18C2980C2692E3C500AB95E3 /* PopUp8VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp8VC.swift; sourceTree = "<group>"; };
 		4F30DCCD26146C9A006D1FC4 /* ReadDetailWebviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDetailWebviewController.swift; sourceTree = "<group>"; };
 		E2A11019719C8E8CDE921ED9 /* Pods-NOW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOW.release.xcconfig"; path = "Target Support Files/Pods-NOW/Pods-NOW.release.xcconfig"; sourceTree = "<group>"; };
-		F60E2F8425EC8E170002E99C /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
-		F60E2F8525EC8E170002E99C /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp5Controller.swift; sourceTree = "<group>"; };
 		F610E0E1262EAEB800089FD8 /* Movie2ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Movie2ItemCell.xib; sourceTree = "<group>"; };
 		F610E0E2262EAEB800089FD8 /* Movie2Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie2Cell.swift; sourceTree = "<group>"; };
@@ -265,8 +255,6 @@
 		F64A41DF25ECC42D0011F8B1 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		F64AB6DB26296E1100ABB691 /* TodayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayModel.swift; sourceTree = "<group>"; };
 		F64B02E025ECF0BD00AAE865 /* ListenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenController.swift; sourceTree = "<group>"; };
-		F64B02E425ECF18900AAE865 /* ChanelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChanelCell.swift; sourceTree = "<group>"; };
-		F64B02E525ECF18900AAE865 /* ChanelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChanelCell.xib; sourceTree = "<group>"; };
 		F64B02EA25ECF30400AAE865 /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		F64BF59F25E64E7900752E80 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		F64C601E25F22753008D44A0 /* MusicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicController.swift; sourceTree = "<group>"; };
@@ -365,8 +353,6 @@
 		F678289425E4AFAE00D96790 /* StreamHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamHelper.swift; sourceTree = "<group>"; };
 		F68D46D525CA43460097B9F4 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		F698933125F5FC9E00EA960A /* WatchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchController.swift; sourceTree = "<group>"; };
-		F698933525F5FD6D00EA960A /* WatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCell.swift; sourceTree = "<group>"; };
-		F698933625F5FD6D00EA960A /* WatchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WatchCell.xib; sourceTree = "<group>"; };
 		F69EDA882631292F00E7122C /* PickUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpController.swift; sourceTree = "<group>"; };
 		F69EDA8C26312B9400E7122C /* NoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoneCell.swift; sourceTree = "<group>"; };
 		F69EDA8D26312B9400E7122C /* NoneCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoneCell.xib; sourceTree = "<group>"; };
@@ -442,15 +428,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		F60E2F8325EC8DF60002E99C /* Comment */ = {
-			isa = PBXGroup;
-			children = (
-				F60E2F8425EC8E170002E99C /* CommentCell.swift */,
-				F60E2F8525EC8E170002E99C /* CommentCell.xib */,
-			);
-			path = Comment;
-			sourceTree = "<group>";
-		};
 		F641343B26284CD000BCB777 /* Type8 */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,7 +483,6 @@
 				F60E2F8925EC96F70002E99C /* PopUp5Controller.swift */,
 				F611070A25EE963100B049C3 /* PopUp6Controller.swift */,
 				F655707A25F8868E00E3A062 /* PopUp7Controller.swift */,
-				18C2980C2692E3C500AB95E3 /* PopUp8VC.swift */,
 			);
 			path = PopUp;
 			sourceTree = "<group>";
@@ -547,15 +523,6 @@
 				F67464992616D1F4003A5593 /* ViewMore3Cell.xib */,
 			);
 			path = ViewMore;
-			sourceTree = "<group>";
-		};
-		F64B02E325ECF16700AAE865 /* Listen */ = {
-			isa = PBXGroup;
-			children = (
-				F64B02E425ECF18900AAE865 /* ChanelCell.swift */,
-				F64B02E525ECF18900AAE865 /* ChanelCell.xib */,
-			);
-			path = Listen;
 			sourceTree = "<group>";
 		};
 		F64C116325EF9417001C3A7C /* Movie */ = {
@@ -671,8 +638,6 @@
 				F649761325F2142100EAC71D /* Music */,
 				F64C116325EF9417001C3A7C /* Movie */,
 				F655978025EE187E00FDA5CA /* Read */,
-				F64B02E325ECF16700AAE865 /* Listen */,
-				F60E2F8325EC8DF60002E99C /* Comment */,
 				F6F7C4DA25E8B1FF008F7A45 /* Book */,
 				F666BEE625E35C590000990E /* PopUpItem */,
 				F65FD96F25C672F0007F8D0F /* Type1 */,
@@ -894,8 +859,6 @@
 		F698933425F5FD3B00EA960A /* TV */ = {
 			isa = PBXGroup;
 			children = (
-				F698933525F5FD6D00EA960A /* WatchCell.swift */,
-				F698933625F5FD6D00EA960A /* WatchCell.xib */,
 				F6614709261EB1B800FD9469 /* TVCell.swift */,
 				F661470A261EB1B800FD9469 /* TVCell.xib */,
 			);
@@ -1058,7 +1021,6 @@
 				180CFABD268313C9004C99C2 /* CellVideo.xib in Resources */,
 				F666BEEB25E35C950000990E /* PopUpItemCell.xib in Resources */,
 				F65FD9A725C694E2007F8D0F /* Type3ItemCell.xib in Resources */,
-				F60E2F8725EC8E170002E99C /* CommentCell.xib in Resources */,
 				F65FD9AB25C694E2007F8D0F /* VideoCell.xib in Resources */,
 				F65EC47B2614669F0088DBC7 /* ViewMoreCell.xib in Resources */,
 				F6CA872F25F5C07E004DF132 /* Music3Cell.xib in Resources */,
@@ -1077,7 +1039,6 @@
 				F65FD9B825C69775007F8D0F /* Type4ItemCell.xib in Resources */,
 				F65FD9BA25C69775007F8D0F /* Type4Cell.xib in Resources */,
 				F65557DE261DA4ED000E8AEA /* MovieItem2Cell.xib in Resources */,
-				F698933825F5FD6D00EA960A /* WatchCell.xib in Resources */,
 				F66330732671C92600068D1C /* Banner2Cell.xib in Resources */,
 				1836BF5626858DC600C9591A /* SpeechToTextVC.xib in Resources */,
 				F649FEC026258B8C0041148E /* ClearCell.xib in Resources */,
@@ -1107,7 +1068,6 @@
 				F6D5068C25C6A84B002BEA99 /* Type6Cell.xib in Resources */,
 				F6B82C7625F2315D009FF801 /* Music2Cell.xib in Resources */,
 				F610E0E7262EAEB900089FD8 /* Movie2Cell.xib in Resources */,
-				F64B02E725ECF18900AAE865 /* ChanelCell.xib in Resources */,
 				F64836B325F0D5BC00A9E878 /* MovieCell.xib in Resources */,
 				F617636E261AF6C400A9A547 /* Book3ItemCell.xib in Resources */,
 				F66164D326677D2700EC094D /* GoogleService-Info.plist in Resources */,
@@ -1208,7 +1168,6 @@
 				F65FD97D25C674CA007F8D0F /* WeatherCell.swift in Sources */,
 				F6614707261EB0BF00FD9469 /* TVController.swift in Sources */,
 				F64B02E125ECF0BD00AAE865 /* ListenController.swift in Sources */,
-				F64B02E625ECF18900AAE865 /* ChanelCell.swift in Sources */,
 				F64836C025F0E9AC00A9E878 /* MovieCategoryController.swift in Sources */,
 				F64836BA25F0D64400A9E878 /* MovieItemCell.swift in Sources */,
 				F6D0C84F25C799B80097C0EC /* NewsController.swift in Sources */,
@@ -1243,7 +1202,6 @@
 				F65FD9B925C69775007F8D0F /* Type4ItemCell.swift in Sources */,
 				F65FD98825C6794F007F8D0F /* CategoryItemCell.swift in Sources */,
 				F66330722671C92600068D1C /* Banner2Cell.swift in Sources */,
-				18C2980D2692E3C500AB95E3 /* PopUp8VC.swift in Sources */,
 				F6D0C84E25C799B80097C0EC /* PopUpController.swift in Sources */,
 				18038166268F0F520025994A /* Movie3Cell.swift in Sources */,
 				F6176371261B152700A9A547 /* MusicPlayerController.swift in Sources */,
@@ -1272,7 +1230,6 @@
 				F647365C2612E555008BF14E /* WordCell.swift in Sources */,
 				F641344326284CD100BCB777 /* Type8ItemCell.swift in Sources */,
 				F69F7A18263155A8001494A9 /* NewBroadCell.swift in Sources */,
-				F60E2F8625EC8E170002E99C /* CommentCell.swift in Sources */,
 				F65557DD261DA4ED000E8AEA /* MovieItem2Cell.swift in Sources */,
 				F6A1885326380CD4001D2A04 /* Type9Cell.swift in Sources */,
 				F666BEEA25E35C950000990E /* PopUpItemCell.swift in Sources */,
@@ -1305,7 +1262,6 @@
 				F6507CB825C3EEFF002E77EC /* AppDelegate.swift in Sources */,
 				F6D0C85425C79C5C0097C0EC /* ParentViewController.swift in Sources */,
 				F6507CEB25C3F3CA002E77EC /* WelcomeController.swift in Sources */,
-				F698933725F5FD6D00EA960A /* WatchCell.swift in Sources */,
 				F6507CBA25C3EEFF002E77EC /* SceneDelegate.swift in Sources */,
 				F641344226284CD100BCB777 /* Type8Cell.swift in Sources */,
 				F69EDA8E26312B9400E7122C /* NoneCell.swift in Sources */,
@@ -1459,7 +1415,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VTC Now.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3.6;
+				CURRENT_PROJECT_VERSION = 1.4.0;
 				DEVELOPMENT_TEAM = J3Q9S3Z487;
 				INFOPLIST_FILE = "$(SRCROOT)/NOW/Now/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1467,7 +1423,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.6;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.vtc.now;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1485,7 +1441,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VTC Now.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.3.6;
+				CURRENT_PROJECT_VERSION = 1.4.0;
 				DEVELOPMENT_TEAM = J3Q9S3Z487;
 				INFOPLIST_FILE = "$(SRCROOT)/NOW/Now/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1493,7 +1449,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.6;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.vtc.now;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -21,7 +21,7 @@ class PlayerView: UIView {
     var player:AVPlayer? {
         set {
             if let layer = layer as? AVPlayerLayer {
-                layer.videoGravity = .resizeAspect
+                layer.videoGravity = .resizeAspectFill
                 layer.player = newValue
             }
         }

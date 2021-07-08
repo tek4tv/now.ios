@@ -117,9 +117,9 @@ class WatchController: UIViewController {//}, IMAAdsLoaderDelegate , IMAAdsManag
 //        setUpAdsLoader()
         
         super.viewDidLoad()
-        collView.delegate = self
-        collView.dataSource = self
-        collView.register(UINib(nibName: WatchCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: WatchCell.reuseIdentifier)
+//        collView.delegate = self
+//        collView.dataSource = self
+        //collView.register(UINib(nibName: WatchCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: WatchCell.reuseIdentifier)
         viewPlayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewPlayer(_:))))
         let layout = UICollectionViewFlowLayout()
         let width = (UIScreen.main.bounds.width - 30 * scaleW) / 4.5
@@ -344,22 +344,22 @@ class WatchController: UIViewController {//}, IMAAdsLoaderDelegate , IMAAdsManag
         viewPlayer.player?.rate = Float(speed)
     }
 }
-extension WatchController: UICollectionViewDelegate, UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listData.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WatchCell.reuseIdentifier, for: indexPath) as! WatchCell
-        let item = listData[indexPath.row]
-        if let url = URL(string: root.cdn.imageDomain + item.image[0].url.replacingOccurrences(of: "\\", with: "/" )){
-            cell.imgThumb.loadImage(fromURL: url)
-        }
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        index = indexPath
-        didOpenVideo()
-    }
-}
+//extension WatchController: UICollectionViewDelegate, UICollectionViewDataSource{
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return listData.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WatchCell.reuseIdentifier, for: indexPath) as! WatchCell
+//        let item = listData[indexPath.row]
+//        if let url = URL(string: root.cdn.imageDomain + item.image[0].url.replacingOccurrences(of: "\\", with: "/" )){
+//            cell.imgThumb.loadImage(fromURL: url)
+//        }
+//        return cell
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        index = indexPath
+//        didOpenVideo()
+//    }
+//}

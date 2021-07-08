@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.4"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,6 +64,48 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zb2-SH-Szr">
                                 <rect key="frame" x="0.0" y="0.0" width="330" height="185.5"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yg1-cS-fSR">
+                                <rect key="frame" x="217.5" y="78" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Yg1-cS-fSR" secondAttribute="height" multiplier="1:1" id="Pgz-pc-O4Q">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="30" id="kSd-w1-WHu">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                </constraints>
+                                <state key="normal">
+                                    <imageReference key="backgroundImage" image="icons8-forward-5-48"/>
+                                </state>
+                                <connections>
+                                    <action selector="didSelectBtnForward:" destination="gTV-IL-0wX" eventType="touchUpInside" id="bPU-Fy-WTi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUe-3B-TM0">
+                                <rect key="frame" x="82.5" y="78" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="YPb-Oe-M5o">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="width" secondItem="UUe-3B-TM0" secondAttribute="height" multiplier="1:1" id="evr-gj-NT0">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                </constraints>
+                                <state key="normal">
+                                    <imageReference key="backgroundImage" image="icons8-replay-5-60"/>
+                                </state>
+                                <connections>
+                                    <action selector="didSelectBtnReplay:" destination="gTV-IL-0wX" eventType="touchUpInside" id="FMQ-hB-lWH"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msr-VC-tET">
                                 <rect key="frame" x="142.5" y="70.5" width="45" height="45"/>
                                 <constraints>
@@ -263,6 +306,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstItem="UUe-3B-TM0" firstAttribute="centerY" secondItem="msr-VC-tET" secondAttribute="centerY" id="9yn-D6-keZ"/>
                             <constraint firstItem="Ez1-XH-Ngq" firstAttribute="centerY" secondItem="xnb-Ge-Rs9" secondAttribute="centerY" id="BLr-Tt-4m8">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -298,6 +342,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstItem="Yg1-cS-fSR" firstAttribute="leading" secondItem="msr-VC-tET" secondAttribute="trailing" constant="30" id="NYC-xm-1Dy"/>
                             <constraint firstItem="msr-VC-tET" firstAttribute="centerY" secondItem="sc5-zG-2dP" secondAttribute="centerY" id="YH9-mq-5sj">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -338,6 +383,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstItem="msr-VC-tET" firstAttribute="leading" secondItem="UUe-3B-TM0" secondAttribute="trailing" constant="30" id="rKe-Sy-S6P"/>
                             <constraint firstItem="msr-VC-tET" firstAttribute="centerX" secondItem="sc5-zG-2dP" secondAttribute="centerX" id="sbz-Nb-czM">
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
@@ -353,6 +399,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </constraint>
+                            <constraint firstItem="Yg1-cS-fSR" firstAttribute="centerY" secondItem="msr-VC-tET" secondAttribute="centerY" id="zn6-Ze-7nf"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="9qV-bI-xhJ">
@@ -453,7 +500,9 @@
                 </constraint>
             </constraints>
             <connections>
+                <outlet property="btnForward" destination="Yg1-cS-fSR" id="WdB-nI-Bwn"/>
                 <outlet property="btnPlay" destination="msr-VC-tET" id="M6U-SU-idJ"/>
+                <outlet property="btnReplay" destination="UUe-3B-TM0" id="8dt-i0-2jr"/>
                 <outlet property="imgShadow" destination="zb2-SH-Szr" id="xDX-gt-2CT"/>
                 <outlet property="imgThumb" destination="MK0-nR-drb" id="MDu-OL-5uq"/>
                 <outlet property="lblCurrentTime" destination="tz8-W6-9DY" id="nxM-7U-P34"/>
@@ -473,6 +522,8 @@
         <image name="PLAY" width="512" height="512"/>
         <image name="ic_fullScreen" width="90" height="90"/>
         <image name="icons8-chromecast-cast-button-49" width="48" height="48"/>
+        <image name="icons8-forward-5-48" width="48" height="48"/>
+        <image name="icons8-replay-5-60" width="60" height="60"/>
         <image name="icons8-settings-48" width="48" height="48"/>
     </resources>
 </document>

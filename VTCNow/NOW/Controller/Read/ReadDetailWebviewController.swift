@@ -7,7 +7,19 @@
 
 import UIKit
 import WebKit
-
+extension ReadDetailWebviewController{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class ReadDetailWebviewController: UIViewController {
     var url = ""
     @IBOutlet weak var webview: WKWebView!

@@ -35,10 +35,7 @@ import Kingfisher
 //}
 class LazyImageView: UIImageView{
     func loadImage(fromURL imageURL: URL){
-        ImageCache.default.diskStorage.config.expiration = .days(7)
-        self.kf.setImage(with: imageURL,placeholder: #imageLiteral(resourceName: "placeHolderImage"), options:[.cacheOriginalImage,.transition(.fade(1))]) { (result) in
-        }
-       
+        self.kf.setImage(with: imageURL,placeholder: #imageLiteral(resourceName: "placeHolderImage"), options:[.cacheOriginalImage,.transition(.fade(1))])
     }
 }
 

@@ -19,6 +19,7 @@ class Type2Cell: UICollectionViewCell {
             lblTitle.text = data.name
             if data.name != oldValue.name{
                 collView.reloadData()
+                collView.layoutIfNeeded()
             }
             if data.name == "Đừng bỏ lỡ"{
                 timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: {(timer) in

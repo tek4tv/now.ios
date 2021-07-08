@@ -30,7 +30,7 @@ class Type1Cell: UICollectionViewCell {
         collView.tag = 0
         collView.delegate = self
         collView.dataSource = self
-        collView.register(UINib(nibName: Type1ItemCell.className, bundle: nil), forCellWithReuseIdentifier: Type1ItemCell.className)
+        collView.register(UINib(nibName: Type1ItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: Type1ItemCell.reuseIdentifier)
         let layout = PagedFlowLayout()
         layout.itemSize = CGSize(width: collView.bounds.width * scaleW, height: collView.bounds.height * scaleW)
         collView.collectionViewLayout = layout
@@ -65,38 +65,10 @@ class Type1Cell: UICollectionViewCell {
     }
 }
 extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate{
-
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let count = collView.visibleCells.count
-//        if count == 2 {
-//            let id0 = collView.indexPath(for: collView.visibleCells[0])!
-//            let id1 = collView.indexPath(for: collView.visibleCells[1])!
-//            if id0.row < id1.row {
-//                if self.indexPath != id0{
-//                    self.indexPath = id0
-//                    print("scrolldidScroll")
-//                    collViewDot.reloadData()
-//                }
-//            }else{
-//                if self.indexPath != id1{
-//                    self.indexPath = id1
-//                    print("scrolldidScroll")
-//                    collViewDot.reloadData()
-//                }
-//            }
-//        } else{
-//            let id0 = collView.indexPath(for: collView.visibleCells[0])!
-//            if self.indexPath != id0{
-//                self.indexPath = id0
-//                print("scrolldidScroll")
-//                collViewDot.reloadData()
-//            }
-//        }
-//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView.tag {
-        case 0:
+        switch collectionView {
+        case collView:
             if data.media.count >= 3 {
                 return 3
             }
@@ -120,7 +92,6 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource, UIScr
             }
             cell.item = item
             cell.lblTitle.text = item.name
-            //cell.lblTime.text = item.timePass
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DotCell.className, for: indexPath) as! DotCell
@@ -156,31 +127,6 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource, UIScr
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case collView:
-//            let count = data.media.count
-//
-//            var list: [MediaModel] = []
-//            if count == 1{
-//                list = []
-//            } else if count == 2{
-//                if indexPath.row == 0 {
-//                    list.append(data.media[1])
-//                } else{
-//                    list.append(data.media[0])
-//                }
-//            } else if count >= 3 {
-//                if indexPath.row == 0{
-//                    list = Array(data.media[1...count-1])
-//                } else if indexPath.row == count-1 {
-//                    list = Array(data.media[0...count - 2])
-//                } else{
-//                    list = Array(data.media[indexPath.row+1...count-1] + data.media[0...indexPath.row-1])
-//                }
-//            }
-//            APIService.shared.getDetailVideo(privateKey: data.media[indexPath.row].privateID) { (data, error) in
-//                if let data = data as? MediaModel{
-//                    self.delegate?.didSelectItemAt(data, list, self)
-//                }
-//            }
             let temp = self.data.copy()
             let item = data.media[indexPath.row]
             temp.media.remove(at: indexPath.row)
@@ -193,8 +139,7 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource, UIScr
         
     }
 }
-protocol Type1CellDelegate: class{
-//    func didSelectItemAt(_ data: MediaModel,_ list: [MediaModel],_ cell: Type1Cell)
+protocol Type1CellDelegate: HighLightController{
     func didSelectItemAt(_ cell: Type1Cell)
 }
 class PagedFlowLayout: UICollectionViewFlowLayout {

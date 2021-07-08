@@ -12,8 +12,10 @@ class Type2ItemCell: UICollectionViewCell{
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var viewShadow: UIView!
+    fileprivate var futureDate: Date? = nil
     var item = MediaModel(){
         didSet{
+            futureDate = item.schedule.toDate()
             if isOnLive(){
                 
             } else{
@@ -32,7 +34,7 @@ class Type2ItemCell: UICollectionViewCell{
     }
    
     @objc func countDown(_ sender: Notification){
-        if let futureDate = item.schedule.toDate(){
+        if let futureDate = futureDate{
             let interval = futureDate - Date()
             if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
                 let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
@@ -43,7 +45,7 @@ class Type2ItemCell: UICollectionViewCell{
                     } else {
                         item.timePass = "Đang phát"
                     }
-                    lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
+                    lblTime.textColor = #colorLiteral(red: 0.5108931065, green: 0.1515108645, blue: 0.2585203648, alpha: 1)
                     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.init("countDownTimer"), object: nil)
                 } else{
                     item.timePass = "\(timeStr)"
@@ -54,7 +56,7 @@ class Type2ItemCell: UICollectionViewCell{
         }
     }
     func isOnLive() -> Bool{
-        if let futureDate = item.schedule.toDate(){
+        if let futureDate = futureDate{
             let interval = futureDate - Date()
             if let hour = interval.hour, let minute = interval.minute, let second = interval.second{
                 let timeStr = String(format: "%02d:%02d:%02d", hour, minute % 60, second % 60)
@@ -65,7 +67,7 @@ class Type2ItemCell: UICollectionViewCell{
                     } else {
                         lblTime.text = "Đang phát"
                     }
-                    lblTime.textColor = #colorLiteral(red: 0.6784313725, green: 0.1294117647, blue: 0.1529411765, alpha: 1)
+                    lblTime.textColor = #colorLiteral(red: 0.5110089779, green: 0.1506488323, blue: 0.2548394501, alpha: 1)
                     return true
                 } else{
                     item.timePass = "\(timeStr)"

@@ -42,7 +42,16 @@ class FullScreenController: UIViewController {
         //aiv.startAnimating()
         return aiv
     }()
-    
+    //
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        viewPlayer.player?.removeObserver(self, forKeyPath: "timeControlStatus", context: nil)
+        viewPlayer.player?.removeObserver(self, forKeyPath: "currentItem.loadedTimeRanges", context: nil)
+        if let timeObserver = timeObserver {
+            viewPlayer.player?.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.rotateToLandsScapeRightDevice()
@@ -68,6 +77,13 @@ class FullScreenController: UIViewController {
         openVideo()
     }
     @objc func didSelectViewBack(_ sender: Any){
+        NotificationCenter.default.removeObserver(self)
+        viewPlayer.player?.removeObserver(self, forKeyPath: "timeControlStatus", context: nil)
+        viewPlayer.player?.removeObserver(self, forKeyPath: "currentItem.loadedTimeRanges", context: nil)
+        if let timeObserver = timeObserver {
+            viewPlayer.player?.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
         dismiss(animated: true, completion: nil)
         onDismiss?()
     }
@@ -90,10 +106,7 @@ class FullScreenController: UIViewController {
         UIView.setAnimationsEnabled(true)
     }
     
-    //
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+
     
     @objc func playerDidFinishPlaying(note: NSNotification){
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
@@ -252,7 +265,6 @@ class FullScreenController: UIViewController {
         isPlaying = true
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
         addTimeObserver()
-        
     }
     let playName = "iOS AVPlayer"
     func monitor(_ item: MediaModel){
@@ -361,7 +373,6 @@ extension FullScreenController: UITableViewDelegate, UITableViewDataSource, UISc
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         10
     }
-    
 }
 extension MPVolumeView {
     static func setVolume(_ volume: Float) {

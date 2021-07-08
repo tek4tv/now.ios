@@ -49,13 +49,10 @@ class TVCell: UICollectionViewCell {
         layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collView.collectionViewLayout = layout
-        
-//        APIService.shared.getPlaylist(privateKey: "62963352-3d13-4ac3-bb94-d05030baebf8") {[self] (data, error) in
-//            if let data = data as? CategoryModel {
-//                listVideos = data.media
-//                collView.reloadData()
-//            }
-//        }
+        NotificationCenter.default.addObserver(self, selector: #selector(pauseVideo(_:)), name: NSNotification.Name("TVController.cell.pauseVideo"), object: nil)
+    }
+    @objc func pauseVideo(_ noti: Notification){
+        NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)
     }
     func loadVideoByDate(date: Date){
         APIService.shared.getVideoByDate(privateId: ids[data.name] ?? "", date: date.getTimeString()) {[weak self] (data, error) in

@@ -7,6 +7,19 @@
 
 import UIKit
 import AVFoundation
+extension TV2Controller{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class TV2Controller: UIViewController {
 
     @IBOutlet weak var collView: UICollectionView!
@@ -16,6 +29,10 @@ class TV2Controller: UIViewController {
     var listVideos: [MediaModel] = []
     var datePicker: Date = Date()
     var isPickDate = false
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        collView = nil
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,10 +66,10 @@ class TV2Controller: UIViewController {
     }
     @objc func didSelectBtnBack(_ sender: Any){
         self.navigationController?.popViewController(animated: false)
-    }
-    deinit {
         NotificationCenter.default.removeObserver(self)
+        collView = nil
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.post(name: NSNotification.Name("stopLive"), object: nil)

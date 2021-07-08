@@ -7,6 +7,19 @@
 
 import UIKit
 import AVFoundation
+extension User2Controller{
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+}
 class User2Controller: UIViewController {
 
     @IBOutlet weak var collView: UICollectionView!

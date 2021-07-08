@@ -195,7 +195,7 @@ extension UITextField{
     @IBInspectable var myAutoFontSize: Bool{
         get{ true }
         set {
-            self.font = self.font?.withSize(self.font!.pointSize * scaleW)
+            self.font = self.font?.withSize(self.font!.pointSize * scaleFont)
         }
     }
 }
@@ -215,7 +215,7 @@ extension UIButton{
     @IBInspectable var myAutoFontSize: Bool{
         get{ true }
         set {
-            self.titleLabel?.font = self.titleLabel?.font.withSize((self.titleLabel?.font.pointSize)! * scaleH)
+            self.titleLabel?.font = self.titleLabel?.font.withSize((self.titleLabel?.font.pointSize)! * scaleW)
         }
     }
 }

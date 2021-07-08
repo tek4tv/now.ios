@@ -105,5 +105,7 @@ class SpeechToTextVC: UIViewController, SFSpeechRecognizerDelegate {
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
     }
-
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }
