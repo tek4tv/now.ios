@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import FirebaseDynamicLinks
 extension HighLight2Controller{
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
@@ -134,50 +135,51 @@ extension HighLight2Controller: UITableViewDelegate, UITableViewDataSource, UISc
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellVideo.reuseIdentifier, for: indexPath) as! CellVideo
-            
-            let item = listSearch[indexPath.row - 1]
-            if news.name == "Đừng bỏ lỡ"{
-                cell.lblTime.text = ""
-            } else if item.episode != ""{
-                cell.lblTime.text = "Tập " + item.episode + "/" + item.totalEpisode
-            } else{
-                cell.lblTime.text = item.timePass
-            }
-            cell.isOn = true
-            cell.item = item
-            cell.indexPath = indexPath
-            cell.lblTitle.text = item.name
-            cell.lblDescription.text = item.descripTion
-            cell.delegate = self
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-                cell.imgThumb.loadImage(fromURL: url)
-            }
-            if indexPath == self.indexPath{
-                var link = ""
-                if item.path != "" {
-                    link = item.path
-                    if Array(link)[link.count - 1] == "/" {
+            if indexPath.row - 1 < listSearch.count {
+                let item = listSearch[indexPath.row - 1]
+                if news.name == "Đừng bỏ lỡ"{
+                    cell.lblTime.text = ""
+                } else if item.episode != ""{
+                    cell.lblTime.text = "Tập " + item.episode + "/" + item.totalEpisode
+                } else{
+                    cell.lblTime.text = item.timePass
+                }
+                cell.isOn = true
+                cell.item = item
+                cell.indexPath = indexPath
+                cell.lblTitle.text = item.name
+                cell.lblDescription.text = item.descripTion
+                cell.delegate = self
+                if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                    cell.imgThumb.loadImage(fromURL: url)
+                }
+                if indexPath == self.indexPath{
+                    var link = ""
+                    if item.path != "" {
+                        link = item.path
+                        if Array(link)[link.count - 1] == "/" {
+                            link = item.fileCode
+                        }
+                    }else{
                         link = item.fileCode
                     }
-                }else{
-                    link = item.fileCode
-                }
-                if let url = URL(string: link.replacingOccurrences(of: "\\", with: "/")){
-                    
-                    cell.viewPlayer.player = AVPlayer(url: url)
-                    if cell.isOn {
-                        cell.monitor(item)
-                        cell.viewPlayer.player?.play()
-//                        cell.imgThumb.isHidden = true
-                    } else {
-                        cell.imgThumb.isHidden = false
+                    if let url = URL(string: link.replacingOccurrences(of: "\\", with: "/")){
+                        
+                        cell.viewPlayer.player = AVPlayer(url: url)
+                        if cell.isOn {
+                            cell.monitor(item)
+                            cell.viewPlayer.player?.play()
+    //                        cell.imgThumb.isHidden = true
+                        } else {
+                            cell.imgThumb.isHidden = false
+                        }
+                        cell.setup()
                     }
-                    cell.setup()
+    //                cell.imgThumb.isHidden = true
+                } else{
+                    cell.viewPlayer.player?.pause()
+                    cell.imgThumb.isHidden = false
                 }
-//                cell.imgThumb.isHidden = true
-            } else{
-                cell.viewPlayer.player?.pause()
-                cell.imgThumb.isHidden = false
             }
             return cell
         }
@@ -317,13 +319,57 @@ extension HighLight2Controller: CellVideoDelegate{
     }
     
     func didSelectViewShare(_ cell: CellVideo) {
-        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "www.now.vtc.vn"
+        components.path = "/about"
+        let itemIDQueryItem = URLQueryItem(name: "id", value: cell.item.privateID)
+        let typeQueryItem = URLQueryItem(name: "type", value: "video")
+        components.queryItems = [typeQueryItem, itemIDQueryItem]
+        
+        guard let linkParameter = components.url else { return }
+//        print("I am sharing \(linkParameter.absoluteString)")
+        
+        // Create the big dynamic link
+        guard let sharedLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://h6z5d.app.goo.gl") else {
+            print("Couldn't create FDL components")
             return
         }
-        let itemsToShare = [url]
-        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-        ac.popoverPresentationController?.sourceView = self.view
-        self.present(ac, animated: true)
+        
+        sharedLink.iOSParameters = DynamicLinkIOSParameters(bundleID: "vn.vtc.now")
+        sharedLink.iOSParameters?.appStoreID = "1355778168"
+        sharedLink.iOSParameters?.minimumAppVersion = "1.3.0"
+        sharedLink.iOSParameters?.fallbackURL = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html")
+        sharedLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.accedo.vtc")
+        sharedLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
+        sharedLink.socialMetaTagParameters?.title = "\(cell.item.name)"
+        sharedLink.socialMetaTagParameters?.imageURL = URL(string: root.cdn.imageDomain + cell.item.thumnail.replacingOccurrences(of: "\\", with: "/"))
+        guard sharedLink.url != nil else { return }
+        //print("The long dynamic link is \(longURL.absoluteString)")
+        
+        sharedLink.shorten { url, warnings, error in
+            if let error = error {
+                print("Oh no! Got error \(error)")
+                return
+            }
+//            if let warnings = warnings {
+//                for warning in warnings {
+//                    print("FDL warnings: \(warning)")
+//                }
+//            }
+            guard let url = url else {return}
+            //print("I have a short URL to share! \(url.absoluteString)")
+            let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            ac.popoverPresentationController?.sourceView = self.view
+            self.present(ac, animated: true)
+        }
+//        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
+//            return
+//        }
+//        let itemsToShare = [url]
+//        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+//        ac.popoverPresentationController?.sourceView = self.view
+//        self.present(ac, animated: true)
     }
     
     func didSelectViewBookmark(_ cell: CellVideo) {

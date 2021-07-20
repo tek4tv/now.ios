@@ -131,12 +131,11 @@ class APIService{
         AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/vtcnow_keysearch", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let data):
-                var list: [String] = []
+                var list: [KeyWordModel] = []
                 if let data = data as? [[String: Any]]{
                     for json in data{
-                        if let name = json["Name"] as? String {
-                            list.append(name)
-                        }
+                        let item = KeyWordModel().initLoad(json)
+                        list.append(item)
                     }
                 }
                 closure(list, nil)
@@ -213,9 +212,12 @@ class APIService{
     }
     func searchAll(keySearch: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
         let json: [String : Any] = [
-            "KeySearch": keySearch
+            "KeySearch" : "\"\(keySearch)\"",
+                "Tag":"",
+                "Page":0,
+                "Size":20
         ]
-        AF.request("http://dev.caching.tek4tv.vn/api/Video/Search", method: .post, parameters: json, encoding: JSONEncoding.default).responseJSON(completionHandler: { (response) in
+        AF.request("https://dev.caching.tek4tv.vn/api/Video/Search", method: .post, parameters: json, encoding: JSONEncoding.default).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let data):
                 var listMedia: [MediaModel] = []
@@ -376,17 +378,14 @@ class APIService{
 //    }
     func getMoreVideoPlaylist(privateKey: String, page: String, closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
 //        print("https://dev.caching.tek4tv.vn/api/Video/\(privateKey)/\(page)/20")
-        AF.request("https://dev.caching.tek4tv.vn/api/Video/\(privateKey)/\(page)/20", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+        AF.request("https://ovp.tek4tv.vn/redis/v1/accounts/103e5b3a-3971-4fcb-bf44-5b15c5bbb88e/playlists/\(privateKey)/desc/20/\(page)", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let data):
-                var list = [MediaModel]()
-                if let data = data as? [[String: Any]]{
-                    for json in data {
-                        let item = MediaModel().initLoad(json)
-                        list.append(item)
-                    }
+                var cate = CategoryModel()
+                if let data = data as? [String: Any]{
+                    cate = cate.initLoad(data)
                 }
-                closure(list, nil)
+                closure(cate.media, nil)
             case .failure(let error):
                 print(error)
             }

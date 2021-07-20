@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19115.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o6B-DR-mrs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o6B-DR-mrs">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -4459,7 +4459,7 @@
                                 </connections>
                             </slider>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVU-We-8Cq">
-                                <rect key="frame" x="332" y="658" width="35" height="35"/>
+                                <rect key="frame" x="339.5" y="665.5" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="eVU-We-8Cq" secondAttribute="height" id="0Ty-zL-Wyg">
                                         <userDefinedRuntimeAttributes>
@@ -4472,13 +4472,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                 </constraints>
-                                <state key="normal" image="next-1"/>
+                                <state key="normal" image="next-2"/>
                                 <connections>
                                     <action selector="didSelectBtnNext:" destination="gUf-4H-7jj" eventType="touchUpInside" id="38X-Lx-giN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPk-cw-52A">
-                                <rect key="frame" x="47" y="658" width="35" height="35"/>
+                                <rect key="frame" x="39.5" y="665.5" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LPk-cw-52A" secondAttribute="height" id="3IZ-4G-qoV">
                                         <userDefinedRuntimeAttributes>
@@ -4635,14 +4635,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rr9-cj-FUw">
-                                <rect key="frame" x="262" y="658" width="35" height="35"/>
+                                <rect key="frame" x="269.5" y="663" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Rr9-cj-FUw" secondAttribute="height" multiplier="1:1" id="jEB-EM-pOE">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
-                                    <constraint firstAttribute="height" constant="35" id="sX2-hU-wgA">
+                                    <constraint firstAttribute="height" constant="40" id="sX2-hU-wgA">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
                                         </userDefinedRuntimeAttributes>
@@ -4654,14 +4654,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aV2-eW-yHQ">
-                                <rect key="frame" x="117" y="658" width="35" height="35"/>
+                                <rect key="frame" x="104.5" y="663" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aV2-eW-yHQ" secondAttribute="height" multiplier="1:1" id="J0Y-Du-NYa">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
-                                    <constraint firstAttribute="height" constant="35" id="cks-MC-fYL">
+                                    <constraint firstAttribute="height" constant="40" id="cks-MC-fYL">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
                                         </userDefinedRuntimeAttributes>
@@ -4673,9 +4673,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CPu-xq-upG">
-                                <rect key="frame" x="182" y="650.5" width="50" height="50"/>
+                                <rect key="frame" x="174.5" y="650.5" width="65" height="65"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="1ho-dT-Unf">
+                                    <constraint firstAttribute="height" constant="65" id="1ho-dT-Unf">
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="myConstain" value="YES"/>
                                         </userDefinedRuntimeAttributes>
@@ -5900,7 +5900,7 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksy-tu-W6E">
-                                        <rect key="frame" x="236.5" y="176.5" width="37.5" height="18"/>
+                                        <rect key="frame" x="236" y="176.5" width="38" height="17.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -5909,7 +5909,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZV5-OP-PMc" customClass="CustomSlider" customModule="NOW" customModuleProvider="target">
-                                        <rect key="frame" x="55.5" y="160.5" width="173" height="51"/>
+                                        <rect key="frame" x="56" y="160.5" width="172" height="51"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Z1Z-fj-Chk">
                                                 <userDefinedRuntimeAttributes>
@@ -5923,7 +5923,7 @@
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwh-1O-L3u">
-                                        <rect key="frame" x="10" y="176.5" width="37.5" height="18"/>
+                                        <rect key="frame" x="10" y="176.5" width="38" height="17.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -5945,7 +5945,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </constraint>
                                         </constraints>
-                                        <state key="normal" backgroundImage="pre"/>
+                                        <state key="normal" backgroundImage="pre-1"/>
                                         <connections>
                                             <action selector="didSelectBtnPrevious:" destination="ygH-Ei-bko" eventType="touchUpInside" id="q0u-7n-mj0"/>
                                         </connections>
@@ -6094,10 +6094,10 @@
                                 <rect key="frame" x="0.0" y="314.5" width="414" height="581.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6w-Yk-DqJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="626.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="626"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nguời kể tình ca&quot; 1990 - Acoustic Cover Songs" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGj-Wy-f8b">
-                                                <rect key="frame" x="20" y="10" width="374" height="49.5"/>
+                                                <rect key="frame" x="20" y="10" width="374" height="49"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="21"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -6106,7 +6106,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thể hiện: Hà Lê, Bùi Lan Hương" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rds-l9-oco">
-                                                <rect key="frame" x="20" y="69.5" width="236" height="20"/>
+                                                <rect key="frame" x="20" y="69" width="246.5" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -6115,7 +6115,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hR2-1R-cKj">
-                                                <rect key="frame" x="314" y="60.5" width="100" height="30"/>
+                                                <rect key="frame" x="314" y="60" width="100" height="30"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vka-hk-ICv">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
@@ -6161,7 +6161,7 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fn-Ah-bFD" userLabel="Line1">
-                                                <rect key="frame" x="20" y="109.5" width="374" height="1"/>
+                                                <rect key="frame" x="20" y="109" width="374" height="1"/>
                                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="yfU-aQ-D29">
@@ -6172,7 +6172,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tiếp theo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9k-gZ-iWM">
-                                                <rect key="frame" x="81" y="127.5" width="65" height="18"/>
+                                                <rect key="frame" x="81" y="127" width="65" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.48328119520000001" green="0.001460217754" blue="0.24496355650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -6181,7 +6181,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2x-Vz-rfi" userLabel="Line2">
-                                                <rect key="frame" x="20" y="150.5" width="374" height="1"/>
+                                                <rect key="frame" x="20" y="150" width="374" height="1"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XQ-qh-w46">
                                                         <rect key="frame" x="0.0" y="0.0" width="187" height="1"/>
@@ -6218,7 +6218,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tự động phát" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhJ-lj-vh5">
-                                                <rect key="frame" x="261" y="163" width="83" height="16.5"/>
+                                                <rect key="frame" x="258" y="162.5" width="86" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -6227,7 +6227,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ahI-r5-e2M">
-                                                <rect key="frame" x="0.0" y="194.5" width="414" height="432"/>
+                                                <rect key="frame" x="0.0" y="194" width="414" height="432"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="432" id="UwJ-BJ-3w6"/>
@@ -6250,7 +6250,7 @@
                                                 </cells>
                                             </collectionView>
                                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wDy-yI-jfj" customClass="CustomSwitch" customModule="NOW" customModuleProvider="target">
-                                                <rect key="frame" x="354" y="161.5" width="40" height="20"/>
+                                                <rect key="frame" x="354" y="161" width="40" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="XBq-x2-kCE">
@@ -7476,9 +7476,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </constraint>
                                         </constraints>
-                                        <state key="normal">
-                                            <imageReference key="backgroundImage" image="icons8-forward-5-48"/>
-                                        </state>
+                                        <state key="normal" backgroundImage="next 5s-1"/>
                                         <connections>
                                             <action selector="didSelectBtnNext:" destination="xAf-0n-j1m" eventType="touchUpInside" id="DBM-tJ-a7p"/>
                                         </connections>
@@ -7655,9 +7653,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </constraint>
                                         </constraints>
-                                        <state key="normal">
-                                            <imageReference key="backgroundImage" image="icons8-replay-5-60"/>
-                                        </state>
+                                        <state key="normal" backgroundImage="pre 5s-1"/>
                                         <connections>
                                             <action selector="didSelectBtnPrevious:" destination="xAf-0n-j1m" eventType="touchUpInside" id="DX9-IY-5gs"/>
                                         </connections>
@@ -8237,18 +8233,20 @@
         <image name="icons8-collapse-30" width="30" height="30"/>
         <image name="icons8-delete-50" width="50" height="50"/>
         <image name="icons8-expand-arrow-48" width="48" height="48"/>
-        <image name="icons8-forward-5-48" width="48" height="48"/>
         <image name="icons8-gear-32" width="32" height="32"/>
         <image name="icons8-menu-48" width="48" height="48"/>
-        <image name="icons8-replay-5-60" width="60" height="60"/>
         <image name="icons8-settings-48" width="48" height="48"/>
         <image name="logo" width="232" height="232"/>
         <image name="next 5s" width="512" height="512"/>
+        <image name="next 5s-1" width="512" height="512"/>
         <image name="next-1" width="512" height="512"/>
+        <image name="next-2" width="512" height="512"/>
         <image name="nghe (1)" width="30" height="30"/>
         <image name="noibat (1)" width="30" height="30"/>
         <image name="pre" width="512" height="512"/>
         <image name="pre 5s" width="512" height="512"/>
+        <image name="pre 5s-1" width="512" height="512"/>
+        <image name="pre-1" width="512" height="512"/>
         <image name="xem (1)" width="30" height="30"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

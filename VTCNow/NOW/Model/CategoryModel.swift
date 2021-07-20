@@ -74,6 +74,7 @@ class MediaModel{
     var fileCode = ""
     var square = ""
     var endTimecode = ""
+    var keyword = ""
     func initLoad(_ json: [String: Any]) -> MediaModel{
         if let temp = json["PrivateID"] as? String { privateID = temp}
         if let temp = json["Description"] as? String { descripTion = temp}
@@ -126,6 +127,12 @@ class MediaModel{
         if let temp = json["Duration"] as? String {
             duration = temp
             minutes = duration.toMinute()
+        }
+        if let temp = json["Keyword"] as? String {
+                let str = temp.split(separator: ",")
+                if str.count > 0 {
+                    keyword = String(str[0])
+                }
         }
         if let previousDate = schedule.toDate(){
             let interval = Date() - previousDate
@@ -311,10 +318,13 @@ class LayoutModel{
 
 class KeyWordModel{
     var privateKey = ""
+    var name = ""
     var keyWord = ""
     func initLoad(_ json: [String: Any]) -> KeyWordModel{
         if let temp = json["PrivateKey"] as? String { privateKey = temp}
         if let temp = json["KeyWord"] as? String { keyWord = temp}
+        if let temp = json["Keysearch"] as? String { keyWord = temp}
+        if let temp = json["Name"] as? String { name = temp}
         return self
     }
 }

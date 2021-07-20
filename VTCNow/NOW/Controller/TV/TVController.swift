@@ -144,28 +144,26 @@ extension TVController: UICollectionViewDelegate, UICollectionViewDataSource, UI
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVCell.reuseIdentifier, for: indexPath) as! TVCell
-            let item = lives[indexPath.row]
-            cell.data = item
-            cell.collView.reloadData()
-            cell.delegate = self
-//            if let url = URL(string: root.cdn.imageDomain + item.image[0].url.replacingOccurrences(of: "\\", with: "/" )){
-//                cell.imgThumb.loadImage(fromURL: url)
-//            }
-            cell.imgThumb.image = images[item.name]
-            if indexPath == self.indexPath {
-                cell.playLive()
-                if isPickDate == true{
-                    cell.loadVideoByDate(date: datePicker)
-                    isPickDate = false
+            if indexPath.row < lives.count{
+                let item = lives[indexPath.row]
+                cell.data = item
+                cell.collView.reloadData()
+                cell.delegate = self
+                cell.imgThumb.image = images[item.name]
+                if indexPath == self.indexPath {
+                    cell.playLive()
+                    if isPickDate == true{
+                        cell.loadVideoByDate(date: datePicker)
+                        isPickDate = false
+                    } else{
+                        cell.setup()
+                    }
                 } else{
-                    cell.setup()
+                    cell.stopLive()
                 }
-            } else{
-                cell.stopLive()
             }
             return cell
         }
-        
     }
 }
 extension TVController: TVCellDelegate{

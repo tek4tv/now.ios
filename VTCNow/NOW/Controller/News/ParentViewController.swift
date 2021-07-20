@@ -187,46 +187,44 @@ extension ParentViewController: UITableViewDelegate, UITableViewDataSource{
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellVideo.reuseIdentifier, for: indexPath) as! CellVideo
-            
-            let item = listSearch[indexPath.row - 1]
-            cell.item = item
-            cell.indexPath = indexPath
-            cell.lblTitle.text = item.name
-            cell.lblDescription.text = item.descripTion
-            if news.name == "Đừng bỏ lỡ"{
-                cell.lblTime.text = ""
-            } else if item.episode != ""{
-                cell.lblTime.text = "Tập " + item.episode + "/" + item.totalEpisode
-            } else{
-                cell.lblTime.text = item.timePass
-            }
-            
-            cell.delegate = self
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-                cell.imgThumb.loadImage(fromURL: url)
-            }
-            if indexPath == self.indexPath{
-                var link = ""
-                if item.path != "" {
-                    link = item.path
-                    if Array(link)[link.count - 1] == "/" {
+            if indexPath.row - 1 < listSearch.count{
+                let item = listSearch[indexPath.row - 1]
+                cell.item = item
+                cell.indexPath = indexPath
+                cell.lblTitle.text = item.name
+                cell.lblDescription.text = item.descripTion
+                if news.name == "Đừng bỏ lỡ"{
+                    cell.lblTime.text = ""
+                } else if item.episode != ""{
+                    cell.lblTime.text = "Tập " + item.episode + "/" + item.totalEpisode
+                } else{
+                    cell.lblTime.text = item.timePass
+                }
+                
+                cell.delegate = self
+                if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                    cell.imgThumb.loadImage(fromURL: url)
+                }
+                if indexPath == self.indexPath{
+                    var link = ""
+                    if item.path != "" {
+                        link = item.path
+                        if Array(link)[link.count - 1] == "/" {
+                            link = item.fileCode
+                        }
+                    }else{
                         link = item.fileCode
                     }
-                }else{
-                    link = item.fileCode
+                    if let url = URL(string: link){
+                        
+                        cell.viewPlayer.player = AVPlayer(url: url)
+                        cell.viewPlayer.player?.play()
+                        cell.setup()
+                    }
+                } else{
+                    cell.viewPlayer.player?.pause()
+                    cell.imgThumb.isHidden = false
                 }
-                if let url = URL(string: link){
-                    
-                    cell.viewPlayer.player = AVPlayer(url: url)
-//                    cell.viewPlayer.player?.automaticallyWaitsToMinimizeStalling = false
-//                    cell.viewPlayer.player?.playImmediately(atRate: 1.0)
-                    cell.viewPlayer.player?.play()
-                    cell.setup()
-                }
-//                cell.imgThumb.isHidden = true
-            } else{
-                cell.viewPlayer.player?.pause()
-                cell.imgThumb.isHidden = false
             }
             return cell
         }

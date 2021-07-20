@@ -97,28 +97,30 @@ extension MovieSetController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type3ItemCell.reuseIdentifier, for: indexPath) as! Type3ItemCell
-        let item = listSearch[indexPath.row]
-        cell.data = item
-        cell.row = indexPath.row
-        cell.delegate = self
-        cell.lblTitle.text = item.name
-        if item.country != "" {
-            cell.lblTime.text = item.country
-        } else {
-            cell.lblTime.text = item.getTimePass()
-        }
-        if isPushByTVShow {
-            cell.lblTime.isHidden = true
-            cell.viewShare.isHidden = true
-        }
-        if item.episode != "" {
-            cell.viewEpisode.isHidden = false
-            cell.lblEpisode.text = item.episode
-            cell.lblTotalEpisode.text = item.totalEpisode
-        }
-        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-            cell.thumbImage.loadImage(fromURL: url)
-            cell.thumbImage.contentMode = .scaleAspectFill
+        if indexPath.row < listSearch.count {
+            let item = listSearch[indexPath.row]
+            cell.data = item
+            cell.row = indexPath.row
+            cell.delegate = self
+            cell.lblTitle.text = item.name
+            if item.country != "" {
+                cell.lblTime.text = item.country
+            } else {
+                cell.lblTime.text = item.getTimePass()
+            }
+            if isPushByTVShow {
+                cell.lblTime.isHidden = true
+                cell.viewShare.isHidden = true
+            }
+            if item.episode != "" {
+                cell.viewEpisode.isHidden = false
+                cell.lblEpisode.text = item.episode
+                cell.lblTotalEpisode.text = item.totalEpisode
+            }
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.thumbImage.loadImage(fromURL: url)
+                cell.thumbImage.contentMode = .scaleAspectFill
+            }
         }
         return cell
     }
@@ -127,6 +129,7 @@ extension MovieSetController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 extension MovieSetController: Type3ItemCellDelegate{
     func didSelectViewImage(_ cell: Type3ItemCell) {
+        print(cell.row)
         let count = listSearch.count
         var list: [MediaModel] = []
         if count == 1{

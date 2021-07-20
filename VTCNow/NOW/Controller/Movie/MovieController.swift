@@ -136,19 +136,23 @@ extension MovieController: UICollectionViewDelegate, UICollectionViewDataSource,
             default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Movie3Cell.reuseIdentifier, for: indexPath) as! Movie3Cell
                 cell.delegate = self
-                let item = news.components[indexPath.section - 1]
-                cell.lblTitle.text = item.name
-                cell.data = item.category
+                if indexPath.section - 1 < news.components.count{
+                    let item = news.components[indexPath.section - 1]
+                    cell.lblTitle.text = item.name
+                    cell.data = item.category
+                }
                 return cell
             }
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieItem2Cell.reuseIdentifier, for: indexPath) as! MovieItem2Cell
-            let item = listSearch[indexPath.row]
-            if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
-                cell.imgThumb.loadImage(fromURL: url)
+            if indexPath.row < listSearch.count {
+                let item = listSearch[indexPath.row]
+                if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
+                    cell.imgThumb.loadImage(fromURL: url)
+                }
+                cell.lblTitle.text = item.name
+                cell.lblCountry.text = item.country
             }
-            cell.lblTitle.text = item.name
-            cell.lblCountry.text = item.country
             return cell
         }
     }

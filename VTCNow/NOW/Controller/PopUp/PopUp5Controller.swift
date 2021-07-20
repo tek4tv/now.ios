@@ -25,7 +25,7 @@ class PopUp5Controller: UIViewController {
         viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewBack(_:))))
     }
     @objc func didSelectViewBack(_ sender: Any){
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
 }
 extension PopUp5Controller: UITableViewDelegate, UITableViewDataSource{

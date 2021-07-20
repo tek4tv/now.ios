@@ -14,16 +14,16 @@ class CategoryCell: UICollectionViewCell {
     @IBOutlet weak var collView: UICollectionView!
     var delegate: CategoryCellDelegate!
     var listCate: [CategoryModel] = []
-    var images: [String: UIImage] = [
-        "Tin mới": #imageLiteral(resourceName: "tinmoi"),
-        "Món ngon": #imageLiteral(resourceName: "MON NGON"),
-        "Sức khỏe": #imageLiteral(resourceName: "SUC KHOE"),
-        "TV Show": #imageLiteral(resourceName: "TV SHOW"),
-        "Âm nhạc": #imageLiteral(resourceName: "AM NHAC"),
-        "Phim lẻ": #imageLiteral(resourceName: "PHIM LE"),
-        "Phim bộ": #imageLiteral(resourceName: "PHIM BO"),
-        "Sách hay": #imageLiteral(resourceName: "SACH HAY"),
-    ]
+//    var images: [String: UIImage] = [
+//        "Tin mới": #imageLiteral(resourceName: "tinmoi"),
+//        "Món ngon": #imageLiteral(resourceName: "MON NGON"),
+//        "Sức khỏe": #imageLiteral(resourceName: "SUC KHOE"),
+//        "TV Show": #imageLiteral(resourceName: "TV SHOW"),
+//        "Âm nhạc": #imageLiteral(resourceName: "AM NHAC"),
+//        "Phim lẻ": #imageLiteral(resourceName: "PHIM LE"),
+//        "Phim bộ": #imageLiteral(resourceName: "PHIM BO"),
+//        "Sách hay": #imageLiteral(resourceName: "SACH HAY"),
+//    ]
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

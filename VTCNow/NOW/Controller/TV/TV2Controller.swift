@@ -128,9 +128,9 @@ extension TV2Controller: UICollectionViewDelegate, UICollectionViewDataSource, U
         case 0:
             return CGSize(width: 414 * scaleW, height: 0)
         case listVideos.count + 2:
-            return CGSize(width: 414 * scaleW, height: 350 * scaleW)
+            return CGSize(width: 414 * scaleW, height: 370 * scaleW)
         default:
-            return CGSize(width: 414 * scaleW, height: 350 * scaleW)
+            return CGSize(width: 414 * scaleW, height: 370 * scaleW)
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

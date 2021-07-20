@@ -123,12 +123,14 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource, 
             switch indexPath.row {
             case 0..<listCate.count:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.reuseIdentifier, for: indexPath) as! NewBroadCell
-                let item = listCate[indexPath.row]
-                cell.delegate = self
-                cell.lblTitle.text = item.name
-                cell.imgAdd.image = #imageLiteral(resourceName: "NEXT")
-                cell.data = item
-                cell.collView.backgroundColor = .white
+                if indexPath.row < listCate.count{
+                    let item = listCate[indexPath.row]
+                    cell.delegate = self
+                    cell.lblTitle.text = item.name
+                    cell.imgAdd.image = #imageLiteral(resourceName: "NEXT")
+                    cell.data = item
+                    cell.collView.backgroundColor = .white
+                }
                 return cell
             default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.reuseIdentifier, for: indexPath) as! NewBroadCell

@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import MUXSDKStats
+import FirebaseDynamicLinks
 extension VideoController{
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
@@ -101,9 +102,17 @@ class VideoController: UIViewController{
         activityIndicatorView.centerYAnchor.constraint(equalTo: viewPlayer.centerYAnchor).isActive = true
         
         openVideoAudio()
-        var row = Double(listData.count) / 2.0
-        row = row.rounded(.toNearestOrEven)
-        heightCollView.constant = CGFloat(row * 190) * scaleW
+        let count = listData.count
+        let no1 = Double(count) / 2.0
+        let no2 = Double(count / 2)
+        if no1 > no2 {
+            heightCollView.constant = CGFloat((no2 + 1) * 190) * scaleW
+        } else {
+            heightCollView.constant = CGFloat(no2 * 190) * scaleW
+        }
+//        var row = Double(listData.count) / 2.0
+//        row = row.rounded(.toNearestOrEven)
+//        heightCollView.constant = CGFloat(row * 190) * scaleW
         
         //
         lblDescription.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectLbl(_:))))
@@ -140,6 +149,9 @@ class VideoController: UIViewController{
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+    }
+    @objc func didSelectViewBack(_ sender: Any){
         self.viewPlayer.player?.pause()
         self.viewPlayer.player?.replaceCurrentItem(with: nil)
         NotificationCenter.default.removeObserver(self)
@@ -148,18 +160,60 @@ class VideoController: UIViewController{
             viewPlayer.player?.removeTimeObserver(timeObserver)
             self.timeObserver = nil
         }
-    }
-    @objc func didSelectViewBack(_ sender: Any){
         self.navigationController?.popViewController(animated: false)
     }
     @objc func didSelectViewShare(_ sender: Any){
-        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(item.privateID).html") else {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "www.now.vtc.vn"
+        components.path = "/about"
+        let itemIDQueryItem = URLQueryItem(name: "id", value: item.privateID)
+        let typeQueryItem = URLQueryItem(name: "type", value: "movie")
+        components.queryItems = [typeQueryItem, itemIDQueryItem]
+        
+        guard let linkParameter = components.url else { return }
+        //print("I am sharing \(linkParameter.absoluteString)")
+        
+        // Create the big dynamic link
+        guard let sharedLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://h6z5d.app.goo.gl") else {
+           // print("Couldn't create FDL components")
             return
         }
-        let itemsToShare = [url]
-        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-        ac.popoverPresentationController?.sourceView = self.view
-        self.present(ac, animated: true)
+        
+        sharedLink.iOSParameters = DynamicLinkIOSParameters(bundleID: "vn.vtc.now")
+        sharedLink.iOSParameters?.appStoreID = "1355778168"
+        sharedLink.iOSParameters?.minimumAppVersion = "1.3.0"
+        sharedLink.iOSParameters?.fallbackURL = URL(string: "https://now.vtc.vn/viewvod/a/\(item.privateID).html")
+        sharedLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.accedo.vtc")
+        sharedLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
+        sharedLink.socialMetaTagParameters?.title = "\(item.name)"
+        sharedLink.socialMetaTagParameters?.imageURL = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/"))
+        guard let longURL = sharedLink.url else { return }
+        //print("The long dynamic link is \(longURL.absoluteString)")
+        
+        sharedLink.shorten { url, warnings, error in
+            if let error = error {
+                print("Oh no! Got error \(error)")
+                return
+            }
+//            if let warnings = warnings {
+//                for warning in warnings {
+//                    //print("FDL warnings: \(warning)")
+//                }
+//            }
+            guard let url = url else {return}
+            //print("I have a short URL to share! \(url.absoluteString)")
+            let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            ac.popoverPresentationController?.sourceView = self.view
+            self.present(ac, animated: true)
+        }
+//        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(item.privateID).html") else {
+//            return
+//        }
+//        let itemsToShare = [url]
+//        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+//        ac.popoverPresentationController?.sourceView = self.view
+//        self.present(ac, animated: true)
     }
     @objc func playerDidFinishPlaying(note: NSNotification){
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
@@ -494,23 +548,25 @@ extension VideoController: UICollectionViewDelegate, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type4ItemCell.reuseIdentifier, for: indexPath) as! Type4ItemCell
-        let item = listData[indexPath.row]
-        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-            cell.thumbImage.loadImage(fromURL: url)
-        }
-        cell.lblTitle.text = item.name
-        if item.country != "" {
-            cell.lblCountry.isHidden = false
-            cell.lblCountry.text = item.country
-        }
-        if item.episode != "" {
-            cell.viewEpisode.isHidden = false
-            cell.lblEpisode.text = item.episode
-            cell.lblTotalEpisode.text = item.totalEpisode
-            cell.lblCountry.isHidden = false
-            cell.lblCountry.text = item.getTimePass()
-        } else {
-            cell.viewEpisode.isHidden = true
+        if indexPath.row < listData.count {
+            let item = listData[indexPath.row]
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.thumbImage.loadImage(fromURL: url)
+            }
+            cell.lblTitle.text = item.name
+            if item.country != "" {
+                cell.lblCountry.isHidden = false
+                cell.lblCountry.text = item.country
+            }
+            if item.episode != "" {
+                cell.viewEpisode.isHidden = false
+                cell.lblEpisode.text = item.episode
+                cell.lblTotalEpisode.text = item.totalEpisode
+                cell.lblCountry.isHidden = false
+                cell.lblCountry.text = item.getTimePass()
+            } else {
+                cell.viewEpisode.isHidden = true
+            }
         }
         return cell
     }
@@ -572,12 +628,13 @@ extension VideoController: UICollectionViewDelegate, UICollectionViewDataSource{
             listData = list
             collView.reloadData()
         } else {
-            
+            item = listData[indexPath.row]
         }
         if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
             imgAudio.loadImage(fromURL: url)
             imgAudio.isHidden = false
         }
+        viewPlayer.player?.replaceCurrentItem(with: nil)
         openVideoAudio()
         scrollView.setContentOffset(CGPoint.zero, animated: true)
     }

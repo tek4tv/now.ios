@@ -45,7 +45,7 @@ class Type2ItemCell: UICollectionViewCell{
                     } else {
                         item.timePass = "Đang phát"
                     }
-                    lblTime.textColor = #colorLiteral(red: 0.5108931065, green: 0.1515108645, blue: 0.2585203648, alpha: 1)
+                    lblTime.textColor = .white//#colorLiteral(red: 0.5108931065, green: 0.1515108645, blue: 0.2585203648, alpha: 1)
                     NotificationCenter.default.removeObserver(self, name: NSNotification.Name.init("countDownTimer"), object: nil)
                 } else{
                     item.timePass = "\(timeStr)"
@@ -67,7 +67,7 @@ class Type2ItemCell: UICollectionViewCell{
                     } else {
                         lblTime.text = "Đang phát"
                     }
-                    lblTime.textColor = #colorLiteral(red: 0.5110089779, green: 0.1506488323, blue: 0.2548394501, alpha: 1)
+                    lblTime.textColor = .white
                     return true
                 } else{
                     item.timePass = "\(timeStr)"

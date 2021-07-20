@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 import MarqueeLabel
+import FirebaseDynamicLinks
 extension BookPlayerController{
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
@@ -47,6 +48,7 @@ class BookPlayerController: UIViewController {
     var data: MediaModel!
     var listData: [MediaModel] = []
     var isNovel = false
+    fileprivate var duration = 10
     let activityIndicatorView1: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
@@ -75,6 +77,8 @@ class BookPlayerController: UIViewController {
             player.removeTimeObserver(timeObserver)
             self.timeObserver = nil
         }
+        self.CdImage.layer.removeAllAnimations()
+        self.duration = 0
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,7 +141,7 @@ class BookPlayerController: UIViewController {
         
     }
     func animation(){
-        UIView.animate(withDuration: 10, delay: 0, options: .curveLinear) { [weak self] in
+        UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: .curveLinear) { [weak self] in
             self?.CdImage.transform = CGAffineTransform.identity
             self?.CdImage.transform = CGAffineTransform(rotationAngle: -CGFloat.pi * 0.999)
         } completion: {[weak self] (true) in
@@ -187,13 +191,57 @@ class BookPlayerController: UIViewController {
         }
     }
     @objc func didSelectViewShare(_ sender: Any){
-        guard let url = URL(string: data.path) else {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "www.now.vtc.vn"
+        components.path = "/about"
+        let itemIDQueryItem = URLQueryItem(name: "id", value: data.privateID)
+        let typeQueryItem = URLQueryItem(name: "type", value: "book")
+        components.queryItems = [typeQueryItem, itemIDQueryItem]
+        
+        guard let linkParameter = components.url else { return }
+        //print("I am sharing \(linkParameter.absoluteString)")
+        
+        // Create the big dynamic link
+        guard let sharedLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://h6z5d.app.goo.gl") else {
+           // print("Couldn't create FDL components")
             return
         }
-        let itemsToShare = [url]
-        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-        ac.popoverPresentationController?.sourceView = self.view
-        self.present(ac, animated: true)
+        
+        sharedLink.iOSParameters = DynamicLinkIOSParameters(bundleID: "vn.vtc.now")
+        sharedLink.iOSParameters?.appStoreID = "1355778168"
+        sharedLink.iOSParameters?.minimumAppVersion = "1.3.0"
+        sharedLink.iOSParameters?.fallbackURL = URL(string: data.path)
+        sharedLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.accedo.vtc")
+        sharedLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
+        sharedLink.socialMetaTagParameters?.title = "\(data.name)"
+        sharedLink.socialMetaTagParameters?.imageURL = URL(string: root.cdn.imageDomain + data.thumnail.replacingOccurrences(of: "\\", with: "/"))
+        guard let longURL = sharedLink.url else { return }
+        //print("The long dynamic link is \(longURL.absoluteString)")
+        
+        sharedLink.shorten { url, warnings, error in
+            if let error = error {
+                print("Oh no! Got error \(error)")
+                return
+            }
+//            if let warnings = warnings {
+//                for warning in warnings {
+//                    //print("FDL warnings: \(warning)")
+//                }
+//            }
+            guard let url = url else {return}
+            //print("I have a short URL to share! \(url.absoluteString)")
+            let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            ac.popoverPresentationController?.sourceView = self.view
+            self.present(ac, animated: true)
+        }
+//        guard let url = URL(string: data.path) else {
+//            return
+//        }
+//        let itemsToShare = [url]
+//        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+//        ac.popoverPresentationController?.sourceView = self.view
+//        self.present(ac, animated: true)
     }
 
 
@@ -218,21 +266,22 @@ class BookPlayerController: UIViewController {
         }
     }
     @IBAction func didSelectList(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PopUp5Controller.className) as! PopUp5Controller
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .coverVertical
         if listData.isEmpty {
-            view.showToast(message: "Hệ thống đang gặp sự cố!")
+            vc.listData = [data]
         } else {
-            let vc = storyboard?.instantiateViewController(withIdentifier: PopUp5Controller.className) as! PopUp5Controller
-            vc.modalPresentationStyle = .overFullScreen
             vc.listData = listData
-            vc.idPlaying = idPlaying
-            present(vc, animated: true, completion: nil)
-            vc.onDississ = {[weak self] (idPlaying) in
-                self?.idPlaying = idPlaying
-                self?.data = self?.listData[idPlaying]
-                self?.playAudio()
-            }
         }
         
+        vc.idPlaying = idPlaying
+        present(vc, animated: false, completion: nil)
+        vc.onDississ = {[weak self] (idPlaying) in
+            self?.idPlaying = idPlaying
+            self?.data = self?.listData[idPlaying]
+            self?.playAudio()
+        }
     }
     func playAudio(){
         if let url = URL(string: data.path.replacingOccurrences(of: "\\", with: "/")){

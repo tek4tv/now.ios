@@ -142,11 +142,11 @@ extension TVCell: UICollectionViewDelegate, UICollectionViewDataSource, UIScroll
         case 0:
             return CGSize(width: 330 * scaleW, height: 0)
         case 1 :
-            return CGSize(width: 330 * scaleW, height: 300 * scaleW)
+            return CGSize(width: 330 * scaleW, height: 320 * scaleW)
         case listVideos.count + 2:
-            return CGSize(width: 330 * scaleW, height: 300 * scaleW)
+            return CGSize(width: 330 * scaleW, height: 320 * scaleW)
         default:
-            return CGSize(width: 330 * scaleW, height: 300 * scaleW)
+            return CGSize(width: 330 * scaleW, height: 320 * scaleW)
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

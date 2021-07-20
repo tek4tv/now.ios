@@ -49,12 +49,14 @@ extension MovieCategoryController: UICollectionViewDelegate, UICollectionViewDat
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieItem2Cell.reuseIdentifier, for: indexPath) as! MovieItem2Cell
-        let item = data.media[indexPath.row]
-        if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
-            cell.imgThumb.loadImage(fromURL: url)
+        if indexPath.row < data.media.count {
+            let item = data.media[indexPath.row]
+            if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
+                cell.imgThumb.loadImage(fromURL: url)
+            }
+            cell.lblTitle.text = item.name
+            cell.lblCountry.text = item.country
         }
-        cell.lblTitle.text = item.name
-        cell.lblCountry.text = item.country
         return cell
     }
     

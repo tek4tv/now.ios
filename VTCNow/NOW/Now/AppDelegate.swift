@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import Sentry
 import UserNotifications
+import FirebaseDynamicLinks
 //import GoogleMobileAds
 @available(iOS 13.0, *)
 @main
@@ -37,6 +38,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         configApplePush(application) // đăng ký nhận push.
         return true
     }
+//    func handledIncomingDynamicLink(_ dynamicLink: DynamicLink) {
+//        guard let url = dynamicLink.url else {
+//            print("That's weird. My dynamic link object has no url")
+//            return
+//        }
+//        print("Your incoming link parameter is \(url.absoluteString)")
+//        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+//              let queryItems = components.queryItems else { return }
+//        for queryItem in queryItems {
+//            print("Parameter \(queryItem.name) has a value of \(queryItem.value ?? "")")
+//        }
+//        //dynamicLink.matchType
+//    }
+//    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+//        if let incomingURL = userActivity.webpageURL{
+//            print("Incoming URL is \(incomingURL)")
+//            let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingURL) { dynamicLink, error in
+//                guard error == nil else{
+//                    print("Found an error \(error!.localizedDescription)")
+//                    return
+//                }
+//                if let dynamicLink = dynamicLink {
+//                    self.handledIncomingDynamicLink(dynamicLink)
+//                }
+//            }
+//            if linkHandled {
+//                // Maybe do other things with our incoming URL ?
+//                return true
+//            } else {
+//                return false
+//            }
+//        }
+//        return false
+//    }
+//    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+//        print("I have received a URL through a custom scheme! \(url.absoluteString)")
+//        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+//            self.handledIncomingDynamicLink(dynamicLink)
+//            return true
+//        } else {
+//            // Maybe handle Google or Facebook sign-in here
+//            return false
+//        }
+//    }
 
     func configApplePush(_ application: UIApplication) {
         if #available(iOS 10.0, *) {
@@ -82,6 +127,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         APIService.shared.getPlaylist(privateKey: privateKey) { (data, error) in
             if let data = data as? CategoryModel{
                 news = data
+                for (index, media) in news.media.enumerated(){
+                    if media.privateID == privateID{
+                        news.media.remove(at: index)
+                        break
+                    }
+                }
                 APIService.shared.getDetailVideo(privateKey: privateID) { (media, error) in
                     if let media = media as? MediaModel{
                         news.media.insert(media, at: 0)

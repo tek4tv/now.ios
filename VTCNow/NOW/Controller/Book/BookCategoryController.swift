@@ -49,17 +49,19 @@ extension BookCategoryController: UICollectionViewDelegate, UICollectionViewData
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookItemCell.reuseIdentifier, for: indexPath) as! BookItemCell
-        let item = data.media[indexPath.row]
-        if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
-            cell.thumbImage.loadImage(fromURL: url)
+        if indexPath.row < data.media.count {
+            let item = data.media[indexPath.row]
+            if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
+                cell.thumbImage.loadImage(fromURL: url)
+            }
+            cell.lblTitle.text = item.name
+            if item.episode != "" {
+                cell.viewEpisode.isHidden = false
+                cell.lblEpisode.text = item.episode
+                cell.lblTotalEpisode.text = item.totalEpisode
+            }
+            cell.lblAuthor.text = item.author
         }
-        cell.lblTitle.text = item.name
-        if item.episode != "" {
-            cell.viewEpisode.isHidden = false
-            cell.lblEpisode.text = item.episode
-            cell.lblTotalEpisode.text = item.totalEpisode
-        }
-        cell.lblAuthor.text = item.author
         return cell
     }
     

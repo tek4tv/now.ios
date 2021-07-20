@@ -116,18 +116,22 @@ extension MusicController: UICollectionViewDelegate, UICollectionViewDataSource,
         switch collectionView {
         case collView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type8ItemCell.reuseIdentifier, for: indexPath) as! Type8ItemCell
-            let item = news.media[indexPath.row]
-            cell.lblTitle.text = item.name
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-                cell.thumbImage.loadImage(fromURL: url)
+            if indexPath.row < news.media.count{
+                let item = news.media[indexPath.row]
+                cell.lblTitle.text = item.name
+                if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                    cell.thumbImage.loadImage(fromURL: url)
+                }
             }
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type8ItemCell.reuseIdentifier, for: indexPath) as! Type8ItemCell
-            let item = listSearch[indexPath.row]
-            cell.lblTitle.text = item.name
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-                cell.thumbImage.loadImage(fromURL: url)
+            if indexPath.row < listSearch.count {
+                let item = listSearch[indexPath.row]
+                cell.lblTitle.text = item.name
+                if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                    cell.thumbImage.loadImage(fromURL: url)
+                }
             }
             return cell
         }

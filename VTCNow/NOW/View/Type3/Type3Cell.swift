@@ -86,15 +86,18 @@ class Type3Cell: UICollectionViewCell {
         }
     }
     @objc func playVOD5(_ notification: Notification){
-        if isPlaying == true {
+        
             if let cell = collView.cellForItem(at: IndexPath(row: 0, section: 5)) as? VideoCell{
-                cell.setup()
-                cell.viewPlayer.player?.play()
-                cell.isPlaying = true
-                cell.btnPlay.isHidden = true
-                cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+                NotificationCenter.default.post(name: NSNotification.Name("cell.loadVideo"), object: nil)
+                if isPlaying == true {
+                    cell.viewPlayer.player?.play()
+                    cell.isPlaying = true
+                    cell.btnPlay.isHidden = true
+                    cell.btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
+                }
+                
             }
-        }
+        
         
     }
     deinit {

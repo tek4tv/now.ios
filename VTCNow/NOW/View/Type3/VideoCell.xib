@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19115.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19107.4"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -74,9 +73,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                 </constraints>
-                                <state key="normal">
-                                    <imageReference key="backgroundImage" image="icons8-replay-5-60"/>
-                                </state>
+                                <state key="normal" backgroundImage="pre 5s-1"/>
                                 <connections>
                                     <action selector="didSelectBtnReplay:" destination="gTV-IL-0wX" eventType="touchUpInside" id="HQz-Fs-Kzd"/>
                                 </connections>
@@ -95,9 +92,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </constraint>
                                 </constraints>
-                                <state key="normal">
-                                    <imageReference key="backgroundImage" image="icons8-forward-5-48"/>
-                                </state>
+                                <state key="normal" backgroundImage="next 5s-1"/>
                                 <connections>
                                     <action selector="didSelectBtnForward:" destination="gTV-IL-0wX" eventType="touchUpInside" id="pTK-oq-5Re"/>
                                 </connections>
@@ -557,8 +552,8 @@
         <image name="PLAY" width="512" height="512"/>
         <image name="ic_fullScreen" width="90" height="90"/>
         <image name="icons8-chromecast-cast-button-49" width="48" height="48"/>
-        <image name="icons8-forward-5-48" width="48" height="48"/>
-        <image name="icons8-replay-5-60" width="60" height="60"/>
         <image name="icons8-settings-48" width="48" height="48"/>
+        <image name="next 5s-1" width="512" height="512"/>
+        <image name="pre 5s-1" width="512" height="512"/>
     </resources>
 </document>

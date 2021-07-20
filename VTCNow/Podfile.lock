@@ -10,6 +10,9 @@ PODS:
   - Firebase/Database (8.2.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (~> 8.2.0)
+  - Firebase/DynamicLinks (8.2.0):
+    - Firebase/CoreOnly
+    - FirebaseDynamicLinks (~> 8.2.0)
   - Firebase/Messaging (8.2.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 8.2.0)
@@ -43,6 +46,8 @@ PODS:
   - FirebaseDatabase (8.2.0):
     - FirebaseCore (~> 8.0)
     - leveldb-library (~> 1.22)
+  - FirebaseDynamicLinks (8.2.0):
+    - FirebaseCore (~> 8.0)
   - FirebaseInstallations (8.2.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/Environment (~> 7.4)
@@ -113,6 +118,7 @@ DEPENDENCIES:
   - Alamofire
   - Firebase/Analytics
   - Firebase/Database
+  - Firebase/DynamicLinks
   - Firebase/Messaging
   - Kingfisher (~> 6.0)
   - MarqueeLabel
@@ -129,6 +135,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseDatabase
+    - FirebaseDynamicLinks
     - FirebaseInstallations
     - FirebaseMessaging
     - GoogleAppMeasurement
@@ -161,6 +168,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 3a83f24c3de69ec9f9a426e2598125ea51f3a2ce
   FirebaseCoreDiagnostics: 61384f54989065b15c36b5922b65112e86811d3c
   FirebaseDatabase: 9c231733363229ac26a55ee9ae9031e94cdb9a7d
+  FirebaseDynamicLinks: 5a527c9f84d334c6e53aa933cdf0fcc04a156c29
   FirebaseInstallations: 9394ea09e242bf0816e95ac30e56a9214cc86ced
   FirebaseMessaging: abe18570508ef84ab6957bba35871410457ed588
   GoogleAppMeasurement: b52eafc9dff542d580700e708216568bd2fbf168
@@ -177,6 +185,6 @@ SPEC CHECKSUMS:
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 5582c59cba95a60dd770ba53a1459d872c0f0fa4
+PODFILE CHECKSUM: 5536aeb8117ee9e36f26faeb6eeb6d98e94a7be1
 
 COCOAPODS: 1.10.1

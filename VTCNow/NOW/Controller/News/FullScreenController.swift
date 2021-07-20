@@ -66,7 +66,7 @@ class FullScreenController: UIViewController {
         slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
         
         hidePlayerController()
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         btnPlay.isHidden = false
         //
         viewPlayer.addSubview(activityIndicatorView)
@@ -109,7 +109,7 @@ class FullScreenController: UIViewController {
 
     
     @objc func playerDidFinishPlaying(note: NSNotification){
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         isPlaying = false
         viewPlayer.player?.pause()
         isEnded = true
@@ -163,7 +163,7 @@ class FullScreenController: UIViewController {
         if isPlaying{
             isPlaying = false
             viewPlayer.player?.pause()
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_pause-1"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         } else{
             isPlaying = true
             if isEnded{
@@ -172,7 +172,7 @@ class FullScreenController: UIViewController {
             }
             viewPlayer.player?.play()
             viewPlayer.player?.rate = Float(speed)
-            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+            btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         }
         //isPlaying = !isPlaying
     }
@@ -263,7 +263,7 @@ class FullScreenController: UIViewController {
         viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         isPlaying = true
-        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "ic_playing"), for: .normal)
+        btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PAUSE"), for: .normal)
         addTimeObserver()
     }
     let playName = "iOS AVPlayer"

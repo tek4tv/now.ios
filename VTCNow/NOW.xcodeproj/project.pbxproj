@@ -15,6 +15,8 @@
 		180CFAC1268316FA004C99C2 /* CellNo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180CFABF268316FA004C99C2 /* CellNo.xib */; };
 		1836BF5626858DC600C9591A /* SpeechToTextVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1836BF5426858DC500C9591A /* SpeechToTextVC.xib */; };
 		1836BF5726858DC600C9591A /* SpeechToTextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1836BF5526858DC600C9591A /* SpeechToTextVC.swift */; };
+		185913EF2698509D00637AA2 /* ViewMore4Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185913ED2698509D00637AA2 /* ViewMore4Cell.swift */; };
+		185913F02698509D00637AA2 /* ViewMore4Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185913EE2698509D00637AA2 /* ViewMore4Cell.xib */; };
 		18737CA2268B20B400BC11D8 /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18737CA1268B20B400BC11D8 /* ScheduleModel.swift */; };
 		1892B43326847079001081A9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1892B43226847079001081A9 /* WebKit.framework */; };
 		18ACF0812683389500F2595C /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ACF0802683389500F2595C /* NetworkMonitor.swift */; };
@@ -209,6 +211,8 @@
 		180CFABF268316FA004C99C2 /* CellNo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellNo.xib; sourceTree = "<group>"; };
 		1836BF5426858DC500C9591A /* SpeechToTextVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeechToTextVC.xib; sourceTree = "<group>"; };
 		1836BF5526858DC600C9591A /* SpeechToTextVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextVC.swift; sourceTree = "<group>"; };
+		185913ED2698509D00637AA2 /* ViewMore4Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMore4Cell.swift; sourceTree = "<group>"; };
+		185913EE2698509D00637AA2 /* ViewMore4Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewMore4Cell.xib; sourceTree = "<group>"; };
 		18737CA1268B20B400BC11D8 /* ScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		1892B43226847079001081A9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		18ACF0802683389500F2595C /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
@@ -521,6 +525,8 @@
 				F67464882616C118003A5593 /* ViewMore2Cell.xib */,
 				F67464982616D1F4003A5593 /* ViewMore3Cell.swift */,
 				F67464992616D1F4003A5593 /* ViewMore3Cell.xib */,
+				185913ED2698509D00637AA2 /* ViewMore4Cell.swift */,
+				185913EE2698509D00637AA2 /* ViewMore4Cell.xib */,
 			);
 			path = ViewMore;
 			sourceTree = "<group>";
@@ -1017,6 +1023,7 @@
 			files = (
 				F6BC461F2615A8FD00DDD828 /* ViewFullItemCell.xib in Resources */,
 				F65FD99025C68BEC007F8D0F /* Type2ItemCell.xib in Resources */,
+				185913F02698509D00637AA2 /* ViewMore4Cell.xib in Resources */,
 				F641344026284CD100BCB777 /* Type8ItemCell.xib in Resources */,
 				180CFABD268313C9004C99C2 /* CellVideo.xib in Resources */,
 				F666BEEB25E35C950000990E /* PopUpItemCell.xib in Resources */,
@@ -1226,6 +1233,7 @@
 				F65FD9C925C6A114007F8D0F /* Type5Cell.swift in Sources */,
 				F65FD9A825C694E2007F8D0F /* Type3ItemCell.swift in Sources */,
 				F674648F2616CA44003A5593 /* Type7Cell.swift in Sources */,
+				185913EF2698509D00637AA2 /* ViewMore4Cell.swift in Sources */,
 				F64B02EB25ECF30400AAE865 /* ChannelModel.swift in Sources */,
 				F647365C2612E555008BF14E /* WordCell.swift in Sources */,
 				F641344326284CD100BCB777 /* Type8ItemCell.swift in Sources */,
@@ -1415,7 +1423,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VTC Now.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.4.0;
+				CURRENT_PROJECT_VERSION = 1.4.4;
 				DEVELOPMENT_TEAM = J3Q9S3Z487;
 				INFOPLIST_FILE = "$(SRCROOT)/NOW/Now/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1423,7 +1431,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.4;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.vtc.now;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1441,7 +1449,7 @@
 				CODE_SIGN_ENTITLEMENTS = "VTC Now.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.4.0;
+				CURRENT_PROJECT_VERSION = 1.4.4;
 				DEVELOPMENT_TEAM = J3Q9S3Z487;
 				INFOPLIST_FILE = "$(SRCROOT)/NOW/Now/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1449,7 +1457,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.4;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.vtc.now;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

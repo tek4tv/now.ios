@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import MUXSDKStats
+import FirebaseDynamicLinks
 extension MusicPlayerController{
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
@@ -108,11 +109,6 @@ class MusicPlayerController: UIViewController{
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
-        viewPlayer.player?.removeObserver(self, forKeyPath: "timeControlStatus", context: nil)
-        if let timeObserver = timeObserver {
-            viewPlayer.player?.removeTimeObserver(timeObserver)
-            self.timeObserver = nil
-        }
     }
     @IBAction func switcherValueChange(_ sender: UISwitch) {
         
@@ -120,21 +116,71 @@ class MusicPlayerController: UIViewController{
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.viewPlayer.player?.pause()
-        self.viewPlayer.player = nil
-        self.viewPlayer.player?.replaceCurrentItem(with: nil)
+        
     }
     @objc func didSelectViewBack(_ sender: Any){
+        viewPlayer.player?.removeObserver(self, forKeyPath: "timeControlStatus", context: nil)
+        if let timeObserver = timeObserver {
+            viewPlayer.player?.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
+        self.viewPlayer.player?.pause()
+        self.viewPlayer.player?.replaceCurrentItem(with: nil)
+        self.viewPlayer.player = nil
         self.navigationController?.popViewController(animated: false)
     }
     @objc func didSelectViewShare(_ sender: Any){
-        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(item.privateID).html") else {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "www.now.vtc.vn"
+        components.path = "/about"
+        let itemIDQueryItem = URLQueryItem(name: "id", value: item.privateID)
+        let typeQueryItem = URLQueryItem(name: "type", value: "music")
+        components.queryItems = [typeQueryItem, itemIDQueryItem]
+        
+        guard let linkParameter = components.url else { return }
+        //print("I am sharing \(linkParameter.absoluteString)")
+        
+        // Create the big dynamic link
+        guard let sharedLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://h6z5d.app.goo.gl") else {
+           // print("Couldn't create FDL components")
             return
         }
-        let itemsToShare = [url]
-        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-        ac.popoverPresentationController?.sourceView = self.view
-        self.present(ac, animated: true)
+        
+        sharedLink.iOSParameters = DynamicLinkIOSParameters(bundleID: "vn.vtc.now")
+        sharedLink.iOSParameters?.appStoreID = "1355778168"
+        sharedLink.iOSParameters?.minimumAppVersion = "1.3.0"
+        sharedLink.iOSParameters?.fallbackURL = URL(string: "https://now.vtc.vn/viewvod/a/\(item.privateID).html")
+        sharedLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.accedo.vtc")
+        sharedLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
+        sharedLink.socialMetaTagParameters?.title = "\(item.name)"
+        sharedLink.socialMetaTagParameters?.imageURL = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/"))
+        guard let longURL = sharedLink.url else { return }
+        //print("The long dynamic link is \(longURL.absoluteString)")
+        
+        sharedLink.shorten { url, warnings, error in
+            if let error = error {
+                print("Oh no! Got error \(error)")
+                return
+            }
+//            if let warnings = warnings {
+//                for warning in warnings {
+//                    //print("FDL warnings: \(warning)")
+//                }
+//            }
+            guard let url = url else {return}
+            //print("I have a short URL to share! \(url.absoluteString)")
+            let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            ac.popoverPresentationController?.sourceView = self.view
+            self.present(ac, animated: true)
+        }
+//        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(item.privateID).html") else {
+//            return
+//        }
+//        let itemsToShare = [url]
+//        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+//        ac.popoverPresentationController?.sourceView = self.view
+//        self.present(ac, animated: true)
     }
     @objc func playerDidFinishPlaying(note: NSNotification){
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
@@ -428,11 +474,13 @@ extension MusicPlayerController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Music3Cell.className, for: indexPath) as! Music3Cell
-        let item = listData[indexPath.row]
-        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-            cell.imgThumb.loadImage(fromURL: url)
+        if indexPath.row < listData.count {
+            let item = listData[indexPath.row]
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.imgThumb.loadImage(fromURL: url)
+            }
+            cell.lblTitle.text = item.name
         }
-        cell.lblTitle.text = item.name
         return cell
     }
     
@@ -461,6 +509,7 @@ extension MusicPlayerController: UICollectionViewDelegate, UICollectionViewDataS
         item = listData[indexPath.row]
         listData = list
         collView.reloadData()
+        viewPlayer.player?.replaceCurrentItem(with: nil)
         openVideoAudio()
         scrollView.setContentOffset(CGPoint.zero, animated: true)
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 import AVFoundation
-var count = 0
+
 extension ListenController{
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
@@ -27,6 +27,7 @@ class ListenController: UIViewController {
     @IBOutlet weak var collSearchView: UICollectionView!
     var listSearch: [MediaModel] = []
     var tag = ""
+    var count = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         txfView.addTarget(self, action: #selector(textFieldDidChange(_:)),
@@ -55,11 +56,9 @@ class ListenController: UIViewController {
             APIService.shared.getPlaylist(privateKey: item.privateKey) {[weak self] (data, error) in
                 if let data = data as? CategoryModel{
                     item.category = data
-                    count += 1
-                    if count == bookCate.components.count {
-                        news = bookCate
+                    self?.count += 1
+                    if self!.count == bookCate.components.count {
                         self?.collView.reloadData()
-                        self?.collView.layoutIfNeeded()
                     }
                 }
             }
@@ -105,7 +104,7 @@ extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource
         case collView:
             switch indexPath.row {
             case 0:
-                return CGSize(width: 414 * scaleW, height: (167 + 70) * scaleW)
+                return CGSize(width: 414 * scaleW, height: (175 + 70) * scaleW)
             default:
                 return CGSize(width: 414 * scaleW, height: 310 * scaleW)
             }
@@ -117,7 +116,7 @@ extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case collView:
-            return news.components.count + 1
+            return bookCate.components.count + 1
         default:
             return listSearch.count
         }
@@ -138,24 +137,28 @@ extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource
             default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Type7Cell.reuseIdentifier, for: indexPath) as! Type7Cell
                 cell.delegate = self
-                let item = news.components[indexPath.row - 1]
-                cell.lblTitle.text = item.name
-                cell.data = item.category
+                if indexPath.row - 1 < bookCate.components.count {
+                    let item = bookCate.components[indexPath.row - 1]
+                    cell.lblTitle.text = item.name
+                    cell.data = item.category
+                }
                 return cell
             }
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookItemCell.reuseIdentifier, for: indexPath) as! BookItemCell
-            let item = listSearch[indexPath.row]
-            if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
-                cell.thumbImage.loadImage(fromURL: url)
+            if indexPath.row < listSearch.count {
+                let item = listSearch[indexPath.row]
+                if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
+                    cell.thumbImage.loadImage(fromURL: url)
+                }
+                cell.lblTitle.text = item.name
+                if item.episode != "" {
+                    cell.viewEpisode.isHidden = false
+                    cell.lblEpisode.text = item.episode
+                    cell.lblTotalEpisode.text = item.totalEpisode
+                }
+                cell.lblAuthor.text = item.author
             }
-            cell.lblTitle.text = item.name
-            if item.episode != "" {
-                cell.viewEpisode.isHidden = false
-                cell.lblEpisode.text = item.episode
-                cell.lblTotalEpisode.text = item.totalEpisode
-            }
-            cell.lblAuthor.text = item.author
             return cell
         }
         
@@ -168,11 +171,13 @@ extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource
             switch indexPath.row {
             case 0:
                 let vc = storyboard?.instantiateViewController(withIdentifier: BookCategoryController.className) as! BookCategoryController
-                vc.data = news
+                vc.data = bookCate
                 self.navigationController?.pushViewController(vc, animated: false)
             default:
                 let vc = storyboard?.instantiateViewController(withIdentifier: BookCategoryController.className) as! BookCategoryController
-                vc.data = news.components[indexPath.row - 1].category
+                if indexPath.row - 1 < bookCate.components.count{
+                    vc.data = bookCate.components[indexPath.row - 1].category
+                }
                 self.navigationController?.pushViewController(vc, animated: false)
             }
         default:
@@ -201,6 +206,11 @@ extension ListenController: UICollectionViewDelegate, UICollectionViewDataSource
     
 }
 extension ListenController: Type7CellDelegate, Book3CellDelegate{
+    func didSelectViewMore(_ cell: Book3Cell) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: BookCategoryController.className) as! BookCategoryController
+        vc.data = cell.data
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
     func didSelectNovel(_ cell: Book3Cell, _ data: MediaModel, _ list: [MediaModel]) {
         APIService.shared.getDetailVideo(privateKey: data.privateID) { (data, error) in
             if let data = data as? MediaModel {

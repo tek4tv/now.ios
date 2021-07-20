@@ -30,7 +30,7 @@ class SearchController: UIViewController {
     @IBOutlet weak var viewSpeech: UIView!
     @IBOutlet weak var collWordView: UICollectionView!
     var indicator =  UIActivityIndicatorView()
-    var listWord: [String] = []
+    var listWord: [KeyWordModel] = []
     var listData : [MediaModel] = []
     var filterListString: [KeySearchModel] = []
     var indexPath = IndexPath(row: 1, section: 0)
@@ -65,7 +65,7 @@ class SearchController: UIViewController {
         }
 
         APIService.shared.getKeySearch {[weak self] (data, error) in
-            if let data = data as? [String] {
+            if let data = data as? [KeyWordModel] {
                 self?.listWord = data
                 self?.collWordView.reloadData()
             }
@@ -141,12 +141,14 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.reuseIdentifier, for: indexPath) as! WordCell
-        cell.lblTitle.text = listWord[indexPath.row]
+        if indexPath.row < listWord.count {
+            cell.lblTitle.text = listWord[indexPath.row].name
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        APIService.shared.searchAll(keySearch: listWord[indexPath.row]) { (data, error) in
+        APIService.shared.searchByTag(privateKey: "", keySearch: listWord[indexPath.row].keyWord) { (data, error) in
             if let data = data as? [MediaModel]{
                 self.listData = data
                 news = CategoryModel()
@@ -163,13 +165,14 @@ extension SearchController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         txfView.endEditing(true)
         tblView.isHidden = true
-
+        print(textField.text!)
         APIService.shared.searchAll(keySearch: textField.text!) { (data, error) in
             if let data = data as? [MediaModel]{
                 self.listData = data
                 news = CategoryModel()
                 news.media = data
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+                vc.isPushByHashTag = true
                 self.navigationController?.pushViewController(vc, animated: false)
             }
         }

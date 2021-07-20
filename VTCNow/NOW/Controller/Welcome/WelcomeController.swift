@@ -21,6 +21,12 @@ class WelcomeController: UIViewController {
     var versionAppstore = ""
     var versionApp = ""
     var isConnectWifi = false
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        aiv.color = #colorLiteral(red: 0.5225926042, green: 0.0004706631007, blue: 0.2674992383, alpha: 1)
+        aiv.translatesAutoresizingMaskIntoConstraints = false
+        return aiv
+    }()
     func isUpdateAvailable() throws -> Bool {
         guard let info = Bundle.main.infoDictionary,
               let currentVersion = info["CFBundleShortVersionString"] as? String,
@@ -56,6 +62,11 @@ class WelcomeController: UIViewController {
                 self?.load()
             }
         }
+        viewShadow.addSubview(activityIndicatorView)
+        activityIndicatorView.centerXAnchor.constraint(equalTo: viewShadow.centerXAnchor).isActive = true
+        activityIndicatorView.centerYAnchor.constraint(equalTo: viewShadow.centerYAnchor).isActive = true
+        activityIndicatorView.startAnimating()
+        viewAlert.isHidden = true
     }
     enum VersionError: Error {
         case invalidResponse, invalidBundleInfo
@@ -96,6 +107,7 @@ class WelcomeController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
         viewShadow.alpha = 0.5
     }
+    
     deinit{
         NotificationCenter.default.removeObserver(self)
     }
@@ -203,7 +215,7 @@ class WelcomeController: UIViewController {
                 if let data2 = data2 as? CategoryModel{
                     categorys.append(data2)
                     self?.count += 1
-                    print(data2.name + " " + data2.layout.type + " - " + data2.layout.subType)
+                   // print(data2.name + " " + data2.layout.type + " - " + data2.layout.subType)
                     if categorys.count == root.components.count{
                         APIService.shared.getLive { (data, error) in
                             if let data = data as? [ChannelModel]{
@@ -229,6 +241,8 @@ class WelcomeController: UIViewController {
                                                 if let data = data as? CategoryModel {
                                                     smallBanner = data
                                                 }
+                                                self?.activityIndicatorView.stopAnimating()
+                                                
                                                 let vc = self?.storyboard?.instantiateViewController(withIdentifier: HomeController.className) as! HomeController
                                                 vc.modalTransitionStyle = .crossDissolve
                                                 vc.modalPresentationStyle = .fullScreen

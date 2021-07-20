@@ -12,8 +12,8 @@ class Type1Cell: UICollectionViewCell {
     @IBOutlet weak var collViewDot: UICollectionView!
     @IBOutlet weak var widthCollDot: NSLayoutConstraint!
     var delegate: Type1CellDelegate!
-    var timer = Timer()
-    var indexPath = IndexPath(row: 0, section: 0)
+    fileprivate var timer = Timer()
+    fileprivate var indexPath = IndexPath(row: 0, section: 0)
     var data = CategoryModel(){
         didSet{
             if data.media.count >= 3 {
@@ -122,7 +122,7 @@ extension Type1Cell: UICollectionViewDelegate, UICollectionViewDataSource, UIScr
         default:
             break
         }
-        
+
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
@@ -162,7 +162,7 @@ class PagedFlowLayout: UICollectionViewFlowLayout {
   override func prepare() {
     super.prepare()
     guard let collectionView = collectionView else { return }
-      collectionView.decelerationRate = UIScrollView.DecelerationRate.fast // mostly you want it fast!
+      //collectionView.decelerationRate = UIScrollView.DecelerationRate.fast // mostly you want it fast!
 
       let insetedBounds = collectionView.bounds.inset(by: self.sectionInset)
     self.itemSize = insetedBounds.size

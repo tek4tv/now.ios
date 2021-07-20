@@ -26,6 +26,9 @@ class NewsController: UIViewController {
     var category = CategoryModel()
     var page = 1
     var indexPath = IndexPath(row: 0, section: 0)
+    deinit{
+        NotificationCenter.default.removeObserver(self)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,97 +70,6 @@ class NewsController: UIViewController {
     }
 }
 
-//extension NewsController: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate{
-//
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let count = collView.visibleCells.count
-//        if count == 2{
-//            let id0 = collView.indexPath(for: collView.visibleCells[0])!
-//            let id1 = collView.indexPath(for: collView.visibleCells[1])!
-//            if id0.row < id1.row {
-//                if self.indexPath != id0{
-//                    if let cell = collView.visibleCells[1] as? VideoCell {
-//                        cell.viewPlayer.player?.pause()
-//                    }
-//                    self.indexPath = id0
-//                    collView.reloadData()
-//                }
-//            }else{
-//                if self.indexPath != id1{
-//                    if let cell = collView.visibleCells[0] as? VideoCell {
-//                        cell.viewPlayer.player?.pause()
-//                    }
-//                    self.indexPath = id1
-//                    collView.reloadData()
-//                }
-//            }
-//        }
-//        if count == 3{
-//            var list: [IndexPath] = []
-//            for cell in collView.visibleCells {
-//                let id = collView.indexPath(for: cell)
-//                list.append(id!)
-//            }
-//            list = list.sorted(by: { $0.row > $1.row })
-//            if self.indexPath != list[1]{
-//                if let cell = collView.visibleCells[0] as? VideoCell {
-//                    cell.viewPlayer.player?.pause()
-//                }
-//                if let cell = collView.visibleCells[2] as? VideoCell {
-//                    cell.viewPlayer.player?.pause()
-//                }
-//                self.indexPath = list[1]
-//                collView.reloadData()
-//            }
-//        }
-//
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return category.media.count
-//    }
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if indexPath.row == category.media.count - 1{
-//            APIService.shared.getMoreVideoPlaylist(privateKey: category.privateKey, page: page.description) { [self] (data, error) in
-//                if let data = data as? [MediaModel]{
-//                    self.category.media += data
-//                    self.page += 1
-//                    self.collView.reloadData()
-//                }
-//            }
-//        }
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.className, for: indexPath) as! VideoCell
-//
-//        let item = category.media[indexPath.row]
-//        cell.item = item
-//        cell.indexPath = indexPath
-//        cell.lblTitle.text = item.name
-//        cell.lblTime.text = item.timePass
-//        cell.delegate = self
-//        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-//            cell.imgThumb.loadImage(fromURL: url)
-//        }
-//        if indexPath == self.indexPath{
-//            if let url = URL(string: item.path){
-//
-//                cell.viewPlayer.player  = AVPlayer(url: url)
-//                //cell.viewPlayer.player?.automaticallyWaitsToMinimizeStalling = false
-//                cell.viewPlayer.player?.playImmediately(atRate: 1.0)
-////                cell.viewPlayer.player?.play()
-//                cell.setup()
-//
-//            }
-//            cell.imgThumb.isHidden = true
-//        } else{
-//            cell.viewPlayer.player?.pause()
-//            cell.imgThumb.isHidden = false
-//        }
-//        return cell
-//    }
-//}
 extension NewsController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return category.media.count
@@ -165,30 +77,31 @@ extension NewsController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellVideo.reuseIdentifier, for: indexPath) as! CellVideo
-        
-        let item = category.media[indexPath.row]
-        cell.item = item
-        cell.indexPath = indexPath
-        cell.lblTitle.text = item.name
-        cell.lblTime.text = item.timePass
-        cell.lblDescription.text = item.descripTion
-        cell.delegate = self
-        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
-            cell.imgThumb.loadImage(fromURL: url)
-        }
-        if indexPath == self.indexPath{
-            if let url = URL(string: item.path.replacingOccurrences(of: "\\", with: "/")){
-                
-                cell.viewPlayer.player  = AVPlayer(url: url)
-                cell.monitor(item)
-                cell.viewPlayer.player?.play()
-                cell.setup()
-                
+        if indexPath.row < category.media.count{
+            let item = category.media[indexPath.row]
+            cell.item = item
+            cell.indexPath = indexPath
+            cell.lblTitle.text = item.name
+            cell.lblTime.text = item.timePass
+            cell.lblDescription.text = item.descripTion
+            cell.delegate = self
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                cell.imgThumb.loadImage(fromURL: url)
             }
-//            cell.imgThumb.isHidden = true
-        } else{
-            cell.viewPlayer.player?.pause()
-            cell.imgThumb.isHidden = false
+            if indexPath == self.indexPath{
+                if let url = URL(string: item.path.replacingOccurrences(of: "\\", with: "/")){
+                    
+                    cell.viewPlayer.player  = AVPlayer(url: url)
+                    cell.monitor(item)
+                    cell.viewPlayer.player?.play()
+                    cell.setup()
+                    
+                }
+    //            cell.imgThumb.isHidden = true
+            } else{
+                cell.viewPlayer.player?.pause()
+                cell.imgThumb.isHidden = false
+            }
         }
         return cell
     }
