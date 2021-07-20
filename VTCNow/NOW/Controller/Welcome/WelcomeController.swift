@@ -10,7 +10,6 @@ import Kingfisher
 var isOffClass = false
 
 class WelcomeController: UIViewController {
-   // @IBOutlet weak var heightLogo: NSLayoutConstraint!
     @IBOutlet weak var viewAlert: UIView!
     @IBOutlet weak var viewShadow: UIView!
     @IBOutlet weak var imgThumb: UIImageView!
@@ -62,11 +61,13 @@ class WelcomeController: UIViewController {
                 self?.load()
             }
         }
+        
         viewShadow.addSubview(activityIndicatorView)
         activityIndicatorView.centerXAnchor.constraint(equalTo: viewShadow.centerXAnchor).isActive = true
         activityIndicatorView.centerYAnchor.constraint(equalTo: viewShadow.centerYAnchor).isActive = true
         activityIndicatorView.startAnimating()
         viewAlert.isHidden = true
+        viewShadow.backgroundColor = .clear
     }
     enum VersionError: Error {
         case invalidResponse, invalidBundleInfo
@@ -86,21 +87,6 @@ class WelcomeController: UIViewController {
             }
         }
     }
-//    @objc func didSelectViewDeSau(_ sender: Any){
-//        APIService.shared.getRootPlaylist {[weak self] (data, error) in
-//            if let data = data as? RootModel{
-//                root = data
-//                self?.load()
-//            }
-//        }
-//    }
-//    @objc func didSelectViewCapNhat(_ sender: Any){
-//        self.isClickUpdate = true
-//        if let url = URL(string: "itms-apps://itunes.apple.com/app/1355778168"),
-//           UIApplication.shared.canOpenURL(url){
-//            UIApplication.shared.open(url)
-//        }
-//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewContainer(_:))))
@@ -131,23 +117,6 @@ class WelcomeController: UIViewController {
                     _ = try self.isUpdateAvailable()
                     DispatchQueue.main.async {
                         if self.versionApp != self.versionAppstore {
-//                            let alert = UIAlertController(title: "Phiên bản VTC NOW mới", message: "Hãy cập nhật ứng dụng để có trải nghiệm tốt nhất", preferredStyle: UIAlertController.Style.alert)
-//                            alert.addAction(UIAlertAction(title: "Cập nhật", style: .cancel, handler: { action in
-//                                self.isClickUpdate = true
-//                                if let url = URL(string: "itms-apps://itunes.apple.com/app/1355778168"),
-//                                   UIApplication.shared.canOpenURL(url){
-//                                    UIApplication.shared.open(url)
-//                                }
-//                            }))
-//                            alert.addAction(UIAlertAction(title: "Bỏ qua", style: .destructive, handler: { action in
-//                                APIService.shared.getRootPlaylist {[weak self] (data, error) in
-//                                    if let data = data as? RootModel{
-//                                        root = data
-//                                        self?.load()
-//                                    }
-//                                }
-//                            }))
-//                            self.present(alert, animated: true, completion: nil)
                             self.lbl3.isHidden = true
                             self.lbl4.isHidden = true
                             self.imgThumb.isHidden = true
@@ -173,12 +142,6 @@ class WelcomeController: UIViewController {
             }
                 
         } else{
-//            let alert = UIAlertController(title: "Không có kết nối mạng", message: "Hãy kiểm tra lại kết nối mạng của bạn trong cài đặt", preferredStyle: UIAlertController.Style.alert)
-//            alert.addAction(UIAlertAction(title: "Thử lại", style: UIAlertAction.Style.default, handler: { action in
-//                self.checkNetwork()
-//            }
-//            ))
-//            self.present(alert, animated: true, completion: nil)
             self.isConnectWifi = false
             self.lbl3.isHidden = false
             self.lbl4.isHidden = false
