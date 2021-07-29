@@ -158,6 +158,7 @@ class HomeController: UITabBarController, UITabBarControllerDelegate{//}, IMAAds
         if isMessaging{
             NotificationCenter.default.post(name: NSNotification.Name("HomeOpenVideo"), object: nil)
         }
+        
         //self.setupMiddleButton()
 //        txfView.delegate = self
 //        viewPlayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectViewPlayer(_:))))

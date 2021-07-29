@@ -68,6 +68,8 @@ class MediaModel{
     var totalEpisode = ""
     var genred = ""
     var thumnail = ""
+    var thumnail320_180 = ""
+    var thumnail800_450 = ""
     var portrait = ""
     var author = ""
     var cast = ""
@@ -82,19 +84,30 @@ class MediaModel{
             for item in temp{
                 let imageAdd = ImageModel().initLoad(item)
                 if imageAdd.type == "Thumbnail"{
-                    //let str = imageAdd.url.split(separator: ".")
-//                    let str = imageAdd.url
-//                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
-//                    let last4 = str.suffix(4)
-//                    let path = prefix + "_800_450" + last4
-//                    thumnail = String(path)
+                    let str = imageAdd.url
+                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
+                    let last4 = str.suffix(4)
+                    let path320_180 = prefix + "_320_180" + last4
+                    let path800_450 = prefix + "_800_450" + last4
+                    thumnail320_180 = String(path320_180)
+                    thumnail800_450 = String(path800_450)
                     thumnail = imageAdd.url
                 }
                 if imageAdd.type == "Portrait"{
-                    portrait = imageAdd.url
+                    let str = imageAdd.url
+                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
+                    let last4 = str.suffix(4)
+                    let path = prefix + "_480_720" + last4
+                    portrait = String(path)
+//                    portrait = imageAdd.url
                 }
                 if imageAdd.type == "Square"{
-                    square = imageAdd.url
+                    let str = imageAdd.url
+                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
+                    let last4 = str.suffix(4)
+                    let path = prefix + "_300_300" + last4
+                    square = String(path)
+//                    square = imageAdd.url
                 }
                 image.append(imageAdd)
             }
@@ -103,19 +116,28 @@ class MediaModel{
             for item in temp.toJsonArray(){
                 let imageAdd = ImageModel().initLoad(item)
                 if imageAdd.type == "Thumbnail"{
-                    //let str = imageAdd.url.split(separator: ".")
-//                    let str = imageAdd.url
-//                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
-//                    let last4 = str.suffix(4)
-//                    let path = prefix + "_800_450" + last4
-//                    thumnail = String(path)
+                    let str = imageAdd.url
+                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
+                    let last4 = str.suffix(4)
+                    let path320_180 = prefix + "_320_180" + last4
+                    let path800_450 = prefix + "_800_450" + last4
+                    thumnail320_180 = String(path320_180)
+                    thumnail800_450 = String(path800_450)
                     thumnail = imageAdd.url
                 }
                 if imageAdd.type == "Portrait"{
-                    portrait = imageAdd.url
+                    let str = imageAdd.url
+                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
+                    let last4 = str.suffix(4)
+                    let path = prefix + "_480_720" + last4
+                    portrait = String(path)
                 }
                 if imageAdd.type == "Square"{
-                    square = imageAdd.url
+                    let str = imageAdd.url
+                    let prefix = str[..<str.index(str.endIndex, offsetBy: -4)]
+                    let last4 = str.suffix(4)
+                    let path = prefix + "_300_300" + last4
+                    square = String(path)
                 }
                 image.append(imageAdd)
             }

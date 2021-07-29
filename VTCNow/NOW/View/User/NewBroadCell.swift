@@ -12,9 +12,15 @@ class NewBroadCell: UICollectionViewCell {
     @IBOutlet weak var collView: UICollectionView!
     @IBOutlet weak var imgAdd: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var icon: UIImageView!
     var delegate: NewBroadCellDelegate!
     var data: CategoryModel = CategoryModel(){
         didSet{
+            if data.media.isEmpty{
+                collView.isHidden = true
+            } else {
+                collView.isHidden = false
+            }
             collView.reloadData()
         }
     }
@@ -31,11 +37,14 @@ class NewBroadCell: UICollectionViewCell {
         layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
         collView.collectionViewLayout = layout
+        icon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectLogo(_:))))
     }
     override func prepareForReuse() {
-        imgAdd.image = #imageLiteral(resourceName: "NEXT")
+        imgAdd.image = #imageLiteral(resourceName: "icons8-add-100")
     }
-
+    @objc func didSelectLogo(_ sender: Any){
+        delegate?.didSelectIcon()
+    }
 }
 extension NewBroadCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -50,7 +59,7 @@ extension NewBroadCell: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.row = indexPath.row
         cell.lblTitle.text = item.name
         cell.lblTime.text = item.getTimePass()
-        if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+        if let url = URL(string: root.cdn.imageDomain + item.thumnail320_180.replacingOccurrences(of: "\\", with: "/" )){
             cell.thumbImage.loadImage(fromURL: url)
             cell.thumbImage.contentMode = .scaleAspectFill
         }
@@ -65,6 +74,7 @@ extension NewBroadCell: UICollectionViewDelegate, UICollectionViewDataSource {
 protocol NewBroadCellDelegate: UserController {
     func didSelectItemAt(_ cell: NewBroadCell)
     func didSelectViewShare(_ cell: Type3ItemCell)
+    func didSelectIcon()
 }
 extension NewBroadCell: Type3ItemCellDelegate {
     func didSelectViewImage(_ cell: Type3ItemCell) {

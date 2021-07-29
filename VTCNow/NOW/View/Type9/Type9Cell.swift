@@ -66,7 +66,7 @@ extension Type9Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             cell.row = indexPath.row
             cell.data = item
             cell.delegate = self
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail320_180.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
             }
             if item.country != ""{
@@ -78,7 +78,7 @@ extension Type9Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMoreCell.reuseIdentifier, for: indexPath) as! ViewMoreCell
             let item = data.media[indexPath.row]
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail320_180.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
             }
             return cell

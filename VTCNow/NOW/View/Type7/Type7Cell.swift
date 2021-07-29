@@ -43,19 +43,19 @@ class Type7Cell: UICollectionViewCell {
     }
 }
 extension Type7Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if data.media.count < 10{
-            APIService.shared.getMoreVideoPlaylist(privateKey: data.privateKey, page: "1") { (data, error) in
-                if let data = data as? [MediaModel]{
-                    self.data.media += data
-                    if self.data.media.count >= 10 {
-                        self.length = 10
-                    }
-                    self.collView.reloadData()
-                }
-            }
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        if data.media.count < 10{
+//            APIService.shared.getMoreVideoPlaylist(privateKey: data.privateKey, page: "1") { (data, error) in
+//                if let data = data as? [MediaModel]{
+//                    self.data.media += data
+//                    if self.data.media.count >= 10 {
+//                        self.length = 10
+//                    }
+//                    self.collView.reloadData()
+//                }
+//            }
+//        }
+//    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        if data.media.count >= 10{
 //            return 10

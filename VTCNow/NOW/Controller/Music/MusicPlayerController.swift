@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 import MUXSDKStats
-import FirebaseDynamicLinks
+
 extension MusicPlayerController{
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
@@ -130,58 +130,15 @@ class MusicPlayerController: UIViewController{
         self.navigationController?.popViewController(animated: false)
     }
     @objc func didSelectViewShare(_ sender: Any){
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "www.now.vtc.vn"
-        components.path = "/about"
-        let itemIDQueryItem = URLQueryItem(name: "id", value: item.privateID)
-        let typeQueryItem = URLQueryItem(name: "type", value: "music")
-        components.queryItems = [typeQueryItem, itemIDQueryItem]
-        
-        guard let linkParameter = components.url else { return }
-        //print("I am sharing \(linkParameter.absoluteString)")
-        
-        // Create the big dynamic link
-        guard let sharedLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://h6z5d.app.goo.gl") else {
-           // print("Couldn't create FDL components")
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(item.privateID).html") else {
             return
         }
-        
-        sharedLink.iOSParameters = DynamicLinkIOSParameters(bundleID: "vn.vtc.now")
-        sharedLink.iOSParameters?.appStoreID = "1355778168"
-        sharedLink.iOSParameters?.minimumAppVersion = "1.3.0"
-        sharedLink.iOSParameters?.fallbackURL = URL(string: "https://now.vtc.vn/viewvod/a/\(item.privateID).html")
-        sharedLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.accedo.vtc")
-        sharedLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
-        sharedLink.socialMetaTagParameters?.title = "\(item.name)"
-        sharedLink.socialMetaTagParameters?.imageURL = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/"))
-        guard let longURL = sharedLink.url else { return }
-        //print("The long dynamic link is \(longURL.absoluteString)")
-        
-        sharedLink.shorten { url, warnings, error in
-            if let error = error {
-                print("Oh no! Got error \(error)")
-                return
-            }
-//            if let warnings = warnings {
-//                for warning in warnings {
-//                    //print("FDL warnings: \(warning)")
-//                }
-//            }
-            guard let url = url else {return}
-            //print("I have a short URL to share! \(url.absoluteString)")
-            let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-            ac.popoverPresentationController?.sourceView = self.view
-            self.present(ac, animated: true)
-        }
-//        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(item.privateID).html") else {
-//            return
-//        }
-//        let itemsToShare = [url]
-//        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-//        ac.popoverPresentationController?.sourceView = self.view
-//        self.present(ac, animated: true)
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
     }
+    
     @objc func playerDidFinishPlaying(note: NSNotification){
         btnPlay.setBackgroundImage(#imageLiteral(resourceName: "PLAY"), for: .normal)
         viewPlayer.player?.pause()
@@ -373,7 +330,7 @@ class MusicPlayerController: UIViewController{
         }
         if item.path.contains("mp3"){
             imgAudio.isHidden = false
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail800_450.replacingOccurrences(of: "\\", with: "/" )){
                 imgAudio.loadImage(fromURL: url)
             }
         }else {
@@ -476,7 +433,7 @@ extension MusicPlayerController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Music3Cell.className, for: indexPath) as! Music3Cell
         if indexPath.row < listData.count {
             let item = listData[indexPath.row]
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail320_180.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
             }
             cell.lblTitle.text = item.name

@@ -87,7 +87,7 @@ class CellVideo: UITableViewCell {
         activityIndicatorView.centerYAnchor.constraint(equalTo: viewPlayer.centerYAnchor).isActive = true
         //
         NotificationCenter.default.addObserver(self, selector: #selector(stopVOD(_:)), name: NSNotification.Name("stopVOD"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(release(_:)), name: NSNotification.Name("tableView.cell.removeObserver"), object: nil)
+        
         
         
     }
@@ -378,7 +378,6 @@ class CellVideo: UITableViewCell {
             }
             
         }
-        viewPlayer.player?.automaticallyWaitsToMinimizeStalling = true
         viewPlayer.player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         viewPlayer.player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(self.playerDidFinishPlaying(note:)),name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 extension UserController{
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
@@ -134,6 +135,8 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource, 
                 return cell
             default:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewBroadCell.reuseIdentifier, for: indexPath) as! NewBroadCell
+                cell.delegate = self
+                cell.imgAdd.image = #imageLiteral(resourceName: "icons8-add-100")
                 cell.lblTitle.text = "Chọn nhiều chủ đề"
                 cell.data = CategoryModel()
                 cell.collView.backgroundColor = .clear
@@ -236,6 +239,38 @@ extension UserController: UICollectionViewDelegate, UICollectionViewDataSource, 
 }
 
 extension UserController: NewBroadCellDelegate{
+    func didSelectIcon() {
+        let vc = storyboard?.instantiateViewController(withIdentifier: PickUpController.className) as! PickUpController
+        navigationController?.pushViewController(vc, animated: false)
+        vc.onComplete = {[self] (index) in
+            
+            let list = UserDefaults.standard.stringArray(forKey: "\(index)")!
+            let cate = CategoryModel()
+            if list.isEmpty {
+                
+            } else {
+                cate.index = index
+                var listName = ""
+                for (index, text) in list.enumerated() {
+                    if index == list.count - 1 {
+                        listName += text
+                    } else{
+                        listName += text + ", "
+                    }
+                    APIService.shared.searchAll(keySearch: text) {[self] (data, error) in
+                        if let data = data as? [MediaModel]{
+                            cate.media += data
+                            if index == list.count - 1 {
+                                cate.name = listName
+                                listCate.append(cate)
+                                collView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     func didSelectViewShare(_ cell: Type3ItemCell) {
         guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.data.privateID).html") else {
             return

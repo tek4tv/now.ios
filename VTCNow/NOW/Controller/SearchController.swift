@@ -47,7 +47,7 @@ class SearchController: UIViewController {
         // Do any additional setup after loading the view.
         collWordView.delegate = self
         collWordView.dataSource = self
-        collWordView.register(UINib(nibName: WordCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: WordCell.reuseIdentifier)
+        collWordView.register(UINib(nibName: HashTagItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: HashTagItemCell.reuseIdentifier)
         let layout2 = LeftAlignedCellsCustomFlowLayout()
         layout2.estimatedItemSize = CGSize(width: 1, height: 40 * scaleW)
         layout2.minimumLineSpacing = 5
@@ -140,7 +140,7 @@ extension SearchController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.reuseIdentifier, for: indexPath) as! WordCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashTagItemCell.reuseIdentifier, for: indexPath) as! HashTagItemCell
         if indexPath.row < listWord.count {
             cell.lblTitle.text = listWord[indexPath.row].name
         }

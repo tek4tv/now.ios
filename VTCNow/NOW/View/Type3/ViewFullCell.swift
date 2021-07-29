@@ -56,7 +56,6 @@ class ViewFullCell: UICollectionViewCell {
             }
             collView.isPagingEnabled = true
         })
-        
     }
     func layout(){
         let layout2 = UICollectionViewFlowLayout()
@@ -89,9 +88,14 @@ extension ViewFullCell: UICollectionViewDelegate, UICollectionViewDataSource{
             cell.lblTime.text = " "
             //cell.lblDescription.text = item.descripTion
             cell.lblDescription.isHidden = true
-            if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
-                cell.imgThumb.loadImage(fromURL: url)
+            if let image = overViewImages[indexPath.row]{
+                cell.imgThumb.image = image
+            } else {
+                if let url = URL(string: root.cdn.imageDomain + item.thumnail800_450.replacingOccurrences(of: "\\", with: "/" )){
+                    cell.imgThumb.loadImage(fromURL: url)
+                }
             }
+            
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LongDotCell.reuseIdentifier, for: indexPath) as! LongDotCell

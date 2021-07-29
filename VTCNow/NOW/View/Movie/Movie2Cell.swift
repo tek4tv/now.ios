@@ -82,7 +82,7 @@ extension Movie2Cell: UICollectionViewDelegate, UICollectionViewDataSource{
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Movie2ItemCell.reuseIdentifier, for: indexPath) as! Movie2ItemCell
             let item = data.media[indexPath.row]
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail800_450.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
             }
             cell.lblTitle.text = item.name

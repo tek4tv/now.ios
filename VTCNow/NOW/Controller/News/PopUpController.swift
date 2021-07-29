@@ -28,7 +28,7 @@ class PopUpController: UIViewController {
         dismiss(animated: false, completion: nil)
     }
     @objc func didSelectViewShare(_ sender: Any){
-        guard let url = URL(string: data.path) else {
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(data.privateID).html") else {
             return
         }
         let itemsToShare = [url]

@@ -29,12 +29,16 @@ class ComponentModel{
     var name = ""
     var icon = ""
     var descripTion = ""
+    var domain = ""
+    var logo = ""
     var category = CategoryModel()
     func initLoad(_ json: [String: Any]) -> ComponentModel{
         if let temp = json["PrivateKey"] as? String { privateKey = temp}
         if let temp = json["Name"] as? String { name = temp}
         if let temp = json["Icon"] as? String { icon = temp}
         if let temp = json["Description"] as? String { descripTion = temp}
+        if let temp = json["Domain"] as? String { domain = temp}
+        if let temp = json["Logo"] as? String { logo = temp}
         return self
     }
 }

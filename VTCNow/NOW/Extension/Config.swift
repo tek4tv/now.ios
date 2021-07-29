@@ -16,6 +16,7 @@ var tabBarIndex = 0
 var isMessaging = false
 var bookCate: CategoryModel!
 var lives: [ChannelModel] = []
+
 var overView: CategoryModel!
 var overView2: CategoryModel!
 var banner: CategoryModel!

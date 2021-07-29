@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 class PopUp6Controller: UIViewController {
 
     

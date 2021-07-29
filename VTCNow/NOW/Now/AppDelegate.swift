@@ -9,8 +9,7 @@ import UIKit
 import Firebase
 import Sentry
 import UserNotifications
-import FirebaseDynamicLinks
-//import GoogleMobileAds
+
 @available(iOS 13.0, *)
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {

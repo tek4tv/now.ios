@@ -52,14 +52,14 @@ extension Book3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
         case 0...8:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Book3ItemCell.reuseIdentifier, for: indexPath) as! Book3ItemCell
             let item = data.media[indexPath.row]
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail800_450.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
             }
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewMore4Cell.reuseIdentifier, for: indexPath) as! ViewMore4Cell
             let item = data.media[indexPath.row]
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail800_450.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
             }
             return cell

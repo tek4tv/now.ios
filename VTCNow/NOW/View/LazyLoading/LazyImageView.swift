@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Kingfisher
+
 //class LazyImageView: UIImageView{
 //
 //    private let imageCache = NSCache<AnyObject, UIImage>()
@@ -35,7 +36,7 @@ import Kingfisher
 //}
 class LazyImageView: UIImageView{
     func loadImage(fromURL imageURL: URL){
-        self.kf.setImage(with: imageURL,placeholder: #imageLiteral(resourceName: "placeHolderImage"), options:[.cacheOriginalImage,.transition(.fade(1))])
+        self.kf.setImage(with: imageURL, options:[.cacheOriginalImage])
     }
 }
 

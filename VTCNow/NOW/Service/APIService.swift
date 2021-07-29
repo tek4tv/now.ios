@@ -10,7 +10,18 @@ import Alamofire
 
 class APIService{
     static let shared = APIService()
-
+    func getAppVersion(closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        AF.request("https://ovp.tek4tv.vn/playback/v1/app/version/ios", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let data):
+                if let data = data as? String{
+                    closure(data, nil)
+                }
+            case .failure(let error):
+                closure(nil, error)
+            }
+        })
+    }
     func getRootPlaylist(closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
         AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/c2064177-6af9-4de5-9428-271099183247", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
             switch response.result {
@@ -292,18 +303,14 @@ class APIService{
         })
     }
     func getLive(closure: @escaping (_ response: Any?, _ error: Error?) -> Void) {
-        AF.request("https://appnow.tek4tv.vn/api/now/v1/live/", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
+        AF.request("https://dev.caching.tek4tv.vn/api/playlist/json/a37f083b-c86f-4d40-87fb-7bb1a3ab2ee1", method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let data):
-                var radios: [ChannelModel] = []
-                if let data = data as? [[String: Any]]{
-                    for json in data{
-                        var itemAdd = ChannelModel()
-                        itemAdd = itemAdd.initLoad(json)
-                        radios.append(itemAdd)
-                    }
+                var cate = CategoryModel()
+                if let data = data as? [String: Any]{
+                    cate = cate.initLoad(data)
                 }
-                closure(radios, nil)
+                closure(cate, nil)
             case .failure(let error):
                 print(error)
             }

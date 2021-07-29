@@ -138,7 +138,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             cell.delegate = self
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.getTimePass()
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail320_180.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
                 cell.thumbImage.contentMode = .scaleAspectFill
             }
@@ -156,7 +156,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             cell.delegate = self
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.getTimePass()
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail320_180.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
                 cell.thumbImage.contentMode = .scaleAspectFill
             }
@@ -178,7 +178,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             cell.delegate = self
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.getTimePass()
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail320_180.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
                 cell.thumbImage.contentMode = .scaleAspectFill
             }
@@ -194,7 +194,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
                 cell.delegate = self
                 cell.lblTitle.text = item.name
                 cell.lblTime.text = item.timePass
-                if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                if let url = URL(string: root.cdn.imageDomain + item.thumnail800_450.replacingOccurrences(of: "\\", with: "/" )){
                     cell.imgThumb.loadImage(fromURL: url)
                 }
                 
@@ -213,7 +213,7 @@ extension Type3Cell: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             cell.delegate = self
             cell.lblTitle.text = item.name
             cell.lblTime.text = item.getTimePass()
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail320_180.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
                 cell.thumbImage.contentMode = .scaleAspectFill
             }
@@ -314,14 +314,6 @@ extension Type3Cell: VideoCellDelegate{
     }
     
     func didSelectViewShare(_ cell: VideoCell) {
-//        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
-//            return
-//        }
-//        let itemsToShare = [url]
-//        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-//        ac.popoverPresentationController?.sourceView = self.view
-//        self.present(ac, animated: true)
-        
         delegate?.didSelectViewShare(cell)
     }
     

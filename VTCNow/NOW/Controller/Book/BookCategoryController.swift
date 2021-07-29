@@ -30,7 +30,7 @@ class BookCategoryController: UIViewController {
         collView.dataSource = self
         collView.register(UINib(nibName: BookItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: BookItemCell.reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: (414 - 80) / 3.01 * scaleW, height: 260 * scaleW)
+        layout.itemSize = CGSize(width: (414 - 80) / 3.01 * scaleW, height: 200 * scaleW)
         layout.minimumLineSpacing = 20 * scaleW
         layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: 10 * scaleW, left: 20 * scaleW, bottom: 0, right: 20 * scaleW)
@@ -51,7 +51,7 @@ extension BookCategoryController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookItemCell.reuseIdentifier, for: indexPath) as! BookItemCell
         if indexPath.row < data.media.count {
             let item = data.media[indexPath.row]
-            if let url = URL(string: root.cdn.imageDomain + item.portrait.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.square.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
             }
             cell.lblTitle.text = item.name

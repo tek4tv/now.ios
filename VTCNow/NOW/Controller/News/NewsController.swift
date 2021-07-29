@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+
 extension NewsController{
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
@@ -85,7 +86,7 @@ extension NewsController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
             cell.lblTime.text = item.timePass
             cell.lblDescription.text = item.descripTion
             cell.delegate = self
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail800_450.replacingOccurrences(of: "\\", with: "/" )){
                 cell.imgThumb.loadImage(fromURL: url)
             }
             if indexPath == self.indexPath{
@@ -93,8 +94,9 @@ extension NewsController: UITableViewDelegate, UITableViewDataSource, UIScrollVi
                     
                     cell.viewPlayer.player  = AVPlayer(url: url)
                     cell.monitor(item)
-                    cell.viewPlayer.player?.play()
                     cell.setup()
+                    cell.viewPlayer.player?.play()
+                    
                     
                 }
     //            cell.imgThumb.isHidden = true

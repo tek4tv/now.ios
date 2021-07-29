@@ -202,7 +202,7 @@ extension ParentViewController: UITableViewDelegate, UITableViewDataSource{
                 }
                 
                 cell.delegate = self
-                if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                if let url = URL(string: root.cdn.imageDomain + item.thumnail800_450.replacingOccurrences(of: "\\", with: "/" )){
                     cell.imgThumb.loadImage(fromURL: url)
                 }
                 if indexPath == self.indexPath{

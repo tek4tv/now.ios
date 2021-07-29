@@ -7,8 +7,7 @@
 
 import UIKit
 import AVFoundation
-import FirebaseDynamicLinks
-//import FirebaseDatabase
+
 extension HighLightController{
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
@@ -148,7 +147,7 @@ extension HighLightController: UICollectionViewDelegate, UICollectionViewDataSou
 //            case "1":
 //                return CGSize(width: width, height: 260 * scaleW)
             case "2":
-                let temp = 70 + 180 + 160
+                let temp = 80 + 180 + 160
                 let height: CGFloat = CGFloat(temp)
                 return CGSize(width: width, height: height * scaleW)
             case "3":
@@ -506,13 +505,10 @@ extension HighLightController: Type1CellDelegate{
 }
 extension HighLightController: Type2CellDelegate{
     func didSelectBanner(_ cell: Type2Cell) {
-        APIService.shared.getPlaylist(privateKey: smallBanner.privateKey) {[weak self] (data, error) in
-            if let data = data as? CategoryModel {
-                news = data
-                let vc = self?.storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
-                self?.navigationController?.pushViewController(vc, animated: false)
-            }
-        }
+        news = CategoryModel()
+        news = smallBanner
+        let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
+        navigationController?.pushViewController(vc, animated: false)
     }
     
     func didSelectItemAt(_ cell: Type2Cell) {
@@ -520,6 +516,7 @@ extension HighLightController: Type2CellDelegate{
         self.navigationController?.pushViewController(vc, animated: false)
     }
     func didSelectViewMore(_ cell: Type2Cell) {
+        news = CategoryModel()
         news = cell.data
         let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller
         self.navigationController?.pushViewController(vc, animated: false)
@@ -548,6 +545,7 @@ extension HighLightController: Type3CellDelegate{
         APIService.shared.getPlaylist(privateKey: "7d20527f-5946-4b64-a42b-c33f9a5993aa") { (data, error) in
             if let data = data as? CategoryModel{
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: MovieSetController.className) as! MovieSetController
+                news = CategoryModel()
                 news = data
                 vc.isPushByTVShow = true
                 self.navigationController?.pushViewController(vc, animated: false)
@@ -555,56 +553,13 @@ extension HighLightController: Type3CellDelegate{
         }
     }
     func didSelectViewShare(_ cell: VideoCell) {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "www.now.vtc.vn"
-        components.path = "/about"
-        let itemIDQueryItem = URLQueryItem(name: "id", value: cell.item.privateID)
-        let typeQueryItem = URLQueryItem(name: "type", value: "video")
-        components.queryItems = [typeQueryItem, itemIDQueryItem]
-        
-        guard let linkParameter = components.url else { return }
-//        print("I am sharing \(linkParameter.absoluteString)")
-        
-        // Create the big dynamic link
-        guard let sharedLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://h6z5d.app.goo.gl") else {
-            print("Couldn't create FDL components")
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
             return
         }
-        
-        sharedLink.iOSParameters = DynamicLinkIOSParameters(bundleID: "vn.vtc.now")
-        sharedLink.iOSParameters?.appStoreID = "1355778168"
-        sharedLink.iOSParameters?.minimumAppVersion = "1.3.0"
-        sharedLink.iOSParameters?.fallbackURL = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html")
-        sharedLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.accedo.vtc")
-        sharedLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
-        sharedLink.socialMetaTagParameters?.title = "\(cell.item.name)"
-        sharedLink.socialMetaTagParameters?.imageURL = URL(string: root.cdn.imageDomain + cell.item.thumnail.replacingOccurrences(of: "\\", with: "/"))
-        guard let longURL = sharedLink.url else { return }
-        //print("The long dynamic link is \(longURL.absoluteString)")
-        
-        sharedLink.shorten { url, warnings, error in
-            if let error = error {
-                print("Oh no! Got error \(error)")
-                return
-            }
-//            if let warnings = warnings {
-//                for warning in warnings {
-//                    print("FDL warnings: \(warning)")
-//                }
-//            }
-            guard let url = url else {return}
-            //print("I have a short URL to share! \(url.absoluteString)")
-            let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-            ac.popoverPresentationController?.sourceView = self.view
-            self.present(ac, animated: true)
-        }
-        
-//        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.item.privateID).html") else {
-//            return
-//        }
-        
-        
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
     }
     
     func didSelectViewSetting(_ cell: VideoCell) {
@@ -663,57 +618,13 @@ extension HighLightController: Type3CellDelegate{
     }
     
     func didSelectViewShare(_ cell: Type3ItemCell) {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "www.now.vtc.vn"
-        components.path = "/about"
-        let itemIDQueryItem = URLQueryItem(name: "id", value: cell.data.privateID)
-        let typeQueryItem = URLQueryItem(name: "type", value: "video")
-        components.queryItems = [typeQueryItem, itemIDQueryItem]
-        
-        guard let linkParameter = components.url else { return }
-        //print("I am sharing \(linkParameter.absoluteString)")
-        
-        // Create the big dynamic link
-        guard let sharedLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://h6z5d.app.goo.gl") else {
-           // print("Couldn't create FDL components")
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.data.privateID).html") else {
             return
         }
-        
-        sharedLink.iOSParameters = DynamicLinkIOSParameters(bundleID: "vn.vtc.now")
-        sharedLink.iOSParameters?.appStoreID = "1355778168"
-        sharedLink.iOSParameters?.minimumAppVersion = "1.3.0"
-        sharedLink.iOSParameters?.fallbackURL = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.data.privateID).html")
-        sharedLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.accedo.vtc")
-        sharedLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
-        sharedLink.socialMetaTagParameters?.title = "\(cell.data.name)"
-        sharedLink.socialMetaTagParameters?.imageURL = URL(string: root.cdn.imageDomain + cell.data.thumnail.replacingOccurrences(of: "\\", with: "/"))
-        guard let longURL = sharedLink.url else { return }
-        //print("The long dynamic link is \(longURL.absoluteString)")
-        
-        sharedLink.shorten { url, warnings, error in
-            if let error = error {
-                print("Oh no! Got error \(error)")
-                return
-            }
-//            if let warnings = warnings {
-//                for warning in warnings {
-//                    //print("FDL warnings: \(warning)")
-//                }
-//            }
-            guard let url = url else {return}
-            //print("I have a short URL to share! \(url.absoluteString)")
-            let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-            ac.popoverPresentationController?.sourceView = self.view
-            self.present(ac, animated: true)
-        }
-//        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.data.privateID).html") else {
-//            return
-//        }
-//        let itemsToShare = [url]
-//        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-//        ac.popoverPresentationController?.sourceView = self.view
-//        self.present(ac, animated: true)
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
     }
 }
 extension HighLightController: Type4CellDelegate{
@@ -750,57 +661,13 @@ extension HighLightController: Type5CellDelegate{
     }
     
     func didSelectView2Share(_ cell: Type3ItemCell) {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "www.now.vtc.vn"
-        components.path = "/about"
-        let itemIDQueryItem = URLQueryItem(name: "id", value: cell.data.privateID)
-        let typeQueryItem = URLQueryItem(name: "type", value: "movie")
-        components.queryItems = [typeQueryItem, itemIDQueryItem]
-        
-        guard let linkParameter = components.url else { return }
-        //print("I am sharing \(linkParameter.absoluteString)")
-        
-        // Create the big dynamic link
-        guard let sharedLink = DynamicLinkComponents.init(link: linkParameter, domainURIPrefix: "https://h6z5d.app.goo.gl") else {
-           // print("Couldn't create FDL components")
+        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.data.privateID).html") else {
             return
         }
-        
-        sharedLink.iOSParameters = DynamicLinkIOSParameters(bundleID: "vn.vtc.now")
-        sharedLink.iOSParameters?.appStoreID = "1355778168"
-        sharedLink.iOSParameters?.minimumAppVersion = "1.3.0"
-        sharedLink.iOSParameters?.fallbackURL = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.data.privateID).html")
-        sharedLink.androidParameters = DynamicLinkAndroidParameters(packageName: "com.accedo.vtc")
-        sharedLink.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
-        sharedLink.socialMetaTagParameters?.title = "\(cell.data.name)"
-        sharedLink.socialMetaTagParameters?.imageURL = URL(string: root.cdn.imageDomain + cell.data.thumnail.replacingOccurrences(of: "\\", with: "/"))
-        guard let longURL = sharedLink.url else { return }
-        //print("The long dynamic link is \(longURL.absoluteString)")
-        
-        sharedLink.shorten { url, warnings, error in
-            if let error = error {
-                print("Oh no! Got error \(error)")
-                return
-            }
-//            if let warnings = warnings {
-//                for warning in warnings {
-//                    //print("FDL warnings: \(warning)")
-//                }
-//            }
-            guard let url = url else {return}
-            //print("I have a short URL to share! \(url.absoluteString)")
-            let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-            ac.popoverPresentationController?.sourceView = self.view
-            self.present(ac, animated: true)
-        }
-//        guard let url = URL(string: "https://now.vtc.vn/viewvod/a/\(cell.data.privateID).html") else {
-//            return
-//        }
-//        let itemsToShare = [url]
-//        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-//        ac.popoverPresentationController?.sourceView = self.view
-//        self.present(ac, animated: true)
+        let itemsToShare = [url]
+        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+        ac.popoverPresentationController?.sourceView = self.view
+        self.present(ac, animated: true)
     }
     func didSelectViewMore(_ cell: Type5Cell) {
         news = cell.data
@@ -827,16 +694,6 @@ extension HighLightController: Type9CellDelegate{
         }
         
     }
-    
-//    func didSelectView2Share(_ cell: Type3ItemCell) {
-//        guard let url = URL(string: cell.data.path) else {
-//            return
-//        }
-//        let itemsToShare = [url]
-//        let ac = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-//        ac.popoverPresentationController?.sourceView = self.view
-//        self.present(ac, animated: true)
-//    }
     func didSelectViewMore(_ cell: Type9Cell) {
         news = cell.data
         let vc = storyboard?.instantiateViewController(withIdentifier: HighLight2Controller.className) as! HighLight2Controller

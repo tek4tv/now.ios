@@ -36,7 +36,7 @@ class PickUpController: UIViewController {
         super.viewDidLoad()
         collView1.delegate = self
         collView1.dataSource = self
-        collView1.register(UINib(nibName: WordCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: WordCell.reuseIdentifier)
+        collView1.register(UINib(nibName: HashTagItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: HashTagItemCell.reuseIdentifier)
         let layout2 = LeftAlignedCellsCustomFlowLayout()
         layout2.estimatedItemSize = CGSize(width: 1, height: 40 * scaleW)
         layout2.minimumLineSpacing = 10 * scaleW
@@ -46,7 +46,7 @@ class PickUpController: UIViewController {
         
         collView2.delegate = self
         collView2.dataSource = self
-        collView2.register(UINib(nibName: WordCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: WordCell.reuseIdentifier)
+        collView2.register(UINib(nibName: HashTagItemCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: HashTagItemCell.reuseIdentifier)
         let layout = LeftAlignedCellsCustomFlowLayout()
         layout.estimatedItemSize = CGSize(width: 1, height: 40 * scaleW)
         layout.minimumLineSpacing = 10 * scaleW
@@ -107,7 +107,7 @@ extension PickUpController: UICollectionViewDelegate, UICollectionViewDataSource
             case 0..<list5.count:
                 let label = UILabel(frame: .zero)
                 label.text = list5[indexPath.row]
-                label.font = UIFont(name: "Roboto-Medium", size: 13 * scaleW)
+                label.font = UIFont(name: "Roboto-Regular", size: 18 * scaleW)
                 label.sizeToFit()
                 return CGSize(width: label.frame.width + 20 * scaleW, height: 40 * scaleW)
             default:
@@ -116,7 +116,7 @@ extension PickUpController: UICollectionViewDelegate, UICollectionViewDataSource
                 }
                 let label = UILabel(frame: .zero)
                 label.text = "              "
-                label.font = UIFont(name: "Roboto-Medium", size: 13 * scaleW)
+                label.font = UIFont(name: "Roboto-Regular", size: 13 * scaleW)
                 label.sizeToFit()
                 return CGSize(width: label.frame.width + 20 * scaleW, height: 40 * scaleW)
             }
@@ -140,26 +140,18 @@ extension PickUpController: UICollectionViewDelegate, UICollectionViewDataSource
         case collView1:
             switch indexPath.row {
             case 0..<list5.count:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.reuseIdentifier, for: indexPath) as! WordCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashTagItemCell.reuseIdentifier, for: indexPath) as! HashTagItemCell
                 cell.lblTitle.text = list5[indexPath.row]
-                cell.viewContain.cornerRadius = 5 * scaleW
-                cell.viewContain.borderColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
-                cell.lblTitle.textColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
                 return cell
             default:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.reuseIdentifier, for: indexPath) as! WordCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashTagItemCell.reuseIdentifier, for: indexPath) as! HashTagItemCell
                 cell.lblTitle.text = "              "
-                cell.viewContain.cornerRadius = 5 * scaleW
-                cell.lblTitle.textColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
                 return cell
             }
             
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCell.reuseIdentifier, for: indexPath) as! WordCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HashTagItemCell.reuseIdentifier, for: indexPath) as! HashTagItemCell
             cell.lblTitle.text = listData[indexPath.row]
-            cell.viewContain.cornerRadius = 5 * scaleW
-            cell.viewContain.borderColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
-            cell.lblTitle.textColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
             return cell
         }
     }

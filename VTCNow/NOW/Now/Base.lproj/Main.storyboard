@@ -237,7 +237,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.85089617969999998" green="0.85103946919999995" blue="0.85087728500000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="TkR-A1-KmK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="4QZ-fj-ykb">
                                 <userDefinedRuntimeAttributes>
@@ -1191,7 +1191,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="O26-2s-bYC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4JN-i8-0OZ">
                                     <size key="itemSize" width="128" height="128"/>
@@ -1397,6 +1397,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S5C-w9-vlJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2191" y="1351"/>
+        </scene>
+        <!--Live Controller-->
+        <scene sceneID="2Rk-ba-nCJ">
+            <objects>
+                <viewController storyboardIdentifier="LiveController" id="gFI-xS-OJc" customClass="LiveController" customModule="NOW" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Gl-hp-oGm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VTC 1" translatesAutoresizingMaskIntoConstraints="NO" id="rDi-dg-07C" customClass="LazyImageView" customModule="NOW" customModuleProvider="target">
+                                <rect key="frame" x="172" y="64" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="rDi-dg-07C" secondAttribute="height" id="Pth-se-Sqk">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="70" id="xZh-IE-95j">
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="myConstainWidth" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </constraint>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WeN-gd-VPw">
+                                <rect key="frame" x="0.0" y="154" width="414" height="659"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gU7-WE-YFv"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rDi-dg-07C" firstAttribute="centerX" secondItem="2Gl-hp-oGm" secondAttribute="centerX" id="2K3-V8-pyA"/>
+                            <constraint firstItem="gU7-WE-YFv" firstAttribute="bottom" secondItem="WeN-gd-VPw" secondAttribute="bottom" id="4Zf-Li-VIu"/>
+                            <constraint firstItem="gU7-WE-YFv" firstAttribute="trailing" secondItem="WeN-gd-VPw" secondAttribute="trailing" id="6b2-yd-zI8"/>
+                            <constraint firstItem="rDi-dg-07C" firstAttribute="top" secondItem="gU7-WE-YFv" secondAttribute="top" constant="20" id="DIX-w0-e2Y"/>
+                            <constraint firstItem="WeN-gd-VPw" firstAttribute="leading" secondItem="gU7-WE-YFv" secondAttribute="leading" id="Is5-AZ-zld"/>
+                            <constraint firstItem="WeN-gd-VPw" firstAttribute="top" secondItem="rDi-dg-07C" secondAttribute="bottom" constant="20" id="fMU-pi-dXa"/>
+                            <constraint firstItem="rDi-dg-07C" firstAttribute="width" secondItem="rDi-dg-07C" secondAttribute="height" id="r64-Kk-Agg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="pd0-Lf-hWD"/>
+                    <connections>
+                        <outlet property="icon" destination="rDi-dg-07C" id="3Di-N2-jwi"/>
+                        <outlet property="tblView" destination="WeN-gd-VPw" id="uUj-bA-wjC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="elC-NR-L62" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2955" y="1351"/>
         </scene>
         <!--Listen Controller-->
         <scene sceneID="kGA-Pg-jXb">
@@ -1702,7 +1752,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZaN-Iv-Jch"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8Dg-AL-QzF" firstAttribute="top" secondItem="ZaN-Iv-Jch" secondAttribute="top" id="5uc-NV-w0r"/>
                             <constraint firstItem="sgy-DD-3Um" firstAttribute="leading" secondItem="ZaN-Iv-Jch" secondAttribute="leading" id="E0O-fv-JBQ"/>
@@ -2295,7 +2345,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="e8v-cU-a5t"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="JyL-1g-ccx" firstAttribute="top" secondItem="Z7a-DF-zGp" secondAttribute="bottom" id="EtV-1U-Xhb"/>
                             <constraint firstItem="e8v-cU-a5t" firstAttribute="bottom" secondItem="JyL-1g-ccx" secondAttribute="bottom" id="OAi-LU-Ngj"/>
@@ -2375,7 +2425,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </constraint>
                                         </constraints>
-                                        <state key="normal" backgroundImage="ic_pause-1"/>
+                                        <state key="normal" backgroundImage="PLAY"/>
                                         <connections>
                                             <action selector="didSelectBtnPlay:" destination="iGo-Gf-f6c" eventType="touchUpInside" id="1zN-Po-aVn"/>
                                         </connections>
@@ -5429,7 +5479,7 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="R7A-Ux-eiw"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="jFi-3L-cVq" firstAttribute="top" secondItem="96f-0b-g0u" secondAttribute="bottom" id="5Xo-Jx-dko"/>
                             <constraint firstItem="jFi-3L-cVq" firstAttribute="leading" secondItem="R7A-Ux-eiw" secondAttribute="leading" id="9ob-Gb-Jn4"/>
@@ -5900,7 +5950,7 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksy-tu-W6E">
-                                        <rect key="frame" x="236" y="176.5" width="38" height="17.5"/>
+                                        <rect key="frame" x="236.5" y="176.5" width="37.5" height="18"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -5909,7 +5959,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZV5-OP-PMc" customClass="CustomSlider" customModule="NOW" customModuleProvider="target">
-                                        <rect key="frame" x="56" y="160.5" width="172" height="51"/>
+                                        <rect key="frame" x="55.5" y="160.5" width="173" height="51"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Z1Z-fj-Chk">
                                                 <userDefinedRuntimeAttributes>
@@ -5923,7 +5973,7 @@
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwh-1O-L3u">
-                                        <rect key="frame" x="10" y="176.5" width="38" height="17.5"/>
+                                        <rect key="frame" x="10" y="176.5" width="37.5" height="18"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -6094,10 +6144,10 @@
                                 <rect key="frame" x="0.0" y="314.5" width="414" height="581.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6w-Yk-DqJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="626"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="626.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nguời kể tình ca&quot; 1990 - Acoustic Cover Songs" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGj-Wy-f8b">
-                                                <rect key="frame" x="20" y="10" width="374" height="49"/>
+                                                <rect key="frame" x="20" y="10" width="374" height="49.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="21"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -6106,7 +6156,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thể hiện: Hà Lê, Bùi Lan Hương" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rds-l9-oco">
-                                                <rect key="frame" x="20" y="69" width="246.5" height="20"/>
+                                                <rect key="frame" x="20" y="69.5" width="236" height="20"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -6115,7 +6165,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hR2-1R-cKj">
-                                                <rect key="frame" x="314" y="60" width="100" height="30"/>
+                                                <rect key="frame" x="314" y="60.5" width="100" height="30"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vka-hk-ICv">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
@@ -6161,7 +6211,7 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fn-Ah-bFD" userLabel="Line1">
-                                                <rect key="frame" x="20" y="109" width="374" height="1"/>
+                                                <rect key="frame" x="20" y="109.5" width="374" height="1"/>
                                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="yfU-aQ-D29">
@@ -6172,7 +6222,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tiếp theo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9k-gZ-iWM">
-                                                <rect key="frame" x="81" y="127" width="65" height="18"/>
+                                                <rect key="frame" x="81" y="127.5" width="65" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.48328119520000001" green="0.001460217754" blue="0.24496355650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -6181,7 +6231,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2x-Vz-rfi" userLabel="Line2">
-                                                <rect key="frame" x="20" y="150" width="374" height="1"/>
+                                                <rect key="frame" x="20" y="150.5" width="374" height="1"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XQ-qh-w46">
                                                         <rect key="frame" x="0.0" y="0.0" width="187" height="1"/>
@@ -6218,7 +6268,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tự động phát" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhJ-lj-vh5">
-                                                <rect key="frame" x="258" y="162.5" width="86" height="16.5"/>
+                                                <rect key="frame" x="261" y="163" width="83" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -6227,7 +6277,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ahI-r5-e2M">
-                                                <rect key="frame" x="0.0" y="194" width="414" height="432"/>
+                                                <rect key="frame" x="0.0" y="194.5" width="414" height="432"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="432" id="UwJ-BJ-3w6"/>
@@ -6250,7 +6300,7 @@
                                                 </cells>
                                             </collectionView>
                                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wDy-yI-jfj" customClass="CustomSwitch" customModule="NOW" customModuleProvider="target">
-                                                <rect key="frame" x="354" y="161" width="40" height="20"/>
+                                                <rect key="frame" x="354" y="161.5" width="40" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="XBq-x2-kCE">
@@ -6921,7 +6971,7 @@
                                             <constraint firstAttribute="height" constant="60" id="vCP-BZ-Job"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xPX-Vj-rdB">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xPX-Vj-rdB">
                                         <rect key="frame" x="0.0" y="60" width="414" height="608"/>
                                         <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableView>
@@ -8180,7 +8230,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="VKA-YM-ag4" kind="relationship" relationship="rootViewController" id="3Z5-Zl-ub3"/>
+                        <segue destination="gFI-xS-OJc" kind="relationship" relationship="rootViewController" id="SxX-zb-38x"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TeB-Z9-DMp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -8216,6 +8266,7 @@
         <image name="DIA QUAY" width="512" height="512"/>
         <image name="PAUSE nghe" width="512" height="512"/>
         <image name="PLAY" width="512" height="512"/>
+        <image name="VTC 1" width="512" height="512"/>
         <image name="_Path_" width="1013" height="122"/>
         <image name="canhan (1)" width="30" height="30"/>
         <image name="clear-day" width="512" height="512"/>
@@ -8225,7 +8276,6 @@
         <image name="edit" width="64" height="64"/>
         <image name="ic_fullScreen" width="90" height="90"/>
         <image name="ic_microphone" width="96" height="96"/>
-        <image name="ic_pause-1" width="96" height="96"/>
         <image name="icons8-back-48" width="48" height="48"/>
         <image name="icons8-back-64" width="64" height="64"/>
         <image name="icons8-chromecast-cast-button-49" width="48" height="48"/>

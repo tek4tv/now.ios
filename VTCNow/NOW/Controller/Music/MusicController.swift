@@ -119,7 +119,7 @@ extension MusicController: UICollectionViewDelegate, UICollectionViewDataSource,
             if indexPath.row < news.media.count{
                 let item = news.media[indexPath.row]
                 cell.lblTitle.text = item.name
-                if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                if let url = URL(string: root.cdn.imageDomain + item.thumnail320_180.replacingOccurrences(of: "\\", with: "/" )){
                     cell.thumbImage.loadImage(fromURL: url)
                 }
             }
@@ -129,7 +129,7 @@ extension MusicController: UICollectionViewDelegate, UICollectionViewDataSource,
             if indexPath.row < listSearch.count {
                 let item = listSearch[indexPath.row]
                 cell.lblTitle.text = item.name
-                if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+                if let url = URL(string: root.cdn.imageDomain + item.thumnail320_180.replacingOccurrences(of: "\\", with: "/" )){
                     cell.thumbImage.loadImage(fromURL: url)
                 }
             }

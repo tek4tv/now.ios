@@ -117,7 +117,7 @@ extension MovieSetController: UICollectionViewDelegate, UICollectionViewDataSour
                 cell.lblEpisode.text = item.episode
                 cell.lblTotalEpisode.text = item.totalEpisode
             }
-            if let url = URL(string: root.cdn.imageDomain + item.thumnail.replacingOccurrences(of: "\\", with: "/" )){
+            if let url = URL(string: root.cdn.imageDomain + item.thumnail320_180.replacingOccurrences(of: "\\", with: "/" )){
                 cell.thumbImage.loadImage(fromURL: url)
                 cell.thumbImage.contentMode = .scaleAspectFill
             }
